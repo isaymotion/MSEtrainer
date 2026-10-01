@@ -2,6 +2,13 @@
    To add a case: append an object to V with a unique id, t (correct term key),
    d (three distractor term keys), q (optional question text), x (vignette; lines starting C: / P: / O:), and w (explanation). */
 const CH={
+  1:`The Delicate Dance: Engagement and Empathy`,
+  2:`Beyond Empathy: Cornerstone Concepts and Techniques for Enhancing Engagement`,
+  3:`The Dynamic Structure: Core Tasks, Strategies, and the Continuum of Open-Endedness`,
+  4:`Facilics: The Art of Transforming Interviews into Conversations`,
+  5:`Validity Techniques: Exploring Sensitive Material and Uncovering the Truth`,
+  6:`The Person Beneath the Diagnosis: Uniqueness, Wellness, and Cultural Context`,
+  7:`Assessment Perspectives: The Human Matrix and Bridges to Treatment Planning`,
   8:`Nonverbal Behavior: The Interview as Mime`,
   9:`Mood Disorders: How to Sensitively Arrive at a Differential Diagnosis`,
   10:`Interviewing Techniques for Understanding the Person Beneath the Mood Disorder`,
@@ -18,10 +25,14 @@ const DOMAINS=[
   {k:'tp',n:'Thought process',g:'mse'},{k:'tc',n:'Thought content',g:'mse'},{k:'pe',n:'Perception',g:'mse'},
   {k:'af',n:'Mood and affect',g:'mse'},{k:'sp',n:'Speech',g:'mse'},{k:'be',n:'Behavior and motor',g:'mse'},
   {k:'cg',n:'Cognition',g:'mse'},{k:'in',n:'Insight and judgment',g:'mse'},
+  {k:'en',n:'Engagement and empathy',g:'p1',ch:1},{k:'sf',n:'Safety and the alliance',g:'p1',ch:2},
+  {k:'ds',n:'Interview structure',g:'p1',ch:3},{k:'fa',n:'Facilics',g:'p1',ch:4},
+  {k:'va',n:'Validity techniques',g:'p1',ch:5},{k:'pb',n:'The person beneath',g:'p1',ch:6},
+  {k:'ap',n:'Assessment and planning',g:'p1',ch:7},{k:'nv',n:'Nonverbal behavior',g:'p1',ch:8},
   {k:'ag',n:'Anger and disengagement',g:'skill',ch:19},{k:'cu',n:'Culture and identity',g:'skill',ch:20},
   {k:'vp',n:'Vantage points',g:'skill',ch:21}
 ];
-const GROUPS=[{g:'mse',n:'Mental status'},{g:'skill',n:'Interviewing skills'}];
+const GROUPS=[{g:'mse',n:'Mental status'},{g:'p1',n:'Clinical interviewing, Part 1'},{g:'skill',n:'Clinical interviewing, Ch. 19–21'}];
 const DOM=Object.fromEntries(DOMAINS.map(d=>[d.k,d.n]));
 const DOMG=Object.fromEntries(DOMAINS.map(d=>[d.k,d.g]));
 
@@ -655,11 +666,11 @@ T('sidetrack','Sidetracking','ag',[19],
  `Shifting the patient's attention to a different, usually emotionally important, topic instead of meeting the challenge head-on.`,
  `It neither answers nor explores the challenge; it changes the channel. Especially useful with mania.`,
  `If the concern resurfaces later, address it more directly.`);
-T('seed_unknown','Core pain: fear of the unknown','ag',[19],
+T('seed_unknown','Core pain: fear of the unknown','ag',[19,7],
  `Anger rooted in not knowing what is happening or what will happen next.`,
  `The questions give it away: what happens, how long, what will they do to me. Information addresses this seed.`,
  `Explain what happens next, step by step, in plain language.`);
-T('seed_control','Core pain: loss of control','ag',[19],
+T('seed_control','Core pain: loss of external control','ag',[19,7],
  `Anger rooted in having choices, freedom, or control taken away.`,
  `The complaints circle around who decides. Offering real choices addresses this seed.`,
  `Offer choices: talk now or later, where to sit, whom to call, what to eat.`);
@@ -667,7 +678,7 @@ T('seed_betrayed','Core pain: feeling wronged or betrayed','ag',[19],
  `Anger rooted in having been let down, mistreated, or betrayed, often by previous helpers.`,
  `Look for a specific past injury that you now stand in for.`,
  `Acknowledge the injury without defending the system: "That sounds like it did real damage. I'd like to do this differently."`);
-T('seed_failure','Core pain: sense of failure','ag',[19],
+T('seed_failure','Core pain: sense of failure','ag',[19,7],
  `Anger rooted in feeling one has failed, often turned outward at helpers.`,
  `Beneath the blame is self-blame: "I did everything, and it wasn't enough."`,
  `Name the effort and the pain behind it before discussing the plan.`);
@@ -863,11 +874,11 @@ T('psychotic_org','Psychotic organization','vp',[21],
  `Kernberg's level with diffuse identity, primitive defenses, and impaired reality testing.`,
  `Under gentle confrontation: many words, little meaning, subtly disorganized or tangential.`,
  `Stop confronting, support, and look for harder signs of psychosis.`);
-T('responsiveness','Style: responsiveness','vp',[21],
+T('responsiveness','Style: responsiveness','vp',[21,2],
  `How visibly your affect responds to the patient, from smiling at a joke to no change at all.`,
  `About reacting to the patient, rather than your general level of gesture and liveliness.`,
  `More responsiveness helps shut-down patients engage.`);
-T('spontaneity','Style: spontaneity','vp',[21],
+T('spontaneity','Style: spontaneity','vp',[21,2],
  `How freely you convey spontaneous affect and opinion, such as humor.`,
  `In-the-moment and unplanned, unlike transparency, which is deliberate disclosure.`,
  `Tone it down with guarded or paranoid patients.`);
@@ -1086,4 +1097,919 @@ P: Little, big, it's all sizes, isn't it. Equal is a word with letters, and lett
  w:`Conscious, deliberate disclosure of his inner experience.`},
 {id:'vp29',t:'spontaneity',d:['transparency','animation','responsiveness'],q:Q_STYLE,x:`O: A supervisor notes that the resident often cracks quick jokes and blurts out off-the-cuff opinions during intakes: "That landlord sounds like a nightmare!"`,
  w:`Unplanned, in-the-moment humor and opinion. Worth reining in with guarded or paranoid patients.`}
+);
+
+/* ===================== Clinical interviewing, Part 1: Shea Ch. 1–8 ===================== */
+
+/* Ch. 1: Engagement and empathy */
+T('feedwander','Feeding the wanderer','en',[1,3],
+ `Unintentionally rewarding a patient's tangents (writing as they veer off, empathic filler, follow-up questions on the new topic), so both drift together.`,
+ `The clinician's own behavior keeps the detour going. Helpful when you want free association; harmful when you need specific data.`,
+ `When a patient drifts, audit yourself first: are your notes, nods, and questions rewarding the drift?`);
+T('unipolar','Unipolar blending','en',[1],
+ `One-sided, superficial, too-rapid openness, often in hypomanic or histrionic patients, that feels like great rapport.`,
+ `It feels unusually good, unusually fast. The objective signs (long utterances, very short latencies, frequent interruptions) tell a different story.`,
+ `If you feel charmed early, check the objective signs before trusting the feeling, and consider hypomania or histrionic defenses.`);
+T('blend_subj','Blending: subjective sense','en',[1],
+ `Using your own internal sense of how the interview feels as a thermometer for engagement.`,
+ `Your felt sense. Useful, but it can be fooled by unipolar blending and can lag behind real change.`,
+ `After each interview, jot one line: "When it went well, I noticed..." to calibrate your thermometer.`);
+T('blend_obj','Blending: objective signs','en',[1],
+ `Gauging engagement from observable features: duration of utterance, reaction time latency, interruptions (Wiens), and body language.`,
+ `Measurable signs, such as lengthening answers, rather than how it feels.`,
+ `With a reticent patient, a lengthening answer is one of the earliest signs your technique is working.`);
+T('selfreport','Blending: patient self-report','en',[1],
+ `Asking the patient, usually near the end, how the conversation has felt.`,
+ `The patient is the source. A hesitant "fine" is an opening to explore, not an answer.`,
+ `"Before we stop, I'm curious how this was for you today. Was there anything that felt uncomfortable or that I missed?"`);
+T('identification','Identification','en',[1],
+ `Continuing to feel and endorse the patient's feelings as one's own, losing Rogers' "as if."`,
+ `Empathy recognizes the feeling and steps back out; identification stays in it and takes sides.`,
+ `Warning signs: replaying a patient's anger at home, taking sides, feeling you are the patient. Bring it to supervision.`);
+T('ec1','Empathy cycle: phase 1 (patient expresses)','en',[1],
+ `Breakdown at the first phase: conscious or unconscious defenses keep the patient from expressing the true feeling.`,
+ `The feeling never reaches the surface. Empathy aimed at an unvoiced feeling may feel intrusive.`,
+ `Respect the defense early; don't push empathy toward a feeling the patient hasn't acknowledged.`);
+T('ec2','Empathy cycle: phase 2 (clinician recognizes)','en',[1],
+ `Breakdown at the second phase: the clinician's own state, defenses, or projection distort perception of the patient's feeling.`,
+ `The patient expressed it; the clinician, as the measuring instrument, missed or distorted it.`,
+ `Before each interview, take ten seconds to name your own state: rushed, angry, sad, tired?`);
+T('ec3','Empathy cycle: phase 3 (clinician conveys)','en',[1],
+ `Breakdown at the third phase: the clinician recognizes the feeling but conveys it with the wrong valence, timing, or length.`,
+ `The clinician understood correctly but said it in a way this patient couldn't accept.`,
+ `Match valence to stance: lower certainty and attribution with guarded patients.`);
+T('ec4','Empathy cycle: phase 4 (patient perceives)','en',[1],
+ `Breakdown at the fourth phase: psychopathology keeps the patient from perceiving the clinician's empathy.`,
+ `The empathy was well conveyed; the patient, because of delirium, severe psychosis, or mania, can't take it in.`,
+ `Keep statements short, simple, and concrete; address the underlying condition.`);
+T('ec5','Empathy cycle: phase 5 (patient accepts)','en',[1],
+ `Breakdown at the fifth phase: the patient perceives the empathy, but psychopathology blocks any visible acknowledgment.`,
+ `It may have landed even though you see no sign of it, as in severe depression or catatonia.`,
+ `Don't conclude empathy failed just because there's no visible response; keep offering it.`);
+T('highcert','High implied certainty','en',[1],
+ `An empathic statement phrased declaratively, as though the clinician knows what the patient feels.`,
+ `Sounds sure ("Everything gave way at once"). Powerful with trusting patients; often backfires with guarded ones.`,
+ `Save declarative empathy for patients who are clearly trusting and engaged.`);
+T('lowcert','Low implied certainty','en',[1],
+ `An empathic statement phrased tentatively ("It sounds like...", "I wonder if...").`,
+ `The hedge lowers the risk. Works with trusting and guarded patients alike.`,
+ `Default to "It sounds like..." until you know where the patient sits on the trusting-to-guarded spectrum.`);
+T('highattr','High intuited attribution','en',[1],
+ `An empathic statement that names an unspoken feeling or links to history the patient hasn't voiced.`,
+ `Reads in beyond what was said. Accurate, it signals deep perception; with a guarded patient, it can feel like an insult.`,
+ `If the patient disavows it ("No, that's not right"), lower the valence or stop.`);
+T('reflecting','Reflecting statement','en',[1],
+ `Mirroring back essentially the patient's exact words; the lowest attributional valence.`,
+ `Adds nothing the patient didn't say. Safe with paranoid patients, but overuse sounds parrot-like.`,
+ `Use the patient's own key words, said in a caring tone.`);
+T('paranoidspiral','Paranoid spiral','en',[1],
+ `Escalating disengagement when a clinician pushes more, and stronger, empathy on a paranoid patient.`,
+ `Each new attempt at empathy raises the intimacy the patient fears, so they retreat or attack.`,
+ `At the first disavowal, stop empathizing; switch to reflecting statements and interested, conversational questions.`);
+T('greasing','Greasing the wheels','en',[1],
+ `An interested, non-empathic, conversational manner that invites a patient to elaborate a delusion (Robinson), paired with pure reflecting.`,
+ `Curious, not empathic: the goal is to let delusional material (and any danger in it) emerge.`,
+ `"What have you noticed?" "How do you make sense of it?" "What do you think needs to happen?"`);
+T('defusing','Defusing statement','en',[1],
+ `A high-certainty statement agreeing that a patient's anger makes sense.`,
+ `The exception to the guarded rule: angry patients respond to strong agreement. The angrier the patient, the higher the valence.`,
+ `Mild: "It makes sense you'd be upset." Moderate: "No wonder you're upset." Strong: "Who wouldn't be upset!"`);
+T('metaphorpara','Metaphorical paraphrase','en',[1],
+ `Capturing the central message of what the patient is saying in a single image.`,
+ `An image of the whole gestalt, not a restatement of the words. Done well, the patient may extend it.`,
+ `"Like running on a treadmill." "Like pushing a boulder uphill."`);
+T('sensorypara','Sensory-based paraphrase','en',[1],
+ `A paraphrase that matches the patient's preferred sensory language: visual, auditory, or kinesthetic.`,
+ `Mirrors the sensory channel ("see," "hear," "feel"), not the whole message as an image.`,
+ `Visual: "So the way you see it..." Auditory: "What I'm hearing is..." Kinesthetic: "It feels like..."`);
+T('naivete','Disciplined naivet\u00e9','en',[1],
+ `Listening receptively, trying to feel the patient's world without seeking cause and effect, classification, or moral judgment (Margulies and Havens).`,
+ `Receptive: you suspend analysis. Imaginative projection is active: you move into the patient's world.`,
+ `When analyzing would harm engagement, set the diagnostic checklist aside for a few minutes and just listen.`);
+T('imagproj','Imaginative projection','en',[1],
+ `Actively and creatively projecting yourself into the patient's inner experience, or "inscape" (Margulies and Havens).`,
+ `Active and imaginative, like a poet entering a scene, while keeping your own perspective.`,
+ `Picture the scene from inside: the sights, sounds, and feelings of the patient's moment.`);
+
+/* Ch. 2: Safety and the alliance */
+T('selfsystem','Self-system','sf',[2],
+ `Sullivan's term for the conscious and unconscious processes that protect self-esteem when meeting someone new.`,
+ `Explains early minimizing and guardedness: the patient is protecting self-esteem, not being difficult.`,
+ `Lower the threat early with regard, warmth, and quiet expertise, so the self-system can relax.`);
+T('upr','Unconditional positive regard','sf',[2],
+ `Rogers: genuine caring for the person, free of evaluation; in assessment, suspending moral judgment of what the patient has done.`,
+ `Caring for the person while setting aside judgment of the behavior.`,
+ `Keep your tone and face steady when a patient discloses something shameful: "Thank you for telling me."`);
+T('parade','Parade of frowns','sf',[2],
+ `The sequence of judgmental reactions many patients have met from family, employers, and other clinicians before seeing us.`,
+ `Explains why a patient braces for judgment before you've said anything.`,
+ `Make sure your face is not the next frown in the parade.`);
+T('nondefensive','Non-defensiveness','sf',[2],
+ `Meeting challenges with curiosity rather than self-protective posturing or lecturing.`,
+ `The clinician stays curious and open about the challenge instead of defending status or credentials.`,
+ `"That's a fair question. What would help you feel comfortable working with me?"`);
+T('ulterior','Ulterior motives','sf',[2],
+ `Clinician needs, such as to be liked, admired, or important, that quietly make the relationship unsafe.`,
+ `About the clinician's own needs being served in the room. Sullivan: don't traffic in ordinary interpersonal satisfactions.`,
+ `Ask yourself whose needs this line of conversation is meeting.`);
+T('blandness','Professional blandness','sf',[2],
+ `Misreading neutrality as expressionlessness; patients tend to read a blank face as dislike (Ryle).`,
+ `An attempt at neutrality that comes across as coldness.`,
+ `Neutral about judgments, not about warmth: let your face respond.`);
+T('consistency','Genuineness: consistency','sf',[2],
+ `A component of genuineness: steady, predictable behavior across the interview and across visits.`,
+ `Being the same person each time. Responsiveness and spontaneity are the other two components.`,
+ `Keep your warmth and style stable from visit to visit, even on hard days.`);
+T('factq','Fact-oriented question','sf',[2],
+ `A usually closed question about concrete symptoms or situations; well timed, it conveys expertise.`,
+ `A precise question that shows you know the territory, often prompting "How did you know?"`,
+ `After the patient describes a symptom, ask about its typical companions.`);
+T('metacomm','Metacommunication','sf',[2],
+ `The implicit message a question or statement sends beyond its literal content.`,
+ `Not what you asked, but what asking it told the patient, such as "this clinician has seen this before."`,
+ `Ask yourself what each question implies about you and about the patient.`);
+T('miracle','Miracle question','sf',[2],
+ `De Shazer's solution-focused question inviting the patient to picture life after an overnight miracle, to surface goals.`,
+ `Imagines a solved future, rather than asking about consequences of one specific change.`,
+ `"If a miracle happened tonight and the problem were solved, what's the first thing you'd notice tomorrow?"`);
+T('bgoals','Alliance: agreement on goals','sf',[2],
+ `One of Borden's three pillars of the alliance: shared agreement on what treatment is for.`,
+ `About the destination. Tasks are about how to get there; the bond is the relationship itself.`,
+ `"What would you most like to be different a few months from now?"`);
+T('btasks','Alliance: agreement on tasks','sf',[2],
+ `One of Borden's three pillars: shared agreement on the methods of treatment.`,
+ `About how you'll work together, not where you're going.`,
+ `Offer options and ask which the patient is willing to try.`);
+T('bbond','Alliance: the bond','sf',[2],
+ `One of Borden's three pillars: the trust and attachment between patient and clinician.`,
+ `The relationship itself, which can hold even when the patient disagrees with a suggestion.`,
+ `Protect the bond during disagreements: "We may see this differently, and I'm still on your side."`);
+
+/* Ch. 3: Interview structure */
+T('ph_intro','Phase 1: introduction','ds',[3],
+ `From first contact to the first inquiry about why the patient came: names, roles, confidentiality, setting the stage.`,
+ `Before the story starts. The opening begins once you ask why they've come.`,
+ `Ask how the patient would like to be addressed, and explain confidentiality and its limits.`);
+T('ph_open','Phase 2: opening','ds',[3],
+ `About 5 to 7 minutes of mostly nondirective listening, while you take in the patient's perspective and mental state (PACE).`,
+ `Mostly open questions and listening. Structured questioning comes in the body.`,
+ `Let the patient lead, and use the time to plan which regions you'll need in the body.`);
+T('ph_body','Phase 3: body','ds',[3],
+ `Structured data gathering across the key regions.`,
+ `You're now steering, systematically, toward the database you need.`,
+ `Announce the shift when it helps: "Now I'd like to ask some more specific questions."`);
+T('ph_close','Phase 4: closing','ds',[3],
+ `Sharing impressions, answering questions, and agreeing on a plan.`,
+ `Data gathering is done; you're giving back and planning together.`,
+ `Leave real time for this phase; it's where hope and adherence are built.`);
+T('ph_term','Phase 5: termination','ds',[3],
+ `The final words and goodbye, which should leave hope and secure a return visit.`,
+ `The last moments at the door. The plan has already been agreed in the closing.`,
+ `End with something concrete and warm: the next appointment and what to do if things worsen.`);
+T('openq','Open-ended question','ds',[3],
+ `A question that can't easily be answered in a word or two and invites the patient to elaborate.`,
+ `A true question (what, how) with no limit on the answer. A gentle command does the same as a statement.`,
+ `"What has your first year of college been like?"`);
+T('gentlecmd','Gentle command','ds',[3],
+ `An open statement such as "Tell me about..." or "Describe..." that invites speech without limiting the answer.`,
+ `Phrased as a request, not a question, so it can't be answered "no." Ideal for shut-down patients.`,
+ `"Tell me about your relationship with your sister."`);
+T('swingq','Swing question','ds',[3],
+ `A question that asks whether the patient will answer ("Can you tell me...?", "Would you say...?"); open or closed depending on engagement.`,
+ `Technically answerable "No." Swap it for a gentle command when engagement is low.`,
+ `Turn "Can you describe the panic?" into "Describe the panic for me."`);
+T('qualq','Qualitative question','ds',[3],
+ `A "How is your...?" question that could be answered "Fine."`,
+ `Open in form but easily closed in practice.`,
+ `With guarded patients, follow it with a gentle command if you get "Fine."`);
+T('stmtinq','Statement of inquiry','ds',[3],
+ `A statement said as a question ("You moved back home last spring?"); used to clarify, summarize, confront, or interpret.`,
+ `Inherently leading and usually answered yes or no.`,
+ `Use it to check facts, not to open a topic.`);
+T('negstmt','Negative statement of inquiry','ds',[3],
+ `A statement of inquiry phrased in the negative ("So you're not...?"), which leads toward "no."`,
+ `Tells the patient the answer you expect. A reliably invalid habit, especially for sensitive topics.`,
+ `Ask neutrally instead: "Have you had thoughts of killing yourself?"`);
+T('facilstmt','Facilitating statement','ds',[3],
+ `A brief prompt such as "Mm-hmm," "Go on," or "I see" that encourages the patient to continue.`,
+ `Keeps the patient talking without directing content. Weak on its own with shut-down patients.`,
+ `Pair it with nods and attentive silence during the opening.`);
+T('closedq','Closed-ended question','ds',[3],
+ `A question that can be answered in a word or two ("Did you drink last night?", "Which hospital was that?").`,
+ `A direct question with a short answer. A closed-ended statement directs without asking.`,
+ `Essential in the body; overused early, it shuts patients down.`);
+T('closedstmt','Closed-ended statement','ds',[3],
+ `A statement that directs or informs without inviting elaboration ("Let's start with your mood.").`,
+ `Not a question at all; it sets direction or gives information.`,
+ `Use it to focus a wandering interview or to structure the body.`);
+T('piggyback','Piggy-back empathic statement','ds',[3],
+ `An empathic lead-in joined to a question, so empathy doesn't stall the flow.`,
+ `Empathy plus a question in one breath: attach an open question for shut-down patients, a closed one to focus wanderers.`,
+ `"That sounds humiliating. Tell me more about what she's been doing."`);
+T('shutdown','Shut-down interview','ds',[3],
+ `A problem pattern with short answers, long latencies, and decreased eye contact, often pulling the clinician into more closed questions.`,
+ `Too little speech. String together open questions and gentle commands, and defer sensitive topics.`,
+ `Six or seven open questions in a row may be needed; one closed question can undo the gain.`);
+T('wandering_int','Wandering interview','ds',[3],
+ `A problem pattern with long answers, short latencies, and topic hopping, often fed by the clinician's nods and open questions.`,
+ `Too much speech that won't stay on topic. The loquacious variant stays on topic but buries it in detail.`,
+ `Focus in steps: piggy-back empathy with a closed question, then gentle redirection ("Before we get to that...").`);
+T('loquacious','Loquacious interview','ds',[3],
+ `A variant of the wandering interview: the patient stays on topic but drowns it in irrelevant detail.`,
+ `On topic, unlike the classic wandering interview; the problem is the detail, not the direction.`,
+ `Ask for the specific number or fact you need, kindly and early.`);
+T('rehearsed','Rehearsed interview','ds',[3],
+ `A pat, well-worn story, often from a patient who has told it many times or wants to steer the interview.`,
+ `Smooth and practiced, with little fresh emotion. Can reflect chronicity or control (malingering, drug seeking, avoiding a topic).`,
+ `Break the script with an affective interjection or questions the patient hasn't been asked before.`);
+T('affinterj','Affective interjection','ds',[3],
+ `Steering a rehearsed story toward an emotionally charged moment to break the script.`,
+ `Interrupts the rote narrative with feeling, rather than changing the subject.`,
+ `"Hold on a second. What was the worst moment of that for you?"`);
+T('namingemo','Naming emotions','ds',[3],
+ `When a patient stalls, naming a few emotions that often cause it (shame, worry, fear) and asking if any fit (Morrison).`,
+ `Offers several possible feelings behind the stall, rather than commenting on the interaction or framing the question.`,
+ `"Sometimes people stop there because they feel embarrassed or worried what I'll think. Does either fit?"`);
+
+/* Ch. 4: Facilics */
+T('freefac','Free facilitation region','fa',[4],
+ `A nondirective stretch where the clinician consciously lets the patient choose the direction.`,
+ `You let the patient lead on purpose. The opening phase is largely this.`,
+ `Use nods, "uh-huh," and open prompts; resist steering.`);
+T('transform','Transformational region','fa',[4],
+ `A stretch spent resolving a communication roadblock, such as defensiveness or anger (formerly "resistance region").`,
+ `The interview pauses its data gathering to work on the relationship itself.`,
+ `Treat the roadblock as collaborative discovery; it often reveals what makes the patient tick.`);
+T('psychodyn','Psychodynamic region','fa',[4],
+ `A stretch focused on how and why the patient responds as they do: insight and reflection.`,
+ `The topic is the patient's own patterns and their meaning.`,
+ `Explore briefly in an intake; it also tests readiness for insight-oriented therapy.`);
+T('scouting','Scouting region','fa',[4],
+ `The introduction plus opening (about the first 7 minutes), mixing process and content as you survey concerns and mental state.`,
+ `The whole early survey, not just the free listening within it.`,
+ `Finish scouting by about 7 minutes, with a plan for the body.`);
+T('stilted','Stilted expansion','fa',[4],
+ `Exploring a region like a checklist, with rapid-fire closed questions.`,
+ `Efficient on paper, interrogating in the room.`,
+ `Soften it: open the region with a gentle command, then follow the patient's answers.`);
+T('blended','Blended expansion','fa',[4],
+ `Exploring a region conversationally, mixing open questions with follow-ups that track the patient.`,
+ `Feels like a conversation while still covering the needed data.`,
+ `Use the patient's last answer as the springboard for your next question.`);
+T('excursion','Excursion','fa',[4],
+ `A brief step out of a region to pursue something related, followed by a return.`,
+ `Short and immediately followed by a return, unlike a split expansion.`,
+ `Signal the return: "Let's come back to your sleep for a moment."`);
+T('split','Split expansion','fa',[4],
+ `One region explored in two or more separate places in the interview.`,
+ `The region is revisited later, not just stepped out of briefly.`,
+ `Fine when needed; make sure the region gets finished.`);
+T('pivot','Pivot point','fa',[4],
+ `A moment when the patient moves into a new region, and you choose whether to follow.`,
+ `The decision moment itself. Following it creates a spontaneous gate.`,
+ `Ask: Is this region more important right now than the one I'm in?`);
+T('gate_spont','Spontaneous gate','fa',[4],
+ `The patient moves into a new region and the clinician follows.`,
+ `The patient opened the gate; you just walked through it.`,
+ `"How do you mean?"`);
+T('gate_natural','Natural gate','fa',[4],
+ `A cue statement from the patient's last sentence or two, plus a transitional question.`,
+ `Grows directly out of what the patient just said.`,
+ `Pick up the patient's last phrase and turn it toward the region you need.`);
+T('gate_manuf','Manufactured gate','fa',[4],
+ `A series of natural gates used to reach a delicate topic smoothly.`,
+ `Several linked steps, each cued by the patient's last answer, ending at the sensitive topic.`,
+ `Plan the stepping stones toward violence, incest, or substance use.`);
+T('gate_refer','Referred gate','fa',[4],
+ `A transition that refers back to something the patient said earlier.`,
+ `"Earlier you mentioned..." bridges to a region using an older cue.`,
+ `Keep a mental list of earlier mentions to use as later gates.`);
+T('gate_implied','Implied gate','fa',[4],
+ `A move to a topically similar region without a direct cue.`,
+ `No cue, but the topics are clearly related, so it doesn't jar.`,
+ `Anxiety to OCD, depression to mania: related regions connect smoothly.`);
+T('gate_phantom','Phantom gate','fa',[4],
+ `A jump to an unrelated region with no cue, reference, or announcement.`,
+ `Jarring and unconnected. Avoid it.`,
+ `If you must jump, announce it with an introduced gate.`);
+T('gate_intro','Introduced gate','fa',[4],
+ `Explicitly announcing a transition, useful before the closing or a sensitive section.`,
+ `Announces the change openly rather than hiding the seam.`,
+ `"Now I'd like to switch gears and ask about your medical history."`);
+T('gate_obs','Observed gate','fa',[4],
+ `A transition cued off the patient's nonverbal behavior.`,
+ `The cue is something you saw, not something the patient said.`,
+ `"You look like you're welling up. What's coming up for you?"`);
+T('deadzone','Dead zone','fa',[4],
+ `The second quarter of the interview lost to interesting but unhelpful material, usually followed by a rushed sprint.`,
+ `A timing error: the trouble is when, not just how, the time was spent.`,
+ `Aim to finish scouting by 7 minutes and cover two or three key regions by 15.`);
+T('unguided','Unguided interview','fa',[4],
+ `A hodgepodge interview from poor focusing, even with a normally verbal patient.`,
+ `Regions are entered and left without finishing any; the patient isn't the problem.`,
+ `Finish a region before leaving it, and use gates deliberately.`);
+
+/* Ch. 5: Validity techniques */
+T('anchor','Anchor question','va',[5],
+ `Tying recall to a memorable time or place to sharpen memory.`,
+ `Uses a landmark event or setting to improve recall.`,
+ `"Think back to your daughter's birthday in June. How was your mood around then?"`);
+T('tagging','Tagging question','va',[5],
+ `Offering a list so the patient can identify a forgotten fact.`,
+ `Helps memory by offering options. Denial of the specific asks about items one at a time to reduce denial.`,
+ `"Was it Prozac, Zoloft, Paxil, or something else?"`);
+T('exaggeration','Exaggeration','va',[5],
+ `Humorous overstatement that shrinks a patient's disproportionate shame.`,
+ `Light humor about a minor act. Symptom amplification uses high numbers to counter minimizing.`,
+ `Use only when the shame is clearly out of proportion and the alliance is good.`);
+T('defterms','Defining technical terms','va',[5],
+ `The clinician explains exactly what a clinical term means before asking about it.`,
+ `About vocabulary. Clarifying norms is about what counts in the patient's family or culture.`,
+ `"By panic attack I mean a sudden wave of intense fear that peaks within minutes."`);
+T('clarnorms','Clarifying norms','va',[5],
+ `Spelling out what counts (for example, as abuse or hitting) when the patient's norms may hide it.`,
+ `About what behavior the question includes, especially where it was considered normal.`,
+ `"By hit, I mean slaps, pushes, or a belt, even if back then it was just called discipline."`);
+T('normalization','Normalization','va',[5],
+ `Framing a question to show that others have had the same experience.`,
+ `"Some people who... find that..." The patient isn't alone. Shame attenuation frames through the patient's own pain.`,
+ `"Sometimes when people are as depressed as you've been, they think about suicide. Have you?"`);
+T('shameatt','Shame attenuation','va',[5],
+ `Framing a question through the patient's own pain, stress, or rationalizations.`,
+ `Anchored in this patient's situation ("With all the stress you're under..."), not in what others experience.`,
+ `"With all the pressure at work, has it ever gotten to the point where you hit someone?"`);
+T('bragging','Induction to bragging','va',[5],
+ `A compliment that precedes a question about a negative behavior.`,
+ `The compliment invites the patient to show off, which can loosen disclosure of antisocial acts.`,
+ `"You clearly know how to handle yourself. How many fights have you been in?"`);
+T('behinc','Behavioral incident','va',[5],
+ `Asking for concrete facts or sequence rather than opinions.`,
+ `"What did you actually do?" replaces the patient's label with observable facts.`,
+ `When a patient says "I lost it," ask exactly what happened.`);
+T('verbalvideo','Verbal video','va',[5],
+ `A series of behavioral incidents reconstructing an event moment by moment.`,
+ `Many linked "and then what?" steps, not just one fact. Watch for gaps (the "Nixon gap").`,
+ `"Walk me through it from the moment you got home."`);
+T('gentleassume','Gentle assumption','va',[5],
+ `Presuming a behavior non-judgmentally: "What other...?"`,
+ `Assumes the behavior happened, making "yes" easier than in a yes-or-no question.`,
+ `"What other drugs have you tried besides marijuana?"`);
+T('denialspec','Denial of the specific','va',[5],
+ `Asking about items on a list one at a time.`,
+ `Each item gets its own question, so each needs its own "no."`,
+ `"Have you used cocaine?... What about pain pills?... Meth?"`);
+T('cannon','Cannon question','va',[5],
+ `Lumping many items into one question, which invites a single "no." Avoid.`,
+ `The opposite of denial of the specific; a reliably invalid habit.`,
+ `Break it apart: one substance or symptom per question.`);
+T('catchall','Catch-all question','va',[5],
+ `"Is there anything we haven't discussed that you think is important?"`,
+ `Opens a door for whatever you didn't think to ask (Davila).`,
+ `Ask it near the end of each major section and before closing.`);
+T('sympamp','Symptom amplification','va',[5],
+ `Offering high numbers so that a minimized answer still reveals the problem.`,
+ `The upper bound is set high on purpose. Exaggeration is humor aimed at shame.`,
+ `"How many hours a day do you spend thinking about suicide on your worst days: 8, 12, 15?"`);
+T('bogus','Bogus symptoms','va',[5],
+ `Asking about atypical or nonexistent symptoms to detect feigning (Resnick).`,
+ `Endorsing a symptom that doesn't really occur suggests malingering, not confusion about memory.`,
+ `Embed one or two atypical items among genuine ones, and interpret with care.`);
+T('soundings','Soundings','va',[5],
+ `Graded probes that gauge a patient's motivation or conviction, like a sailor measuring water depth (Havens).`,
+ `Tests how deep a commitment or belief goes, step by step.`,
+ `Move from mild to stronger probes: "And if... would that change things?"`);
+
+/* Ch. 6: The person beneath the diagnosis */
+T('parataxic','Parataxic distortion','pb',[6],
+ `Sullivan: perceiving another person through unconscious templates from earlier relationships, rather than as they are.`,
+ `The patient sees someone from their past in you. It is Sullivan's interpersonal term for transference-like distortions.`,
+ `Notice when the patient's reactions fit someone else better than they fit you.`);
+T('intersubj','Intersubjectivity','pb',[6],
+ `Clinical data are jointly constructed by both participants' subjectivities (Ogden).`,
+ `The data depend on the dyad, not just the patient.`,
+ `Ask: What might this patient tell a different interviewer, and why?`);
+T('reliablyinvalid','Reliably invalid interviewing','pb',[6],
+ `Consistent interviewing habits that produce wrong data, such as negative questions, cannon questions, or too few behavioral incidents.`,
+ `The "instrument" is consistent, but consistently wrong.`,
+ `Audit your own phrasing for leading and lumped questions.`);
+T('interpers','Interpersonal perspective','pb',[6],
+ `Understanding a person through how they believe others see them (Whitehorn, Sullivan).`,
+ `Asks how others see the patient, rather than what their experience feels like.`,
+ `"How would your best friend describe you?"`);
+T('phenom','Phenomenological inquiry','pb',[6],
+ `Exploring what it is like to be this person, often through the senses.`,
+ `Aims at lived, sensory experience rather than symptoms or others' views.`,
+ `"When it's at its worst, what does a morning look and feel like?"`);
+T('presentsol','Presenting solutions','pb',[6],
+ `What the patient has already tried that has helped.`,
+ `Focused on the patient's own existing solutions, not an imagined future.`,
+ `"What have you already tried that made things even a little better?"`);
+T('strengths','Wellness triad: strengths','pb',[6],
+ `Character traits, such as kindness, persistence, humor, or hope (VIA strengths).`,
+ `Who the person is. Skills are what they can do; interests are what they enjoy.`,
+ `"What would your friends say is your best quality?"`);
+T('skills','Wellness triad: skills','pb',[6],
+ `Teachable abilities, such as carpentry, listening, or organizing.`,
+ `Something learned and done well, not a character trait.`,
+ `"What are you good at?"`);
+T('interests','Wellness triad: interests','pb',[6],
+ `Pastimes and passions the person enjoys.`,
+ `What they love doing, regardless of skill.`,
+ `"What do you do for fun, or what used to bring you joy?"`);
+T('kulturbrille','Kulturbrille','pb',[6],
+ `Boas: the "cultural glasses" through which everyone, including the clinician, sees the world.`,
+ `Your own cultural lens shaping what seems normal, rather than a prejudice about a specific group.`,
+ `Ask: Is this a problem, or just different from how I was raised?`);
+
+/* Ch. 7: Assessment and planning */
+T('primsec','Primary and secondary delineation','ap',[7],
+ `First identifying broad diagnostic regions, such as mood or psychosis, then specific diagnoses within them.`,
+ `Broad region first, then specifics, so whole regions don't get missed.`,
+ `Screen every major diagnostic region before settling on a single diagnosis.`);
+T('vcode','V-codes (other conditions)','ap',[7],
+ `Conditions not attributable to a mental disorder that may still be a focus of clinical attention.`,
+ `A real problem worth treating, without a psychiatric diagnosis.`,
+ `Document relational, occupational, and other stressors even when no disorder is present.`);
+T('intrawing','Intra-wing intervention','ap',[7],
+ `In matrix treatment planning, treating a wing's problem from within that same wing.`,
+ `Same wing in and out, such as medication for a biological depression.`,
+ `List intra-wing options for each problem, then look for inter-wing ones.`);
+T('interwing','Inter-wing intervention','ap',[7],
+ `Treating a wing's problem from a different wing.`,
+ `The intervention lives in one wing; the target problem lives in another.`,
+ `For each problem, ask which other wings could help.`);
+T('healingmatrix','Healing matrix effect','ap',[7],
+ `A change in one wing that improves another wing.`,
+ `A positive ripple, not the intervention itself.`,
+ `Expect and point out healing ripples; they build hope.`);
+T('damagingmatrix','Damaging matrix effect','ap',[7],
+ `A change in one wing that harms another wing.`,
+ `A negative ripple, often an unintended side effect.`,
+ `Before each intervention, ask what it could disturb in other wings.`);
+T('redherring','Red herring effect','ap',[7],
+ `A problem in one wing that appears to originate in another.`,
+ `The source is in a different wing than it seems, such as medical illness presenting as depression.`,
+ `When treatment isn't working, ask whether you're treating the wrong wing.`);
+T('matrixq','Matrix question','ap',[7],
+ `"How do you think your life might change if...?", inviting the patient to imagine ripple effects across wings.`,
+ `Asks about the consequences of one specific change. The miracle question imagines everything solved.`,
+ `"How might your life change if the panic attacks stopped?"`);
+T('cp_lonely','Core pain: loneliness','ap',[7],
+ `The pain of isolation and disconnection.`,
+ `Centered on being alone or left, rather than on being judged or unworthy.`,
+ `Watch for dependence on the clinician, and build other connections.`);
+T('cp_worthless','Core pain: worthlessness','ap',[7],
+ `The belief that one has no value or can't cope.`,
+ `About the self being inadequate, rather than about others rejecting or leaving.`,
+ `Small, achievable tasks and cognitive work can chip away at it.`);
+T('cp_reject','Core pain: rejection','ap',[7],
+ `The pain of being, or expecting to be, rejected by others.`,
+ `Expects others' rejection; often shows up as preemptive defensiveness.`,
+ `Explicitly reassure: "You're helping me understand you better."`);
+T('cp_internal','Core pain: loss of internal control','ap',[7],
+ `The fear of losing control of one's own impulses, emotions, or mind.`,
+ `The threat is inside the person. Loss of external control is about others controlling them.`,
+ `Check in about control directly when the patient feels unstable.`);
+T('cp_meaning','Core pain: loss of meaning','ap',[7],
+ `The pain of feeling life lacks purpose or significance.`,
+ `About purpose, not about relationships or competence.`,
+ `Explore and nurture sources of meaning as a treatment resource.`);
+
+/* Ch. 8: Nonverbal behavior */
+T('emblem','Emblem','nv',[8],
+ `A nonverbal signal with a culturally agreed meaning, such as a thumbs-up or a shrug.`,
+ `Stands in for words and means the same thing to anyone in the culture.`,
+ `Remember that emblems vary across cultures.`);
+T('illustrator','Illustrator','nv',[8],
+ `A gesture that clarifies speech, by pointing or by outlining a shape or size.`,
+ `Accompanies words to show what they mean.`,
+ `Notice when illustrators disappear, as can happen in depression.`);
+T('regulator','Regulator','nv',[8],
+ `A movement that manages turn-taking and conversational flow, such as eye contact at the end of a statement or a head nod.`,
+ `Manages whose turn it is to talk.`,
+ `Use nods to invite more; use eye contact and pauses to signal your turn.`);
+T('adaptor','Adaptor','nv',[8],
+ `A mostly unconscious comfort behavior, such as touching the face, picking nails, or rolling a pen.`,
+ `Self-soothing, usually outside awareness. A cut-off specifically blocks out stress.`,
+ `A rise in adaptors can signal rising anxiety around a topic.`);
+T('affdisplay','Affective display','nv',[8],
+ `A facial movement expressing emotion, sometimes as a fleeting micro-expression.`,
+ `The face showing a feeling, whether or not words admit it.`,
+ `Watch for brief expressions that contradict the words.`);
+T('cutoff','Cut-off','nv',[8],
+ `A nonverbal adaptor that shuts out environmental stress, such as averting or closing the eyes (evasive, shifty, stuttering, or stammering eye).`,
+ `Blocks out input. Exaggerated or odd cut-offs may suggest psychosis.`,
+ `Note which topics trigger cut-offs; they map the patient's stress points.`);
+T('proxemics','Proxemics','nv',[8],
+ `The study of how people use space and distance (Hall).`,
+ `About distance and space, not movement or voice.`,
+ `Sit about 4 to 6 feet away, slightly angled, without a desk between you.`);
+T('kinesics','Kinesics','nv',[8],
+ `The study of body movement: posture, gestures, facial expression, and gaze.`,
+ `About how the body moves, not how far apart people are or how words sound.`,
+ `Review your own posture and gestures on video.`);
+T('paralanguage','Paralanguage','nv',[8],
+ `How words are said: tone, pitch, loudness, rate, rhythm, and fluency.`,
+ `The voice beyond the words.`,
+ `Listen for how "I'm fine" is said, not just that it was said.`);
+T('immediacy','Immediacy','nv',[8],
+ `The felt warmth, closeness, and involvement created by nonverbal behavior.`,
+ `The overall effect of distance, lean, gaze, nods, and voice combined.`,
+ `Raise it for withdrawn patients; lower it for paranoid or escalating ones.`);
+T('respzone','Responsive zone','nv',[8],
+ `The distance at which the patient is comfortable and your movements, like a gentle forward lean, still register.`,
+ `Specific to each patient: larger for paranoid patients, closer for withdrawn or hard-of-hearing ones.`,
+ `Adjust your seat until the patient seems at ease but still responds to your nods and lean.`);
+T('incongruence','Incongruent paramessages','nv',[8],
+ `Conflict among the channels of a message (words, tone, posture, face), often signaling ambivalence (Grinder and Bandler).`,
+ `The channels disagree with each other, rather than one single display.`,
+ `Treat incongruence as a road sign to explore, now or later.`);
+T('kinrecip','Kinesic reciprocal','nv',[8],
+ `An escalating shared behavior pattern, such as courting, parenting, or dominance, that the clinician may unconsciously continue (Scheflen).`,
+ `A social script both people fall into, not a single gesture.`,
+ `Ask: Am I being pulled into a role (rescuer, parent, suitor, rival)? Then step out of it.`);
+T('phantompres','Phantom presence effect','nv',[8],
+ `The reduced immediacy of a clinician who is only an image on a screen.`,
+ `Video keeps face and voice but loses real presence, space, and true eye contact.`,
+ `On video, slightly exaggerate nods and warmth, and look at the camera when it matters.`);
+T('nakedcomm','Naked communication','nv',[8],
+ `The unsettling absence of all nonverbal cues in text or chat interviewing.`,
+ `Only words and response timing remain; even the voice is gone.`,
+ `Ask more often how the patient is feeling, and confirm your reading of short replies.`);
+
+const Q_CYC=`Where in the empathy cycle did empathy break down?`;
+const Q_VAL=`How would you classify this empathic statement?`;
+const Q_BLEND=`Which method of gauging blending is this?`;
+const Q_ALLY=`Which element of Borden's alliance is being built?`;
+const Q_GEN=`Which component of genuineness is the patient describing?`;
+const Q_PHASE=`Which phase of the interview is this?`;
+const Q_DOC=`What type of verbalization is this, on the Degree of Openness Continuum?`;
+const Q_PAT=`Which problem interview pattern is this?`;
+const Q_REGION=`What kind of region is this stretch of the interview?`;
+const Q_EXP=`How is this region being explored?`;
+const Q_GATE=`What kind of gate is this?`;
+const Q_VT=`Which validity technique is this?`;
+const Q_TRIAD=`Which part of the wellness triad does this reveal?`;
+const Q_PAIN=`Which core pain seems most prominent?`;
+const Q_MTX=`In matrix treatment planning, what is this?`;
+const Q_NVT=`Which type of nonverbal behavior is this?`;
+const Q_NVA=`Which area of nonverbal communication does this involve?`;
+
+V.push(
+/* Ch. 1 */
+{id:'en01',t:'feedwander',d:['unipolar','freefac','naivete'],q:`Which interactional process is this?`,x:`O: A resident asks a patient about her mood. She shifts to her son's doctors; he starts writing quickly and says, "I'm sure." She moves on to her husband, and he asks, "What does your husband do for work?" Ten minutes later he still has no data on her depression.`,
+ w:`Writing as she veered, empathic filler, and a question about the new topic all rewarded the drift. Both participants built the tangential interview together.`},
+{id:'en02',t:'unipolar',d:['feedwander','identification','imagproj'],q:`What is happening to the sense of rapport?`,x:`O: Five minutes into an intake, a resident feels she has never connected with anyone so quickly. The patient tells vivid, funny stories, answers before questions are finished, and talks for minutes at a time. The resident realizes she hasn't learned anything about his sleep or mood.`,
+ w:`Rapid, one-sided openness that feels wonderful. The objective signs (long utterances, very short latency, interruptions) point toward hypomania or histrionic defenses.`},
+{id:'en03',t:'selfreport',d:['blend_subj','blend_obj','unipolar'],q:Q_BLEND,x:`C: Before we stop, how has it been talking with me today?
+P: (pause) Fine, I guess.
+C: I noticed a little hesitation. Was there anything I said that didn't sit right?`,
+ w:`Asking the patient directly, and treating a hesitant "fine" as an opening rather than an answer.`},
+{id:'en04',t:'blend_obj',d:['blend_subj','selfreport','unipolar'],q:Q_BLEND,x:`O: With a quiet patient, the resident notices that her answers have grown from a few words to several sentences since he switched to gentle commands, and she now begins answering more quickly.`,
+ w:`Rising duration of utterance and falling latency are measurable signs that engagement is improving.`},
+{id:'en05',t:'blend_subj',d:['blend_obj','selfreport','unipolar'],q:Q_BLEND,x:`O: Midway through the interview, a resident realizes it has started to feel like a conversation rather than an interrogation, and she notices her own shoulders have relaxed.`,
+ w:`Her own felt sense of the interview, used as a thermometer.`},
+{id:'en06',t:'identification',d:['imagproj','highcert','associational'],q:`What is happening?`,x:`O: A resident going through her own divorce stays furious at her patient's husband for days after the session. In the next visit she tells the patient, "I know exactly how you feel. He had no right."`,
+ w:`She has lost the "as if": she feels and endorses the patient's anger as her own and takes sides. Bring it to supervision.`},
+{id:'en07',t:'ec1',d:['ec2','ec3','ec5'],q:Q_CYC,x:`O: Asked about her 7-year-old son, who has marked, permanent developmental problems, a mother insists he's "just independent-minded, like other kids," and explains his obvious speech difficulty as something boys outgrow.`,
+ w:`Denial and rationalization keep the core pain from being expressed. Empathy aimed at the unspoken grief would likely feel intrusive right now.`},
+{id:'en08',t:'ec2',d:['ec1','ec3','ec4'],q:Q_CYC,x:`O: Still rattled from a tense supervision meeting, a resident completely misses his patient's quiet mention that today is the anniversary of her brother's death.`,
+ w:`The patient expressed it; the clinician's own state kept him from recognizing it.`},
+{id:'en09',t:'ec3',d:['ec4','ec1','ec2'],q:Q_CYC,x:`P: I've got a hundred problems and no one to help.
+C: It must be devastating to be so alone.
+P: (glares) Maybe for some people.`,
+ w:`The clinician recognized the feeling but conveyed it with too much certainty for a guarded patient.`},
+{id:'en10',t:'ec4',d:['ec5','ec3','ec2'],q:Q_CYC,x:`O: A clinician offers a warm, accurate comment about how frightening the hospital must feel, but the patient, acutely delirious, can't follow what she said and asks again where he is.`,
+ w:`The empathy was well conveyed; delirium kept the patient from perceiving it.`},
+{id:'en11',t:'ec5',d:['ec4','ec1','ec3'],q:Q_CYC,x:`O: A patient with severe, regressive depression shows no visible reaction to the clinician's empathic remarks. At discharge she says, "You were the only one who seemed to understand."`,
+ w:`She perceived the empathy, but the depression blocked any visible acknowledgment at the time.`},
+{id:'en12',t:'highcert',d:['lowcert','highattr','reflecting'],q:Q_VAL,x:`P: When my partner left without warning, it was like the floor gave way.
+C: (gently) Everything you counted on gave way at once.
+P: (begins to cry) Yes. That's exactly it.`,
+ w:`Declarative, as if the clinician knows; powerfully engaging with this trusting patient.`},
+{id:'en13',t:'lowcert',d:['highcert','highattr','defusing'],q:Q_VAL,x:`P: My landlord won't call me back. People are cruel.
+C: It sounds like it could feel pretty overwhelming.`,
+ w:`"It sounds like... could" keeps certainty low, which is safer with a guarded patient.`},
+{id:'en14',t:'highattr',d:['highcert','reflecting','metaphorpara'],q:Q_VAL,x:`P: After she left so suddenly, my whole life started to fall apart.
+C: It sounds frightening to lose her so suddenly, a bit like losing your dad when you were young.`,
+ w:`It names an unspoken feeling (fear) and links to history the patient didn't raise. Accurate, it signals deep perception; with a guarded patient, it can backfire.`},
+{id:'en15',t:'reflecting',d:['highattr','metaphorpara','sensorypara'],q:Q_VAL,x:`P: I just feel like I'm being watched at work.
+C: You feel like you're being watched.`,
+ w:`The patient's own words, mirrored back. Very low attribution, which suits a possibly paranoid patient.`},
+{id:'en16',t:'paranoidspiral',d:['feedwander','unipolar','ec4'],q:`What process is unfolding?`,x:`O: A suspicious patient corrects the resident's empathic remark. The resident tries again, more warmly and with more certainty. The patient grows curt, then hostile, then stands up to leave.`,
+ w:`Each stronger empathic statement increases the intimacy he fears. The first disavowal was the cue to stop and switch to reflecting.`},
+{id:'en17',t:'greasing',d:['highattr','naivete','defusing'],q:Q_TECH,x:`P: They've been putting devices in my walls.
+C: What have you noticed?
+P: Clicks at night. My mail's been opened.
+C: Clicks at night. How do you make sense of it?`,
+ w:`Interested, conversational, and non-empathic, with pure reflecting. It lets the delusion, and any danger in it, come out.`},
+{id:'en18',t:'defusing',d:['highcert','reflecting','proc3'],q:Q_TECH,x:`P: You're 25 minutes late! What is going on here?
+C: Who wouldn't be upset! I'm very late, and I truly apologize.`,
+ w:`Strong agreement that the anger makes sense. Angry patients respond to high certainty, the reverse of guarded ones.`},
+{id:'en19',t:'metaphorpara',d:['sensorypara','reflecting','highattr'],q:Q_TECH,x:`P: Every day I get up, go to work, come home, and nothing changes. I keep trying and getting nowhere.
+C: Like running on a treadmill.
+P: Yes, and I'm getting so tired of running.`,
+ w:`One image captures the whole message, and the patient extends it, which gives the clinician something to build on.`},
+{id:'en20',t:'sensorypara',d:['metaphorpara','reflecting','highcert'],q:Q_TECH,x:`P: I just can't see a way out. Everything looks bleak.
+C: So the way you see it, there's no path forward right now. Does that look right to you?`,
+ w:`Matches the patient's visual language in both the stem and the check-out.`},
+{id:'en21',t:'naivete',d:['imagproj','identification','lookat'],q:`Which frame of mind is the resident using?`,x:`O: As a patient describes leaving his family to live in his van, the resident consciously sets aside her urge to classify or judge, and simply listens, trying to feel what his world is like.`,
+ w:`Receptive listening with analysis and judgment suspended. Imaginative projection would be actively moving into his inner scene.`},
+{id:'en22',t:'imagproj',d:['naivete','identification','somatic_emp'],q:`Which frame of mind is the resident using?`,x:`O: As a fisherman describes losing his boat, the resident actively imagines herself on the dock at dawn: the empty mooring, the smell of diesel, the silence. She keeps her own perspective while she does it.`,
+ w:`Actively entering the patient's "inscape," like a poet, without losing the "as if."`},
+
+/* Ch. 2 */
+{id:'sf01',t:'selfsystem',d:['parade','ulterior','rehearsed'],q:`Which concept best explains her early minimizing?`,x:`P: I'm not really sure why I'm here. It's not a big deal. Everyone gets a little down.
+O: Later in the interview she describes three months of barely leaving her bed.`,
+ w:`Early on, the self-system protects her self-esteem from a stranger's judgment. As safety grows, the real story emerges.`},
+{id:'sf02',t:'upr',d:['nondefensive','identification','gentleassume'],q:`What is the clinician conveying?`,x:`P: I've been taking money from my mother's purse to buy pills.
+C: (steady, interested tone) Thank you for telling me that. Help me understand how it started.`,
+ w:`Caring for the person while suspending moral judgment of the behavior, which keeps disclosure flowing.`},
+{id:'sf03',t:'parade',d:['selfsystem','cultransf','mad_opp'],q:`What has this patient likely met before arriving?`,x:`P: Go ahead, give me the look. Every doctor does when I tell them how much I drink.`,
+ w:`A history of judgmental reactions from others. Make sure your face isn't the next frown in the parade.`},
+{id:'sf04',t:'nondefensive',d:['ulterior','blandness','upr'],q:`What quality is the clinician showing?`,x:`P: You look about twelve. Are you even a real doctor?
+C: Fair question. I'm a psychiatry resident, and I work closely with an attending. What would help you feel comfortable working with me?`,
+ w:`Curiosity instead of self-protection: no lecture, no wounded tone, and a turn toward the patient's concern.`},
+{id:'sf05',t:'ulterior',d:['identification','transferential','blandness'],q:`What is quietly making the relationship unsafe?`,x:`O: A resident notices she keeps steering sessions toward topics where the patient compliments her insight, and she feels hurt when he cancels.`,
+ w:`Her own need to be admired is shaping the conversation.`},
+{id:'sf06',t:'blandness',d:['ulterior','responsiveness','parade'],q:`What went wrong?`,x:`O: Trying hard to stay neutral, a resident keeps a fixed, blank face and a monotone voice. After the session, the patient tells the front desk, "That doctor didn't like me."`,
+ w:`Neutrality about judgment was mistaken for expressionlessness, which patients tend to read as dislike.`},
+{id:'sf07',t:'consistency',d:['responsiveness','spontaneity','upr'],q:Q_GEN,x:`P: I trust you because you're the same every time. My last doctor was warm one week and cold the next.`,
+ w:`Steady, predictable behavior across visits.`},
+{id:'sf08',t:'responsiveness',d:['consistency','spontaneity','animation'],q:Q_GEN,x:`O: When a patient describes his daughter's graduation, the resident's face brightens; when he mentions his new diagnosis, her expression turns serious.`,
+ w:`Her affect visibly responds to what the patient shares.`},
+{id:'sf09',t:'factq',d:['gentleassume','sympamp','swingq'],q:`What type of question is this?`,x:`P: The panic just comes out of nowhere.
+C: When it hits, do you notice your heart pounding, tingling in your fingers, or a fear that you might die?
+P: Yes! All of that. How did you know?`,
+ w:`A well-timed, concrete question that conveys expertise, and with it, safety.`},
+{id:'sf10',t:'metacomm',d:['upr','immediacy','blend_obj'],q:`What is the name for the implicit message the patient picked up?`,x:`O: After the resident asks a few precise questions about her panic symptoms, the patient relaxes visibly.
+P: You've seen this before, haven't you.`,
+ w:`Beyond their literal content, the questions told her "this clinician knows this territory."`},
+{id:'sf11',t:'miracle',d:['matrixq','existential','tick'],q:Q_TECH,x:`C: Suppose that tonight, while you're asleep, a miracle happens and the problems that brought you here are solved. When you wake up tomorrow, what's the first thing you'd notice?`,
+ w:`De Shazer's solution-focused question: picturing the solved future surfaces goals.`},
+{id:'sf12',t:'bgoals',d:['btasks','bbond','miracle'],q:Q_ALLY,x:`C: Before I suggest anything, what would you most like to be different a few months from now?
+P: I want to be able to drive my kids to school again.`,
+ w:`Agreeing on the destination.`},
+{id:'sf13',t:'btasks',d:['bgoals','bbond','factq'],q:Q_ALLY,x:`C: There are a few ways we could work on the panic: a medication, a kind of therapy that practices facing the fear step by step, or both. Which of those feels like something you'd be willing to try?`,
+ w:`Agreeing on the methods of treatment.`},
+{id:'sf14',t:'bbond',d:['bgoals','btasks','consistency'],q:Q_ALLY,x:`P: I don't always like what you suggest, but I trust that you're on my side.`,
+ w:`The relationship itself, strong enough to hold through disagreement.`},
+
+/* Ch. 3 */
+{id:'ds01',t:'ph_intro',d:['ph_open','ph_term','ph_close'],q:Q_PHASE,x:`C: Hi, I'm Dr. Reyes, one of the psychiatry residents. Would you prefer I call you Mr. Alvarez or Daniel?
+P: Daniel's fine.
+C: Before we start, I want you to know that what you share stays confidential, with a few safety exceptions I'll explain.`,
+ w:`First contact through setting the stage: names, roles, confidentiality.`},
+{id:'ds02',t:'ph_open',d:['ph_intro','ph_body','ph_close'],q:Q_PHASE,x:`C: What's been happening that brought you in?
+O: For the next several minutes, the resident mostly listens, nodding and offering gentle prompts, while the patient describes the past few months.`,
+ w:`Mostly nondirective listening while taking in the patient's perspective and mental state.`},
+{id:'ds03',t:'ph_body',d:['ph_open','ph_close','ph_intro'],q:Q_PHASE,x:`C: Now I'd like to ask some more specific questions about your sleep, appetite, and energy, and then about alcohol and drug use.`,
+ w:`The shift into structured data gathering across regions.`},
+{id:'ds04',t:'ph_close',d:['ph_body','ph_term','ph_open'],q:Q_PHASE,x:`C: From what you've told me, this sounds like a depression. I'd like to go over some treatment options and hear what you think. What questions do you have for me?`,
+ w:`Sharing impressions, answering questions, and planning together.`},
+{id:'ds05',t:'ph_term',d:['ph_close','ph_intro','ph_body'],q:Q_PHASE,x:`O: Standing at the door:
+C: I'm glad you came in today. I'll see you Tuesday at 3. If anything gets worse before then, call the clinic.`,
+ w:`Final words that leave hope and secure the return visit.`},
+{id:'ds06',t:'openq',d:['gentlecmd','qualq','swingq'],q:Q_DOC,x:`C: What has your first year of college been like?`,
+ w:`A true open-ended question that can't be answered in a word.`},
+{id:'ds07',t:'gentlecmd',d:['openq','swingq','facilstmt'],q:Q_DOC,x:`C: Tell me about your relationship with your sister.`,
+ w:`An open statement, not a question, so it can't be answered "no."`},
+{id:'ds08',t:'swingq',d:['gentlecmd','qualq','closedq'],q:Q_DOC,x:`C: Can you describe what the panic feels like?`,
+ w:`"Can you...?" is technically answerable "No." It swings open only if engagement is good.`},
+{id:'ds09',t:'qualq',d:['openq','swingq','closedq'],q:Q_DOC,x:`C: How's your sleep?`,
+ w:`Open in form, but easily answered "Fine."`},
+{id:'ds10',t:'stmtinq',d:['closedq','negstmt','swingq'],q:Q_DOC,x:`C: You moved back home last spring?`,
+ w:`A statement said as a question: leading, and usually answered yes or no.`},
+{id:'ds11',t:'negstmt',d:['stmtinq','closedq','cannon'],q:Q_DOC,x:`C: So you're not having any thoughts of hurting yourself?`,
+ w:`Phrased to expect "no." Especially risky for lethality questions; ask neutrally instead.`},
+{id:'ds12',t:'facilstmt',d:['gentlecmd','reflecting','openq'],q:Q_DOC,x:`P: ...and then my boss called me into her office.
+C: Mm-hmm. Go on.`,
+ w:`A brief prompt that keeps the patient going without directing content.`},
+{id:'ds13',t:'closedq',d:['stmtinq','qualq','closedstmt'],q:Q_DOC,x:`C: Did you drink anything last night?`,
+ w:`A direct question with a one-word answer.`},
+{id:'ds14',t:'closedstmt',d:['gentlecmd','closedq','gate_intro'],q:Q_DOC,x:`C: Let's start with your mood.`,
+ w:`It directs without asking anything, so it sits at the closed end of the continuum.`},
+{id:'ds15',t:'piggyback',d:['highcert','gentlecmd','facilstmt'],q:Q_TECH,x:`P: My supervisor yells at me in front of everyone.
+C: That sounds humiliating. Tell me more about what she's been doing.`,
+ w:`Empathy leads and an open request carries the momentum, so empathy doesn't stall a quiet patient.`},
+{id:'ds16',t:'shutdown',d:['wandering_int','rehearsed','loquacious'],q:Q_PAT,x:`O: A patient answers every question in two or three words, after long pauses, looking at the floor. The resident notices she's asking more and more closed questions.`,
+ w:`Short answers, long latencies, little eye contact, and a clinician being pulled toward closed questions.`},
+{id:'ds17',t:'wandering_int',d:['shutdown','rehearsed','loquacious'],q:Q_PAT,x:`O: A patient talks at length with good eye contact, starts answering before questions are finished, and hops from his job to his ex to a trip he took last year. The resident is nodding, saying "go on," and writing furiously.`,
+ w:`Long answers, short latencies, and topic hopping, fed by the clinician's facilitation.`},
+{id:'ds18',t:'loquacious',d:['wandering_int','rehearsed','shutdown'],q:Q_PAT,x:`C: How long does it take you to fall asleep?
+O: The patient talks about sleep for six minutes: his mattress, the street noise, his college finals, his roommate's snoring. He never gives a number.`,
+ w:`He stays on the topic, but buries it in irrelevant detail: the loquacious variant of the wandering interview.`},
+{id:'ds19',t:'rehearsed',d:['wandering_int','loquacious','shutdown'],q:Q_PAT,x:`O: A patient with many prior admissions tells her story smoothly, using clinical terms and showing little emotion, almost word for word as it appears in her old chart.`,
+ w:`A pat, well-worn narrative. Clinician and patient can drift into accepting half-truths together.`},
+{id:'ds20',t:'affinterj',d:['sidetrack','piggyback','proc1'],q:Q_TECH,x:`O: Midway through a smooth, practiced account of his past hospitalizations:
+C: Hold on a second. What was the worst moment of that last hospitalization for you?`,
+ w:`Steering the rehearsed story toward an emotionally charged moment breaks the script.`},
+{id:'ds21',t:'namingemo',d:['proc1','normalization','shameatt'],q:Q_TECH,x:`O: Asked about her marriage, a patient stops and looks away.
+C: Sometimes when people stop there, it's because they feel embarrassed, or worried what I'll think, or a little afraid. Do any of those fit?`,
+ w:`Naming a few possible emotions behind the stall and asking which fits (Morrison).`},
+
+/* Ch. 4 */
+{id:'fa01',t:'freefac',d:['transform','psychodyn','scouting'],q:Q_REGION,x:`P: My partner and I are on different planets lately.
+O: For several minutes, the resident offers only nods, "uh-huh," and an occasional open prompt, deliberately letting the patient take the conversation wherever she wants.`,
+ w:`A consciously nondirective stretch in which the patient chooses the direction.`},
+{id:'fa02',t:'transform',d:['freefac','psychodyn','excursion'],q:Q_REGION,x:`P: Is there someone older I could see?
+C: That's a reasonable question. Tell me what concerns you about seeing a resident.
+O: They spend several minutes on her worries before returning to her history.`,
+ w:`Time spent resolving a roadblock, approached with curiosity rather than defensiveness.`},
+{id:'fa03',t:'psychodyn',d:['freefac','transform','scouting'],q:Q_REGION,x:`C: I notice you brought up your mother each time we talked about your boss. What do you make of that?
+P: Huh. They both make me feel like I'm never good enough.
+O: They spend the next few minutes on that pattern.`,
+ w:`A stretch on how and why she responds as she does.`},
+{id:'fa04',t:'scouting',d:['freefac','psychodyn','transform'],q:Q_REGION,x:`O: In the first seven minutes, the resident introduces herself, lets the patient describe his concerns freely, notes his mental state, and starts deciding which regions to cover next.`,
+ w:`The introduction and opening together: surveying process and content to plan the body.`},
+{id:'fa05',t:'stilted',d:['blended','excursion','split'],q:Q_EXP,x:`C: Sleep okay?
+P: No.
+C: Appetite?
+P: Down.
+C: Energy?
+P: Low.
+C: Concentration?
+P: Bad.`,
+ w:`Checklist-style questioning: efficient on paper, interrogating in the room.`},
+{id:'fa06',t:'blended',d:['stilted','excursion','split'],q:Q_EXP,x:`C: Tell me what your nights have been like.
+P: I fall asleep fine, then I'm up at 3.
+C: What goes through your mind at 3?
+P: Work, mostly. Whether I'll lose my job.
+C: How has that worry affected your appetite and energy during the day?`,
+ w:`Conversational, tracking the patient's answers while still covering the symptoms needed.`},
+{id:'fa07',t:'excursion',d:['split','gate_spont','deadzone'],q:`What is the resident doing?`,x:`O: While exploring depressive symptoms, the patient mentions drinking to fall asleep. The resident asks two quick questions about how much and how often, then says, "Let's come back to your sleep for a moment."`,
+ w:`A brief step out of the region, followed by an immediate return.`},
+{id:'fa08',t:'split',d:['excursion','stilted','unguided'],q:`What has the resident done with this region?`,x:`O: Reviewing her transcript, a resident sees she asked about substance use early on, left it, and returned to finish it 25 minutes later.`,
+ w:`One region explored in two separate places. That's fine, as long as it gets finished.`},
+{id:'fa09',t:'pivot',d:['gate_spont','excursion','deadzone'],q:`What is this moment called in facilics?`,x:`P: My sleep's been bad... ever since my brother started using again, actually.
+O: The resident pauses: follow the brother, or stay with sleep?`,
+ w:`The patient has moved toward a new region, and the clinician must decide whether to follow.`},
+{id:'fa10',t:'gate_spont',d:['gate_natural','gate_implied','gate_refer'],q:Q_GATE,x:`P: ...and honestly, the bigger problem is my drinking.
+C: How do you mean?`,
+ w:`The patient moved into the new region, and the clinician followed.`},
+{id:'fa11',t:'gate_natural',d:['gate_implied','gate_spont','gate_phantom'],q:Q_GATE,x:`P: I've been so wound up I can barely sit still at night.
+C: When you feel that wound up, do your thoughts ever race so fast you can't keep up with them?`,
+ w:`The patient's last sentence (the cue) plus a transitional question into screening for mania.`},
+{id:'fa12',t:'gate_manuf',d:['gate_natural','gate_implied','gate_intro'],q:Q_GATE,x:`P: Work's been awful.
+C: When work is that stressful, how do things go at home?
+P: Tense. We fight a lot.
+C: When the fights get really heated, has anyone ever pushed or hit anyone?`,
+ w:`A series of natural gates, each built on the last answer, leading smoothly to a delicate topic.`},
+{id:'fa13',t:'gate_refer',d:['gate_natural','gate_implied','gate_spont'],q:Q_GATE,x:`C: Earlier you mentioned your uncle had "nerve problems." Tell me more about emotional problems in your family.`,
+ w:`It refers back to something said earlier rather than the last sentence.`},
+{id:'fa14',t:'gate_implied',d:['gate_phantom','gate_natural','gate_intro'],q:Q_GATE,x:`O: After finishing questions about the patient's anxiety, with no new cue from her:
+C: Have you ever had times when you had to check things over and over, like the locks or the stove?`,
+ w:`No direct cue, but anxiety and OCD are topically close, so the move doesn't jar.`},
+{id:'fa15',t:'gate_phantom',d:['gate_implied','gate_intro','gate_refer'],q:Q_GATE,x:`P: ...so my sister and I finally talked it out, and it felt really good.
+C: Have you ever been arrested?`,
+ w:`An unconnected jump with no cue, reference, or announcement. Jarring and likely to disengage.`},
+{id:'fa16',t:'gate_intro',d:['gate_phantom','gate_implied','gate_refer'],q:Q_GATE,x:`C: We've talked a lot about how you've been feeling. Now I'd like to switch gears and ask some questions about your medical history.`,
+ w:`The transition is announced openly.`},
+{id:'fa17',t:'gate_obs',d:['gate_spont','gate_natural','proc1'],q:Q_GATE,x:`O: While describing her father's illness, the patient's eyes fill with tears.
+C: You look like you're welling up. What's coming up for you?`,
+ w:`Cued by nonverbal behavior rather than by words.`},
+{id:'fa18',t:'deadzone',d:['unguided','split','wandering_int'],q:`Which time-management error is this?`,x:`O: After a good start, a resident spends minutes 10 through 25 on a fascinating story about the patient's travels abroad, then races through suicide assessment, substance use, and family history in the last ten minutes.`,
+ w:`The second quarter was lost to interesting but unhelpful material, forcing a sprint at the end.`},
+{id:'fa19',t:'unguided',d:['deadzone','split','gate_phantom'],q:`What problem does the supervisor identify?`,x:`O: Reviewing a tape, a supervisor notes the interview jumps from sleep to family to work to sleep to medical history to work again, with no region finished, although the patient was easy to talk with.`,
+ w:`A hodgepodge from poor focusing; the patient wasn't the problem.`},
+
+/* Ch. 5 */
+{id:'va01',t:'anchor',d:['tagging','behinc','verbalvideo'],q:Q_VT,x:`C: Think back to your daughter's birthday party in June. How was your mood around then?`,
+ w:`A memorable event anchors recall.`},
+{id:'va02',t:'tagging',d:['anchor','denialspec','sympamp'],q:Q_VT,x:`P: I tried some antidepressant a few years ago, I can't remember which.
+C: Was it Prozac, Zoloft, Paxil, or something else?`,
+ w:`A list helps the patient recognize a forgotten fact.`},
+{id:'va03',t:'exaggeration',d:['sympamp','shameatt','normalization'],q:Q_VT,x:`P: I'm so ashamed. I yelled at my sister last week.
+C: (lightly) So you didn't burn her house down or anything?
+P: (laughs) No, nothing like that. I just raised my voice.`,
+ w:`Humorous overstatement shrinks disproportionate shame. Use it only when the shame clearly outweighs the act.`},
+{id:'va04',t:'defterms',d:['clarnorms','factq','tagging'],q:Q_VT,x:`C: Have you ever had a panic attack? By that I mean a sudden wave of intense fear, with your heart racing, that peaks within a few minutes.`,
+ w:`The clinician defines the clinical term so the answer means the same thing to both of them.`},
+{id:'va05',t:'clarnorms',d:['defterms','gentleassume','normalization'],q:Q_VT,x:`C: When I ask whether your father hit you, I mean slaps, pushes, or being hit with a belt, even if back then it was just considered discipline.`,
+ w:`Spells out what counts, because family norms may have treated it as normal.`},
+{id:'va06',t:'normalization',d:['shameatt','gentleassume','sympamp'],q:Q_VT,x:`C: Sometimes when people are as depressed as you've been, they have thoughts of killing themselves. Have you had thoughts like that?`,
+ w:`Others have had the same experience, so the patient isn't alone in it.`},
+{id:'va07',t:'shameatt',d:['normalization','gentleassume','bragging'],q:Q_VT,x:`C: With all the pressure you've been under at work, has it ever gotten to the point where you lost your temper and hit someone?`,
+ w:`Framed through this patient's own stress, which softens the shame of answering yes.`},
+{id:'va08',t:'bragging',d:['shameatt','sympamp','exaggeration'],q:Q_VT,x:`C: You obviously know how to handle yourself; you've worked security for years. How many fights have you been in?`,
+ w:`A compliment invites the patient to show off, loosening disclosure of a negative behavior.`},
+{id:'va09',t:'behinc',d:['gentleassume','defterms','verbalvideo'],q:Q_VT,x:`P: I lost it on her.
+C: What exactly did you do?
+P: I grabbed my keys and left for two days.`,
+ w:`Asking for concrete facts replaced a vague label, and overturned the assumption of violence.`},
+{id:'va10',t:'verbalvideo',d:['behinc','anchor','gate_manuf'],q:Q_VT,x:`C: Walk me through it. What happened right after you got home?
+P: I went to the kitchen.
+C: And then?
+P: I poured a drink.
+C: What did you do with the bottle after that?`,
+ w:`Serial behavioral incidents reconstruct the event step by step. Watch for gaps where time goes missing.`},
+{id:'va11',t:'gentleassume',d:['denialspec','catchall','normalization'],q:Q_VT,x:`C: What other drugs have you tried besides marijuana?`,
+ w:`It presumes there are others, non-judgmentally, making disclosure easier than a yes-or-no question.`},
+{id:'va12',t:'denialspec',d:['cannon','tagging','gentleassume'],q:Q_VT,x:`C: Have you ever used cocaine?
+P: No.
+C: What about pain pills you weren't prescribed?
+P: ...A few times.
+C: Methamphetamine?`,
+ w:`Each item gets its own question, so each needs its own "no."`},
+{id:'va13',t:'cannon',d:['denialspec','tagging','closedq'],q:`What validity problem does this question have?`,x:`C: Have you ever used cocaine, heroin, pills, meth, or acid?
+P: No.`,
+ w:`Lumping everything together invites one easy "no." Ask about each item separately.`},
+{id:'va14',t:'catchall',d:['gentleassume','gate_intro','ph_term'],q:Q_VT,x:`C: Is there anything we haven't talked about that you think is important for me to know?`,
+ w:`A safety net for whatever you didn't think to ask.`},
+{id:'va15',t:'sympamp',d:['exaggeration','tagging','gentleassume'],q:Q_VT,x:`C: On your worst days, how many hours do you spend thinking about suicide: 8 hours, 12, 15?`,
+ w:`Setting the range high means even a minimized answer ("maybe 4") reveals a serious problem.`},
+{id:'va16',t:'bogus',d:['tagging','gentleassume','soundings'],q:Q_TECH,x:`C: When people talk to you, do you see their words spelled out in the air?
+P: Yes, all the time.`,
+ w:`An atypical symptom; endorsing it raises the question of feigning. Interpret alongside the whole picture.`},
+{id:'va17',t:'soundings',d:['bogus','tagging','miracle'],q:Q_TECH,x:`C: Some people want to stop drinking completely; others just want to cut back. Where are you?
+P: Cut back, I guess.
+C: And if your wife told you she'd leave over it, would that change things?`,
+ w:`Graded probes that measure how deep his motivation goes.`},
+
+/* Ch. 6 */
+{id:'pb01',t:'parataxic',d:['cultransf','intersubj','incorpprej'],q:`Which concept fits best?`,x:`O: A patient raised by a harsh, critical father keeps hearing her calm, gentle clinician's neutral questions as accusations.
+P: You think I'm lazy, don't you?`,
+ w:`She perceives the clinician through an earlier template rather than as he actually is.`},
+{id:'pb02',t:'intersubj',d:['parataxic','reliablyinvalid','telescoping'],q:`Which concept is the supervisor describing?`,x:`O: Two residents interview the same patient on the same day. With the warm, unhurried one, she discloses past trauma; with the rushed, brisk one, she denies it. The supervisor notes the "data" were shaped by each dyad.`,
+ w:`Clinical data are jointly constructed by both participants.`},
+{id:'pb03',t:'reliablyinvalid',d:['intersubj','unguided','parataxic'],q:`What problem has she found in her interviewing?`,x:`O: Auditing her intakes, a resident realizes she asks every patient, "You're not suicidal, are you?" and has documented "denies SI" in all 40 charts.`,
+ w:`A consistent habit producing consistently wrong data. Ask neutrally instead.`},
+{id:'pb04',t:'interpers',d:['phenom','strengths','matrixq'],q:`What kind of inquiry is this?`,x:`C: How would your best friend describe you?
+P: Loyal. Maybe too loyal.
+C: And how do you think your coworkers see you?`,
+ w:`Understanding the person through how they believe others see them.`},
+{id:'pb05',t:'phenom',d:['interpers','imagproj','presentsol'],q:`What kind of inquiry is this?`,x:`C: When the depression is at its worst, what does your apartment look like? What does a morning feel like?`,
+ w:`Exploring lived, sensory experience: what it's like to be this person.`},
+{id:'pb06',t:'presentsol',d:['miracle','strengths','bgoals'],q:`What is the clinician asking about?`,x:`C: What have you already tried that has made things even a little better?
+P: Walking the dog late at night helps me sleep.`,
+ w:`The patient's own existing solutions, a strengths-based starting point for planning.`},
+{id:'pb07',t:'strengths',d:['skills','interests','presentsol'],q:Q_TRIAD,x:`P: My friends say I'm the one who never gives up, even when things look hopeless.`,
+ w:`A character trait (persistence).`},
+{id:'pb08',t:'skills',d:['strengths','interests','cogability'],q:Q_TRIAD,x:`P: I'm good with engines. Give me any car and I'll get it running.`,
+ w:`A teachable ability.`},
+{id:'pb09',t:'interests',d:['strengths','skills','presentsol'],q:Q_TRIAD,x:`P: On weekends I mostly go birdwatching. I've kept a list since I was ten.`,
+ w:`A pastime he loves.`},
+{id:'pb10',t:'kulturbrille',d:['colorblind','tradprej','parataxic'],q:`Which concept is the resident recognizing?`,x:`O: A resident realizes her assumption that a 30-year-old man living with his parents must be "failing to launch" comes from her own upbringing, not from his family's norms.`,
+ w:`Her own cultural glasses were defining what's normal.`},
+
+/* Ch. 7 */
+{id:'ap01',t:'primsec',d:['matrixq','redherring','intrawing'],q:`Which diagnostic strategy is she using?`,x:`O: Before deciding between major depression, persistent depressive disorder, and bipolar II, a resident first establishes that the patient's problems sit mainly in the mood disorders region, with possible anxiety, and screens the other major regions.`,
+ w:`Broad regions first, then specific diagnoses within them.`},
+{id:'ap02',t:'vcode',d:['primsec','redherring','damagingmatrix'],q:`How would these problems be classified?`,x:`O: A woman with no psychiatric disorder seeks help for constant conflict with her teenage son and a recent job loss. The resident documents these as the focus of clinical attention.`,
+ w:`Real problems worth attention, without a mental disorder.`},
+{id:'ap03',t:'intrawing',d:['interwing','healingmatrix','redherring'],q:Q_MTX,x:`O: A patient's severe biological depression is treated with an antidepressant.`,
+ w:`Biological problem, biological intervention: same wing.`},
+{id:'ap04',t:'interwing',d:['intrawing','healingmatrix','redherring'],q:Q_MTX,x:`O: To help a patient's chronic self-loathing, the clinician encourages her to return to her church choir, where she says she feels valued.`,
+ w:`A psychological problem treated from the worldview wing.`},
+{id:'ap05',t:'healingmatrix',d:['damagingmatrix','interwing','redherring'],q:Q_MTX,x:`O: After his depression responds to medication, a father starts going to his son's games again, and his marriage noticeably improves.`,
+ w:`A change in one wing helped others: a positive ripple.`},
+{id:'ap06',t:'damagingmatrix',d:['healingmatrix','redherring','intrawing'],q:Q_MTX,x:`O: A patient's new antipsychotic causes major weight gain. She feels ashamed, stops going to her support group, and her relationship with her partner deteriorates.`,
+ w:`A change in the biological wing harmed the psychological and dyadic wings.`},
+{id:'ap07',t:'redherring',d:['damagingmatrix','primsec','interwing'],q:Q_MTX,x:`O: A patient's "treatment-resistant depression" turns out to be caused by untreated hypothyroidism.`,
+ w:`The problem appeared psychological but originated in the biological wing.`},
+{id:'ap08',t:'matrixq',d:['miracle','bgoals','presentsol'],q:Q_TECH,x:`C: How do you think your life might change if the panic attacks stopped?
+P: I'd start driving again, and I'd probably see my friends more.`,
+ w:`Invites the patient to imagine ripple effects of one specific change.`},
+{id:'ap09',t:'cp_lonely',d:['cp_reject','cp_worthless','cp_meaning'],q:Q_PAIN,x:`P: When my partner falls asleep before me, I feel completely abandoned. I hate being the only one awake in the house.`,
+ w:`Centered on being alone and left.`},
+{id:'ap10',t:'cp_worthless',d:['cp_lonely','cp_reject','cp_meaning'],q:Q_PAIN,x:`P: I can't cope with anything. Other people manage jobs and kids. I can't even manage the laundry. I'm useless.`,
+ w:`The self as inadequate. Small, achievable tasks can begin to counter it.`},
+{id:'ap11',t:'cp_reject',d:['cp_lonely','cp_worthless','seed_betrayed'],q:Q_PAIN,x:`O: The patient avoids eye contact, and when the clinician asks a question, she snaps, "That's a stupid thing to ask. You think I'm stupid?" Later she says everyone eventually gets sick of her.`,
+ w:`She expects rejection and defends against it in advance.`},
+{id:'ap12',t:'cp_internal',d:['seed_control','cp_meaning','seed_unknown'],q:Q_PAIN,x:`P: Sometimes I just explode. I've punched a wall and thrown a chair, and afterward I don't know where it came from. That scares me more than anything.`,
+ w:`Fear of losing control of his own impulses. Loss of external control is about others controlling him.`},
+{id:'ap13',t:'cp_meaning',d:['cp_lonely','cp_worthless','seed_failure'],q:Q_PAIN,x:`P: I get up, I go to work, I come home. I keep asking myself what any of it is for.`,
+ w:`About purpose, not relationships or competence.`},
+
+/* Ch. 8 */
+{id:'nv01',t:'emblem',d:['illustrator','regulator','adaptor'],q:Q_NVT,x:`O: Asked how her week went, a patient says nothing and gives a thumbs-down.`,
+ w:`A gesture with a culturally agreed meaning that replaces words.`},
+{id:'nv02',t:'illustrator',d:['emblem','regulator','affdisplay'],q:Q_NVT,x:`O: Describing the lump he found, a patient holds his thumb and forefinger about an inch apart.`,
+ w:`A gesture that clarifies what he's saying.`},
+{id:'nv03',t:'regulator',d:['illustrator','emblem','adaptor'],q:Q_NVT,x:`O: As she finishes each point, the patient looks up and pauses, signaling the clinician's turn. The clinician nods, and she continues.`,
+ w:`Movements that manage turn-taking.`},
+{id:'nv04',t:'adaptor',d:['emblem','illustrator','cutoff'],q:Q_NVT,x:`O: While discussing his finances, a patient keeps picking at his nails and rolling a pen between his fingers, apparently unaware of it.`,
+ w:`Unconscious comfort behaviors, often rising with anxiety.`},
+{id:'nv05',t:'affdisplay',d:['adaptor','emblem','illustrator'],q:Q_NVT,x:`O: When her ex-husband is mentioned, a fleeting look of disgust crosses the patient's face just before she says she "has no feelings about him at all."`,
+ w:`A brief facial expression of emotion, here contradicting her words.`},
+{id:'nv06',t:'cutoff',d:['adaptor','regulator','affdisplay'],q:Q_NVT,x:`O: Asked about the night of the accident, the patient glances away and back again and again, then stares at the floor as if studying something invisible.`,
+ w:`Eye cut-offs (shifty, then evasive eye) block out stress. Exaggerated cut-offs can suggest psychosis.`},
+{id:'nv07',t:'proxemics',d:['kinesics','paralanguage','immediacy'],q:Q_NVA,x:`O: A suspicious patient slides his chair back each time the resident leans forward, until there's about eight feet between them.`,
+ w:`Use of space and distance.`},
+{id:'nv08',t:'kinesics',d:['proxemics','paralanguage','immediacy'],q:Q_NVA,x:`O: Reviewing a session video, a supervisor focuses on the resident's posture, gestures, and facial expressions, and on how the patient's posture began to mirror hers.`,
+ w:`Body movement: posture, gesture, face.`},
+{id:'nv09',t:'paralanguage',d:['kinesics','proxemics','emblem'],q:Q_NVA,x:`O: The patient says "I'm fine" in a flat, quiet, slow voice that trails off at the end.`,
+ w:`How the words were said, beyond the words themselves.`},
+{id:'nv10',t:'immediacy',d:['proxemics','respzone','regulator'],q:`What has the resident increased?`,x:`O: Moving out from behind her desk, sitting at an angle about five feet away, and leaning slightly forward with relaxed nods, a resident notices her withdrawn patient start to talk more.`,
+ w:`The combined warmth and involvement conveyed nonverbally.`},
+{id:'nv11',t:'respzone',d:['immediacy','proxemics','kinrecip'],q:`Which concept is she applying?`,x:`O: A resident learns that a paranoid patient is comfortable only when she sits farther away than usual, while an elderly, withdrawn patient doing a cognitive exam needs her closer and speaking louder.`,
+ w:`The patient-specific distance where comfort and responsiveness overlap.`},
+{id:'nv12',t:'incongruence',d:['affdisplay','cutoff','paralanguage'],q:`What should the clinician notice?`,x:`O: A patient says she hates her boyfriend and will never go back, but in a resigned, pouting tone, palms up in her lap, with no sign of anger.`,
+ w:`Words and nonverbal channels disagree, an early clue to ambivalence worth exploring.`},
+{id:'nv13',t:'kinrecip',d:['immediacy','regulator','transferential'],q:`What pattern is the clinician being pulled into?`,x:`O: A young patient fumbles helplessly with her microphone and glances up. The clinician immediately leans over and fixes it for her. Later, strong dependent traits emerge.`,
+ w:`A parenting reciprocal: the patient began the script, and the clinician unconsciously continued it.`},
+{id:'nv14',t:'phantompres',d:['nakedcomm','respzone','proxemics'],q:`Which effect is she compensating for?`,x:`O: On video visits, a resident notices patients seem less engaged than in person, though her words are the same. She starts slightly exaggerating her nods and warmth.`,
+ w:`Being only an image on a screen reduces felt presence and immediacy.`},
+{id:'nv15',t:'nakedcomm',d:['phantompres','paralanguage','cutoff'],q:`What is the counselor up against?`,x:`O: On a crisis text line, a counselor can't tell whether a teenager's one-word replies mean anger, sarcasm, or despair. There is no face or voice to read, only words and how long each reply takes.`,
+ w:`All nonverbal cues are gone. Check your reading more often.`}
 );

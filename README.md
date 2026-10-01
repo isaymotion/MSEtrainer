@@ -1,14 +1,15 @@
 # MSE Trainer
 
-A web app for psychiatry residents to practice recognizing mental status exam (MSE) and psychopathology findings, and the interviewing techniques and concepts in Shea's *Psychiatric Interviewing: The Art of Understanding*, 3rd ed. (2016). Each case presents a short vignette or interview excerpt, and the resident picks the term that fits best from four options chosen to be easily confused with one another (for example, circumstantiality vs. tangentiality, or a process response vs. sidetracking).
+A web app for psychiatry residents to practice recognizing mental status exam (MSE) and psychopathology findings, along with the interviewing techniques and concepts in Shea's *Psychiatric Interviewing: The Art of Understanding*, 3rd ed. (2016). Each case presents a short vignette or interview excerpt, and the resident picks the term that fits best from four options chosen to be easily confused with one another (for example, circumstantiality vs. tangentiality, or a process response vs. sidetracking).
 
 After each answer the app explains the answer and gives a rule for telling it apart from its look-alikes. MSE cases show a sample line for documenting the finding in the chart; interviewing-skills cases show a practical tip or sample phrasing for the bedside. Every term points to the relevant Shea chapter for further reading.
 
 ## Features
 
-- 155 fictional cases covering 149 terms
+- 286 fictional cases covering 279 terms
 - Mental status: eight MSE domains, from thought process to insight and judgment
-- Interviewing skills: anger and disengagement (Ch. 19), culture and identity (Ch. 20), and vantage points (Ch. 21)
+- Clinical interviewing, Part 1 (Ch. 1–8): engagement and empathy, safety and the alliance, interview structure, facilics, validity techniques, the person beneath the diagnosis, assessment and planning, and nonverbal behavior
+- Clinical interviewing, Ch. 19–21: anger and disengagement, culture and identity, and vantage points
 - Filter by domain, practice only unseen or previously missed cases, and choose session length
 - Searchable glossary with a "Drill this term" option
 - Progress by domain and a list of terms to revisit, saved in the browser (no account or server)
@@ -51,7 +52,7 @@ O: Observation line`, w:`Explanation shown after answering.`}
 - `t` is the key of the correct term, and `d` lists three distractor term keys. All keys must exist in `TERMS`.
 - Lines beginning `C:`, `P:`, or `O:` render as clinician, patient, and observation lines. A vignette with no `C:` or `P:` lines renders as a single narrative paragraph.
 
-New terms are added with `T(key, name, domain, [chapters], definition, tellingApart, chartLine)`. For interviewing-skills domains, the last field is shown as "At the bedside" instead of "In the chart." New domains go in the `DOMAINS` list with a group (`mse` or `skill`), and new chapter titles go in `CH`.
+New terms are added with `T(key, name, domain, [chapters], definition, tellingApart, chartLine)`. For interviewing domains, the last field is shown as "At the bedside" instead of "In the chart." New domains go in the `DOMAINS` list with a group (`mse`, `p1`, or `skill`), and new chapter titles go in `CH`.
 
 ## Disclaimer
 
@@ -59,4 +60,4 @@ For education only. All cases are fictional and do not describe real patients. T
 
 ## Author
 
-Made by Isabella Navarro, MD. Latest version September 2026. isaymotion@gmail.com
+Made by Isabella Navarro, MD. Latest version October 2026. isaymotion@gmail.com

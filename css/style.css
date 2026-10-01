@@ -82,7 +82,7 @@ select{padding:7px 10px;border-radius:10px;border:1px solid var(--rule);backgrou
 .ln.cl{color:var(--muted)}
 .ln.pt{color:var(--ink)}
 .ln.note{grid-column:1/-1;font-style:italic;color:var(--muted);font-size:1.08rem}
-.tx .ln.pt + .sp,.tx .sp:has(+ .ln.pt){background:var(--accent-soft);color:var(--accent)}
+.tx .sp:has(+ .ln.pt){background:var(--accent-soft);color:var(--accent)}
 
 /* Answer options */
 .prompt{font-weight:700;font-size:1.05rem;letter-spacing:-.01em;margin:0 0 12px}

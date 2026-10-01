@@ -4,12 +4,12 @@ function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'{}');return
 let stats=load();
 function save(){try{localStorage.setItem(STORE,JSON.stringify(stats))}catch(e){}}
 
-const savedDoms=stats.prefs.dv===2&&stats.prefs.doms&&stats.prefs.doms.length?stats.prefs.doms.filter(k=>DOM[k]):null;
+const savedDoms=stats.prefs.dv===3&&stats.prefs.doms&&stats.prefs.doms.length?stats.prefs.doms.filter(k=>DOM[k]):null;
 const settings={
   doms:new Set(savedDoms&&savedDoms.length?savedDoms:DOMAINS.map(d=>d.k)),
   mode:stats.prefs.mode||'mix', len:+(stats.prefs.len||10), drill:null
 };
-function savePrefs(){stats.prefs={dv:2,doms:[...settings.doms],mode:settings.mode,len:settings.len};save();}
+function savePrefs(){stats.prefs={dv:3,doms:[...settings.doms],mode:settings.mode,len:settings.len};save();}
 
 const $=s=>document.querySelector(s);
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -108,7 +108,7 @@ function showFeedback(focus){
     <p class="why">${esc(v.w)}</p>
     <div class="apart"><h3>Telling it apart</h3><p><mark>${esc(T0.tell)}</mark></p>
       ${ok?'':`<p class="picked"><strong>You chose ${esc(P.n)}.</strong> ${esc(P.def)}</p>`}</div>
-    <div class="chart"><h3>${DOMG[T0.dom]==='skill'?'At the bedside':'In the chart'}</h3><p class="chartline">${esc(T0.chart)}</p></div>
+    <div class="chart"><h3>${DOMG[T0.dom]!=='mse'?'At the bedside':'In the chart'}</h3><p class="chartline">${esc(T0.chart)}</p></div>
     <p class="read"><strong>Further reading in Shea:</strong> ${T0.ch.map(c=>`Ch. ${c}, ${esc(CH[c])}`).join('; ')}.</p>
     <button class="btn primary" id="next">${session.i+1<n?'Next case':'See results'}</button>
   </div>`;
