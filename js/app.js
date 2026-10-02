@@ -4,12 +4,12 @@ function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'{}');return
 let stats=load();
 function save(){try{localStorage.setItem(STORE,JSON.stringify(stats))}catch(e){}}
 
-const savedDoms=stats.prefs.dv===3&&stats.prefs.doms&&stats.prefs.doms.length?stats.prefs.doms.filter(k=>DOM[k]):null;
+const savedDoms=stats.prefs.dv===4&&stats.prefs.doms&&stats.prefs.doms.length?stats.prefs.doms.filter(k=>DOM[k]):null;
 const settings={
   doms:new Set(savedDoms&&savedDoms.length?savedDoms:DOMAINS.map(d=>d.k)),
   mode:stats.prefs.mode||'mix', len:+(stats.prefs.len||10), drill:null
 };
-function savePrefs(){stats.prefs={dv:3,doms:[...settings.doms],mode:settings.mode,len:settings.len};save();}
+function savePrefs(){stats.prefs={dv:4,doms:[...settings.doms],mode:settings.mode,len:settings.len};save();}
 
 const $=s=>document.querySelector(s);
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
