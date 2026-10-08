@@ -32,7 +32,7 @@ Open `index.html` in any modern browser. No build step or installation is needed
 
 ```
 index.html      Page structure
-favicon.svg, favicon-32.png, apple-touch-icon.png   Browser tab and home-screen icons (Rod of Asclepius)
+favicon-32.png, apple-touch-icon.png   Browser tab and home-screen icons (caduceus)
 icon-512.png    Large icon, e.g., for a repository or profile image
 css/style.css   Styles, including light and dark themes
 js/data.js      Domains, terms, Shea chapter titles, and all cases
