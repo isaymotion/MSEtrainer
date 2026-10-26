@@ -1,5 +1,14 @@
 /* What's New, newest first. Add an entry with every release. */
 const WHATS_NEW=[
+  {v:'A new look and easier navigation', date:'October 2026', items:[
+    'New plum and rose theme in light and dark, with the same layout as the other study companions.',
+    'A sidebar lists every mental status domain and Shea chapter, with your score for each. On phones and iPad portrait it opens from the sidebar button.',
+    'Each domain has its own page: case count, your accuracy, its terms, and a Practice this domain button.',
+    'Home shows one Start or Continue button, your overall progress, weak spots, and shortcuts to Review misses and Tagalog cases.',
+    'Sessions now keep their place: leave mid-session and pick up at the same case later, even after closing the app.',
+    'Custom session opens in a panel with collapsible domain groups, so the practice screen shows only the case.',
+    'Search the glossary from the top bar (press / on a keyboard). Sessions default to 20 cases, with a 40-case option.'
+  ]},
   {v:'Tagalog cases', date:'October 2026', items:[
     '42 original Tagalog cases: patient and clinician lines in Tagalog, with the English translation shown after you answer (or tap Show English).',
     'Tagalog cases cover all eight MSE domains, with extra practice on thought process in Tagalog speech: circumstantiality, tangentiality, flight of ideas, clanging, neologisms, blocking, and loosening of associations.',

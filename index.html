@@ -8,94 +8,83 @@
 <meta name="author" content="Isabella Navarro, MD">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#3443E8">
+<meta name="theme-color" content="#FBF6F8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1220" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-<script>try{var t=localStorage.getItem("mse-trainer-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<script>try{var t=localStorage.getItem("mse-trainer-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("mse-trainer-sidebar")==="closed")document.documentElement.classList.add("side-closed")}catch(e){}</script>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand">
-      <h1>MSE Trainer</h1>
-      <p>Read the case. Name the finding or the technique.</p>
-    </div>
-    <div class="topbar">
-      <div class="navbtns">
-        <button class="iconbtn" id="navBack" aria-label="Back" title="Back (Alt+←)">‹</button>
-        <button class="iconbtn" id="navFwd" aria-label="Forward" title="Forward (Alt+→)">›</button>
+<header class="topbar">
+  <div class="tb-left">
+    <div class="menuwrap">
+      <button class="iconbtn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu" title="Menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="menu" id="menu" hidden>
+        <button data-go="new">What's New</button>
+        <button id="exportBtn">Back up progress</button>
+        <button id="importBtn">Restore from backup</button>
+        <button data-go="about">About</button>
+        <a href="https://isaymotion.github.io/tagalog/#/psych" target="_blank" rel="noopener">Usap Tayo (Tagalog)</a>
       </div>
-      <nav class="tabs" role="tablist" aria-label="Sections">
-        <button role="tab" data-view="practice" aria-selected="true">Practice</button>
-        <button role="tab" data-view="glossary" aria-selected="false">Glossary</button>
-        <button role="tab" data-view="progress" aria-selected="false">Progress</button>
-      </nav>
-      <button class="iconbtn" id="themeBtn" aria-label="Theme: match device" title="Theme"></button>
-      <div class="menuwrap">
-        <button class="iconbtn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu">☰</button>
-        <div class="menu" id="menu" hidden>
-          <button data-view="new">What's New</button>
-          <button id="exportBtn">Back up progress</button>
-          <button id="importBtn">Restore from backup</button>
-          <button data-view="about">About</button>
-          <a href="https://isaymotion.github.io/tagalog/#/psych" target="_blank" rel="noopener">Usap Tayo (Tagalog)</a>
-        </div>
-      </div>
-      <input type="file" id="importFile" accept="application/json,.json" hidden>
     </div>
-  </header>
+    <button class="iconbtn" id="sideBtn" aria-label="Show or hide the sidebar" aria-controls="side" aria-expanded="true" title="Sidebar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M9.5 4.5v15"/></svg>
+    </button>
+    <button class="iconbtn nav" id="navBack" aria-label="Back" title="Back (Alt+←)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg></button>
+    <button class="iconbtn nav" id="navFwd" aria-label="Forward" title="Forward (Alt+→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
+    <a class="brand" href="#/home" aria-label="MSE Trainer home">
+      <img src="apple-touch-icon.png" alt="" width="40" height="40">
+      <span><strong>MSE Trainer</strong><small>Mental Status &amp; Interviewing Practice</small></span>
+    </a>
+  </div>
+  <label class="tsearch">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+    <input id="tq" type="search" placeholder="Search findings, techniques, terms" aria-label="Search the glossary" autocomplete="off">
+    <kbd>/</kbd>
+  </label>
+  <div class="tb-right">
+    <button class="iconbtn searchicon" id="searchBtn" aria-label="Search" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg></button>
+    <button class="iconbtn" id="themeBtn" aria-label="Theme: match device" title="Theme"></button>
+  </div>
+  <input type="file" id="importFile" accept="application/json,.json" hidden>
+</header>
 
-  <main>
-    <section id="v-practice">
-      <div class="controls">
-        <div class="chips" id="chips" role="group" aria-label="Domains to practice"></div>
-        <div class="row">
-          <label>Cases
-            <select id="mode">
-              <option value="mix">Mixed, weighted to misses</option>
-              <option value="new">Only unseen</option>
-              <option value="missed">Only missed last time</option>
-            </select>
-          </label>
-          <label>Language
-            <select id="lang">
-              <option value="all">English and Tagalog</option>
-              <option value="en">English cases</option>
-              <option value="tl">Tagalog cases</option>
-            </select>
-          </label>
-          <label>Session length
-            <select id="len">
-              <option value="10">10 cases</option>
-              <option value="20">20 cases</option>
-              <option value="999">All matching</option>
-            </select>
-          </label>
-          <button class="btn" id="restart">New session</button>
-        </div>
-        <div id="drill"></div>
-      </div>
-      <div id="stage"></div>
+<div class="scrim" id="scrim" hidden></div>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="Sections">
+    <nav class="sidenav" id="sidenav"></nav>
+  </aside>
+
+  <main id="main" tabindex="-1">
+    <section id="v-home" class="view"></section>
+    <section id="v-domain" class="view" hidden></section>
+    <section id="v-practice" class="view" hidden>
+      <div class="sessbar" id="sessbar"></div>
+      <div class="pagepad"><div id="stage"></div></div>
     </section>
-
-    <section id="v-glossary" hidden>
+    <section id="v-glossary" class="view pagepad" hidden>
+      <p class="eyebrow">Glossary</p>
+      <h1 class="pagetitle">Every finding and technique</h1>
       <input class="search" id="q" type="search" placeholder="Search terms and definitions" aria-label="Search glossary">
       <div id="gloss"></div>
     </section>
-
-    <section id="v-progress" hidden>
+    <section id="v-progress" class="view pagepad" hidden>
+      <p class="eyebrow">My progress</p>
       <div id="prog"></div>
     </section>
-
-    <section id="v-new" hidden>
-      <h2 class="pagetitle">What's New</h2>
+    <section id="v-new" class="view pagepad" hidden>
+      <p class="eyebrow">What's New</p>
+      <h1 class="pagetitle">Release notes</h1>
       <div id="news"></div>
     </section>
-
-    <section id="v-about" hidden>
-      <h2 class="pagetitle">About</h2>
+    <section id="v-about" class="view pagepad" hidden>
+      <p class="eyebrow">About</p>
+      <h1 class="pagetitle">About MSE Trainer</h1>
       <div class="prose">
         <p>MSE Trainer helps psychiatry residents recognize mental status exam findings and the interviewing techniques in Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016).</p>
         <p><strong>Tagalog cases</strong> are original teaching cases written for Filipino clinical practice. Their terms still point to the matching Shea chapters (mostly Ch. 16, The Mental Status, and Ch. 20, Culturally Adaptive Interviewing). The patient's English translation appears after you answer. Tagalog audio is the recorded Filipino voice from <a href="https://isaymotion.github.io/tagalog/" target="_blank" rel="noopener">Usap Tayo</a>, played when you are online.</p>
@@ -103,14 +92,54 @@
         <p>A study aid only, not a substitute for the book, supervision, or clinical judgment. All cases are fictional. Progress is saved in this browser; use Back up progress in the menu to keep a copy.</p>
       </div>
     </section>
-  </main>
 
-  <footer>
-    <p>Further-reading links point to Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016), matched by chapter topic. Tagalog cases are original and cite the matching chapter.</p>
-    <p>All cases are fictional teaching vignettes. Progress is saved in this browser only. Keys 1 to 4 answer; Enter goes to the next case.</p>
-    <p class="credit">Made by Isabella Navarro, MD. Latest version October 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
-  </footer>
+    <footer class="pagepad">
+      <p>Further-reading links point to Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016), matched by chapter topic. Tagalog cases are original and cite the matching chapter.</p>
+      <p>All cases are fictional teaching vignettes. Progress is saved in this browser only. During a session, keys 1 to 4 answer and Enter goes to the next case; / searches.</p>
+      <p class="credit">Made by Isabella Navarro, MD. Latest version October 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
+    </footer>
+  </main>
 </div>
+
+<dialog class="sheet" id="custom" aria-labelledby="customTitle">
+  <form method="dialog" id="customForm">
+    <div class="sheethead">
+      <h2 id="customTitle">Custom session</h2>
+      <button class="iconbtn" value="cancel" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="sheetbody">
+      <div id="domPick"></div>
+      <div class="fields">
+        <label>Cases
+          <select id="mode">
+            <option value="mix">Focus on misses</option>
+            <option value="new">Only unseen</option>
+            <option value="missed">Only missed last time</option>
+          </select>
+        </label>
+        <label>Language
+          <select id="lang">
+            <option value="all">English and Tagalog</option>
+            <option value="en">English cases</option>
+            <option value="tl">Tagalog cases</option>
+          </select>
+        </label>
+        <label>Length
+          <select id="len">
+            <option value="10">10 cases</option>
+            <option value="20">20 cases</option>
+            <option value="40">40 cases</option>
+            <option value="999">All matching</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="sheetfoot">
+      <span id="poolCount" class="muted"></span>
+      <button class="btn primary" id="customStart" value="start">Start session</button>
+    </div>
+  </form>
+</dialog>
 
 <script src="js/data.js"></script>
 <script src="js/data-tl.js"></script>

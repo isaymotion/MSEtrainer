@@ -14,13 +14,16 @@ After each answer the app explains the answer and gives a rule for telling it ap
 - Tagalog and Filipino culture: Tagalog cases across all eight MSE domains (patient lines in Tagalog, English shown after answering, "Ask it in Tagalog" for each), and a Culture or pathology? domain with 10 Filipino look-alikes (hiya, deferential gaze, dropped po, shared kulam/usog/engkanto beliefs, grief-related sensing, sama ng loob, nerbiyos, lutang, agreeable opo, sanib)
 - Sa Tagalog card on every MSE and culture case, linking to the matching Usap Tayo section or lesson
 - Tagalog audio in the recorded Filipino voice from Usap Tayo (isaymotion.github.io/tagalog), played when online
-- Filter by domain and language (English, Tagalog, or both), practice only unseen or previously missed cases, and choose session length
-- Searchable glossary with a "Drill this term" option
+- Sidebar with every MSE domain and Shea chapter (with your score); each domain has its own page with its terms and a Practice button
+- Home page with one Start or Continue button, overall progress, weak spots, Review misses, and Tagalog shortcuts
+- Sessions keep their place, so you can leave and continue at the same case later
+- Custom session panel: choose domains, language (English, Tagalog, or both), only unseen or previously missed cases, and length (10, 20, 40, or all)
+- Glossary search from the top bar (/ on a keyboard), with a "Drill this term" option
 - Progress by domain and a list of terms to revisit, saved in the browser (no account or server); back up and restore progress from the ☰ menu
 - Keyboard shortcuts: 1 to 4 to answer, Enter for the next case
 - Back and forward buttons (Alt+← / Alt+→), What's New and About pages
-- Works on phones and desktops; light, dark, or match-device theme
-- Deep links: `#/practice?lang=tl&dom=fc` (Tagalog culture cases), `#/practice?drill=<term key>`
+- Plum and rose theme: light, dark, or match device. Works on iPhone, iPad, and desktop (the sidebar becomes a drawer on narrow screens)
+- Deep links: `#/domain/<domain key>` (e.g. `#/domain/tp`), `#/tagalog`, `#/misses`, `#/quick`, `#/practice?lang=tl&dom=fc` (Tagalog culture cases), `#/practice?drill=<term key>`
 
 ## Run it locally
 
@@ -44,7 +47,7 @@ js/data.js      Domains, terms, Shea chapter titles, and the English cases
 js/data-tl.js   Tagalog cases and the Culture or pathology? domain and terms
 js/audio-key.js Maps a Tagalog line to its audio file in Usap Tayo's pack (same as Usap Tayo's js/audio-key.js)
 js/news.js      What's New entries
-js/app.js       App logic: sessions, scoring, glossary, progress, navigation, theme, backup, audio
+js/app.js       App logic: sidebar, home and domain pages, sessions (saved so they can be resumed), scoring, glossary, progress, navigation, theme, backup, audio
 .nojekyll       Tells GitHub Pages to serve files as-is
 ```
 
