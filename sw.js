@@ -1,6 +1,6 @@
 /* MSE Trainer offline support. Network first, so an online visit always gets the latest version;
    the cached copy is used only when offline. Tagalog audio is not cached (it streams from Usap Tayo). */
-const CACHE='mse-trainer-v2';
+const CACHE='mse-trainer-v3';
 const SHELL=['./','index.html','css/style.css','js/data.js','js/data-tl.js','js/audio-key.js','js/news.js','js/app.js',
   'manifest.webmanifest','favicon-32.png','apple-touch-icon.png','icon-192.png','icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});

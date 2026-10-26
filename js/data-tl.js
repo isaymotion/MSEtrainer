@@ -4,7 +4,7 @@
      lang:'tl'   a Tagalog case. In x, C: and P: lines are written "Tagalog || English"; the English stays hidden until the case is answered.
      ask         "Tagalog || English": a question that would elicit the finding, shown as "Ask it in Tagalog".
      dom         optional: puts the case in a domain other than its answer's (used for "Culture or pathology?" cases whose answer is a standard MSE term).
-   Audio for Tagalog lines comes from Usap Tayo's recorded pack (isaymotion.github.io/tagalog/audio). When you add or change Tagalog lines,
+   Audio for Tagalog lines comes from Usap Tayo's recorded pack (isaymotion.github.io/Tagalog/audio). When you add or change Tagalog lines,
    regenerate Usap Tayo's tools/extra-texts/msetrainer.txt (see README) so the audio job records them. */
 GROUPS.push({g:'tl',n:'Tagalog and Filipino culture'});
 DOMAINS.push({k:'fc',n:'Culture or pathology?',g:'tl',ch:20});

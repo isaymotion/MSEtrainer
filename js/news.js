@@ -8,6 +8,7 @@ const WHATS_NEW=[
     'Sessions now keep their place: leave mid-session and pick up at the same case later, even after closing the app.',
     'Custom session opens in a panel with collapsible domain groups, so the practice screen shows only the case.',
     'Search the glossary from the top bar (press / on a keyboard). Sessions default to 20 cases, with a 40-case option.',
+    'Fixed: the Usap Tayo menu link, the Sa Tagalog links, and Tagalog audio now point to the right address (isaymotion.github.io/Tagalog).',
     'Install it as a home-screen app: on iPhone or iPad tap Share, then Add to Home Screen. It opens full screen with the caduceus icon and works offline after your first visit (Tagalog audio still needs a connection).'
   ]},
   {v:'Tagalog cases', date:'October 2026', items:[

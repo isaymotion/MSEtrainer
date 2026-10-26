@@ -13,7 +13,7 @@ After each answer the app explains the answer and gives a rule for telling it ap
 - Clinical interviewing, Ch. 19–21: anger and disengagement, culture and identity, and vantage points
 - Tagalog and Filipino culture: Tagalog cases across all eight MSE domains (patient lines in Tagalog, English shown after answering, "Ask it in Tagalog" for each), and a Culture or pathology? domain with 10 Filipino look-alikes (hiya, deferential gaze, dropped po, shared kulam/usog/engkanto beliefs, grief-related sensing, sama ng loob, nerbiyos, lutang, agreeable opo, sanib)
 - Sa Tagalog card on every MSE and culture case, linking to the matching Usap Tayo section or lesson
-- Tagalog audio in the recorded Filipino voice from Usap Tayo (isaymotion.github.io/tagalog), played when online
+- Tagalog audio in the recorded Filipino voice from Usap Tayo (isaymotion.github.io/Tagalog), played when online
 - Sidebar with every MSE domain and Shea chapter (with your score); each domain has its own page with its terms and a Practice button
 - Home page with one Start or Continue button, overall progress, weak spots, Review misses, and Tagalog shortcuts
 - Sessions keep their place, so you can leave and continue at the same case later

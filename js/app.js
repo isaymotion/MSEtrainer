@@ -192,7 +192,7 @@ function renderDomain(k){
 }
 
 /* ---------- practice ---------- */
-const UT='https://isaymotion.github.io/tagalog/#/';
+const UT='https://isaymotion.github.io/Tagalog/#/';
 const UT_DOM={tp:['psych/s/mse-describe','MSE: describing observations'],sp:['psych/s/mse-describe','MSE: describing observations'],be:['psych/s/mse-describe','MSE: describing observations'],
   tc:['psych/s/delusions','Psychosis: delusions and thought disturbances'],pe:['psych/s/hallucinations','Psychosis: hallucinations and perceptual disturbances'],
   af:['psych/s/depression','Mood and depression'],cg:['psych/s/mse-cog','MSE: orientation, attention, memory'],in:['psych/s/mse-abstract','MSE: abstraction, judgment, insight'],
@@ -509,7 +509,7 @@ function renderNews(){
 
 /* ---------- Tagalog audio: Usap Tayo's recorded pack, then a Filipino device voice ---------- */
 const AUDIO=(()=>{
-  const BASE='https://isaymotion.github.io/tagalog/audio/';
+  const BASE='https://isaymotion.github.io/Tagalog/audio/';
   let keys=null, cur=null;
   const fil=()=>('speechSynthesis' in window)?speechSynthesis.getVoices().find(v=>/^(fil|tl)/i.test(v.lang)):null;
   fetch(BASE+'manifest.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{
