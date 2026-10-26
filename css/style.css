@@ -168,3 +168,36 @@ footer p{margin:0 0 4px;max-width:72ch}
   .domrow{grid-template-columns:1fr auto}
   .domrow .bar{grid-column:1/-1;order:3}
 }
+
+/* Header controls (back/forward, theme, menu) */
+.topbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.navbtns{display:flex;gap:4px}
+.iconbtn{min-width:38px;height:38px;padding:0 10px;border-radius:10px;border:1px solid var(--rule);background:var(--card);color:var(--ink);font-size:1.05rem;font-weight:600;cursor:pointer;line-height:1}
+.iconbtn:hover{border-color:var(--accent)}
+.menuwrap{position:relative}
+.menu{position:absolute;right:0;top:44px;z-index:20;min-width:220px;display:flex;flex-direction:column;padding:6px;background:var(--card);border:1px solid var(--rule);border-radius:12px;box-shadow:0 8px 24px rgba(28,31,69,.18)}
+.menu button,.menu a{background:none;border:0;text-align:left;padding:10px 12px;border-radius:8px;font-size:.94rem;color:var(--ink);text-decoration:none;cursor:pointer}
+.menu button:hover,.menu a:hover{background:var(--tint)}
+.pagetitle{font-size:1.5rem;margin:10px 0 14px}
+.prose p{margin:0 0 12px}
+.prose a,.read a{color:var(--accent)}
+
+/* Tagalog cases */
+.langtag{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:999px;margin-bottom:8px}
+.ln .tlline,.ask .tlline{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;margin:0}
+.ln .tlline span{flex:1}
+.ln .en{margin:4px 0 0;color:var(--muted);font-size:.92rem;font-style:italic}
+.ln p{margin:0}
+.say{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--rule);background:var(--card);color:var(--accent);font-size:.8rem;cursor:pointer;display:inline-grid;place-items:center}
+.say:hover{border-color:var(--accent)}
+.say.playing{background:var(--accent);color:var(--accent-ink)}
+#showEn{margin-top:10px}
+.btn.small{padding:5px 12px;font-size:.86rem}
+.ask{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--tint)}
+.ask h3{margin:0 0 6px;font-size:.92rem}
+.ask .muted{margin:4px 0 0;font-size:.9rem}
+@media (max-width:520px){ .brand h1{font-size:2.1rem} .tabs button{padding:7px 10px} }
+.satagalog{margin:12px 0 0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 10px 10px 0}
+.satagalog h3{margin:0 0 4px;font-size:.88rem}
+.satagalog p{margin:0;font-size:.92rem}
+.satagalog a{color:var(--accent);font-weight:600}

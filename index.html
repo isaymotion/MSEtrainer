@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script>try{var t=localStorage.getItem("mse-trainer-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 </head>
 <body>
 <div class="wrap">
@@ -21,11 +22,29 @@
       <h1>MSE Trainer</h1>
       <p>Read the case. Name the finding or the technique.</p>
     </div>
-    <nav class="tabs" role="tablist" aria-label="Sections">
-      <button role="tab" data-view="practice" aria-selected="true">Practice</button>
-      <button role="tab" data-view="glossary" aria-selected="false">Glossary</button>
-      <button role="tab" data-view="progress" aria-selected="false">Progress</button>
-    </nav>
+    <div class="topbar">
+      <div class="navbtns">
+        <button class="iconbtn" id="navBack" aria-label="Back" title="Back (Alt+←)">‹</button>
+        <button class="iconbtn" id="navFwd" aria-label="Forward" title="Forward (Alt+→)">›</button>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Sections">
+        <button role="tab" data-view="practice" aria-selected="true">Practice</button>
+        <button role="tab" data-view="glossary" aria-selected="false">Glossary</button>
+        <button role="tab" data-view="progress" aria-selected="false">Progress</button>
+      </nav>
+      <button class="iconbtn" id="themeBtn" aria-label="Theme: match device" title="Theme"></button>
+      <div class="menuwrap">
+        <button class="iconbtn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <div class="menu" id="menu" hidden>
+          <button data-view="new">What's New</button>
+          <button id="exportBtn">Back up progress</button>
+          <button id="importBtn">Restore from backup</button>
+          <button data-view="about">About</button>
+          <a href="https://isaymotion.github.io/tagalog/#/psych" target="_blank" rel="noopener">Usap Tayo (Tagalog)</a>
+        </div>
+      </div>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
   </header>
 
   <main>
@@ -38,6 +57,13 @@
               <option value="mix">Mixed, weighted to misses</option>
               <option value="new">Only unseen</option>
               <option value="missed">Only missed last time</option>
+            </select>
+          </label>
+          <label>Language
+            <select id="lang">
+              <option value="all">English and Tagalog</option>
+              <option value="en">English cases</option>
+              <option value="tl">Tagalog cases</option>
             </select>
           </label>
           <label>Session length
@@ -62,16 +88,34 @@
     <section id="v-progress" hidden>
       <div id="prog"></div>
     </section>
+
+    <section id="v-new" hidden>
+      <h2 class="pagetitle">What's New</h2>
+      <div id="news"></div>
+    </section>
+
+    <section id="v-about" hidden>
+      <h2 class="pagetitle">About</h2>
+      <div class="prose">
+        <p>MSE Trainer helps psychiatry residents recognize mental status exam findings and the interviewing techniques in Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016).</p>
+        <p><strong>Tagalog cases</strong> are original teaching cases written for Filipino clinical practice. Their terms still point to the matching Shea chapters (mostly Ch. 16, The Mental Status, and Ch. 20, Culturally Adaptive Interviewing). The patient's English translation appears after you answer. Tagalog audio is the recorded Filipino voice from <a href="https://isaymotion.github.io/tagalog/" target="_blank" rel="noopener">Usap Tayo</a>, played when you are online.</p>
+        <p><strong>Culture or pathology?</strong> covers Filipino look-alikes such as hiya and blunted affect, a shared belief in kulam and a delusion, or grief and hallucinations. These are teaching generalizations: always ask the patient and family what an experience means to them.</p>
+        <p>A study aid only, not a substitute for the book, supervision, or clinical judgment. All cases are fictional. Progress is saved in this browser; use Back up progress in the menu to keep a copy.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>Further-reading links point to Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016), matched by chapter topic.</p>
+    <p>Further-reading links point to Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016), matched by chapter topic. Tagalog cases are original and cite the matching chapter.</p>
     <p>All cases are fictional teaching vignettes. Progress is saved in this browser only. Keys 1 to 4 answer; Enter goes to the next case.</p>
     <p class="credit">Made by Isabella Navarro, MD. Latest version October 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
   </footer>
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/data-tl.js"></script>
+<script src="js/audio-key.js"></script>
+<script src="js/news.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
