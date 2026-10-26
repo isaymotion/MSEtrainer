@@ -7,7 +7,8 @@ const WHATS_NEW=[
     'Home shows one Start or Continue button, your overall progress, weak spots, and shortcuts to Review misses and Tagalog cases.',
     'Sessions now keep their place: leave mid-session and pick up at the same case later, even after closing the app.',
     'Custom session opens in a panel with collapsible domain groups, so the practice screen shows only the case.',
-    'Search the glossary from the top bar (press / on a keyboard). Sessions default to 20 cases, with a 40-case option.'
+    'Search the glossary from the top bar (press / on a keyboard). Sessions default to 20 cases, with a 40-case option.',
+    'Install it as a home-screen app: on iPhone or iPad tap Share, then Add to Home Screen. It opens full screen with the caduceus icon and works offline after your first visit (Tagalog audio still needs a connection).'
   ]},
   {v:'Tagalog cases', date:'October 2026', items:[
     '42 original Tagalog cases: patient and clinician lines in Tagalog, with the English translation shown after you answer (or tap Show English).',

@@ -20,6 +20,7 @@ After each answer the app explains the answer and gives a rule for telling it ap
 - Custom session panel: choose domains, language (English, Tagalog, or both), only unseen or previously missed cases, and length (10, 20, 40, or all)
 - Glossary search from the top bar (/ on a keyboard), with a "Drill this term" option
 - Progress by domain and a list of terms to revisit, saved in the browser (no account or server); back up and restore progress from the ☰ menu
+- Installs as a home-screen app (Share > Add to Home Screen on iPhone and iPad; Install app in Chrome) and opens offline after the first visit; Tagalog audio still needs a connection
 - Keyboard shortcuts: 1 to 4 to answer, Enter for the next case
 - Back and forward buttons (Alt+← / Alt+→), What's New and About pages
 - Plum and rose theme: light, dark, or match device. Works on iPhone, iPad, and desktop (the sidebar becomes a drawer on narrow screens)
@@ -40,8 +41,11 @@ Open `index.html` in any modern browser. No build step or installation is needed
 
 ```
 index.html      Page structure
-favicon-32.png, apple-touch-icon.png   Browser tab and home-screen icons (caduceus)
-icon-512.png    Large icon, e.g., for a repository or profile image
+favicon.ico, favicon-32.png   Browser tab icons (caduceus)
+apple-touch-icon.png   iPhone and iPad home-screen icon
+icon-192.png, icon-512.png, icon-maskable-512.png   Install icons (Android, desktop)
+manifest.webmanifest   Lets the app install to the home screen
+sw.js           Offline support: network first, cached copy when offline
 css/style.css   Styles, including light and dark themes
 js/data.js      Domains, terms, Shea chapter titles, and the English cases
 js/data-tl.js   Tagalog cases and the Culture or pathology? domain and terms

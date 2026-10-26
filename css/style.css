@@ -331,3 +331,11 @@ select{padding:10px 12px;border-radius:12px;border:1px solid var(--rule);backgro
   .fields{grid-template-columns:1fr}
   .sessrow .what{font-size:.94rem}
 }
+
+/* Installed on the home screen: no browser back button, so keep the in-app one on phones */
+@media (display-mode: standalone) and (max-width:760px){
+  .iconbtn.nav#navBack{display:inline-grid}
+}
+@media (display-mode: standalone) and (max-width:420px){
+  .brand span{display:none}
+}
