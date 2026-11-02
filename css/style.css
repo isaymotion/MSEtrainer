@@ -367,3 +367,5 @@ svg.facilic{display:block;width:auto;height:auto;max-width:none;margin:0;stroke:
 .facilic rect,.facilic ellipse,.facilic circle{fill:var(--card)}
 .facilic text{fill:var(--ink);stroke:none}
 .facilic text.small{font-size:.74rem}
+
+.langtag.draft{color:var(--muted);background:transparent;border:1px dashed var(--rule);margin-left:6px}

@@ -325,7 +325,7 @@ function renderPractice(){
   const {v,opts}=session.cur;
   st.innerHTML=`
     ${session.drill?`<div class="drill"><span>Drilling <strong>${esc(TERMS[session.drill].n)}</strong> and the terms it gets confused with.</span></div>`:''}
-    <article class="case" aria-label="Case vignette">${v.lang==='tl'?'<span class="langtag">Tagalog</span>':''}${renderVig(v.x)}${v.lang==='tl'&&v.x.includes(' || ')?'<button class="btn small" id="showEn">Show English</button>':''}</article>
+    <article class="case" aria-label="Case vignette">${v.lang==='tl'?'<span class="langtag">Tagalog</span>':''}${v.lang==='tl'&&v.rev===0?'<span class="langtag draft" title="This Tagalog wording has not yet been reviewed">Draft translation</span>':''}${renderVig(v.x)}${v.lang==='tl'&&v.x.includes(' || ')?'<button class="btn small" id="showEn">Show English</button>':''}</article>
     <p class="prompt" id="prompt">${esc(v.q||'Which term fits best?')}</p>
     <div class="opts" role="group" aria-labelledby="prompt">${opts.map((k,i)=>`<button class="opt" data-k="${k}"><span class="key" aria-hidden="true">${i+1}</span><span>${esc(TERMS[k].n)}</span></button>`).join('')}</div>
     <div id="fb" aria-live="polite"></div>`;
