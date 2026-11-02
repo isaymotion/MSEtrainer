@@ -39,7 +39,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--top) + 60px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1rem;line-height:1.5;overflow-x:hidden}
 button,select,input{font:inherit;color:inherit}
 a{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
@@ -53,6 +53,8 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke
 .tb-right{margin-left:auto}
 .iconbtn{width:42px;height:42px;display:inline-grid;place-items:center;border-radius:50%;border:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer;padding:0;flex:none}
 .iconbtn:hover{background:var(--tint)}
+#textSizeBtn span{font:600 1.05rem/1 var(--sans);letter-spacing:-.02em;white-space:nowrap}
+#textSizeBtn small{font-size:.7em;font-weight:inherit}
 .iconbtn:disabled{opacity:.35;cursor:default;background:transparent}
 .iconbtn.nav{border-color:transparent}
 .iconbtn.nav:hover:not(:disabled){border-color:var(--rule)}
@@ -316,7 +318,8 @@ select{padding:10px 12px;border-radius:12px;border:1px solid var(--rule);backgro
 @media (max-width:560px){
   :root{--top:60px}
   .topbar{gap:8px}
-  .tb-left{gap:6px}
+  .tb-left{gap:6px;flex:0 1 auto;min-width:0}
+  .brand strong{overflow:hidden;text-overflow:ellipsis}
   .iconbtn{width:40px;height:40px}
   .brand img{width:34px;height:34px;border-radius:9px}
   .brand strong{font-size:1.15rem}
@@ -339,3 +342,14 @@ select{padding:10px 12px;border-radius:12px;border:1px solid var(--rule);backgro
 @media (display-mode: standalone) and (max-width:420px){
   .brand span{display:none}
 }
+
+/* ---------- text size popover ---------- */
+.ts-panel{position:fixed;top:calc(var(--top) + env(safe-area-inset-top,0px) + 6px);right:10px;z-index:60;width:min(360px,calc(100vw - 20px));padding:14px;background:var(--card);border:1px solid var(--rule);border-radius:16px;box-shadow:0 14px 34px -10px rgba(0,0,0,.35)}
+.ts-panel[hidden]{display:none}
+.ts-title{margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.ts-seg{display:grid;grid-template-columns:repeat(4,minmax(max-content,1fr));gap:2px;padding:4px;border-radius:12px;background:var(--tint)}
+.ts-seg label{display:block;position:relative;min-width:0}
+.ts-seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.ts-seg span{display:block;text-align:center;padding:9px 6px;border-radius:9px;font-weight:600;color:var(--ink);white-space:nowrap}
+.ts-seg input:checked+span{background:var(--accent-fill);color:var(--accent-ink)}
+.ts-seg input:focus-visible+span{outline:2px solid var(--lilac);outline-offset:1px}

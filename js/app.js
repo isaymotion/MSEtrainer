@@ -139,7 +139,7 @@ function renderHome(){
     </div>
   </div></div>
   <div class="pagepad homebody">
-    ${r?`<a class="newsbar" href="#/new"><span class="tag">NEW</span><span class="txt">${esc(r.v)}: ${r.items.length} updates</span><span class="more">See what changed</span></a>`:''}
+    ${r?`<a class="newsbar" href="#/new"><span class="tag">NEW</span><span class="txt">${esc(r.v)}: ${r.items.length} update${r.items.length===1?'':'s'}</span><span class="more">See what changed</span></a>`:''}
     <div class="cards">
       <a class="card" href="#/misses"><h3>Review misses${mc?`<span class="badge">${mc}</span>`:''}</h3><p>${mc?'Cases you got wrong the last time you saw them.':'Nothing to review yet. Misses collect here as you practice.'}</p><span class="go">${mc?'Review now':'Start practicing'}</span></a>
       <a class="card" href="${weak.length?'#/domain/'+weak[0].d.k:'#/progress'}"><h3>Weak spots</h3>${weak.length?`<ul class="weaklist">${weak.map(x=>`<li><span>${esc(x.d.n)}</span><span>${x.s.pct}%</span></li>`).join('')}</ul>`:'<p>Your lowest-scoring domains show up here after a few cases.</p>'}<span class="go">${weak.length?'Practice '+esc(weak[0].d.n):'See progress'}</span></a>
@@ -482,6 +482,34 @@ function applyTheme(){
 }
 $('#themeBtn').onclick=()=>{theme=THEMES[(THEMES.indexOf(theme)+1)%3];try{localStorage.setItem('mse-trainer-theme',theme)}catch(e){}applyTheme();};
 applyTheme();
+
+/* ---------- text size: Aa button in the top bar ---------- */
+const TEXT_SIZES=[['90','Smaller'],['100','Default'],['112.5','Larger'],['125','Largest']];
+function applyTextSize(v){
+  document.documentElement.style.fontSize=TEXT_SIZES.some(t=>t[0]===v)&&v!=='100'?v+'%':'';
+}
+(()=>{
+  const btn=$('#textSizeBtn');if(!btn)return;
+  let cur='100';try{const z=localStorage.getItem('mse-trainer-textSize');if(TEXT_SIZES.some(t=>t[0]===z))cur=z}catch(e){}
+  applyTextSize(cur);
+  const panel=document.createElement('div');
+  panel.className='ts-panel';panel.id='textSizePanel';panel.hidden=true;
+  panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Text size');
+  document.body.appendChild(panel);
+  const build=()=>{panel.innerHTML='<p class="ts-title">Text size</p><div class="ts-seg">'+TEXT_SIZES.map((t,i)=>
+    '<label><input type="radio" name="ts" value="'+t[0]+'"'+(cur===t[0]?' checked':'')+'><span style="font-size:'+[0.82,0.92,1.02,1.12][i]+'rem">'+t[1]+'</span></label>').join('')+'</div>';};
+  const open=()=>{build();panel.hidden=false;btn.setAttribute('aria-expanded','true');const f=panel.querySelector('input:checked');if(f)f.focus();};
+  const close=()=>{if(panel.hidden)return;panel.hidden=true;btn.setAttribute('aria-expanded','false');};
+  btn.addEventListener('click',e=>{e.stopPropagation();panel.hidden?open():close();});
+  panel.addEventListener('change',e=>{
+    if(e.target.name!=='ts')return;
+    cur=e.target.value;try{localStorage.setItem('mse-trainer-textSize',cur)}catch(err){}
+    applyTextSize(cur);
+  });
+  document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){close();btn.focus();}});
+  window.addEventListener('hashchange',close);
+})();
 
 /* ---------- backup ---------- */
 $('#exportBtn').onclick=()=>{

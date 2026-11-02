@@ -1,5 +1,8 @@
 /* What's New, newest first. Add an entry with every release. */
 const WHATS_NEW=[
+  {v:'Text size', date:'November 2026', items:[
+    'Text size: tap Aa in the top bar to make text smaller or larger. Your choice is saved on this device.'
+  ]},
   {v:'A new look and easier navigation', date:'October 2026', items:[
     'New plum and rose theme in light and dark, with the same layout as the other study companions.',
     'A sidebar lists every mental status domain and Shea chapter, with your score for each. On phones and iPad portrait it opens from the sidebar button.',

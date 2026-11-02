@@ -21,6 +21,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>try{var t=localStorage.getItem("mse-trainer-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("mse-trainer-sidebar")==="closed")document.documentElement.classList.add("side-closed")}catch(e){}</script>
+<script>try{var z=localStorage.getItem("mse-trainer-textSize");if(z==="90"||z==="112.5"||z==="125")document.documentElement.style.fontSize=z+"%"}catch(e){}</script>
 </head>
 <body>
 <header class="topbar">
@@ -54,6 +55,7 @@
   </label>
   <div class="tb-right">
     <button class="iconbtn searchicon" id="searchBtn" aria-label="Search" title="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg></button>
+    <button type="button" class="iconbtn" id="textSizeBtn" aria-label="Text size" aria-expanded="false" aria-controls="textSizePanel" title="Text size"><span aria-hidden="true">A<small>A</small></span></button>
     <button class="iconbtn" id="themeBtn" aria-label="Theme: match device" title="Theme"></button>
   </div>
   <input type="file" id="importFile" accept="application/json,.json" hidden>
@@ -102,7 +104,7 @@
     <footer class="pagepad">
       <p>Further-reading links point to Shea, <em>Psychiatric Interviewing: The Art of Understanding</em>, 3rd ed. (2016), matched by chapter topic. Tagalog cases are original and cite the matching chapter.</p>
       <p>All cases are fictional teaching vignettes. Progress is saved in this browser only. During a session, keys 1 to 4 answer and Enter goes to the next case; / searches.</p>
-      <p class="credit">Made by Isabella Navarro, MD. Latest version October 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
+      <p class="credit">Made by Isabella Navarro, MD. Latest version November 2026. <a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a></p>
     </footer>
   </main>
 </div>

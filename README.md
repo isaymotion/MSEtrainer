@@ -23,6 +23,7 @@ After each answer the app explains the answer and gives a rule for telling it ap
 - Installs as a home-screen app (Share > Add to Home Screen on iPhone and iPad; Install app in Chrome) and opens offline after the first visit; Tagalog audio still needs a connection
 - Keyboard shortcuts: 1 to 4 to answer, Enter for the next case
 - Back and forward buttons (Alt+← / Alt+→), What's New and About pages
+- Text size: tap Aa in the top bar for Smaller, Default, Larger, or Largest; saved on the device
 - Plum and rose theme: light, dark, or match device. Works on iPhone, iPad, and desktop (the sidebar becomes a drawer on narrow screens)
 - Deep links: `#/domain/<domain key>` (e.g. `#/domain/tp`), `#/tagalog`, `#/misses`, `#/quick`, `#/practice?lang=tl&dom=fc` (Tagalog culture cases), `#/practice?drill=<term key>`
 
@@ -84,4 +85,4 @@ For education only. All cases are fictional and do not describe real patients. T
 
 ## Author
 
-Made by Isabella Navarro, MD. Latest version October 2026. isaymotion@gmail.com
+Made by Isabella Navarro, MD. Latest version November 2026. isaymotion@gmail.com
