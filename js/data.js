@@ -22,12 +22,17 @@ const CH={
   18:`Exploring Violent and Homicidal Ideation`,
   19:`Transforming Anger: Confrontation and Other Points of Disengagement`,
   20:`Culturally Adaptive Interviewing: Exploring Culture, Worldview, and Spirituality`,
-  21:`Vantage Points: Bridges to Psychotherapy`
+  21:`Vantage Points: Bridges to Psychotherapy`,
+  22:`Motivational Interviewing (MI): A Foundation Stone in Collaborative Interviewing`,
+  23:`Medication Interest Model (MIM): Moving From Mere "Adherence" to Genuine Interest and Effective Use`,
+  AI:`An Introduction to the Facilic Schematic System: A Shorthand for Supervisors and Supervisees`,
+  AIII:`The Written Document/Electronic Health Record (EHR): Effective Strategies`
 };
 const DOMAINS=[
   {k:'tp',n:'Thought process',g:'mse'},{k:'tc',n:'Thought content',g:'mse'},{k:'pe',n:'Perception',g:'mse'},
   {k:'af',n:'Mood and affect',g:'mse'},{k:'sp',n:'Speech',g:'mse'},{k:'be',n:'Behavior and motor',g:'mse'},
   {k:'cg',n:'Cognition',g:'mse'},{k:'in',n:'Insight and judgment',g:'mse'},
+  {k:'aa',n:'Appearance',g:'mse'},{k:'at',n:'Attitude and rapport',g:'mse'},
   {k:'en',n:'Engagement and empathy',g:'p1',ch:1},{k:'sf',n:'Safety and the alliance',g:'p1',ch:2},
   {k:'ds',n:'Interview structure',g:'p1',ch:3},{k:'fa',n:'Facilics',g:'p1',ch:4},
   {k:'va',n:'Validity techniques',g:'p1',ch:5},{k:'pb',n:'The person beneath',g:'p1',ch:6},
@@ -36,10 +41,13 @@ const DOMAINS=[
   {k:'po',n:'Psychotic disorders',g:'p2',ch:11},{k:'bo',n:'Beneath the psychosis',g:'p2',ch:12},
   {k:'pc',n:'Personality: core concepts',g:'p2',ch:13},{k:'pd',n:'Personality: differential',g:'p2',ch:14},
   {k:'pm',n:'Personality: psychodynamics',g:'p2',ch:15},
+  {k:'su',n:'Suicide assessment',g:'p3',ch:17},{k:'vi',n:'Violence assessment',g:'p3',ch:18},
   {k:'ag',n:'Anger and disengagement',g:'skill',ch:19},{k:'cu',n:'Culture and identity',g:'skill',ch:20},
-  {k:'vp',n:'Vantage points',g:'skill',ch:21}
+  {k:'vp',n:'Vantage points',g:'skill',ch:21},
+  {k:'mi',n:'Motivational interviewing',g:'collab',ch:22},{k:'mm',n:'Medication Interest Model',g:'collab',ch:23},
+  {k:'fs',n:'Facilic schematics',g:'appx',ch:'AI'},{k:'wd',n:'The written document',g:'appx',ch:'AIII'}
 ];
-const GROUPS=[{g:'mse',n:'Mental status'},{g:'p1',n:'Clinical interviewing, Part 1'},{g:'p2',n:'Clinical interviewing, Part 2'},{g:'skill',n:'Clinical interviewing, Ch. 19–21'}];
+const GROUPS=[{g:'mse',n:'Mental status'},{g:'p1',n:'Clinical interviewing, Part 1'},{g:'p2',n:'Clinical interviewing, Part 2'},{g:'p3',n:'Clinical interviewing, Part 3: suicide and violence'},{g:'skill',n:'Clinical interviewing, Part 4'},{g:'collab',n:'Collaborative interviewing'},{g:'appx',n:'Appendices: schematics and the written document'}];
 const DOM=Object.fromEntries(DOMAINS.map(d=>[d.k,d.n]));
 const DOMG=Object.fromEntries(DOMAINS.map(d=>[d.k,d.g]));
 

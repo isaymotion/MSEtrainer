@@ -4,8 +4,8 @@ function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'{}');return
 let stats=load();
 function save(){try{localStorage.setItem(STORE,JSON.stringify(stats))}catch(e){}}
 
-/* prefs v4 had 26 domains; a saved full list means "all", so new domains (Culture or pathology?) are included. */
-const savedDoms=(stats.prefs.dv===5||stats.prefs.dv===4)&&stats.prefs.doms&&stats.prefs.doms.length&&!(stats.prefs.dv===4&&stats.prefs.doms.length>=26)?stats.prefs.doms.filter(k=>DOM[k]):null;
+/* prefs v4 had 26 domains and v5 had 27; a saved full list means "all", so domains added later are included. */
+const savedDoms=(stats.prefs.dv===6||stats.prefs.dv===5||stats.prefs.dv===4)&&stats.prefs.doms&&stats.prefs.doms.length&&!(stats.prefs.dv===4&&stats.prefs.doms.length>=26)&&!(stats.prefs.dv===5&&stats.prefs.doms.length>=27)?stats.prefs.doms.filter(k=>DOM[k]):null;
 const ALL=()=>new Set(DOMAINS.map(d=>d.k));
 const settings={
   doms:new Set(savedDoms&&savedDoms.length?savedDoms:DOMAINS.map(d=>d.k)),
@@ -13,7 +13,7 @@ const settings={
 };
 const domOf=v=>v.dom||TERMS[v.t].dom;
 const VBYID=Object.fromEntries(V.map(v=>[v.id,v]));
-function savePrefs(){stats.prefs={dv:5,doms:[...settings.doms],mode:settings.mode,len:settings.len,lang:settings.lang};save();}
+function savePrefs(){stats.prefs={dv:6,doms:[...settings.doms],mode:settings.mode,len:settings.len,lang:settings.lang};save();}
 
 const $=s=>document.querySelector(s);
 const $$=s=>document.querySelectorAll(s);
@@ -43,7 +43,7 @@ function pool(o){
   if(o.mode==='missed')p=p.filter(v=>{const s=stats.items[v.id];return s&&s.l===0});
   return p;
 }
-function weightOf(v){const s=stats.items[v.id];if(!s)return 2.5;const miss=(s.a-s.c)/s.a;return (s.l===0?3:1)*(1+2*miss);}
+function weightOf(v){const s=stats.items[v.id];const m=termMastery(v.t).mastered?1:1.4;if(!s)return 2.5*m;const miss=(s.a-s.c)/s.a;return m*(s.l===0?3:1)*(1+2*miss);}
 function pick(p,len){return p.map(v=>({v,k:Math.pow(Math.random(),1/weightOf(v))})).sort((a,b)=>b.k-a.k).map(o=>o.v).slice(0,len);}
 const missedCount=()=>V.filter(v=>{const s=stats.items[v.id];return s&&s.l===0}).length;
 function describeDoms(doms){
@@ -84,6 +84,27 @@ function loadSession(){
 }
 const inProgress=()=>session&&!session.done&&session.items.length;
 
+/* ---------- chapter labels, mastery ---------- */
+const chNum=c=>typeof c==='number'?c:100+(['AI','AII','AIII'].indexOf(c)+1);
+const chShort=c=>typeof c==='number'?`Ch. ${c}`:`Appendix ${c.slice(1)}`;
+const SHEA_G=d=>d.g!=='mse'&&d.g!=='tl';
+const sheaDoms=()=>DOMAINS.filter(SHEA_G).sort((a,b)=>chNum(a.ch)-chNum(b.ch));
+/* A term counts as mastered when its last answer was correct on at least two different cases and no case of it is currently missed. */
+const CASES_BY_TERM={};V.forEach(v=>(CASES_BY_TERM[v.t]||(CASES_BY_TERM[v.t]=[])).push(v));
+function termMastery(k){
+  const vs=CASES_BY_TERM[k]||[];let ok=0,miss=0,seen=0;
+  vs.forEach(v=>{const s=stats.items[v.id];if(!s)return;seen++;if(s.l===1)ok++;else miss++;});
+  return {n:vs.length,seen,ok,miss,mastered:ok>=2&&miss===0};
+}
+function masteryPill(k){
+  const m=termMastery(k);
+  if(m.mastered)return `<span class="pill ok">Mastered</span>`;
+  if(m.miss)return `<span class="pill miss">Missed ${m.miss} of ${m.n}</span>`;
+  if(m.ok)return `<span class="pill part">${m.ok} of ${Math.min(2,m.n)} needed</span>`;
+  return `<span class="pill none">Not yet seen</span>`;
+}
+const masteredCount=ks=>ks.filter(k=>termMastery(k).mastered).length;
+
 /* ---------- sidebar ---------- */
 function domStats(k){
   const vs=V.filter(v=>domOf(v)===k);let a=0,c=0,seen=0,miss=0;
@@ -94,7 +115,7 @@ function renderSide(){
   const cur=view==='domain'?'domain/'+domView:view, mc=missedCount();
   const link=(r,icon,label,extra)=>`<a href="#/${r}" ${cur===r?'aria-current="page"':''}>${ico(icon)}<span class="lbl">${esc(label)}</span>${extra||''}</a>`;
   const dlink=(d,num)=>{const st=domStats(d.k);return `<a class="dom" href="#/domain/${d.k}" ${cur==='domain/'+d.k?'aria-current="page"':''}><span class="num">${num}</span><span class="lbl">${esc(d.n)}</span>${st.pct!==null?`<span class="pct">${st.pct}%</span>`:''}</a>`;};
-  const mse=DOMAINS.filter(d=>d.g==='mse'), shea=DOMAINS.filter(d=>d.g==='p1'||d.g==='p2'||d.g==='skill').sort((a,b)=>a.ch-b.ch), tl=DOMAINS.filter(d=>d.g==='tl');
+  const mse=DOMAINS.filter(d=>d.g==='mse'), shea=sheaDoms(), tl=DOMAINS.filter(d=>d.g==='tl');
   $('#sidenav').innerHTML=
     link('home','home','Home')+
     (inProgress()?link('practice','bolt',`Session: case ${session.i+1} of ${session.items.length}`):`<a href="#/quick">${ico('bolt')}<span class="lbl">Quick session</span><span class="pct">10 cases</span></a>`)+
@@ -104,7 +125,7 @@ function renderSide(){
     link('progress','chart','My progress')+
     link('new','spark',"What's New")+
     `<div class="sidesep"></div><p class="sidehead">Mental status</p>`+mse.map((d,i)=>dlink(d,i+1)).join('')+
-    `<p class="sidehead">Interviewing · Shea</p>`+shea.map(d=>dlink(d,d.ch)).join('')+
+    `<p class="sidehead">Interviewing · Shea</p>`+shea.map(d=>dlink(d,typeof d.ch==='number'?d.ch:d.ch.slice(1))).join('')+
     `<p class="sidehead">Tagalog and Filipino culture</p>`+
     `<a href="#/tagalog">${ico('chat')}<span class="lbl">Tagalog cases</span><span class="pct">${V.filter(v=>v.lang==='tl').length}</span></a>`+
     tl.map(d=>dlink(d,d.ch)).join('');
@@ -144,6 +165,8 @@ function renderHome(){
       <a class="card" href="#/misses"><h3>Review misses${mc?`<span class="badge">${mc}</span>`:''}</h3><p>${mc?'Cases you got wrong the last time you saw them.':'Nothing to review yet. Misses collect here as you practice.'}</p><span class="go">${mc?'Review now':'Start practicing'}</span></a>
       <a class="card" href="${weak.length?'#/domain/'+weak[0].d.k:'#/progress'}"><h3>Weak spots</h3>${weak.length?`<ul class="weaklist">${weak.map(x=>`<li><span>${esc(x.d.n)}</span><span>${x.s.pct}%</span></li>`).join('')}</ul>`:'<p>Your lowest-scoring domains show up here after a few cases.</p>'}<span class="go">${weak.length?'Practice '+esc(weak[0].d.n):'See progress'}</span></a>
       <a class="card feature" href="#/tagalog"><h3>Tagalog cases</h3><p>${tlN} original cases with Tagalog patient lines, audio, and "Ask it in Tagalog".</p><span class="go">Practice in Tagalog</span></a>
+      <a class="card" href="#/domain/su"><h3>Suicide and violence assessment</h3><p>The CASE and CADE approaches, risk factors versus warning signs, and the tetrads of lethality from Shea Ch. 17–18.</p><span class="go">Practice safety assessment</span></a>
+      <a class="card" href="#/domain/mi"><h3>MI and the Medication Interest Model</h3><p>OARS, change talk, the Choice Triad and the medication toolboxes from Ch. 22–23.</p><span class="go">Open collaborative interviewing</span></a>
       <a class="card" href="#/domain/fc"><h3>Culture or pathology?</h3><p>Filipino look-alikes: hiya, sama ng loob, kulam, lutang, sanib and more.</p><span class="go">Open domain</span></a>
       <a class="card" href="#/glossary"><h3>Glossary</h3><p>${Object.keys(TERMS).length} terms with definitions, telling-apart rules and chart lines.</p><span class="go">Browse terms</span></a>
     </div>
@@ -152,9 +175,9 @@ function renderHome(){
 
 /* ---------- domain page ---------- */
 function termCard(t){return `<article class="term">
-  <h3>${esc(t.n)}</h3><p>${esc(t.def)}</p><p><mark>${esc(t.tell)}</mark></p>
+  <h3>${esc(t.n)} ${masteryPill(t.k)}</h3><p>${esc(t.def)}</p><p><mark>${esc(t.tell)}</mark></p>
   <p class="chartline">${esc(t.chart)}</p>
-  <p class="refs">Shea ${t.ch.map(c=>`Ch. ${c}`).join(', ')}</p>
+  <p class="refs">Shea ${t.ch.map(chShort).join(', ')}</p>
   <button class="btn small" data-drill="${t.k}">Drill this term</button></article>`;}
 function renderDomain(k){
   const d=DOMAINS.find(x=>x.k===k);if(!d){show('home');return;}
@@ -162,16 +185,18 @@ function renderDomain(k){
   const terms=Object.values(TERMS).filter(t=>t.dom===k);
   const extraTerms=k==='fc'?[...new Set(V.filter(v=>v.dom==='fc').map(v=>v.t))].filter(t=>TERMS[t].dom!=='fc').map(t=>TERMS[t]):[];
   let ch=d.ch;if(!ch){const cnt={};terms.forEach(t=>t.ch.forEach(c=>cnt[c]=(cnt[c]||0)+1));ch=+Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0]?.[0]||16;}
+  const mastered=masteredCount(terms.map(t=>t.k));
   $('#v-domain').innerHTML=`
   <div class="domhero">
     <p class="eyebrow">${esc(G.n)}</p>
     <h1 class="pagetitle">${esc(d.n)}</h1>
-    <p class="chap">Shea Ch. ${ch}: ${esc(CH[ch])}</p>
+    <p class="chap">Shea ${chShort(ch)}: ${esc(CH[ch])}</p>
     <div class="domstats">
       <div><strong>${st.n}</strong>cases</div>
       <div><strong>${st.seen}</strong>seen</div>
       <div><strong>${st.pct===null?'—':st.pct+'%'}</strong>correct</div>
       <div><strong>${terms.length+extraTerms.length}</strong>terms</div>
+      <div><strong>${mastered}</strong>mastered</div>
     </div>
     <div class="domactions">
       <button class="btn primary big" id="dPractice">Practice this domain</button>
@@ -196,7 +221,9 @@ const UT='https://isaymotion.github.io/Tagalog/#/';
 const UT_DOM={tp:['psych/s/mse-describe','MSE: describing observations'],sp:['psych/s/mse-describe','MSE: describing observations'],be:['psych/s/mse-describe','MSE: describing observations'],
   tc:['psych/s/delusions','Psychosis: delusions and thought disturbances'],pe:['psych/s/hallucinations','Psychosis: hallucinations and perceptual disturbances'],
   af:['psych/s/depression','Mood and depression'],cg:['psych/s/mse-cog','MSE: orientation, attention, memory'],in:['psych/s/mse-abstract','MSE: abstraction, judgment, insight'],
-  md:['psych/s/depression','Mood and depression'],po:['psych/s/hallucinations','Psychosis: hallucinations and perceptual disturbances'],fc:['lessons/folk','Folk beliefs, spirits, and cultural explanations']};
+  md:['psych/s/depression','Mood and depression'],po:['psych/s/hallucinations','Psychosis: hallucinations and perceptual disturbances'],fc:['lessons/folk','Folk beliefs, spirits, and cultural explanations'],
+  aa:['psych/s/mse-describe','MSE: describing observations'],at:['psych/s/mse-describe','MSE: describing observations'],
+  su:['psych/s/suicide','Suicide risk assessment'],mi:['psych/s/mi','Motivational interviewing (substance use module)'],mm:['psych/discharge','Discharge and medication counseling']};
 const UT_TERM={hiya:['lessons/values','Hiya, utang na loob, pakikisama, bahala na'],pakikisama:['lessons/values','Hiya, utang na loob, pakikisama, bahala na'],
   galang:['lessons/politeness','Po, opo, and respectful address'],podrop:['lessons/politeness','Po, opo, and respectful address'],
   samangloob:['lessons/idioms-distress','Idioms of distress'],nerbiyos:['lessons/idioms-distress','Idioms of distress'],lutang:['lessons/idioms-distress','Idioms of distress'],
@@ -209,11 +236,18 @@ function speakable(t){return String(t).replace(/\([^)]*\)/g,' ').replace(/\s+/g,
 function sayBtn(t){t=speakable(t);return t&&AUDIO.can(t)?`<button class="say" data-say="${esc(t)}" aria-label="Play Tagalog audio" title="Play">▶</button>`:'';}
 function renderVig(x){
   const lines=x.split('\n');
+  /* S: lines hold a facilic schematic (monospace, spacing kept); several consecutive S: lines form one block. */
+  const sch=l=>`<pre class="schematic">${esc(l.replace(/^S:\s?/,''))}</pre>`;
+  if(lines.some(l=>/^S:/.test(l))&&!lines.some(l=>/^[CP]:/.test(l))){
+    let out='',buf=[];const flush=()=>{if(buf.length){out+=`<pre class="schematic">${esc(buf.join('\n'))}</pre>`;buf=[];}};
+    lines.forEach(l=>{if(/^S:/.test(l))buf.push(l.replace(/^S:\s?/,''));else{flush();if(l.trim())out+=`<p class="obs">${esc(l.replace(/^O:\s*/,''))}</p>`;}});flush();return out;
+  }
   if(!lines.some(l=>/^[CP]:/.test(l)))return `<p class="obs">${esc(x.replace(/^O:\s*/,''))}</p>`;
   const line=(cls,txt)=>{const [tl,en]=splitTL(txt);return `<div class="ln ${cls}">${en?`<p class="tlline"><span>${esc(tl)}</span>${sayBtn(tl)}</p><p class="en" hidden>${esc(en)}</p>`:`<p>${esc(tl)}</p>`}</div>`;};
   return `<div class="tx">`+lines.map(l=>{
     if(l.startsWith('C:'))return `<span class="sp">Clin.</span>`+line('cl',l.slice(2).trim());
     if(l.startsWith('P:'))return `<span class="sp">Pt.</span>`+line('pt',l.slice(2).trim());
+    if(l.startsWith('S:'))return sch(l);
     return `<p class="ln note">${esc(l.replace(/^O:/,'').trim())}</p>`;
   }).join('')+`</div>`;
 }
@@ -275,7 +309,7 @@ function showFeedback(focus){
       ${ok?'':`<p class="picked"><strong>You chose ${esc(P.n)}.</strong> ${esc(P.def)}</p>`}</div>
     <div class="chart"><h3>${DOMG[T0.dom]!=='mse'?'At the bedside':'In the chart'}</h3><p class="chartline">${esc(T0.chart)}</p></div>
     ${ask?`<div class="ask"><h3>Ask it in Tagalog</h3><p class="tlline"><span>${esc(ask[0])}</span>${sayBtn(ask[0])}</p><p class="muted">${esc(ask[1])}</p></div>`:''}
-    <p class="read"><strong>Further reading in Shea:</strong> ${T0.ch.map(c=>`Ch. ${c}, ${esc(CH[c])}`).join('; ')}.${v.lang==='tl'?' This Tagalog case is original, not from the book.':''}</p>
+    <p class="read"><strong>Further reading in Shea:</strong> ${T0.ch.map(c=>`${chShort(c)}, ${esc(CH[c])}`).join('; ')}.${v.lang==='tl'?' This Tagalog case is original, not from the book.':''}</p>
     ${utCard(v)}
     <div class="nextrow"><button class="btn primary big" id="next">${session.i+1<n?'Next case':'See results'}</button></div>
   </div>`;
@@ -338,7 +372,7 @@ function renderProgress(){
   const byTerm={};seen.forEach(v=>{const s=it[v.id],b=byTerm[v.t]||(byTerm[v.t]={a:0,c:0});b.a+=s.a;b.c+=s.c});
   const weak=Object.entries(byTerm).filter(([,s])=>s.c<s.a).sort((x,y)=>(x[1].c/x[1].a)-(y[1].c/y[1].a)||y[1].a-x[1].a).slice(0,8);
   $('#prog').innerHTML=`
-    <p class="stat-lead">You've worked through ${seen.length} of ${V.length} cases, answering ${Math.round(C/A*100)}% correctly overall.</p>
+    <p class="stat-lead">You've worked through ${seen.length} of ${V.length} cases, answering ${Math.round(C/A*100)}% correctly overall. Terms mastered: <strong>${masteredCount(Object.keys(TERMS))}</strong> of ${Object.keys(TERMS).length} (a term is mastered once you get it right on two different cases).</p>
     ${rows}
     <p class="section-h">Terms to revisit</p>
     ${weak.length?`<ul class="weak">${weak.map(([k,s])=>`<li><span><strong>${esc(TERMS[k].n)}</strong><br><span class="muted">${s.c} of ${s.a} correct</span></span><button class="btn small" data-drill="${k}">Drill</button></li>`).join('')}</ul>`
@@ -351,12 +385,12 @@ function renderProgress(){
 /* ---------- custom session sheet ---------- */
 const dlg=$('#custom');
 function renderPicker(){
-  const groups=[{n:'Mental status',ds:DOMAINS.filter(d=>d.g==='mse')},{n:'Interviewing · Shea',ds:DOMAINS.filter(d=>['p1','p2','skill'].includes(d.g)).sort((a,b)=>a.ch-b.ch)},{n:'Tagalog and Filipino culture',ds:DOMAINS.filter(d=>d.g==='tl')}];
+  const groups=[{n:'Mental status',ds:DOMAINS.filter(d=>d.g==='mse')},{n:'Interviewing · Shea',ds:sheaDoms()},{n:'Tagalog and Filipino culture',ds:DOMAINS.filter(d=>d.g==='tl')}];
   $('#domPick').innerHTML=groups.map((G,gi)=>{
     const on=G.ds.filter(d=>settings.doms.has(d.k)).length;
     return `<details class="pickgrp" ${gi===0?'open':''}><summary>${esc(G.n)}<span class="cnt" data-cnt="${gi}">${on} of ${G.ds.length}</span></summary><div class="picklist">
       <label class="pick all"><input type="checkbox" data-grp="${gi}" ${on===G.ds.length?'checked':''}>Select all</label>
-      ${G.ds.map(d=>`<label class="pick"><input type="checkbox" data-k="${d.k}" data-g="${gi}" ${settings.doms.has(d.k)?'checked':''}>${d.g!=='mse'&&d.ch?`<span class="ch">Ch. ${d.ch}</span>`:''}<span>${esc(d.n)}</span></label>`).join('')}
+      ${G.ds.map(d=>`<label class="pick"><input type="checkbox" data-k="${d.k}" data-g="${gi}" ${settings.doms.has(d.k)?'checked':''}>${d.g!=='mse'&&d.ch?`<span class="ch">${chShort(d.ch)}</span>`:''}<span>${esc(d.n)}</span></label>`).join('')}
     </div></details>`;
   }).join('');
   const sync=()=>{

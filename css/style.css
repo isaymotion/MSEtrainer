@@ -234,6 +234,11 @@ mark{background:linear-gradient(transparent 8%,var(--marker) 8%,var(--marker) 92
 .term p{margin:4px 0;max-width:68ch}
 .term .chartline{font-size:1rem;line-height:1.5;color:var(--muted)}
 .term .refs{font-size:.84rem;color:var(--muted)}
+.term .pill{display:inline-block;vertical-align:middle;font:600 .72rem var(--sans);letter-spacing:.03em;padding:2px 9px;border-radius:999px;margin-left:6px;border:1px solid var(--rule);color:var(--muted);background:var(--card)}
+.term .pill.ok{color:var(--ok);background:var(--ok-soft);border-color:transparent}
+.term .pill.miss{color:var(--no);background:var(--no-soft);border-color:transparent}
+.term .pill.part{color:var(--accent);background:var(--accent-soft);border-color:transparent}
+.schematic{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;overflow-x:auto;font-size:.92rem;line-height:1.5}
 .term .btn{margin-top:10px}
 .term ul{margin:6px 0 0;padding-left:20px}
 .term li{margin:4px 0}
