@@ -326,6 +326,10 @@ select{padding:10px 12px;border-radius:12px;border:1px solid var(--rule);backgro
   .hero{padding-top:36px;padding-bottom:32px}
   .case{padding:22px 18px;border-radius:18px}
   .obs,.ln{font-size:1.16rem}
+}
+@media (max-width:420px){
+  .brand span{display:none} /* logo only: the Aa and theme buttons need the room */
+  .brand{margin-left:0}
   .tx{column-gap:10px}
   .domrow{grid-template-columns:1fr auto}
   .domrow .bar{grid-column:1/-1;order:3}
