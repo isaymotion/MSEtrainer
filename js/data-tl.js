@@ -269,3 +269,78 @@ P: Ewan ko po. Okay lang. || I don't know. It's okay.`,
  w:`Low expression that does not lift with time, family, or a favorite topic, and is a change from his usual self: blunted affect. Hiya is real, but calling every quiet patient "nahihiya lang" can hide negative symptoms.`,
  ask:`Ano po ang mga bagay na nagpapasaya sa inyo dati? Ngayon po? || What used to make you happy? And now?`}
 );
+
+/* ===== v5: Tagalog cases for Appearance, Attitude, Insight, Affect, Speech (original cases; Tagalog pending review) ===== */
+/* Tagalog cases (draft — pending Dr. Navarro's review) */
+V.push(
+{id:'tl-aa01',lang:'tl',t:'aa_hygiene',d:['avolition','aa_attire','aa_older'],q:Q_AA,x:`O: Mang Lito, 60, is brought in by his daughter.
+C: Kailan po kayo huling naligo? || When did you last take a bath?
+P: Ewan ko po. Matagal na. Wala na po akong gana. || I don't know. A long time. I've lost the drive.
+O: His shirt is stained, his fingernails are black underneath, and there is a strong body odor. He does not smell of alcohol.`,
+ w:`The appearance finding is visible neglect of self-care, charted with specifics and a pertinent negative. "Wala nang gana" points to the history (perhaps avolition), but what you see today is poor hygiene.`,
+ ask:`Kailan po kayo huling naligo o nagpalit ng damit? || When did you last bathe or change clothes?`},
+{id:'tl-aa02',lang:'tl',t:'aa_rti',d:['aa_eye','hiya','aa_hyperalert'],q:Q_AA,x:`O: While answering, a 32-year-old woman keeps turning toward the empty corner and whispering.
+C: Sino po ang kinakausap ninyo? || Who are you talking to?
+P: Wala po. Wala po. || No one. No one.
+O: She shakes her head sharply and covers her right ear.`,
+ w:`Turning toward empty space, whispering, and covering an ear as if shutting out a voice: apparent response to hallucinations. Chart what you saw even though she denies it; hiya is shyness, not reacting to something unseen.`,
+ ask:`May naririnig po ba kayong boses o tunog na hindi naririnig ng iba? || Do you hear voices or sounds that other people can't hear?`},
+{id:'tl-aa03',lang:'tl',t:'aa_older',d:['aa_younger','aa_hygiene','pmr'],q:Q_AA,x:`C: Ilang taon na po kayo? || How old are you?
+P: Trenta'y siyete po. || Thirty-seven.
+O: He is thin and stooped, with mostly gray hair and several missing teeth. His clothes are clean. He looks well past fifty.`,
+ w:`He appears much older than his stated age; chart what makes him look older. His clothes are clean, so self-care isn't the striking finding.`,
+ ask:`Ilang taon na po kayo, at kailan po ang kaarawan ninyo? || How old are you, and when is your birthday?`},
+{id:'tl-at01',lang:'tl',t:'at_suspicious',d:['at_guarded','persec','podrop'],q:Q_AT,x:`O: The resident writes a note.
+P: Ano'ng sinusulat n'yo diyan? Sino'ng makakabasa niyan? Pinadala ba kayo ng munisipyo? || What are you writing there? Who'll read that? Did the municipal hall send you?
+O: He watches the pen and asks twice why his address is needed. He still uses respectful "kayo" forms.`,
+ w:`He openly questions the resident's motives: a suspicious attitude. Guarded patients withhold quietly; and his register stays respectful, so there is no dropped po to note.`,
+ ask:`Mukhang nag-aalala po kayo sa mga sinusulat ko. Ano po ang iniisip ninyo? || You seem worried about what I'm writing. What's on your mind?`},
+{id:'tl-at02',lang:'tl',t:'at_guarded',d:['hiya','povspeech','at_suspicious'],q:Q_AT,x:`C: Sino po ang kasama ninyo sa bahay? || Who lives with you at home?
+P: Pamilya. || Family.
+C: Ikuwento n'yo naman po sila. || Tell me about them, please.
+P: Okay lang sila. || They're fine.
+O: He looks at the resident steadily, says little on any personal topic, but chats easily about basketball.`,
+ w:`Withholding on personal topics while open on others: guarded. Hiya shows as shyness with eyes down that eases with warmth; he watches steadily and is relaxed on safe topics. He doesn't question motives, so he isn't suspicious.`,
+ ask:`May mga bagay po ba tungkol sa pamilya na mahirap pag-usapan? || Are there things about your family that are hard to talk about?`},
+{id:'tl-at03',lang:'tl',t:'at_hostile',d:['at_threat','at_guarded','at_uncoop'],q:Q_AT,x:`C: Kumusta po ang tulog ninyo? || How is your sleep?
+P: Ano'ng pakialam mo? Puro ka tanong, wala ka namang naitutulong. || What do you care? All you do is ask questions, and you don't help at all.
+O: A 45-year-old woman who used po with the triage nurse now uses "mo" and "ka" with the resident and rolls her eyes, but stays seated and makes no threats.`,
+ w:`Sarcastic, antagonistic stance toward the interviewer without any threat: hostile. Her dropped po is a useful clue to the hostility, not a separate attitude.`,
+ ask:`Mukhang naiinis po kayo sa amin ngayon. Ano po ang nangyari? || You seem annoyed with us right now. What happened?`},
+{id:'tl-in20',lang:'tl',t:'in_partial',d:['anosognosia','intellinsight','in_somedist'],q:Q_IN,x:`P: Puyat lang po ako, Dok, kaya bigyan n'yo na lang ako ng pampatulog. Pero totoo po yung mga kapitbahay, pinag-uusapan nila ako sa pader gabi-gabi. Hindi po sakit iyon. || I'm just short on sleep, Doc, so just give me something to sleep. But the neighbors are real; they talk about me through the wall every night. That's not an illness.`,
+ w:`He accepts part of the problem (sleep) but attributes the rest to the neighbors, with no doubt about them: partial insight. Absent insight would deny any problem.`,
+ ask:`Sa tingin n'yo po, may kinalaman kaya ang naririnig ninyo sa puyat o sa isang sakit? || Do you think what you hear could be related to lack of sleep or to an illness?`},
+{id:'tl-in21',lang:'tl',t:'in_halluins',d:['in_somedist','in_nodist','shared'],q:Q_IN,x:`P: May boses po akong naririnig na nagsasabing wala akong kwenta. Pero alam ko pong walang tao. Sakit ko po iyon, lumalala kapag hindi ako nakakainom ng gamot. || I hear a voice saying I'm worthless. But I know there's no one there. It's my illness; it gets worse when I miss my medicine.`,
+ w:`She hears the voice but knows no real being is speaking: insight into hallucinations. She doesn't frame it as a spirit or engkanto (a culturally shared belief), and there is no delusion to have distance from.`,
+ ask:`Kapag naririnig n'yo po ang boses, sa tingin n'yo po ba ay may totoong tao o nilalang na nagsasalita? || When you hear the voice, do you think a real person or being is speaking?`},
+{id:'tl-in22',lang:'tl',t:'in_somedist',d:['in_nodist','nerbiyos','compulsion'],q:Q_IN,x:`C: Naniniwala pa rin po ba kayong nilalason ng mga kapitbahay ang tubig ninyo? || Do you still believe the neighbors are poisoning your water?
+P: Ewan ko na po, Dok. Baka nerbiyos ko lang. Pero pinapakuluan ko pa rin, para sigurado. || I'm not sure anymore, Doc. Maybe it's just my nerves. But I still boil it, to be safe.`,
+ w:`She can now doubt the belief while still partly acting on it: some distance from the delusion. Her "nerbiyos" here is her own alternative explanation, not the presenting idiom.`,
+ ask:`Posible po bang may iba pang paliwanag sa nangyari? || Is it possible there's another explanation for what happened?`},
+{id:'tl-af20',lang:'tl',t:'af_discord',d:['inapp','labelle','pakikisama'],q:Q_AF,x:`C: Kumusta po ang pakiramdam ninyo nitong mga nakaraang linggo? || How have you been feeling these past weeks?
+P: Okay lang po, Dok. Ayos lang po talaga ako. || I'm okay, Doc. I'm really fine.
+O: Tears run down her face as she says it, and she wipes her eyes again and again.`,
+ w:`Her reported mood ("okay lang") and her tearful affect disagree. Chart both as found; the possible reasons (denial, pakikisama, not wanting to burden the doctor) go in the formulation.`,
+ ask:`Napansin ko pong naluluha kayo. Ano po ang nararamdaman ninyo ngayon? || I notice you're tearing up. What are you feeling right now?`},
+{id:'tl-af21',lang:'tl',t:'af_fright',d:['at_suspicious','af_angry','labile'],q:Q_AF,x:`P: Dok, nandiyan sila sa labas. Kukunin nila ako. Huwag n'yo po silang papasukin. || Doc, they're outside. They're going to take me. Please don't let them in.
+O: An 18-year-old woman, wide-eyed, pulls her knees up to her chest and keeps glancing at the window. Her voice shakes.`,
+ w:`Visible fear in her face, posture, and voice: frightened affect. She trusts the resident and asks for protection, so the finding isn't a suspicious attitude toward the interviewer.`,
+ ask:`Ano po ang kinatatakutan ninyong mangyari? || What are you afraid will happen?`},
+{id:'tl-af22',lang:'tl',t:'af_moodref',d:['af_discord','alexithymia','hiya'],q:Q_AF_CHART,x:`C: Paano n'yo po ilalarawan ang pakiramdam ninyo nitong mga araw na ito? || How would you describe how you've been feeling these days?
+P: Ayoko pong pag-usapan iyan. Laktawan na lang natin. || I don't want to talk about that. Let's skip it.
+O: He answers all other questions. His face is tense and his jaw is set.`,
+ w:`He declined to describe his mood, so the mental status can only say so; affect is still charted (tense). Alexithymia is being unable to name feelings; he is unwilling.`,
+ ask:`Kung ayaw n'yo pa pong pag-usapan nang mahaba, kahit isang salita lang po: masaya, malungkot, galit, o kinakabahan? || If you'd rather not talk about it at length, just one word: happy, sad, angry, or nervous?`},
+{id:'tl-sp20',lang:'tl',t:'sp_soft',d:['hiya','povspeech','latency'],q:Q_SP,x:`C: Ikuwento n'yo po ang trabaho ninyo. || Tell me about your work.
+P: (barely audible) Sa palengke po, nagbubuhat ng gulay. Alas-tres po ako gumigising, tapos... || (barely audible) At the market, carrying vegetables. I wake up at three, then...
+O: A 29-year-old man answers fully and at length, but the resident must lean in to hear him. His voice stays just as soft an hour later, when he is relaxed and joking.`,
+ w:`Low volume with plenty of words: decreased volume. The soft voice of hiya lifts as rapport grows; his doesn't, even once he is at ease.`,
+ ask:`Pasensya na po, medyo hindi ko marinig. Puwede po bang lakasan nang kaunti? || Sorry, I can't quite hear you. Could you speak a little louder?`},
+{id:'tl-sp21',lang:'tl',t:'sp_rapid',d:['pressured','foi','tang'],x:`P: Dok, ang dami ko pong plano, magbubukas ako ng karinderya, tapos... || Doc, I have so many plans, I'll open a carinderia, and then...
+O: He speaks quickly, but pauses between sentences and stops as soon as the resident raises a hand.
+C: Sandali lang po. Ilang oras po kayo natutulog? || Just a moment. How many hours do you sleep?
+P: Mga apat po. Pero okay lang, Dok, marami pa akong lakas. || About four. But it's fine, Doc, I still have plenty of energy.`,
+ q:Q_SP,
+ w:`Fast speech that keeps its pauses and is easy to interrupt: rapid rate, not pressured speech. He also answers the sleep question directly, so this isn't flight of ideas or tangentiality.`,
+ ask:`Puwede ko po ba kayong maputol sandali para magtanong? || May I interrupt you briefly to ask something?`}
+);

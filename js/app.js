@@ -173,6 +173,54 @@ function renderHome(){
   </div>`;
 }
 
+
+/* ---------- facilic schematic renderer (Appendix I notation) ----------
+   An S: line holds one row of a facilic map, tokens separated by spaces:
+     [Label]      content region (rectangle)      (Label)   process region (circle)      {Label}  scouting region (capsule)
+     [Label/3]    three corner slashes (expansion depth, 1–4; 5–6 = overexpansion)        ...      ellipsis
+     -spont->  -nat->  -ref->  -imp->  -phan->  -intro->  -obs->    the seven gates (Fig. AI.1); -?-> an unlabeled arrow
+     a gate may carry an annotation: -ref->@b (circled letter) or -phan->@10:41 (counter time)
+   Several S: lines are drawn as stacked rows. */
+function renderSchematic(rows){
+  const W=640,RH=96,PAD=12;let out='',y=0;
+  const node=(tok,x,cy)=>{
+    const m=tok.match(/^([\[\({])(.+?)(?:\/(\d))?([\]\)}])$/);if(!m)return null;
+    const kind=m[1],label=m[2].replace(/_/g,' '),sl=+(m[3]||0);
+    const lines=label.split('|'),w=Math.max(70,Math.min(150,10+Math.max(...lines.map(l=>l.length))*7.2)),h=lines.length>1?56:48;
+    let g='';
+    if(kind==='[')g+=`<rect x="${x}" y="${cy-h/2}" width="${w}" height="${h}" rx="2"/>`;
+    else if(kind==='(')g+=`<ellipse cx="${x+w/2}" cy="${cy}" rx="${w/2}" ry="${h/2+4}"/>`;
+    else g+=`<rect x="${x}" y="${cy-h/2}" width="${w}" height="${h}" rx="${h/2}"/>`;
+    const sx=[[x,cy-h/2,1],[x+w,cy-h/2,-1],[x,cy+h/2,1],[x+w,cy+h/2,-1],[x+w/2,cy-h/2,0],[x+w/2,cy+h/2,0]];
+    for(let i=0;i<Math.min(sl,6);i++){const [px,py,d]=sx[i];g+=d?`<line x1="${px-8*d}" y1="${py+(i<2?-9:9)}" x2="${px+8*d}" y2="${py+(i<2?9:-9)}"/>`:`<line x1="${px-7}" y1="${py+(i===4?-9:9)}" x2="${px+7}" y2="${py+(i===4?9:-9)}"/>`;}
+    lines.forEach((l,i)=>{g+=`<text x="${x+w/2}" y="${cy+(i-(lines.length-1)/2)*15+5}" text-anchor="middle">${esc(l)}</text>`;});
+    return {g,w};
+  };
+  const gate=(tok,x,cy)=>{
+    const m=tok.match(/^-(spont|nat|ref|imp|phan|intro|obs|\?)->(?:@(\S+))?$/);if(!m)return null;
+    const k=m[1],ann=m[2],w=78,x2=x+w;let g='';
+    const arrow=`<path d="M${x2-9} ${cy-6} L${x2} ${cy} L${x2-9} ${cy+6}" fill="none"/>`;
+    if(k==='spont')g+=`<path d="M${x+2} ${cy} c6 -14 12 -14 12 0 c0 14 6 14 12 0 c0 -14 6 -14 12 0 c0 14 6 14 12 0 L${x2} ${cy}" fill="none"/>`+arrow;
+    else if(k==='nat')g+=`<line x1="${x}" y1="${cy-5}" x2="${x2}" y2="${cy-5}"/><line x1="${x}" y1="${cy+5}" x2="${x2-12}" y2="${cy+5}"/><path d="M${x2-9} ${cy-11} L${x2} ${cy-5} L${x2-9} ${cy+1}" fill="none"/>`;
+    else if(k==='ref')g+=`<line x1="${x}" y1="${cy-5}" x2="${x2}" y2="${cy-5}" stroke-dasharray="7 5"/><line x1="${x}" y1="${cy+5}" x2="${x2-12}" y2="${cy+5}"/><path d="M${x2-9} ${cy-11} L${x2} ${cy-5} L${x2-9} ${cy+1}" fill="none"/>`;
+    else if(k==='imp')g+=`<path d="M${x+22} ${cy-26} L${x+28} ${cy+2} L${x2-6} ${cy+10} L${x2-14} ${cy+22}" fill="none"/><path d="M${x2-14} ${cy+1} L${x2-6} ${cy+10} L${x2-18} ${cy+13}" fill="none"/>`;
+    else if(k==='phan')g+=`<line x1="${x}" y1="${cy}" x2="${x+26}" y2="${cy}"/><rect x="${x+26}" y="${cy-10}" width="20" height="20"/><line x1="${x+26}" y1="${cy-10}" x2="${x+46}" y2="${cy+10}"/><line x1="${x+46}" y1="${cy-10}" x2="${x+26}" y2="${cy+10}"/><line x1="${x+46}" y1="${cy}" x2="${x2}" y2="${cy}"/>`+arrow;
+    else if(k==='intro')g+=`<line x1="${x}" y1="${cy}" x2="${x+26}" y2="${cy}"/><rect x="${x+26}" y="${cy-10}" width="20" height="20"/><line x1="${x+46}" y1="${cy}" x2="${x2}" y2="${cy}"/>`+arrow;
+    else if(k==='obs')g+=`<line x1="${x}" y1="${cy}" x2="${x+24}" y2="${cy}"/><ellipse cx="${x+38}" cy="${cy}" rx="14" ry="9"/><circle cx="${x+38}" cy="${cy}" r="3.5"/><line x1="${x+52}" y1="${cy}" x2="${x2}" y2="${cy}"/>`+arrow;
+    else g+=`<line x1="${x}" y1="${cy}" x2="${x2}" y2="${cy}"/>`+arrow;
+    if(ann){if(/^[a-z]$/.test(ann))g+=`<circle cx="${x+w/2}" cy="${cy+26}" r="9"/><text x="${x+w/2}" y="${cy+30}" text-anchor="middle" class="small">${esc(ann)}</text>`;else g+=`<text x="${x+w/2}" y="${cy-20}" text-anchor="middle" class="small">${esc(ann)}</text>`;}
+    return {g,w};
+  };
+  let maxW=0;
+  rows.forEach(row=>{
+    const toks=row.trim().split(/\s+/).filter(Boolean);let x=PAD;const cy=y+RH/2;let g='';
+    toks.forEach(t=>{if(t==='...'){g+=`<text x="${x+4}" y="${cy+6}">· · ·</text>`;x+=36;return;}const n=node(t,x,cy)||gate(t,x,cy);if(n){g+=n.g;x+=n.w+8;}else{g+=`<text x="${x}" y="${cy+5}">${esc(t)}</text>`;x+=t.length*7+8;}});
+    out+=g;maxW=Math.max(maxW,x+PAD);y+=RH;
+  });
+  const vw=Math.max(W,maxW);
+  return `<svg class="facilic" viewBox="0 0 ${vw} ${y}" role="img" aria-label="Facilic schematic" preserveAspectRatio="xMinYMid meet">${out}</svg>`;
+}
+
 /* ---------- domain page ---------- */
 function termCard(t){return `<article class="term">
   <h3>${esc(t.n)} ${masteryPill(t.k)}</h3><p>${esc(t.def)}</p><p><mark>${esc(t.tell)}</mark></p>
@@ -237,9 +285,9 @@ function sayBtn(t){t=speakable(t);return t&&AUDIO.can(t)?`<button class="say" da
 function renderVig(x){
   const lines=x.split('\n');
   /* S: lines hold a facilic schematic (monospace, spacing kept); several consecutive S: lines form one block. */
-  const sch=l=>`<pre class="schematic">${esc(l.replace(/^S:\s?/,''))}</pre>`;
+  const sch=l=>renderSchematic([l.replace(/^S:\s?/,'')]);
   if(lines.some(l=>/^S:/.test(l))&&!lines.some(l=>/^[CP]:/.test(l))){
-    let out='',buf=[];const flush=()=>{if(buf.length){out+=`<pre class="schematic">${esc(buf.join('\n'))}</pre>`;buf=[];}};
+    let out='',buf=[];const flush=()=>{if(buf.length){out+=renderSchematic(buf);buf=[];}};
     lines.forEach(l=>{if(/^S:/.test(l))buf.push(l.replace(/^S:\s?/,''));else{flush();if(l.trim())out+=`<p class="obs">${esc(l.replace(/^O:\s*/,''))}</p>`;}});flush();return out;
   }
   if(!lines.some(l=>/^[CP]:/.test(l)))return `<p class="obs">${esc(x.replace(/^O:\s*/,''))}</p>`;
