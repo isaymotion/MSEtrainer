@@ -362,7 +362,8 @@ select{padding:10px 12px;border-radius:12px;border:1px solid var(--rule);backgro
 .ts-seg span{display:block;text-align:center;padding:9px 6px;border-radius:9px;font-weight:600;color:var(--ink);white-space:nowrap}
 .ts-seg input:checked+span{background:var(--accent-fill);color:var(--accent-ink)}
 .ts-seg input:focus-visible+span{outline:2px solid var(--lilac);outline-offset:1px}
-.facilic{display:block;width:100%;max-width:640px;height:auto;margin:6px 0 10px;stroke:var(--ink);stroke-width:1.6;fill:none;font:500 .86rem var(--sans)}
+.facilic-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px -4px 10px;padding:0 4px}
+svg.facilic{display:block;width:auto;height:auto;max-width:none;margin:0;stroke:var(--ink);stroke-width:1.6;fill:none;font:500 .86rem var(--sans)}
 .facilic rect,.facilic ellipse,.facilic circle{fill:var(--card)}
 .facilic text{fill:var(--ink);stroke:none}
 .facilic text.small{font-size:.74rem}

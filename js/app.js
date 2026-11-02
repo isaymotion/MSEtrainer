@@ -218,7 +218,7 @@ function renderSchematic(rows){
     out+=g;maxW=Math.max(maxW,x+PAD);y+=RH;
   });
   const vw=Math.max(W,maxW);
-  return `<svg class="facilic" viewBox="0 0 ${vw} ${y}" role="img" aria-label="Facilic schematic" preserveAspectRatio="xMinYMid meet">${out}</svg>`;
+  return `<div class="facilic-wrap"><svg class="facilic" width="${vw}" height="${y}" viewBox="0 0 ${vw} ${y}" role="img" aria-label="Facilic schematic">${out}</svg></div>`;
 }
 
 /* ---------- domain page ---------- */
