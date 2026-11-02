@@ -6,11 +6,15 @@ After each answer the app explains the answer and gives a rule for telling it ap
 
 ## Features
 
-- 462 fictional cases covering 419 terms, including 42 original Tagalog cases
-- Mental status: eight MSE domains, from thought process to insight and judgment
+- 1,269 fictional cases covering 625 terms, including 56 original Tagalog cases; every interviewing term has at least two cases
+- Mental status: ten MSE domains, from appearance and attitude toward the examiner to insight and judgment
 - Clinical interviewing, Part 1 (Ch. 1–8): engagement and empathy, safety and the alliance, interview structure, facilics, validity techniques, the person beneath the diagnosis, assessment and planning, and nonverbal behavior
 - Clinical interviewing, Part 2 (Ch. 9–15): mood disorders, the person beneath the mood disorder, psychotic disorders, the person beneath the psychosis, and personality disorders (core concepts, differential diagnosis, and psychodynamics)
-- Clinical interviewing, Ch. 19–21: anger and disengagement, culture and identity, and vantage points
+- Clinical interviewing, Part 3 (Ch. 17–18): suicide assessment (risk factors and warning signs, the tetrad of lethality, the CASE Approach, safety contracting) and violence assessment (the violence tetrad, dangerous psychotic process, the CADE Approach)
+- Clinical interviewing, Part 4 (Ch. 19–21): anger and disengagement, culture and identity, and vantage points
+- Collaborative interviewing (Ch. 22–23): motivational interviewing (spirit, principles, OARS, four processes, change talk) and the Medication Interest Model (Choice Triad, passports, the three toolboxes)
+- Appendices: facilic schematics drawn with Shea's own symbols (Appendix I) and the written document (Appendix III)
+- Mastery: a term counts as mastered after two correct answers on different cases; term cards, domain pages and My progress show it
 - Tagalog and Filipino culture: Tagalog cases across all eight MSE domains (patient lines in Tagalog, English shown after answering, "Ask it in Tagalog" for each), and a Culture or pathology? domain with 10 Filipino look-alikes (hiya, deferential gaze, dropped po, shared kulam/usog/engkanto beliefs, grief-related sensing, sama ng loob, nerbiyos, lutang, agreeable opo, sanib)
 - Sa Tagalog card on every MSE and culture case, linking to the matching Usap Tayo section or lesson
 - Tagalog audio in the recorded Filipino voice from Usap Tayo (isaymotion.github.io/Tagalog), played when online
@@ -48,7 +52,7 @@ icon-192.png, icon-512.png, icon-maskable-512.png   Install icons (Android, desk
 manifest.webmanifest   Lets the app install to the home screen
 sw.js           Offline support: network first, cached copy when offline
 css/style.css   Styles, including light and dark themes
-js/data.js      Domains, terms, Shea chapter titles, and the English cases
+js/data.js      Domains, terms, Shea chapter titles, and the English cases (new v5 domains and the second-case series are appended at the end)
 js/data-tl.js   Tagalog cases and the Culture or pathology? domain and terms
 js/audio-key.js Maps a Tagalog line to its audio file in Usap Tayo's pack (same as Usap Tayo's js/audio-key.js)
 js/news.js      What's New entries
@@ -70,6 +74,8 @@ O: Observation line`, w:`Explanation shown after answering.`}
 - `q` is optional; it replaces the default question, "Which term fits best?"
 - `t` is the key of the correct term, and `d` lists three distractor term keys. All keys must exist in `TERMS`.
 - Lines beginning `C:`, `P:`, or `O:` render as clinician, patient, and observation lines. A vignette with no `C:` or `P:` lines renders as a single narrative paragraph.
+- Lines beginning `S:` draw a facilic schematic (Appendix I notation) as an SVG: `[Maj._Dep./3]` is a content rectangle with three corner slashes, `(Dynam.)` a process circle, `{Scout.}` the scouting capsule, and `-spont->`, `-nat->`, `-ref->`, `-imp->`, `-phan->`, `-intro->`, `-obs->` the seven gates. A gate may carry `@b` (circled letter) or `@10:41` (counter time). Underscores become spaces; consecutive `S:` lines stack as rows.
+- `dom:'fs'` (or any domain key) places a case in a domain other than its answer's, as the schematic drill does for the Ch. 4 gate terms.
 
 New terms are added with `T(key, name, domain, [chapters], definition, tellingApart, chartLine)`. For interviewing domains, the last field is shown as "At the bedside" instead of "In the chart." New domains go in the `DOMAINS` list with a group (`mse`, `p1`, `p2`, or `skill`), and new chapter titles go in `CH`.
 
@@ -85,4 +91,4 @@ For education only. All cases are fictional and do not describe real patients. T
 
 ## Author
 
-Made by Isabella Navarro, MD. Latest version November 2026. isaymotion@gmail.com
+Made by Isabella Navarro, MD. Latest version November 2026 (v5). isaymotion@gmail.com

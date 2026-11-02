@@ -4485,141 +4485,141 @@ const Q_WD=`Which documentation principle does this chart excerpt follow or viol
 const Q_WD2=`Which Appendix III documentation principle applies here?`;
 
 /* ===== Facilic schematics (fs) ===== */
-T('fs_longmap','Longitudinal facilic map','fs',[4],
+T('fs_longmap','Longitudinal facilic map','fs',['AI',4],
  `The backbone of the facilic schematic system (Appendix I): a chronological, start-to-finish record of the interview, drawn as a chain of region figures linked by gate symbols, showing the trainee's expansions, gates, and flow.`,
  `It follows structure and transitions in sequence. A cross-sectional map shows only how time was divided across four quarters, not the gates.`,
  `Draw it as you watch, placing a gate between each pair of successive regions so the map stays one continuous chain.`);
-T('fs_crossmap','Cross-sectional map','fs',[4],
+T('fs_crossmap','Cross-sectional map','fs',['AI',4],
  `A simple pie diagram that divides the interview into four quarters of time and shows what each quarter was spent on (Appendix I).`,
  `It shows time management, not specific structuring techniques. It complements the longitudinal map rather than replacing it.`,
  `Use it when pacing is the problem, so the trainee can see at a glance where the minutes went.`);
-T('fs_rect','Rectangle (content region symbol)','fs',[4],
+T('fs_rect','Rectangle (content region symbol)','fs',['AI',4],
  `A content region is drawn as a rectangle with the region's abbreviated name inside, such as "Maj. Dep.," "OCD," or "Soc. Hx."`,
  `Rectangle = content (a diagnostic or history area). Circle = process (psychodynamic or transformational). Scouting gets its own combined shape.`,
  `Always abbreviate the topic inside the figure. An unlabeled box tells the trainee nothing in supervision.`);
-T('fs_circle','Circle (process region symbol)','fs',[4],
+T('fs_circle','Circle (process region symbol)','fs',['AI',4],
  `A process region, such as a psychodynamic region ("Dynam.") or a transformational region where a roadblock like anger is worked through ("Transform."), is drawn as a circle with its abbreviation inside.`,
  `Ask what the stretch is about: gathering a topic's data (rectangle) or how the patient responds and relates (circle).`,
  `When the trainee shifts into interpretive questions, or into working through anger, close the rectangle and switch to a circle.`);
-T('fs_scoutsym','Scouting symbol (rectangle with rounded ends)','fs',[4],
+T('fs_scoutsym','Scouting symbol (rectangle with rounded ends)','fs',['AI',4],
  `The scouting phase is drawn as a combination of rectangle and circle: a rectangle with a half circle on each end.`,
  `It is the only combined shape and marks the opening survey, which mixes content and process (Ch. 4). A plain circle marks a later process region.`,
  `Most longitudinal maps begin with this shape. Note how long it ran, since a scouting phase that runs too long is a common teaching point.`);
-T('fs_slash','Corner slash (25% per corner)','fs',[4],
+T('fs_slash','Corner slash (25% per corner)','fs',['AI',4],
  `Completeness of a content region's expansion is shown by slash marks at the rectangle's corners. Each slashed corner equals about 25% of the needed information, marked as the dyad leaves the region.`,
  `Fewer than four slashes means an unfinished expansion that needs a return visit. Four means complete. More than four means too much for the task.`,
  `Slash the corners the moment the dyad leaves the region, while your sense of what was covered is fresh.`);
-T('fs_fullexp','Four-slash rectangle (complete expansion)','fs',[4],
+T('fs_fullexp','Four-slash rectangle (complete expansion)','fs',['AI',4],
  `A rectangle with all four corners slashed, showing the region was completely expanded for the task at hand.`,
  `Four slashes means "complete for this setting," not "every possible question asked." A fifth slash would mean over-gathering.`,
  `Point out the four-slash regions in supervision too. Trainees need to see what thorough looks like.`);
-T('fs_overexp','Fifth or sixth slash (over-expansion)','fs',[4],
+T('fs_overexp','Fifth or sixth slash (over-expansion)','fs',['AI',4],
  `A fifth, and possibly sixth, slash on a rectangle, showing that more information was gathered than the task at hand required.`,
  `The region is complete, but the extra data cost time needed elsewhere. Four slashes is the target, not the minimum.`,
  `Classic in a busy ER: full criteria coverage when severity and suicide data were what the triage needed. Teach flexibility in data-gathering decisions.`);
-T('fs_taskhand','Task-at-hand standard','fs',[4],
+T('fs_taskhand','Task-at-hand standard','fs',['AI',4],
  `Slashes are judged against the database that should be covered for the specific task and setting. The same content region may need different data in a 50-minute intake than in a 20-minute emergency assessment.`,
  `This is the standard behind the slashes, not a symbol. The same coverage can earn two slashes in one setting and four in another.`,
  `Before watching, decide what "complete" means for this setting, then slash against that.`);
-T('fs_reentry','Re-entry rectangle (resumed split expansion)','fs',[4],
+T('fs_reentry','Re-entry rectangle (resumed split expansion)','fs',['AI',4],
  `When the dyad returns to an incompletely expanded region, the supervisor draws a new rectangle with the same label, immediately marks the slashes it already had, and adds slashes for new data on leaving.`,
  `The pre-marked slashes carry over earlier coverage. A fresh, unslashed rectangle would wrongly suggest a new region or lost data.`,
  `Copy the old slash count first, then update on exit, so the trainee sees the region finally reach four.`);
-T('fs_omitpattern','Bevy of incomplete expansions','fs',[4],
+T('fs_omitpattern','Bevy of incomplete expansions','fs',['AI',4],
  `A map pattern in which many rectangles are left with fewer than four slashes. It displays a trainee's tendency to leave regions prematurely, resulting in errors of omission.`,
  `It is a pattern across the map (or several maps), not one split expansion that later gets finished.`,
  `Lay the maps side by side. Seeing the pile of half-slashed boxes motivates change more than a verbal comment does.`);
-T('fs_phantomstring','String of phantom gates','fs',[4],
+T('fs_phantomstring','String of phantom gates','fs',['AI',4],
  `A map pattern of regions linked by repeated phantom gates: the trainee jumps from region to region with no cue, which can create a "Meet the Press" style interview.`,
  `One phantom gate is a single transition. The pattern is a run of them, showing an overused habit of abrupt transitions.`,
  `Ask the trainee what he was feeling at each jump, then rewrite one gate together as a natural or referred gate.`);
-T('fs_circletter','Circled-letter annotation','fs',[4],
+T('fs_circletter','Circled-letter annotation','fs',['AI',4],
  `A circled letter of the alphabet placed on the map marks a point the supervisor will comment on later, or the exact wording of a gate. The matching note is listed below the map.`,
  `The letter keys a note below the map. A counter setting records when something happened. They are often used together.`,
  `Below the map: "Ⓑ 'Earlier you mentioned your uncle...': nice referred gate."`);
-T('fs_counter','Counter setting / minute mark','fs',[4],
+T('fs_counter','Counter setting / minute mark','fs',['AI',4],
  `The supervisor periodically notes elapsed minutes and the video counter number on the map, so important teaching moments can be found quickly during supervision.`,
  `It records where in time something happened. A circled letter records what to discuss.`,
  `Write the time beside the figure, e.g., "13:40 good empathy," then cue the recording there during supervision.`);
-T('fs_supershort','Supervisor-drawn shorthand','fs',[4],
+T('fs_supershort','Supervisor-drawn shorthand','fs',['AI',4],
  `Facilic symbols are drawn by a supervisor watching the interview and shared with the trainee in supervision, preferably right after the interview. The interviewer is not meant to draw them during the interview.`,
  `If the interviewer is drawing boxes, the system has been misunderstood. The map is a supervision record, not a data-gathering aid.`,
  `Tell trainees: "Your job is the patient. Mine is the map."`);
-T('fs_videosup','Video facilic supervision','fs',[4],
+T('fs_videosup','Video facilic supervision','fs',['AI',4],
  `The supervisor first watches the recording alone, mapping the flow with facilic schematics, adding comments on other skills (engagement, validity, psychodynamics), and noting minutes or counter numbers. Selected segments are then reviewed with the trainee.`,
  `It is a supervision format that uses the map. Longitudinal and cross-sectional maps are the tools used within it.`,
  `Number the teaching points worth viewing together, and let the trainee request segments you did not highlight.`);
 
 /* ===== Written document (wd) ===== */
-T('wd_selfreview','Writing it for yourself','wd',[16],
+T('wd_selfreview','Writing it for yourself','wd',['AIII'],
  `In Appendix III, Shea calls the clinician the most important reader. Writing forces a review of the data, which can reveal forgotten questions, recurring training "blind spots," and the need to rethink diagnoses or the plan.`,
  `The point is the write-up as a clinical tool for the writer, not as a defense against outside readers. Compare the no-surprises test, which a reviewer applies.`,
  `"Addendum: on write-up, I found no history of manic symptoms was obtained. Will ask at follow-up and call his sister."`);
-T('wd_prompt','Documenting promptly','wd',[16],
+T('wd_prompt','Documenting promptly','wd',['AIII'],
  `Write the assessment as close to the interview as possible (Appendix III). Done immediately, it can take half the time it takes days later, and it avoids a burnout-inducing pile of late paperwork. Shea urges at least 30 minutes after a 60-minute interview.`,
  `This is about timing after the interview, not about typing during it.`,
  `Intake 9:00-10:00, documentation 10:00-10:30 blocked on the schedule.`);
-T('wd_notyping','No final notes typed during the interview','wd',[16],
+T('wd_notyping','No final notes typed during the interview','wd',['AIII'],
  `Final EHR notes should not be typed during the interview. Typing disrupts flow and engagement and makes it easy to miss subtle nonverbal clues of hesitancy or deceit. Rough notes should be limited to memory aids (Appendix III).`,
  `"Surgeons do not dictate while they cut." The concern is attention during the interview, not when the note is finished.`,
  `During the interview, jot only memory cues, e.g., "pills? sister's house; job loss June." Build the note right after.`);
-T('wd_rawdata','Raw behavioral data, not labels (HPI)','wd',[16],
+T('wd_rawdata','Raw behavioral data, not labels (HPI)','wd',['AIII'],
  `The HPI is part of the objective database. It should record the behavioral symptoms themselves and leave out clinical judgments such as "appeared manic." The label belongs later, in the Narrative Summary and Formulation (Appendix III).`,
  `Without the raw data, no reader can tell whether the label fits, and a lawyer can argue diagnosis slapping. Explaining a diagnosis is the formulation's job.`,
  `"For 3 weeks she has slept about 2 hours a night, talked loudly and rapidly, and spent her savings on raffle tickets."`);
-T('wd_ccquote','Chief complaint as a direct quote','wd',[16],
+T('wd_ccquote','Chief complaint as a direct quote','wd',['AIII'],
  `The Appendix IIIB quality-assurance guideline for the ID section lists age, sex, marital status, referring clinician, reason for referral, and the chief complaint as a direct quotation from the patient.`,
  `Use the patient's own words, not the clinician's paraphrase or diagnosis.`,
  `"Chief complaint: 'I can't sleep anymore, and nothing feels worth doing.'"`);
-T('wd_hpistress','Opening stressor paragraph','wd',[16],
+T('wd_hpistress','Opening stressor paragraph','wd',['AIII'],
  `The HPI opens with one short paragraph on the patient's current stressors and how the patient sees the problems, giving context for the symptoms that follow. Details are left for later therapists, except when stressors are the main issue (Appendix III).`,
  `Keep it brief and about context. The symptom picture belongs in the next, chronological paragraph.`,
  `"Mrs. Dizon, a market vendor, links her distress to her husband's job loss in June and growing debts. She sees the problem as 'just stress.'"`);
-T('wd_onepara','One paragraph per diagnosis','wd',[16],
+T('wd_onepara','One paragraph per diagnosis','wd',['AIII'],
  `After the primary-diagnosis paragraph (chronological symptoms and treatment), each additional diagnosis or rule-out gets its own HPI paragraph of supporting DSM-5 symptoms. Every diagnosis in the differential should have its raw data in the HPI (Appendix III).`,
  `This is the writing rule. The no-surprises test is how a reader checks that it was followed.`,
  `"Regarding alcohol use: since March he drinks most nights, has missed work twice after drinking..." (supports the rule-out of alcohol use disorder).`);
-T('wd_pertneg','Pertinent negatives','wd',[16],
+T('wd_pertneg','Pertinent negatives','wd',['AIII'],
  `Pertinent negatives are symptoms the patient was asked about and clearly denied. They are listed in the HPI, or partly in the mental status, especially for diagnoses the presenting picture raises, such as mania in a depressed patient (Appendix III).`,
  `They document what was asked and ruled out, defending against a claim that a diagnosis was missed. Positives support the diagnosis given.`,
  `"She denies racing thoughts, decreased need for sleep, reckless spending, or other manic symptoms."`);
-T('wd_nosurprise','No-surprises test','wd',[16],
+T('wd_nosurprise','No-surprises test','wd',['AIII'],
  `A well-written HPI leaves no surprises at the DSM-5 listing. A supervisor can write in the margin which diagnosis each paragraph supports. A diagnosis with no supporting paragraph signals a problem in documentation or formulation (Appendix III).`,
  `This is a quality-assurance check made by the reader. One paragraph per diagnosis is the writing rule that passes it.`,
  `Margin note: "Para 2: MDD. Para 3: r/o GAD. PTSD listed, but where is the supporting paragraph?"`);
-T('wd_sihpi','Suicidal ideation in the HPI, without opinion','wd',[16],
+T('wd_sihpi','Suicidal ideation in the HPI, without opinion','wd',['AIII'],
  `Recent suicidal ideation, planning, and behavior from the current episode are described factually in the HPI (in a separate paragraph if significant). No opinion about risk is given there. The risk judgment comes later, in the formulation or risk field (Appendix III).`,
  `HPI = what happened. Formulation = what the clinician concludes about risk and why. Ideation during the interview itself goes in the mental status.`,
  `"Two weeks ago, after an argument with her partner, she thought of overdosing and set aside some of her mother's pills. She gave them to her sister the next morning."`);
-T('wd_riskreason','Reasoning behind the safety decision','wd',[16],
+T('wd_riskreason','Reasoning behind the safety decision','wd',['AIII'],
  `In the Narrative Summary and Formulation (or a risk field), the clinician states the decision about immediate safety and explains why. "Not suicidal at present" alone is not enough, because it is the soundness of the reasoning that protects in court (Appendix III).`,
  `The error is stating a conclusion without its evidence. The evidence cited comes from the database sections.`,
  `"Not acutely suicidal at present, as evidenced by denial of current ideation, no past attempts, no current drinking, and active interest in follow-up care."`);
-T('wd_protquote','Quoting the patient on deterrents','wd',[16],
+T('wd_protquote','Quoting the patient on deterrents','wd',['AIII'],
  `Direct quotes from the patient suggesting that suicide or violence risk is minimal are recorded in the HPI or mental status and referred back to in the formulation. They also show future clinicians which deterrents to recheck (Appendix III).`,
  `The quote is raw data in the patient's words. The formulation then cites it as part of the reasoning.`,
  `MSE: "Denies current suicidal ideation, stating, 'I could never do that to my grandchildren.'"`);
-T('wd_contract','Documenting safety contracting as an assessment tool','wd',[16],
+T('wd_contract','Documenting safety contracting as an assessment tool','wd',['AIII'],
  `If safety contracting is used as an assessment tool, document the behavioral clues of sincerity (eye contact, handshake, genuine affect, interest in the safety plan, no nonverbal evidence of ambivalence or deceit), not merely that a contract was made. Safety planning should also be documented (Appendix III).`,
  `"Made a safety contract" alone is the error. The observations are what make it meaningful.`,
  `"Using safety contracting as an assessment tool: steady eye contact, firm handshake, genuine affect. He saved the crisis line number in his phone. No nonverbal evidence of ambivalence or deceit."`);
-T('wd_corrob','Documenting corroborative contacts','wd',[16],
+T('wd_corrob','Documenting corroborative contacts','wd',['AIII'],
  `Record any contacts with corroborative sources and what they said that supports the patient's safety and truthfulness, including their agreement with the safety plan (Appendix III).`,
  `This covers informants who supply or confirm history. Consultation covers colleagues who review your decision.`,
  `"Spoke with his wife, who confirmed he has not talked about suicide and has no past attempts. She agrees with the safety plan and will check on him tonight."`);
-T('wd_consult','Documenting consultation','wd',[16],
+T('wd_consult','Documenting consultation','wd',['AIII'],
  `List everyone you discussed the case with and their agreement with the decision. Shea calls consultation probably the single best defense against a charge of negligence, but it weakens markedly if it is not recorded (Appendix III).`,
  `This covers colleagues reviewing your judgment, not family members or informants supplying history.`,
  `"Discussed with Dr. Santos (on-call consultant) and with her outpatient therapist. Both agree with discharge home and follow-up in 3 days."`);
-T('wd_norepeat','Formulation explains, not repeats','wd',[16],
+T('wd_norepeat','Formulation explains, not repeats','wd',['AIII'],
  `The Narrative Summary and Formulation opens with brief identification and one or two sentences on what brought the patient in, then explains why each diagnosis was given. It refers back to the HPI instead of re-listing symptoms (Appendix III).`,
  `Repeating symptoms wastes time. The formulation's job is reasoning. Compare the raw-data rule, which keeps labels out of the HPI.`,
  `"Her symptoms (see HPI) began within weeks of the typhoon damage to her home. I favor an adjustment disorder because they fall short of a major depressive episode and ease on days she is with family."`);
-T('wd_stigmadx','Explaining stigmatizing diagnoses','wd',[16],
+T('wd_stigmadx','Explaining stigmatizing diagnoses','wd',['AIII'],
  `Take the time to explain why a diagnosis that carries stigma or legal or benefits implications was made, such as borderline or antisocial personality disorder. This protects against later charges of "label slapping" (Appendix III).`,
  `Every diagnosis needs reasoning, but labels with stigma or consequences need it spelled out explicitly.`,
  `"Borderline personality disorder is listed because of the long-standing pattern described in the Social History: repeated intense, unstable relationships since adolescence, chronic emptiness, and recurrent self-cutting when feeling abandoned."`);
-T('wd_medconsent','Documenting the medication discussion','wd',[16],
+T('wd_medconsent','Documenting the medication discussion','wd',['AIII'],
  `When prescribing for the first time, document that side effects and benefits were discussed and that the patient understood and was interested in starting, ideally in the patient's own words (Appendix IIIB treatment-plan guideline).`,
  `This documents informed agreement to a treatment. Quoting deterrents documents safety reasoning.`,
  `"Side effects, risks, and benefits of sertraline were discussed. She understood and wished to start, saying, 'Sige, Doc, let's try it.'"`);
@@ -4807,4 +4807,1068 @@ V.push(
  w:`An empty box on the arrow is the introduced gate: the clinician announces the new topic ("I'd like to ask about your family now"). With an X it would be a phantom gate.`},
 {id:'fs39',t:'gate_obs',d:['gate_spont','gate_intro','gate_natural'],dom:'fs',q:Q_FSG,x:`S: [Maj._Dep./3] -obs-> (Transform.)`,
  w:`The oval with a dot, an eye, is the observed gate: the clinician moves because of something observed, such as tears or a clenched jaw. The coil would mean the patient raised the topic.`}
+);
+
+/* ===== Suicide assessment (Shea Ch. 17) ===== */
+/* Suicide assessment — Shea Ch. 17. Drafted 2026-11-02. */
+const Q_SU=`Which suicide-assessment concept does this illustrate?`;
+const Q_SU_TECH=`Which technique is the clinician using in this part of the CASE Approach?`;
+const Q_SU_REGION=`Which region of the CASE Approach is the clinician exploring?`;
+const Q_SU_TET=`Which element of the tetrad of lethality is present?`;
+const Q_SU_ACR=`Which mnemonic organizes these items?`;
+
+/* ---------- Risk factors, warning signs, protective factors ---------- */
+T('su_riskfactor','Risk factor','su',[17],
+ `A characteristic found statistically more often than expected in large samples of people who have died by suicide (e.g., demographics, living circumstances, history, clinical condition). No collection of risk factors has been shown to predict an imminent attempt.`,
+ `A risk factor comes from population statistics. A warning sign (risk predictor) is a feature of this specific living person that may signal an increased likelihood of an attempt by them.`,
+ `Use risk factors as a reason to look harder (more tenacious questioning, a call to a corroborative source), never as a score that rules risk in or out.`);
+T('su_warnsign','Warning sign (risk predictor)','su',[17],
+ `A characteristic of a specific living person that may indicate an increased likelihood of a suicide attempt by that individual. "Warning sign" has replaced the older term "risk predictor."`,
+ `Warning signs belong to this individual right now (e.g., psychosis, intense anxiety, acute intoxication). Risk factors are group statistics, though some items (intoxication, psychosis) can be both.`,
+ `Ask yourself: "What about this person, today, makes an attempt more likely?" Intense anxiety, agitation or a sudden change in condition should raise a flag.`);
+T('su_static','Static risk factor','su',[17],
+ `A risk factor that cannot be changed, such as age, sex, history of previous attempts, the absence of a spouse or partner, or an unchangeable loss (e.g., the death of a child).`,
+ `Static factors raise background concern but are not treatment targets. Dynamic factors (substance use, depression, unemployment) can be changed.`,
+ `List static factors briefly in the formulation. Spend your planning time on the dynamic ones.`);
+T('su_dynamic','Dynamic risk factor','su',[17],
+ `A risk factor or warning sign that can potentially be altered, such as substance abuse, psychotic process, depression, a changeable stressor like unemployment, family dynamics or the patient's spirituality.`,
+ `Dynamic factors are changeable and so become points for collaborative, matrix treatment planning. Static factors cannot be changed.`,
+ `Turn each dynamic factor into a plan item: "Your drinking is one thing we can work on together. Can we start there?"`);
+T('su_protective','Protective factor','su',[17],
+ `A characteristic, attribute or situation that may reduce the likelihood of an attempt. Personal examples are reasons for living, religious prohibition, hope, sobriety and fear of death. Environmental examples are strong family ties, restricted access to lethal means, responsibilities to others and pets.`,
+ `Protective factors lower risk and are weighed as mitigating elements. Risk factors and warning signs raise it.`,
+ `"What has kept you going, even on the worst days?" Document the patient's own words (e.g., "I could never do that to my kids").`);
+T('su_sadpersons','SAD PERSONS Scale','su',[17],
+ `Patterson and colleagues' 10-item acronym of mostly static risk factors: Sex, Age, Depression, Previous attempt, Ethanol abuse, Rational thinking loss, Social supports lacking, Organized plan, No spouse, Sickness.`,
+ `A checklist of mostly static factors. Shea says assigning points to it has no predictive value. NO HOPE adds dynamic factors, and IS PATH WARM lists warning signs.`,
+ `Use it as a memory jog when you are rushed. Never total the items into a score that "clears" a patient.`);
+T('su_nohope','NO HOPE acronym','su',[17],
+ `Shea's acronym that adds dynamic factors: No framework for meaning, Overt change in clinical condition, Hostile interpersonal environment, Out of hospital recently, Predisposing personality factors, Excuses for dying present and strongly believed. Its name is a reminder to ask about hopelessness.`,
+ `NO HOPE complements SAD PERSONS (mostly static) by emphasizing changeable, phenomenological risk such as rational excuses for dying or a recent discharge.`,
+ `Ask about each item: "Since you left the hospital, how have things been at home?" and "Do you ever think your family would be better off without you?"`);
+T('su_ispathwarm','IS PATH WARM','su',[17],
+ `The American Association of Suicidology's warning-sign mnemonic: Ideation, Substance abuse, Purposelessness, Anger, Trapped, Hopelessness, Withdrawing, Anxiety, Recklessness, Mood change.`,
+ `It focuses only on dynamic warning signs of imminent risk. It also separates the cognitive belief of hopelessness from the emotional sensation of feeling trapped.`,
+ `"Some people describe feeling trapped, like there's no way out of the pain. Have you felt that way?"`);
+T('su_chronic','Chronic suicide risk','su',[17],
+ `Elevated risk from many risk factors present over a long period (e.g., depression, debilitating illness, hopelessness, a strained marriage). This does not by itself mean the patient is in immediate danger.`,
+ `Chronic risk reflects the long-term risk-factor load. Immediate risk turns on things like the tetrad of lethality and current intent, so a patient can carry many risk factors yet convincingly deny intent and have no plan.`,
+ `Chronic risk guides how often you follow up and how you build supports. It does not by itself call for admission.`);
+T('su_acute','Immediate (reasonably foreseeable) risk','su',[17],
+ `The clinician's estimate of whether there is a reasonably foreseeable increased risk of an attempt in the near future, the question behind hospitalization decisions. Following Simon, Shea warns that "imminent" implies more predictive power than clinicians have.`,
+ `It is driven by critical warning signs, the tetrad of lethality and elicited intent rather than the number of risk factors. A patient with few risk factors can still be at high immediate risk.`,
+ `Frame your note as foreseeability: "Given her command hallucinations, I judge her at foreseeably high risk in the near term and recommend admission."`);
+
+/* ---------- Tetrad of lethality ---------- */
+T('su_tet_attempt','Tetrad: recent serious attempt','su',[17],
+ `First element of the tetrad of lethality: an immediately recent serious suicide attempt. Its weight depends on how dangerous the method was and how much room was left for rescue.`,
+ `It concerns an act that has already happened. A relayed intent concerns what the patient says or plans, and denial to avoid being stopped is about concealment.`,
+ `Ask about rescue: Did they choose a spot where they would be found? Was help nearby? Did they leave a note where it would be seen, or contact anyone afterward?`);
+T('su_tet_psychosis','Tetrad: ominous psychotic process','su',[17],
+ `Second element: acutely disturbing psychotic process that suggests lethality. Especially dangerous are command hallucinations, feelings of alien control and hyper-religious preoccupation (e.g., an "Abraham syndrome" belief that God demands a sacrifice).`,
+ `The danger comes from disrupted rational thought, even when the patient denies "wanting" to die. A patient driven by an outside force may deny suicide because, in their mind, it would be murder.`,
+ `"Have you felt that something is trying to take you over or control you?" Then: "Is it trying to get you to harm yourself?"`);
+T('su_tet_intent','Tetrad: relayed serious intent','su',[17],
+ `Third element: the patient relays serious suicidal intent in the interview, or recent behaviors outside the interview show serious intent. Shea considers this the single most important indicator of suicide potential.`,
+ `The patient discloses intent, by words or reported actions. In the fourth element the patient conceals intent behind a flat denial.`,
+ `Elicit ideation, planning, actions and intent thoroughly. This database, not the risk-factor count, is what has shown some predictive value.`);
+T('su_tet_denial','Tetrad: denial to avoid being stopped','su',[17],
+ `Fourth element: the patient flatly denies suicidal ideation because they truly intend to die and do not want to be stopped. Shea calls it arguably the most dangerous possibility and an easy one to miss.`,
+ `The denial itself is the danger. Alerts include many risk factors or one intense risk factor, few protective factors, and terse or annoyed answers. Roadblocks such as shame describe hesitancy in general and do not imply a decision to die.`,
+ `If you suspect it, look for other sources: corroborative informants, past records, a consult, or a second interviewer.`);
+
+/* ---------- Intent and roadblocks ---------- */
+T('su_reflected','Reflected intent','su',[17],
+ `The quality and quantity of the patient's suicidal thoughts, desires, plans and the actions taken toward them. This reflects how much the patient truly wants to die. It is one part of the Equation of Suicidal Intent: Real = Stated + Reflected + Withheld.`,
+ `Stated intent is what the patient says when asked directly. Reflected intent is read from the time, thoroughness and action invested in planning ("actions speak louder than words").`,
+ `Ask how much time they spend thinking about it, what they have done to get ready, and whether they have rehearsed it. Weigh these answers more than "I'd never do it."`);
+T('su_roadblocks','Roadblocks to sharing ideation','su',[17],
+ `Reasons patients hold back suicidal thoughts: shame or seeing suicide as weakness, belief it is sinful, taboo, fear of seeming crazy, fear of being locked up or of police, fear others will find out, belief no one can help, alexithymia, impulsivity without prior ideation, or a decision to die.`,
+ `Roadblocks are the general reasons for hesitancy that the interviewer works to transform. "Denial to avoid being stopped" is the single most dangerous roadblock, but most hesitancy comes from shame, fear or taboo.`,
+ `Name the fear: "Some people worry that if they tell me, they'll automatically be admitted. Can we talk about what actually happens?"`);
+T('su_triad','Elicitation of suicidal ideation triad','su',[17],
+ `The best moment to raise suicide is where three factors meet: (1) sound engagement, (2) intense emotional discharge in the patient, and (3) the patient hinting at the topic (not always present).`,
+ `The triad is about when to ask. Normalization and shame attenuation are about how to phrase the question once the moment comes.`,
+ `Don't ask too early or "get it out of the way." Wait until the patient is engaged and in pain. If they hint ("I don't know if it's worth going on"), pick it up right away.`);
+T('su_myth','The "planting the idea" myth','su',[17],
+ `The clinical myth that raising suicide might give the patient the idea. Shea knows of no case of this, notes that suicide is no cultural secret and is very hard to do, and argues that frank discussion relieves the patient's burden.`,
+ `This is a mistaken belief about the patient. Countertransference is the clinician's own feelings (anxiety, moral views, wish to avoid a "mess") that bias how they ask.`,
+ `Ask directly and calmly. Talking openly shows the patient that suicidal thought is a problem to be solved, not a sin to be hidden.`);
+T('su_counter','Countertransference in suicide assessment','su',[17],
+ `The clinician's own beliefs and feelings about suicide (sinful, weak, personal or family history) and the wish to avoid the "mess" that serious ideation creates. These can show up as not asking, asking only at the end, rushing, or using a negatively phrased question.`,
+ `It originates in the clinician. Roadblocks originate in the patient. A negative inquiry ("You're not thinking of killing yourself?") is often a sign of it.`,
+ `Before the interview, ask yourself: "What do I believe about suicide? Do I want a 'no' right now?" Keep your tone and eye contact steady when the topic comes up.`);
+
+/* ---------- CASE Approach and its regions ---------- */
+T('su_case','CASE Approach','su',[17],
+ `The Chronological Assessment of Suicide Events: a flexible, practical, easily learned strategy for eliciting suicidal ideation, planning, behavior, desire and intent. Its macrostructure splits the sprawling inquiry into four contiguous timeframes (presenting, recent, past, immediate) to reduce errors of omission, and seven validity techniques reduce invalid data.`,
+ `CASE only uncovers the patient's suicidal ideation, planning and intent. It does not gather risk factors and says nothing about formulating risk, which are the other two parts of a suicide assessment. Shea offers it as a reasonable way, not "the right way" or a standard of care.`,
+ `"Engagement. Engagement. Engagement." Then explore each region fully before moving on, and don't follow a tangent out of a region without a very good reason.`);
+T('su_presenting','CASE region: presenting events','su',[17],
+ `Region 1: the ideation, plans or actions the patient presents once the topic is raised, usually from the past 48 hours or several weeks. An attempt (or pressing plan) is explored with a verbal video to judge its seriousness: method, how serious the action was, signs of intent and room for rescue, planning vs impulsivity, alcohol or drugs, interpersonal factors and stressors, hopelessness, and why the attempt failed.`,
+ `If the patient's reported events do not fall within the past 48 hours or several weeks, there is no presenting event and the clinician starts with recent events. Recent events cover the preceding 2 months.`,
+ `"What are some of your thoughts about the fact that you are still alive now?" Also ask whether they told or hinted to anyone, including by text or social media.`);
+T('su_recent','CASE region: recent events','su',[17],
+ `Region 2: the preceding 2 months. Shea calls it perhaps the richest arena for reflected intent ("a mother lode") and the region where a highly intent patient may be hiding the method of choice. The clinician (1) finds out which plans were contemplated, (2) determines how far the patient acted on each, and (3) determines how much time goes into these plans and ruminations.`,
+ `Its sequence: a bridging question about the presenting method, then repeated gentle assumptions with a verbal video for each new method, denials of the specific only if withholding is suspected, the catch-all question, and finally symptom amplification. State the exact timeframe, never just "recently."`,
+ `Bridge in with: "Over the past 2 months, have you had any other thoughts of overdosing?"`);
+T('su_past','CASE region: past events','su',[17],
+ `Region 3: from 2 months ago back in time. Shea operationalizes it by asking only about past suicidal behaviors (not isolated thoughts), and only for information that could change immediate triage: the most serious attempt, whether current triggers and state resemble it, the approximate number of gestures and attempts, and the most recent attempt outside the 2-month window.`,
+ `Clinicians often spend too much time here; an hour reviewing a long history would be "an hour poorly spent." Recent events cover the last 2 months in detail.`,
+ `"What was your most serious attempt? Is anything about what's happening now like what was happening then?"`);
+T('su_immediate','CASE region: immediate events','su',[17],
+ `Region 4, the region of "Now/Next": suicidal ideation, desire and intent arising during the interview itself, plus whether the patient expects further suicidal thoughts after leaving. It separates desire (the pain and wish to die) from intent (the decision to act), and explores hope and reasons for living.`,
+ `It comes last, after the three earlier timeframes have built trust. Desire and intent are related but not identical: a patient can have intense pain and a strong wish to die yet no intent ("I could never do that to my children").`,
+ `"Right now, are you having any thoughts about wanting to kill yourself?" ... "What keeps you from killing yourself?"`);
+T('su_verbalvideo','Verbal video','su',[17],
+ `A series of behavioral incidents that guides the patient to describe an attempt or plan from beginning to end, so the clinician can see it unfold "as if watching a streaming video." CBT and DBT call this a behavioral (chain) analysis.`,
+ `If the patient skips a piece (a "Nixon Gap"), the clinician rewinds the video to where the gap began. Sequencing incidents ("What happened next?") carry the video, and fact-finding incidents secure the "lethal points" that show dangerousness. A single behavioral incident is just one question.`,
+ `When a gap appears: "Let's go back for a moment. Right after you took them, what did you do next?"`);
+T('su_methodinhand','Method-in-hand question','su',[17],
+ `Asking whether the patient has ever gotten the method out while thinking about killing themselves. It is the first step of Shea's four-step kick-start of a verbal video: method in hand, when it last happened, where, and a summarizing invitation.`,
+ `It checks how far the patient acted on one method already named. A gentle assumption searches for other methods, and denial of the specific names methods not yet mentioned.`,
+ `"Have you ever gotten the pills out while you were thinking of overdosing?" Then: "When was the last time? Where were you?"`);
+T('su_suminvite','Summarizing invitation','su',[17],
+ `The fourth step of the verbal-video kick-start: the clinician summarizes what is known so far and literally invites the patient to walk through what happened step by step.`,
+ `It launches the verbal video after the method-in-hand and anchoring (when, where) questions. Sequencing and fact-finding behavioral incidents carry it on from there.`,
+ `"It sounds like last night was a very difficult time. It will help me understand if you walk me through it step by step. You were at the seawall, you'd picked a spot. What did you do next?"`);
+T('su_motives','Apparent and not-so-apparent motivations','su',[17],
+ `Exploring what the patient hopes to achieve by dying, beyond the near-universal wish for release from unrelenting pain. Drawing on Maltsberger: dreamless sleep, reunion with someone lost, escape from a persecutor, destroying an enemy lodged inside oneself, passage to a better world, or revenge.`,
+ `It asks why the patient leans toward death, not how far they have acted (reflected intent). These goals often surface on their own as the patient weighs pros and cons during a verbal video, and some are driven by anger or psychosis.`,
+ `When the patient starts weighing pros and cons, follow it: "What have you pictured happening after you die?"`);
+T('su_safetyplan','Safety planning','su',[17],
+ `Collaboratively building a series of steps the patient will take if suicidal ideation re-emerges, from something simple like a warm shower or soothing music up to calling a crisis line or returning to the hospital. It can be done in the immediate region or in the closing phase.`,
+ `Shea prefers it to safety contracting as a deterrent. It is much less useful as an assessment tool, because its ultra-collaborative style lacks the "interpersonal push" that prompts nonverbal leakage of intent.`,
+ `"What would you do later tonight or tomorrow if you began to have suicidal thoughts again?" Brainstorm the steps together.`);
+T('su_firstno','Not accepting the first "no"','su',[17],
+ `Shea's principle that the clinician should seldom, if ever, leave the topic after a single denial. The least hesitancy, or answers like "No, not really," often mean there has been concrete ideation, so he asks again, softening the second inquiry to cover even fleeting thoughts.`,
+ `It is about persistence after a denial. A negatively phrased question ("You're not thinking of killing yourself?") invites that first "no"; the softened re-ask makes the truth easier to share.`,
+ `"Have you had any fleeting thoughts of killing yourself, even for a moment or two?" Or, after "No, not really": "What kind of thoughts have you had?"`);
+
+/* ---------- The seven validity techniques of the CASE Approach ---------- */
+T('su_behinc','Behavioral incident (in CASE)','su',[17],
+ `Pascal's questions that build a picture of a specific event. Fact-finding incidents ask for specific facts, behavioral details or thoughts; sequencing incidents ask what happened next. Shea: judge from the details of the story rather than rely on the patient's "objective opinion."`,
+ `It is one concrete question. A series of them that reconstructs an event is a verbal video, and the method-in-hand question is one particular fact-finding incident.`,
+ `Replace "Did you come close?" with "Did you load it?" and "What made you put it down?"`);
+T('su_gentle','Gentle assumption (in CASE)','su',[17],
+ `Assuming, in a gentle tone, that the potentially embarrassing behavior is occurring. In CASE it has a specific juncture: after the first method has been thoroughly explored, it searches for other methods ("What other ways have you thought of killing yourself?") and is repeated until the patient denies any others.`,
+ `"Have you thought about any other ways?" is a vague foray, not a gentle assumption. Denial of the specific comes only after the blanket denial, and only if withholding is suspected.`,
+ `"What other ways have you thought of killing yourself?" Add "if at all" to soften it if needed.`);
+T('su_denial','Denial of the specific (in CASE)','su',[17],
+ `After "none" to a gentle assumption, asking about specific methods, each as a separate question with a pause. It is used only when the clinician suspects a plan, especially the method of choice, is being withheld.`,
+ `Asked one at a time, the patient may have to lie repeatedly, and each lie is a chance to spot nonverbal leakage. Strung together, the questions become a cannon question. Ask only about methods common in the patient's culture; often one or two is enough.`,
+ `"Have you been having any thoughts about hanging yourself?" (pause, watch) "...about jumping off a bridge or other high place?"`);
+T('su_sympamp','Symptom amplification (in CASE)','su',[17],
+ `Setting the quantity in the question at a high level, in an ascending series, so that a minimized answer still reveals the problem. In CASE it measures how much time the patient is preoccupied with suicide, usually as the last step of the recent region.`,
+ `The numbers must start high and go higher, and it is used only when you suspect minimizing. Fit the units to the patient: percentages of waking hours for the highly educated, hours a day for others.`,
+ `"On your very worst days, how much time do you spend thinking about killing yourself: 10 hours a day, 14 hours a day, 18 hours a day?"`);
+T('su_normal','Normalization (in CASE)','su',[17],
+ `Beginning the question by suggesting other patients have had the same experience, metacommunicating that the patient is not alone: "Sometimes when people are in a tremendous amount of pain, they find themselves having thoughts of killing themselves. Have you been having any thoughts like that?"`,
+ `It mentions other people. Shame attenuation uses the patient's own pain with no mention of others. Shea prefers "killing yourself" to "committing suicide" (pejorative "commit") or "hurting yourself" (confusable with non-lethal self-harm).`,
+ `"It's not unusual for someone who is depressed to feel hopeless and have thoughts about death or dying." Then: "Have you been having any thoughts about killing yourself?"`);
+T('su_shame','Shame attenuation (in CASE)','su',[17],
+ `Using the patient's own pain as the gateway to suicide, metacommunicating "I get how much pain you are in": "With everything you're going through, have you been having any thoughts of killing yourself?" or "With all of your pain...?"`,
+ `No other people are mentioned (unlike normalization). Shea uses "everything you're going through" when stressors prompted help-seeking, and "pain" for long-standing illness such as schizophrenia, bipolar disorder or PTSD.`,
+ `"With all of your pain, have you been having any thoughts of killing yourself?" Say "killing yourself," not "hurting yourself."`);
+T('su_catchall','Catch-all question (in CASE)','su',[17],
+ `Asking whether any method has not yet been discussed, generally right after the denials of the specific: "We've been talking about a lot of different ways you've been thinking about killing yourself; are there any ways you've thought about that we haven't talked about yet?"`,
+ `It is one open sweep that catches unusual methods or ones the clinician forgot to name, and it can reveal web searching. Denial of the specific names each method in turn. A pause after the catch-all is nonverbal leakage worth gently naming.`,
+ `If the patient pauses: "It looks like you may have thought of some other ways. Try to share them with me, even if they were fleeting."`);
+T('su_contract','Safety contracting (and its caveats)','su',[17],
+ `Asking the patient to promise to contact the clinician or staff before acting on suicidal thoughts. It has two radically different uses. As a deterrent it is limited: it guarantees nothing, must never come before a sound assessment, and is generally inferior to safety planning. As an assessment tool, its "interpersonal push" may prompt nonverbal leakage of hidden intent.`,
+ `As an assessment tool it is used selectively, when the clinician leans toward discharge but intuition says something "does not add up," and it is avoided with borderline or passive-aggressive pathology. Safety planning is collaborative and better for deterrence.`,
+ `"Can you promise me that you will not act on any suicidal thoughts before you call me, or my staff, any hour of the day or night? And can you really promise me that?" Watch the face, body and voice.`);
+
+V.push(
+/* risk factor */
+{id:'su01',t:'su_riskfactor',d:['su_warnsign','su_protective','su_tet_intent'],q:Q_SU,x:`Mang Ben is 72, a widower who lives alone in Orani and has a long history of heavy drinking. He denies any suicidal thought today. The resident notes that each of these characteristics shows up more often than expected in large samples of people who have died by suicide.`,
+ w:`These are statistical characteristics drawn from population data, which makes them risk factors. A warning sign would be something about Mang Ben himself, right now, suggesting an attempt is more likely.`},
+{id:'su02',t:'su_riskfactor',d:['su_warnsign','su_ispathwarm','su_protective'],q:Q_SU,x:`A first-year resident totals a patient's characteristics (male, middle-aged, separated, previous attempt) and writes "low risk, only four factors." Her consultant replies that no combination of these has ever been shown to predict an imminent attempt. Their real value is to tell her when to look harder.`,
+ w:`Risk factors alert the clinician to dig deeper or call a corroborative source. They do not work as a predictive algorithm. Warning signs, by contrast, are features of this particular person suggesting increased likelihood now.`},
+/* warning sign */
+{id:'su03',t:'su_warnsign',d:['su_riskfactor','su_static','su_chronic'],q:Q_SU,x:`Ella's roommate tells the ER resident that in the past week Ella has been pacing at night, looking frightened, drinking heavily and unable to sleep. Ella herself says only that she is "stressed."`,
+ w:`Acute, intense anxiety and agitation, heavy drinking and a sudden change in sleep in this specific person are warning signs. Risk factors are population-level statistics such as age or sex.`},
+{id:'su04',t:'su_warnsign',d:['su_riskfactor','su_dynamic','su_protective'],q:`In current literature, which term has replaced "risk predictor"?`,x:`O: The resident is teaching nursing students. She explains that some features are statistics about large groups of people who died by suicide, while others are features of the specific living person in front of you that may indicate an attempt by that individual.
+O: She asks what the second group is now called.`,
+ w:`"Warning signs" replaced "risk predictors" for features of a specific living person. Risk factors describe statistical associations in large samples.`},
+/* static */
+{id:'su05',t:'su_static',d:['su_dynamic','su_protective','su_warnsign'],q:`What type of risk factors are these?`,x:`In his formulation the resident lists: male, 58 years old, father died by suicide, previous attempt in 2019, son killed in a road accident last year.`,
+ w:`None of these can be changed: age, sex, family history, a past attempt and an irreversible loss. That makes them static factors. Dynamic factors like substance use or unemployment can be changed and become treatment targets.`},
+{id:'su06',t:'su_static',d:['su_dynamic','su_chronic','su_riskfactor'],q:`The consultant's point turns on which kind of factor?`,x:`C: I've listed his age, sex and his prior attempt as our treatment goals.
+O: The consultant gently says these cannot be altered. They raise background concern, but the plan should target what can change.`,
+ w:`Age, sex and a prior attempt are static: true risk factors that cannot be modified. Dynamic factors (depression, drinking, a changeable stressor) are where collaborative treatment planning goes.`},
+/* dynamic */
+{id:'su07',t:'su_dynamic',d:['su_static','su_protective','su_chronic'],q:`What type of risk factors is the team focusing on?`,x:`For Rodel, 34, the team writes its plan around his daily drinking, his untreated depression and his job loss after the factory closed. They link him to an AA group, start treatment and refer him to a livelihood program.`,
+ w:`Drinking, depression and a changeable situational stress like unemployment are dynamic risk factors. They are points for matrix treatment planning, unlike unchangeable static factors such as age or a past attempt.`},
+{id:'su08',t:'su_dynamic',d:['su_static','su_warnsign','su_protective'],q:Q_SU,x:`The resident notes that Liza's constant fighting with her mother and her loss of connection to her church are risks that family psychoeducation and pastoral support might change. She makes both of them items in Liza's treatment plan.`,
+ w:`Shea counts changeable family dynamics and the patient's spirituality as dynamic factors, inroads on other wings of the matrix. A static factor could not be altered by such interventions.`},
+/* protective */
+{id:'su09',t:'su_protective',d:['su_riskfactor','su_dynamic','su_reflected'],q:Q_SU,x:`P: I have thought it would be easier to be gone. But it's a mortal sin, and who would take care of my apo after school? Honestly, I'm also scared of dying.`,
+ w:`Religious prohibition, responsibility to grandchildren and fear of death are protective factors (Rudd sees fear of death as a good sign that the patient has not habituated to death). They mitigate risk and should be documented in the patient's own words.`},
+{id:'su10',t:'su_protective',d:['su_riskfactor','su_static','su_contract'],q:`What do these environmental details represent?`,x:`O: Lito's brother has taken the family's gun to his own house. Lito lives with his wife and two daughters who check on him, and he leads the youth group at his barangay chapel.`,
+ w:`Restricted access to lethal means, strong family relationships and responsibilities in community activities are external (environmental) protective factors. They lower risk rather than raise it.`},
+/* SAD PERSONS */
+{id:'su11',t:'su_sadpersons',d:['su_nohope','su_ispathwarm','su_case'],q:Q_SU_ACR,x:`Sex. Age. Depression. Previous attempt. Ethanol abuse. Rational thinking loss. Social supports lacking. Organized plan. No spouse. Sickness.`,
+ w:`This is the SAD PERSONS Scale, a 10-item checklist of mostly static risk factors. NO HOPE adds dynamic factors, and IS PATH WARM lists warning signs.`},
+{id:'su12',t:'su_sadpersons',d:['su_nohope','su_ispathwarm','su_tet_psychosis'],q:`Which tool is being misused here?`,x:`A postpartum mother scores one point out of ten on a risk-factor checklist because her only positive item is loss of rational thinking. The resident writes "low risk." The mother is convinced demons will torture her baby unless she kills herself.`,
+ w:`Shea uses this example to show that numerical SAD PERSONS scores have no predictive value. One critical item, psychosis with commands, can mean very high risk despite a score of one.`},
+/* NO HOPE */
+{id:'su13',t:'su_nohope',d:['su_sadpersons','su_ispathwarm','su_tet_intent'],q:Q_SU_ACR,x:`No framework for meaning. Overt change in clinical condition. Hostile interpersonal environment. Out of hospital recently. Predisposing personality factors. Excuses for dying present and strongly believed.`,
+ w:`These are Shea's NO HOPE items, which add dynamic factors to the mostly static SAD PERSONS. The acronym itself reminds the clinician to ask about hopelessness.`},
+{id:'su14',t:'su_nohope',d:['su_sadpersons','su_ispathwarm','su_riskfactor'],q:`Which mnemonic's items does this patient mainly fit?`,x:`Aling Cora was discharged from the ward ten days ago. Her husband shouts that she is a burden. She calmly explains that dying "is the only way I can really help my family." Since last week she has seemed unusually peaceful.`,
+ w:`Out of hospital recently, a hostile interpersonal environment, a strongly believed excuse for dying and an overt change in clinical condition are NO HOPE items. SAD PERSONS covers mostly static demographics and history.`},
+/* IS PATH WARM */
+{id:'su15',t:'su_ispathwarm',d:['su_sadpersons','su_nohope','su_case'],q:Q_SU_ACR,x:`Ideation. Substance abuse. Purposelessness. Anger. Trapped. Hopelessness. Withdrawing. Anxiety. Recklessness. Mood change.`,
+ w:`IS PATH WARM, from the American Association of Suicidology, focuses only on dynamic warning signs of imminent risk. SAD PERSONS is mostly static risk factors.`},
+{id:'su16',t:'su_ispathwarm',d:['su_nohope','su_sadpersons','su_reflected'],q:`Which mnemonic captures the distinction this patient is drawing?`,x:`P: It's not that I think nothing will ever change. It's this feeling, all day, like I'm in a box with no door. And there's no point to anything I do anymore.`,
+ w:`IS PATH WARM separates the emotional sensation of feeling Trapped from the cognitive belief of Hopelessness, and names Purposelessness. Shea praises it for these phenomenological nuances.`},
+/* chronic */
+{id:'su17',t:'su_chronic',d:['su_acute','su_tet_intent','su_tet_denial'],q:`How is this patient's suicide risk best characterized?`,x:`Aling Rosa, 58, has had painful, deforming arthritis for eight years, depression for months, growing hopelessness and a bitter marriage. Over a long, warm interview she convincingly denies any intent, has no plan, and describes her faith as the reason she would never act.`,
+ w:`Many risk factors present over a long period make for chronic risk. She lacks every element of the tetrad, so she is unlikely to be in immediate danger despite the risk-factor load.`},
+{id:'su18',t:'su_chronic',d:['su_acute','su_static','su_tet_attempt'],q:Q_SU,x:`O: The consultant tells the team: "Her long list of risk factors means we should see her often, involve her daughter and keep a close eye on her. But nothing in the tetrad is present today, so outpatient care is reasonable."`,
+ w:`The consultant is describing chronic risk, which shapes follow-up intensity and supports. Immediate risk would hinge on tetrad elements or elicited intent.`},
+/* acute / immediate */
+{id:'su19',t:'su_acute',d:['su_chronic','su_riskfactor','su_static'],q:`Which risk formulation does the clinician reach?`,x:`A 35-year-old married teacher with no prior attempts, no substance use and a supportive family hears voices ordering her to die before tonight. The resident concludes she is at foreseeably high risk in the near term and arranges admission.`,
+ w:`Few risk factors do not rule out serious near-term risk when a critical warning sign is present. That is a judgment of immediate (reasonably foreseeable) risk, not chronic risk.`},
+{id:'su20',t:'su_acute',d:['su_chronic','su_warnsign','su_tet_intent'],q:`Which concept is the consultant asking the resident to estimate instead?`,x:`C: You wrote "imminent risk." We can't really predict when someone will attempt. What we can do, and are responsible for, is judge something else.
+O: The consultant crosses out "imminent."`,
+ w:`Following Simon, Shea says "imminent" implies too much predictive power. Clinicians estimate whether there is a reasonably foreseeable increased risk in the near future.`},
+/* tetrad: attempt */
+{id:'su21',t:'su_tet_attempt',d:['su_tet_intent','su_tet_denial','su_tet_psychosis'],q:Q_SU_TET,x:`Jun, 26, was brought in this morning after taking his sleeping pills in a locked boarding-house room while his housemates were away for the weekend. He left no note and told no one. A housemate came back early and found him.`,
+ w:`This is an immediately recent serious attempt. The choice of a time and place where he would not be found and the lack of any signal for help suggest he left little room for rescue.`},
+{id:'su22',t:'su_tet_attempt',d:['su_tet_intent','su_tet_psychosis','su_verbalvideo'],q:Q_SU_TET,x:`C: When you went to the old pier that night, did you expect anyone to be around?
+P: No. I picked it because nobody goes there after dark.
+C: Did you call or text anyone afterward?
+P: No.`,
+ w:`The clinician is weighing a recent attempt by asking how much room was left for rescue: an isolated spot and no contact afterward. The questions themselves are behavioral incidents, but the tetrad element present is the recent serious attempt.`},
+/* tetrad: psychosis */
+{id:'su23',t:'su_tet_psychosis',d:['su_tet_intent','su_tet_denial','su_tet_attempt'],q:Q_SU_TET,x:`P: I don't want to die. But something got inside me last night. It put the knife in my hand and held it against my chest.
+O: He looks terrified and keeps glancing at the corner of the room.`,
+ w:`Feelings of alien control pushing the patient toward self-harm are an ominous psychotic process. Such patients may deny wanting to die because, to them, it is the outside force's will, not theirs.`},
+{id:'su24',t:'su_tet_psychosis',d:['su_tet_intent','su_tet_attempt','su_tet_denial'],q:Q_SU_TET,x:`C: Are there parts of the Bible that seem especially important to you right now?
+P: The story of Abraham. God is testing me the same way. I have to prove I love Him more than my own life.`,
+ w:`Hyper-religious preoccupation in which God seems to demand a sacrifice (the "Abraham syndrome") is one of the three dangerous psychotic processes. Note the indirect opening question, which avoids feeding the delusion.`},
+/* tetrad: intent */
+{id:'su25',t:'su_tet_intent',d:['su_tet_denial','su_tet_psychosis','su_chronic'],q:Q_SU_TET,x:`P: I've made up my mind. Once my kids move to my sister's in Balanga on Sunday, I'm going to do it. I'm only telling you because you asked straight.`,
+ w:`The patient openly relays serious suicidal intent in the interview, which Shea considers the single most important indicator. In the denial element, by contrast, intent is hidden.`},
+{id:'su26',t:'su_tet_intent',d:['su_tet_attempt','su_tet_denial','su_protective'],q:Q_SU_TET,x:`P: I wrote letters to each of my children last week. I bought a rope and hid it in the bodega. I haven't tried anything yet.`,
+ w:`No attempt has occurred, but recent behaviors outside the interview show serious intent. That falls under the third tetrad element, not the first.`},
+/* tetrad: denial */
+{id:'su27',t:'su_tet_denial',d:['su_tet_intent','su_roadblocks','su_chronic'],q:Q_SU_TET,x:`C: Have you had any thoughts of ending your life?
+P: (curtly) No. I already told the nurse. Can I go?
+O: He is 55, recently separated and drinking heavily. On the phone, his wife says he has talked of nothing but suicide for a month and she saw him with his pistol last week.`,
+ w:`A terse flat denial with a heavy risk-factor load, contradicted by a corroborative source, suggests a patient who intends to die and does not want to be stopped. Shea calls this the most dangerous and most easily missed element.`},
+{id:'su28',t:'su_tet_denial',d:['su_roadblocks','su_tet_intent','su_myth'],q:Q_SU_TET,x:`O: Mark, 40, denies any suicidal thoughts with irritation and refuses further discussion. His brother reports that Mark has said "things will be better soon," has been spending long hours alone, and recently asked where their late father's gun was kept.`,
+ w:`Annoyed denial plus corroborative hints of planning point to the fourth element. The response is to seek other sources, consult, or have a second clinician interview him.`},
+/* reflected intent */
+{id:'su29',t:'su_reflected',d:['su_roadblocks','su_warnsign','su_myth'],q:`What do the details the clinician weighs most heavily represent?`,x:`P: I'd never actually do it, Doc.
+C: How much time do you spend thinking about it?
+P: Hours, most nights. I've read about it online, picked a place, and driven there twice to see what it's like.`,
+ w:`The time, planning and rehearsal the patient describes are reflected intent. Shea notes it may show seriousness better than the stated "I'd never do it."`},
+{id:'su30',t:'su_reflected',d:['su_tet_intent','su_roadblocks','su_counter'],q:`Which concept does the consultant's teaching point illustrate?`,x:`O: The consultant compares two drinkers. One promises to attend AA. The other has found a meeting, read the literature and arranged a ride. "The second one is more likely to change. Suicide works the same way: look at the thinking, planning and action, not only at what the patient says."`,
+ w:`Using motivational theory, Shea argues that the extent of goal-directed thinking and action reflects real intent better than words. That is reflected intent, part of Real = Stated + Reflected + Withheld.`},
+/* roadblocks */
+{id:'su31',t:'su_roadblocks',d:['su_tet_denial','su_counter','su_myth'],q:`What is keeping this patient from sharing?`,x:`P: If I say yes, will you lock me up? And will this go to my school? Last time somebody found out, it was all over the group chat.`,
+ w:`Fear of being locked up and fear that others will find out through a break in confidentiality are among Shea's roadblocks. The patient is hesitant, not necessarily hiding a decision to die.`},
+{id:'su32',t:'su_roadblocks',d:['su_counter','su_tet_denial','su_triad'],q:`What is keeping this patient from sharing?`,x:`P: Only weak people think about that. My father raised us strong. And it's a sin. So no, I don't think about it.
+O: His voice cracks on the last sentence.`,
+ w:`Seeing suicide as weakness and as a sin are classic roadblocks that the interviewer must gently transform. Shea warns that such defenses can even make the patient believe his intent is less than it is.`},
+/* triad */
+{id:'su33',t:'su_triad',d:['su_normal','su_myth','su_presenting'],q:`The timing of the clinician's question reflects which principle?`,x:`O: Twenty-five minutes in, Marites is tearful as she describes her husband leaving for Dubai and never calling.
+P: I don't even know if it's worth going on.
+C: When you say it's not worth going on, have you had thoughts of killing yourself?`,
+ w:`Sound engagement, intense affect and a patient hint meet here. That is the elicitation of suicidal ideation triad, the best moment to raise suicide.`},
+{id:'su34',t:'su_triad',d:['su_case','su_roadblocks','su_reflected'],q:`Which principle did the clinician neglect?`,x:`C: Before we start, I just need to get the hard question out of the way. Are you suicidal?
+P: (stiffens) No. Why would you even ask that?
+O: The patient answers in single words for the rest of the interview.`,
+ w:`Asking about suicide too early, before engagement and before the patient is in touch with painful affect, ignores the triad and can cost both the truth and the alliance.`},
+/* myth */
+{id:'su35',t:'su_myth',d:['su_counter','su_roadblocks','su_triad'],q:Q_SU,x:`O: A nursing aide pulls the resident aside: "Please don't ask Lola about suicide. She hasn't mentioned it, and you might give her the idea."`,
+ w:`This is the planting-the-idea myth. Shea knows of no such case. Suicide is no secret and is hard to do, and frank discussion relieves the patient's burden.`},
+{id:'su36',t:'su_myth',d:['su_counter','su_reflected','su_roadblocks'],q:`Which mistaken belief is the consultant correcting?`,x:`C: Not one case of this has ever been described. Everyone has heard of suicide. And it takes far more than one conversation to make someone decide to die. Asking shows her it can be talked about.`,
+ w:`The consultant is answering the myth that raising suicide might give the patient the idea. Countertransference would be the clinician's own feelings distorting the inquiry.`},
+/* countertransference */
+{id:'su37',t:'su_counter',d:['su_myth','su_roadblocks','su_tet_denial'],q:Q_SU,x:`O: It is 4:50 on a Friday and the ER is full. Already late, the resident ends the interview with:
+C: You're not thinking of killing yourself, are you?
+P: Uh, no, not really.`,
+ w:`Time pressure and the wish to avoid the "mess" of serious ideation show up as a negatively phrased question asked at the very end. The patient answers the "no" the clinician signaled she wanted.`},
+{id:'su38',t:'su_counter',d:['su_myth','su_roadblocks','su_triad'],q:`What is the resident examining in herself?`,x:`O: Before her ER shift, the resident reflects: "Do I secretly think people who attempt are weak? My tito died by suicide. Do I rush past the topic because of that?"`,
+ w:`Shea recommends this kind of self-questioning to bring countertransference to light before it leaks out through tone, eye contact or avoiding the topic.`},
+/* CASE overall */
+{id:'su39',t:'su_case',d:['su_triad','su_verbalvideo','su_sadpersons'],q:`Which interviewing strategy is the resident following?`,x:`O: After building engagement, the resident first explores the overdose that brought Joy in. Next come her thoughts and plans over the preceding two months, then any attempts from before that, and finally whether she has thoughts or plans right now and for tonight.`,
+ w:`Exploring presenting, recent, past and immediate events in that order is the CASE Approach. A verbal video is one tool used inside it, and the triad concerns only when to raise the topic.`},
+{id:'su40',t:'su_case',d:['su_verbalvideo','su_triad','su_sadpersons'],q:`Which strategy does the consultant recommend?`,x:`O: In a packed ER at 3 A.M., a resident forgot to ask whether her patient had considered any method besides pills. The consultant says: "That's an error of omission, and we all make them under pressure. Split the suicide inquiry into four small timeframes and finish each before moving on. You'll notice when the patient wanders, and you'll know what you haven't covered."`,
+ w:`This is the macrostructure of the CASE Approach: following facilic principles, splitting a large body of data into smaller, well-defined chronological regions reduces errors of omission. Its validity techniques address the other big error, invalid data.`},
+/* presenting */
+{id:'su41',t:'su_presenting',d:['su_recent','su_past','su_immediate'],q:Q_SU_REGION,x:`O: Jojo was brought to the ER after his landlady found him following an overdose last night.
+C: Let's start with what happened last night. Take me back to when the thoughts started.`,
+ w:`The clinician is exploring the attempt the patient presents with, from the past 48 hours or several weeks: the presenting events. Recent events would cover the preceding two months.`},
+{id:'su42',t:'su_presenting',d:['su_recent','su_immediate','su_past'],q:Q_SU_REGION,x:`O: Two days ago, Ana took her mother's pills. The clinician has just finished walking through the attempt.
+C: Before you took them, did you hint to anyone, even by text or on Facebook? And afterward, did you tell anyone?`,
+ w:`Asking about hints beforehand and disclosure afterward gauges how serious the patient's intentions were in an attempt from the past few days, which is part of exploring presenting events.`},
+/* recent */
+{id:'su43',t:'su_recent',d:['su_presenting','su_past','su_immediate'],q:Q_SU_REGION,x:`O: The clinician has just finished a verbal video of Mang Tonyo's overdose three days ago.
+C: Good. How about over the past 2 months, have you had any other thoughts of overdosing?`,
+ w:`This is Shea's classic bridging question into recent events: the same method, with an exact 2-month timeframe instead of a vague "recently."`},
+{id:'su44',t:'su_recent',d:['su_presenting','su_past','su_immediate'],q:Q_SU_REGION,x:`C: With all of your pain, have you been having any thoughts of killing yourself?
+P: Not this week, no. But about a month ago I sat in the car in the garage for a long time, thinking about it.
+C: Let's talk about these past two months, then.`,
+ w:`Because the patient's events fall outside the last 48 hours or several weeks, there is no presenting event, and the clinician goes straight to recent events (the preceding 2 months).`},
+/* past */
+{id:'su45',t:'su_past',d:['su_recent','su_presenting','su_immediate'],q:Q_SU_REGION,x:`C: Going back further, before these last two months. Have you ever actually tried to end your life?
+P: Once, when I was seventeen, after my parents separated.`,
+ w:`Past events run from 2 months ago back in time. Shea limits this region to past suicidal behaviors that could change immediate triage, and keeps it brief.`},
+{id:'su46',t:'su_past',d:['su_recent','su_immediate','su_presenting'],q:Q_SU_REGION,x:`C: You said the most serious time was in college, after the breakup. Is anything about what you're going through now like what you were going through then?
+P: ...Yes. It's the same feeling, like nobody would even notice I was gone.`,
+ w:`Comparing current triggers and inner state with the most serious past attempt is a core question of the past events region. Similarity here signals higher concern.`},
+/* immediate */
+{id:'su47',t:'su_immediate',d:['su_recent','su_presenting','su_past'],q:Q_SU_REGION,x:`C: We've been talking for quite some time. Right now, are you having any thoughts about wanting to kill yourself?
+P: (pauses) I don't know. I feel a little better talking, but I don't know.`,
+ w:`Asking about suicidal thoughts at this very moment belongs to immediate events ("Now/Next"), the last CASE region, explored after the earlier regions have built trust.`},
+{id:'su48',t:'su_immediate',d:['su_recent','su_presenting','su_past'],q:Q_SU_REGION,x:`C: I realize you can't know for sure, but what is your best guess as to how likely it is that you will try to kill yourself during the next week, from highly unlikely to very likely?`,
+ w:`This question looks ahead to the near future to see whether desire has turned into intent, which is the focus of immediate events. Recent events look backward over the past two months.`},
+/* verbal video */
+{id:'su49',t:'su_verbalvideo',d:['su_behinc','su_sympamp','su_gentle'],q:Q_SU_TECH,x:`C: So you were in the bathroom with the bottle. What happened next?
+P: I took some.
+C: And then what did you do?
+P: I sat on the floor.
+C: What was going through your mind right then?`,
+ w:`A chain of sequencing and fact-finding behavioral incidents that walks the patient step by step through the attempt is a verbal video. A single behavioral incident is just one concrete question.`},
+{id:'su50',t:'su_verbalvideo',d:['su_behinc','su_denial','su_catchall'],q:Q_SU_TECH,x:`P: ...and then I woke up in the ER.
+C: Let's go back for a moment. Right after you took the pills, what did you do next?
+P: Oh. I called my sister.`,
+ w:`The patient skipped ahead (a "Nixon Gap"), so the clinician rewinds the video to where the gap began. Here the rewind uncovers a call for help, a piece of the puzzle that reflects lower intent.`},
+/* behavioral incident */
+{id:'su51',t:'su_behinc',d:['su_gentle','su_denial','su_verbalvideo'],q:Q_SU_TECH,x:`O: Exploring this week's attempt.
+P: It wasn't really serious.
+C: Did you lock the door before you took them?`,
+ w:`One fact-finding behavioral incident replaces the patient's opinion ("not serious") with a concrete fact the clinician can judge for herself. A run of such questions would form a verbal video.`},
+{id:'su52',t:'su_behinc',d:['su_gentle','su_sympamp','su_normal'],q:Q_SU_TECH,x:`O: Exploring past events.
+P: Back then I got my father's gun out of the cabinet.
+C: What did you do with it?`,
+ w:`Asking what the patient actually did is a sequencing behavioral incident, used here to learn how far a past attempt went.`},
+/* gentle assumption */
+{id:'su53',t:'su_gentle',d:['su_denial','su_catchall','su_behinc'],q:Q_SU_TECH,x:`O: The clinician has finished exploring the patient's thoughts of overdosing in the past 2 months.
+C: What other ways have you thought of killing yourself?`,
+ w:`Once the first method has been thoroughly explored, a gentle assumption searches for other methods. "Have you thought about any other ways?" would be a vague foray, not a gentle assumption.`},
+{id:'su54',t:'su_gentle',d:['su_methodinhand','su_denial','su_catchall'],q:Q_SU_TECH,x:`P: I went to the shed a few times to check if the weed killer was still there.
+O: The clinician explores those visits with a short verbal video, then asks:
+C: What other ways have you thought about killing yourself?`,
+ w:`In the recent region the gentle assumption is repeated after each new method is explored, until the patient denies any others. Only then would denials of the specific follow, if withholding is suspected.`},
+/* denial of the specific */
+{id:'su55',t:'su_denial',d:['su_gentle','su_catchall','cannon'],q:Q_SU_TECH,x:`C: What other ways have you thought of?
+P: None, really.
+C: Have you been having any thoughts about hanging yourself?
+O: (pause) He shakes his head.
+C: Any thoughts about jumping off a bridge or other high place?
+O: (pause) He looks away.`,
+ w:`After a doubtful "none," specific methods are asked one at a time with pauses, which is denial of the specific. Each answer gives the clinician another chance to spot nonverbal leakage.`},
+{id:'su56',t:'su_denial',d:['cannon','su_gentle','su_catchall'],q:Q_SU_TECH,x:`O: The patient, a fisherman, has denied other methods. The clinician suspects the method of choice has not been shared.
+C: Most fishermen I know keep a bolo or a gun on the boat. When people are in as much pain as you've been, they sometimes think of using one. Has that crossed your mind?
+P: (long pause) ...I suppose.`,
+ w:`Asking about one specific, culturally common method (here introduced with a normalization) is denial of the specific. It can surface a withheld method of choice, as with Shea's farmer.`},
+/* symptom amplification */
+{id:'su57',t:'su_sympamp',d:['su_gentle','su_behinc','su_denial'],q:Q_SU_TECH,x:`C: On your very worst days, how much time do you spend thinking about killing yourself: 10 hours a day, 14 hours a day, 18 hours a day?
+P: Oh, not that much. Maybe five or six.`,
+ w:`An ascending series of high numbers lets the patient minimize while still revealing heavy preoccupation. Symptom amplification needs actual numbers in the question.`},
+{id:'su58',t:'su_sympamp',d:['su_gentle','su_catchall','su_behinc'],q:Q_SU_TECH,x:`O: The patient is a graduate student who has described weeks of suicidal thinking.
+C: On your very worst days, how much time do you spend thinking about killing yourself: 70% of your waking hours, 80%, 90%?`,
+ w:`Shea uses percentages of waking hours with highly educated patients and hours a day with others. Either way it is symptom amplification, measuring preoccupation through a high, ascending series.`},
+/* normalization */
+{id:'su59',t:'su_normal',d:['su_shame','su_gentle','su_triad'],q:Q_SU_TECH,x:`C: Sometimes when people lose a spouse they loved as much as you loved Tony, they have thoughts of killing themselves. Have you been having any thoughts like that?`,
+ w:`Suggesting that other people in the same situation have had these thoughts is normalization. Shame attenuation would bridge from this patient's own pain without mentioning others.`},
+{id:'su60',t:'su_normal',d:['su_shame','su_gentle','su_denial'],q:Q_SU_TECH,x:`P: My husband likes to hurt us. We have no future.
+C: You said "we." Sometimes parents consider taking the lives of their children too. Has that thought ever crossed your mind?`,
+ w:`Normalization ("Sometimes parents...") lets the clinician move gently into an extremely sensitive area, the possibility of harming the children before a suicide.`},
+/* shame attenuation */
+{id:'su61',t:'su_shame',d:['su_normal','su_gentle','su_triad'],q:Q_SU_TECH,x:`O: Bert has had schizophrenia for fifteen years and says the voices "never let up."
+C: With all of your pain, have you been having any thoughts of killing yourself?`,
+ w:`Using the patient's own pain as the gateway, with no mention of others, is shame attenuation. Shea finds the word "pain" resonates with patients suffering from long-standing illness.`},
+{id:'su62',t:'su_shame',d:['su_normal','su_sympamp','su_gentle'],q:Q_SU_TECH,x:`C: Have you thought of hurting yourself?
+P: I scratch my arms sometimes when I'm upset.
+C: With everything you're going through with the business, have you been having any thoughts of killing yourself?`,
+ w:`The second question is shame attenuation, bridging from the patient's own stress. It also fixes the word choice: "hurting yourself" can be heard as asking about non-lethal self-harm, so Shea asks about "killing yourself."`},
+/* catch-all */
+{id:'su63',t:'su_catchall',d:['su_denial','su_gentle','su_behinc'],q:Q_SU_TECH,x:`O: The clinician has just finished two denials of the specific.
+C: We've been talking about a lot of different ways you've been thinking about killing yourself; are there any ways you've thought about that we haven't talked about yet?`,
+ w:`One open sweep to catch an unusual or forgotten method after the denials of the specific is the catch-all question. Denial of the specific names each method in turn.`},
+{id:'su64',t:'su_catchall',d:['su_denial','su_sympamp','su_gentle'],q:Q_SU_TECH,x:`O: After a final open question about any ways not yet discussed, the patient pauses and glances away.
+C: It looks like you may have thought of some other ways. I know it's hard to talk about, but try to share them with me, even if they were fleeting.
+P: ...I looked some things up online last week.`,
+ w:`A pause after the catch-all question can be nonverbal leakage, and gently naming it may bring out a hidden plan or web searching, both reflections of intent.`},
+/* safety contracting */
+{id:'su65',t:'su_contract',d:['su_safetyplan','su_immediate','su_protective'],q:Q_SU,x:`O: The resident is leaning toward discharge, but something "does not add up."
+C: Can you promise me that you won't act on any suicidal thoughts before you call me or my staff, any hour of the day or night? And can you really promise me that?
+O: He hesitates and briefly glances down.
+C: It looks as though this is hard for you to agree to. What's going on in your mind?`,
+ w:`The resident is using safety contracting as an assessment tool. Its interpersonal push can prompt nonverbal leakage, which may be the only sign of the patient's true immediate risk and can change the disposition.`},
+{id:'su66',t:'su_contract',d:['su_safetyplan','su_immediate','su_reflected'],q:`What is this chart entry documenting?`,x:`O: "Used as an assessment tool, not as a deterrent: the patient agreed to contact the crisis team before acting on any suicidal thoughts. He showed good eye contact, a firm handshake and a genuine affect, and wrote down the number himself. No nonverbal evidence of ambivalence or deceit."`,
+ w:`Shea advises stating which use of safety contracting was intended and recording the behavioral cues of sincerity. As a deterrent it guarantees nothing.`},
+/* method-in-hand */
+{id:'su67',t:'su_methodinhand',d:['su_gentle','su_suminvite','su_denial'],q:Q_SU_TECH,x:`P: I've thought about taking all my sleeping pills.
+C: Have you ever gotten the pills out while you were thinking of overdosing?`,
+ w:`Asking whether the patient has ever had the method in hand is the method-in-hand question, the first step of the four-step kick-start. A gentle assumption would ask about other methods.`},
+{id:'su68',t:'su_methodinhand',d:['su_sympamp','su_gentle','su_catchall'],q:Q_SU_TECH,x:`P: I thought about hanging myself, but it's not a good way to go.
+C: Have you ever gotten a rope out, or something else, to use to hang yourself?`,
+ w:`Even when the patient disavows a method, the method-in-hand question checks whether any action was taken with it, which is part of reflected intent.`},
+/* summarizing invitation */
+{id:'su69',t:'su_suminvite',d:['su_methodinhand','su_shame','su_gentle'],q:Q_SU_TECH,x:`C: It sounds like Tuesday night was a very difficult time. It will help me understand what you went through if you walk me through it step by step. You were on the seawall, you'd picked a spot. What did you do next?`,
+ w:`Summarizing what is known and inviting a step-by-step walk-through is the summarizing invitation, the fourth step of the kick-start that launches a verbal video.`},
+{id:'su70',t:'su_suminvite',d:['su_methodinhand','su_normal','su_catchall'],q:Q_SU_TECH,x:`O: The clinician has learned when and where the patient had the pills out.
+C: So it was Sunday, you were alone in your dorm room, and you had the bottle in your hand. Help me understand what happened from there.`,
+ w:`After the method-in-hand and anchoring questions (when, where), the clinician summarizes and invites the walk-through. That is the summarizing invitation.`},
+/* motivations */
+{id:'su71',t:'su_motives',d:['su_reflected','su_roadblocks','su_presenting'],q:`What is the clinician gaining insight into?`,x:`O: While describing the night he drove to the cemetery, Mang Celso begins weighing pros and cons out loud.
+P: The kids are grown. And Celia is waiting for me. If I go, at least I'll be with her again.`,
+ w:`Reunion with someone lost is one of Maltsberger's goals of suicide. Such motivations often surface during a verbal video and reveal which way the patient is leaning. Reflected intent concerns how far the patient has acted, not why.`},
+{id:'su72',t:'su_motives',d:['su_reflected','su_tet_intent','su_roadblocks'],q:`What is the clinician gaining insight into?`,x:`C: What have you pictured happening after you die?
+P: They'll finally be sorry. They'll see what they did to me, and I'll watch them suffer.`,
+ w:`Revenge, abandoning others and watching them suffer "from beyond the grave," is one of the not-so-apparent motivations for suicide Shea draws from Maltsberger.`},
+/* safety planning */
+{id:'su73',t:'su_safetyplan',d:['su_contract','su_immediate','su_protective'],q:Q_SU,x:`C: What would you do later tonight or tomorrow if you began to have suicidal thoughts again?
+P: Take a warm bath, maybe play my music. If that doesn't work, call my ate. And if it's really bad, the crisis line.`,
+ w:`Brainstorming a series of steps to handle re-emerging ideation is safety planning. A safety contract would ask for a promise instead.`},
+{id:'su74',t:'su_safetyplan',d:['su_contract','su_firstno','su_case'],q:`Which tool is the consultant describing?`,x:`O: The consultant explains: "For deterrence I'd much rather build this with her than ask her for a promise. But don't expect it to reveal hidden intent. It's so collaborative that there's no interpersonal push to make ambivalence leak out."`,
+ w:`Safety planning is generally preferred to contracting as a deterrent. Because it lacks the interpersonal push of contracting, it is much less useful as an assessment tool.`},
+/* not accepting the first no */
+{id:'su75',t:'su_firstno',d:['su_gentle','su_counter','su_tet_denial'],q:Q_SU,x:`C: Have you been having any thoughts of killing yourself?
+P: No, not really.
+C: (in a concerned tone) What kind of thoughts have you had?`,
+ w:`"No, not really" often means there has been concrete ideation, so the clinician does not leave the topic after the first denial.`},
+{id:'su76',t:'su_firstno',d:['su_denial','su_sympamp','su_catchall'],q:Q_SU,x:`C: With everything you're going through, have you been having any thoughts of killing yourself?
+P: No.
+C: Have you had any fleeting thoughts of killing yourself, even for a moment or two?
+P: ...Well, sometimes at night, yes.`,
+ w:`Shea often asks a second time after a denial, softening it to include even fleeting thoughts. The answer is sometimes surprising.`}
+);
+
+/* ===== Motivational interviewing (Shea Ch. 22) ===== */
+/* Motivational interviewing — Shea Ch. 22. Drafted 2026-11-02. */
+const Q_MI_T=`Which MI technique is this?`;
+const Q_MI_S=`Which element of the spirit of MI is this?`;
+const Q_MI_P=`Which MI guiding principle is this?`;
+const Q_MI_PR=`Which MI process is the clinician mainly in?`;
+const Q_MI_TALK=`Is this change talk or sustain talk, and which kind?`;
+const Q_MI_C=`Which MI concept best fits?`;
+
+T('mi_partnership','Spirit of MI: collaborative partnership','mi',[22],
+ `MI is done with the patient, not to the patient: a collaborative partnership in which the clinician is a guide rather than the one with all the answers. Miller and Rollnick's spirit also includes respectfully evoking the patient's own motivation and wisdom, and compassion.`,
+ `Partnership is about the working relationship (we figure this out together). Acceptance/autonomy is narrower: the final decision about change belongs to the patient alone.`,
+ `"You know your life far better than I do, and I know a little about how people change. Let's put those together."`);
+T('mi_autonomy','Spirit of MI: acceptance (autonomy)','mi',[22],
+ `The radical acceptance that whether change happens is ultimately each person's own choice, an autonomy that cannot be taken away however much the clinician might wish to.`,
+ `This is an underlying attitude. Autonomy-supportive comments are the specific phrases used while giving information. Rolling with concerns is how you respond in the moment to push-back.`,
+ `Say it out loud at least once: "In the end, whether and how you change this is your decision, not mine."`);
+T('mi_righting','Righting reflex','mi',[22],
+ `The well-meant urge to correct or "make right" what the clinician sees as a misconception or bad decision, usually by repeating advice and arguments. It provokes reasons not to change, the "Yeah-But Dance." MI's first guiding principle is to resist it.`,
+ `Righting = the clinician argues for change and the patient argues back. Developing discrepancy lets the patient discover the gap himself instead of being told.`,
+ `When you hear yourself say "But..." twice in a row, stop and reflect instead.`);
+T('mi_rolling','Rolling with the patient\'s concerns','mi',[22],
+ `The non-oppositional MI stance of accepting the patient's concerns or disagreement rather than challenging, correcting or confronting them, sometimes discovering the patient is right. In Shea's words, gaining persuasion by yielding it.`,
+ `Rolling is the response to push-back. The righting reflex is its opposite. An amplified reflection deliberately overstates the patient's side; rolling simply accepts it.`,
+ `"It may be that this program isn't right for you. That's your call. What parts seem the least useful?"`);
+T('mi_explore','Principle: understand and explore the patient\'s motivations','mi',[22],
+ `Collaboratively exploring the patient's own reasons to change, or not to change, without jumping to the obvious reasons from the clinician's view. MI typically asks about the good things the behavior does first.`,
+ `The failure here is the "problem reflex": rushing to list the problems with the behavior. The righting reflex is correcting what the patient has already said.`,
+ `"Tell me a bit about what drinking does for you in a good sense. It must help in some ways or you wouldn't be doing it."`);
+T('mi_empathy','Principle: listen with empathy','mi',[22],
+ `Trying to see the world through the patient's eyes with Rogerian unconditional positive regard, even when frustrated by low motivation or by harm done to others. It means understanding how the patient arrived at a decision, not agreeing with it.`,
+ `Empathy is about understanding. Empowering is about building the patient's confidence and self-efficacy.`,
+ `When you feel frustrated, ask yourself: "How did this choice come to make sense to him?"`);
+T('mi_empower','Principle: empower the patient','mi',[22],
+ `Helping patients feel good about their change efforts and about themselves. It builds self-confidence and self-efficacy through positive feedback on skill building, respect for movement through the stages of change, and reminders of progress during slips.`,
+ `Empowering is the principle. Affirmations are one technique for doing it. Listening with empathy is understanding rather than building confidence.`,
+ `After a slip: "Let's not lose sight of how far you came last month. That skill is still yours."`);
+T('mi_openq','Open question (OARS)','mi',[22],
+ `A question, usually beginning with "What" or "How," that gives great freedom of response. Shea cautions that swing questions ("Can you tell me...?") are not truly open, and that "Why" questions sound parental. Reword them as "What are some of your reasons...?"`,
+ `It is a true question with no limit on the answer. A swing question can be answered "No." A reflection is a statement, not a question.`,
+ `Swap "Why do you use shabu?" for "What are some of your reasons for using shabu?"`);
+T('mi_affirm','Affirmation','mi',[22],
+ `A statement that affirms the patient's worth or recognizes their real effort, progress, persistence or courage. It is delivered with matter-of-fact respect, not gushing, which can sound patronizing. Affirmations can also be drawn from the patient: "What strong points do you have that could help you succeed?"`,
+ `It affirms something positive directly. Reframing starts from the patient's own negative self-statement and turns it into a strength.`,
+ `"Thanks for coming in today, and even arriving early." Say it plainly, without exaggerated enthusiasm.`);
+T('mi_reframe','Reframing','mi',[22],
+ `A technique borrowed from family therapy: the patient makes a disparaging or disappointed comment about himself, and the clinician turns it into an affirmation by naming the positive quality implied in it.`,
+ `Reframing needs a negative self-statement to transform. A plain affirmation praises effort without one. A reflection mirrors the meaning without turning it around.`,
+ `"I've failed to quit five times." "Five tries tells me how much this matters to you, and how persistent you are."`);
+T('mi_simple','Simple reflection','mi',[22],
+ `A reflective statement with little intuitive extrapolation, staying close to the patient's own words. It is closest to the classic "reflective statement" in response-mode research.`,
+ `A simple reflection adds almost nothing new. A complex reflection guesses at the meaning beneath the words.`,
+ `"Everyone around you chews nganga." Repeat the content and let the patient go on.`);
+T('mi_complex','Complex reflection','mi',[22],
+ `A reflective statement with a high degree of intuitive attribution, guessing at what the patient means beneath the words. Shea notes that most response-mode systems would code it as an empathic statement.`,
+ `A complex reflection adds meaning the patient did not say. Avoid strong, certain ones with actively paranoid or angry patients. An amplified reflection deliberately overstates the patient's position.`,
+ `"You have a lot of reasons to stay healthy." With a paranoid patient, keep reflections simple and tentative.`);
+T('mi_amplified','Amplified reflection','mi',[22],
+ `A reflection that deliberately overstates the patient's sustain side (for example, "the drinking plays no part at all") so that the patient pulls back and voices the other side, evoking change talk. Shea likens it to a statement of provocative inquiry.`,
+ `It is exaggerated on purpose, with no sarcasm. A complex reflection aims to be accurate. The righting reflex argues the opposite side instead.`,
+ `Use a light, non-sarcastic tone: "So the shabu has been nothing but good for you." Then wait.`);
+T('mi_summary','Summarizing statement','mi',[22],
+ `A statement that collects several things the patient has said, sometimes from different points in the interview. In MI it can offer insight, link comments, highlight ambivalence, or serve as a bridge to a new topic, such as moving from the pros of drinking to the cons.`,
+ `It gathers several points. A reflection responds to one statement. Listing the pros first signals that the clinician has heard and accepted them.`,
+ `"So the gin helps you sleep, makes nights with your barkada fun, and eases the stress. That's a real list. Now, what, if anything, worries you about it?"`);
+T('mi_engaging','Process: engaging','mi',[22],
+ `The first MI process: building the working relationship so the patient feels safe and wants to return. It runs through all the other processes and is the one most generally applicable to the initial interview.`,
+ `In engaging, the aim is the relationship, so the clinician follows the patient's concerns. Focusing sets a shared direction. Evoking draws out motivation for a specific change.`,
+ `Early on, follow the patient's own complaint (even "My wife is the real problem") with OARS before steering anywhere.`);
+T('mi_focusing','Process: focusing','mi',[22],
+ `Collaboratively finding a shared direction and specific goals. In the initial interview it includes letting the patient choose which stressor to explore first ("zooming in") and asking what information the patient most wants in the closing phase.`,
+ `Focusing chooses what to talk about. Evoking draws out the patient's motivation once a target is chosen.`,
+ `"Of the stresses you mentioned, which, or something we haven't touched, would be most important to focus on today?"`);
+T('mi_evoking','Process: evoking','mi',[22],
+ `The heart of MI: listening and using language so the patient draws out his or her own motivations for change, works through ambivalence, and moves toward self-generated change talk. Shea calls it the art of "releasing."`,
+ `Evoking draws out the why (motivation). Planning works out the how (concrete steps, monitoring, handling lapses).`,
+ `Use DARN open questions and reflect back any change talk you hear.`);
+T('mi_planning','Process: planning','mi',[22],
+ `The ongoing collaborative development of the patient's plan to reach a goal: specific goals, methods, monitoring progress, accepting lapses and maintaining change. In an initial interview, its key task is making sure the patient plans to return.`,
+ `Planning comes after motivation is present and is about the how. Evoking is still building the why.`,
+ `At the close of an intake, ask how likely the patient is to come back next week. Don't assume it.`);
+T('mi_permission','EPE step 1: eliciting permission','mi',[22],
+ `The first step of Elicit–Provide–Elicit: asking permission before sharing information, and exploring the patient's prior knowledge and interest so that what is shared fits what the patient wants to know.`,
+ `It comes before any information is given. Autonomy-supportive comments come while the information is being provided.`,
+ `"Would it be helpful if I shared my thoughts about what might be going on?" or "What have you heard about how this is treated?"`);
+T('mi_autosupport','EPE step 2: autonomy-supportive comments','mi',[22],
+ `While providing information, phrasing it so that the patient's choice and autonomy stay front and center, for example "It's really up to you, but I can describe some options."`,
+ `These phrases wrap information or advice. Rolling with concerns responds to push-back without giving information. EPE step 3 then asks what the patient makes of the information.`,
+ `"I can't tell you what to do, but I can tell you what some other people have done."`);
+T('mi_ambivalence','Ambivalence','mi',[22],
+ `Holding reasons both for and against change at the same time. MI treats it as normal and natural, not as denial. It becomes a problem only when it stalls a change the person wants and would benefit from.`,
+ `Ambivalence holds both sides. Sustain talk voices only the side against change. Discrepancy is the gap between goals and current behavior that the clinician helps the patient see.`,
+ `Name both sides without taking one: "Part of you wants to stop, and part of you can't picture getting through the night without it."`);
+T('mi_sustain','Sustain talk','mi',[22],
+ `Patient speech expressing concerns about, or reasons against, changing. If it continues unabated, it sustains the problem behavior.`,
+ `It argues for things staying the same. Change talk (desire, ability, reasons, need) leans toward change.`,
+ `Don't argue with sustain talk. Reflect it, and roll with it.`);
+T('mi_desire','Change talk: desire','mi',[22],
+ `Change talk expressing wanting, wishing or liking a change, the D of DARN. Desire questions use words like want, wish and like: "How do you want your life to be different a year from now?"`,
+ `The patient wants or wishes. Ability is "I could." Reasons are the benefits of change or the downsides of now. Need is "I must."`,
+ `"What do you wish for in your marriage?"`);
+T('mi_ability','Change talk: ability','mi',[22],
+ `Change talk expressing what the patient thinks he or she can, could or is able to do, the A of DARN. Ability questions are asked gently, with no hint of "should" or "must."`,
+ `The patient says "I can" or "I could." Desire is about wanting; need is about urgency.`,
+ `"Of the options you've considered, what seems most possible?"`);
+T('mi_reason','Change talk: reasons','mi',[22],
+ `Change talk naming problems with how things are now or benefits if things changed, the R of DARN.`,
+ `Reasons give specific pros of change or cons of the status quo. Need is a general sense of urgency without the specific why.`,
+ `"What's the downside of how things are now?" or "What could be some of the advantages of...?"`);
+T('mi_need','Change talk: need','mi',[22],
+ `Change talk expressing that making a change is a high priority or urgent, the N of DARN.`,
+ `Need sounds like "I must" or "I have to," without necessarily giving reasons. Reasons name the specific benefits.`,
+ `"How serious or urgent does this feel to you?" or "Complete this sentence: 'I really must...'"`);
+T('mi_discrepancy','Developing discrepancy','mi',[22],
+ `Helping the patient see for himself the gap between where he wants to be (goals, values, loved ones) and the current behavior that could keep him from getting there. Vividly seeing that gap often produces a sincere desire to change.`,
+ `The patient discovers the gap himself. The righting reflex tells him what the gap is. Ambivalence is simply holding both sides.`,
+ `"Five years from now you want to be with your wife and kids. Where does the drinking fit in that picture?"`);
+T('mi_ruler','0–10 motivation scale (ruler)','mi',[22],
+ `Asking the patient to rate, from 0 to 10, how important a change is (or how committed he is to a step such as returning next week). It helps the patient set and voice a priority.`,
+ `It produces a number the patient commits to aloud. A need question asks about urgency in open form, with no scale.`,
+ `"On a scale of 0 to 10, with 0 'not important at all' and 10 'extremely important,' how important is it to you to stop?"`);
+
+V.push(
+{id:'mi01',t:'mi_partnership',d:['mi_autonomy','mi_empower','mi_engaging'],q:Q_MI_S,x:`O: Before talking about his smoking, Dr. Reyes moves her chair out from behind the desk.
+C: I'm not here to lecture you about cigarettes, Mang Ernie. You're the expert on your own life; I know a bit about how people quit. Let's work out together whether, and how, this fits for you.`,
+ w:`She sets up a joint, non-hierarchical relationship, pooling his expertise and hers. That is collaborative partnership. Acceptance/autonomy would center on the decision being his alone.`},
+{id:'mi02',t:'mi_partnership',d:['mi_autonomy','mi_explore','mi_planning'],q:`Which element of the spirit of MI was missing from this session?`,x:`O: Reviewing a recording, a resident notices she spent the whole session telling a jeepney driver with an alcohol problem exactly what he had to do. He answered "Opo, Doc" and said little else. Her supervisor reminds her that MI is done with the patient, not to him.`,
+ w:`The resident cast herself as the expert handing down answers, with no joint work. Collaborative partnership is what was missing.`},
+{id:'mi03',t:'mi_autonomy',d:['mi_partnership','mi_rolling','mi_autosupport'],q:Q_MI_S,x:`P: My wife says I have to stop the nganga or she'll leave.
+C: That's a lot of pressure. And in the end, whether you change your chewing, and how, is your decision. No one can make it for you, not even me.`,
+ w:`He explicitly says the decision is the patient's alone: radical acceptance of autonomy. No information is being given, so these are not EPE autonomy-supportive comments.`},
+{id:'mi04',t:'mi_autonomy',d:['mi_empathy','mi_partnership','mi_righting'],q:Q_MI_S,x:`O: A nurse is upset that a patient went home against advice and went back to using shabu. Her consultant says: "MI asks us to accept that change is ultimately his choice. That isn't giving up on him. It's a choice no one can take away from him."`,
+ w:`Accepting that whether change happens is the person's own choice is the acceptance/autonomy element of MI's spirit. Empathy is about understanding his view, not about who owns the decision.`},
+{id:'mi05',t:'mi_righting',d:['mi_rolling','mi_discrepancy','mi_amplified'],q:`What is the clinician caught in?`,x:`C: But the drinking is damaging your liver. You really need to stop.
+P: Yeah, but I only drink on weekends.
+C: Weekends add up. Your liver tests are high.
+P: Yeah, but my tatay drank more than me and lived to 80.`,
+ w:`Repeating the arguments for change draws out reasons not to change: the Yeah-But Dance of the righting reflex. Developing discrepancy would let him see the gap himself.`},
+{id:'mi06',t:'mi_righting',d:['mi_sustain','mi_amplified','mi_explore'],q:Q_MI_C,x:`P: Shabu isn't that dangerous. I only use it to stay awake on night shift.
+C: That's a misconception. Shabu is very dangerous. It can cause psychosis, and you need to understand that.`,
+ w:`The clinician immediately corrects what he sees as a misconception, which is the righting reflex. The patient's line is sustain talk, but the question is about the clinician's response.`},
+{id:'mi07',t:'mi_rolling',d:['mi_righting','mi_autosupport','mi_amplified'],q:Q_MI_C,x:`P: I don't need rehab. I can stop the gin any time I want. I've done it before.
+C: You've cut back before and you believe you can do it again. Maybe rehab isn't right for you; that's your call. What helped the last time you cut back?`,
+ w:`He accepts the patient's view with no push-back and keeps exploring. That is rolling with concerns. No information is offered, so it is not an autonomy-supportive EPE comment, and nothing is exaggerated, so it is not an amplified reflection.`},
+{id:'mi08',t:'mi_rolling',d:['mi_righting','mi_simple','mi_discrepancy'],q:Q_MI_C,x:`P: Honestly, this outpatient group sounds like a waste of my time.
+C: It may well not fit you. Many people feel that way at first. Which parts seem like the biggest waste?`,
+ w:`Rather than defending the group, the clinician yields and stays curious, which is rolling with the patient's concerns. A simple reflection would only mirror the statement.`},
+{id:'mi09',t:'mi_explore',d:['mi_empathy','mi_empower','mi_rolling'],q:Q_MI_P,x:`C: Tell me a little about what drinking does for you in a good sense. It must help you in some ways, or you wouldn't be doing it.`,
+ w:`Asking about the pros first, from the patient's view, applies the principle of understanding and exploring the patient's own motivations. It resists the problem reflex.`},
+{id:'mi10',t:'mi_explore',d:['mi_empathy','mi_partnership','mi_planning'],q:`Which guiding principle did the resident skip?`,x:`O: A resident opens a tobacco discussion by listing emphysema, cancer and the cost of cigarettes. Her supervisor says: "You jumped to the obvious reasons, yours, not his. Start by asking what he gets from smoking."`,
+ w:`This is the "problem reflex." Principle 2 asks the clinician not to jump to the obvious reasons, so that the patient can find his own.`},
+{id:'mi11',t:'mi_empathy',d:['mi_explore','mi_autonomy','mi_empower'],q:Q_MI_P,x:`O: A man with bipolar disorder refuses lithium after a manic episode that exhausted his family. The resident feels irritated but works at understanding how stopping the lithium came to make sense to him, keeping positive regard without agreeing with the decision.`,
+ w:`Trying to see the world through his eyes, especially when he does the opposite of what you want, is listening with empathy. It is understanding, not agreement.`},
+{id:'mi12',t:'mi_empathy',d:['mi_autonomy','mi_righting','mi_partnership'],q:Q_MI_P,x:`O: A nurse admits she finds it hard to feel any warmth for a patient whose drinking led him to hurt his wife. Her mentor says: "You don't have to approve of what he did. Try to understand, through his eyes, how he got there."`,
+ w:`Understanding how the patient arrived at his behavior while holding unconditional positive regard is the principle of listening with empathy. It is hardest when the harm to others is serious.`},
+{id:'mi13',t:'mi_empower',d:['mi_empathy','mi_explore','mi_rolling'],q:Q_MI_P,x:`P: I smoked again this week. I'm back to zero.
+C: Last month you went from a pack a day to five sticks. That took real skill, and that skill is still yours. Let's look at what got in the way this week.`,
+ w:`Reminding him of his progress during a slip builds self-confidence and self-efficacy. That is empowering the patient.`},
+{id:'mi14',t:'mi_empower',d:['mi_partnership','mi_empathy','mi_planning'],q:Q_MI_P,x:`O: Over several sessions, the counselor gives matter-of-fact positive feedback each time a patient practices refusing nganga at work, and acknowledges with genuine respect each step he takes toward change.`,
+ w:`Positive feedback on skill building and respect for movement through the stages of change are how MI empowers the patient.`},
+{id:'mi15',t:'mi_openq',d:['swingq','mi_simple','mi_affirm'],q:Q_MI_T,x:`C: How are you feeling about being here today?`,
+ w:`A "How" question that gives wide freedom of response is an open question, the O of OARS. A swing question ("Can you tell me...?") could be answered "No."`},
+{id:'mi16',t:'mi_openq',d:['swingq','gentlecmd','mi_complex'],q:`The supervisor's rewording is which kind of response?`,x:`O: A resident asks a patient, "Why do you keep chewing nganga?" Her supervisor suggests instead: "What are some of your reasons for chewing nganga?"`,
+ w:`It is still an open question, but "de-parentified." Replacing "Why" with "What are some of your reasons" removes the condemning tone. A gentle command would start with "Tell me."`},
+{id:'mi17',t:'mi_affirm',d:['mi_reframe','mi_complex','mi_summary'],q:Q_MI_T,x:`C: You got really discouraged this week, and still you came back. You're persistent.`,
+ w:`Recognizing his persistence is an affirmation. Reframing would need a negative self-statement from the patient to turn around.`},
+{id:'mi18',t:'mi_affirm',d:['mi_reframe','mi_simple','mi_permission'],q:Q_MI_T,x:`C: Thanks for coming in today, and even arriving early. And thank you for hanging in there with me. I know this isn't easy to hear.`,
+ w:`Simply thanking the patient for effort, said with plain respect, is an affirmation.`},
+{id:'mi19',t:'mi_reframe',d:['mi_affirm','mi_amplified','mi_complex'],q:Q_MI_T,x:`P: I'm a failure. I've tried to quit smoking five times.
+C: Five tries tells me how much this matters to you, and how stubborn you are about it. Each time you've gotten a little further.`,
+ w:`The clinician takes the patient's disparaging self-statement and turns it into a strength it implies. That is reframing. A plain affirmation does not start from a negative frame.`},
+{id:'mi20',t:'mi_reframe',d:['mi_affirm','mi_empower','mi_simple'],q:Q_MI_T,x:`P: I've been in and out of detox so many times. Pathetic.
+C: And here you are again, trying. This has knocked you down again and again, and you keep getting back up. That takes guts.`,
+ w:`"Pathetic" is transformed into evidence of courage, which is reframing. Empowering is the principle it serves, not the technique.`},
+{id:'mi21',t:'mi_simple',d:['mi_complex','mi_amplified','mi_summary'],q:Q_MI_T,x:`P: I chew nganga because everyone in our barangay does.
+C: Everyone around you chews.`,
+ w:`It stays close to his words with no added meaning: a simple reflection. A complex reflection would guess at what lies beneath, such as belonging.`},
+{id:'mi22',t:'mi_simple',d:['mi_complex','mi_amplified','mi_openq'],q:Q_MI_T,x:`P: My husband says I drink too much.
+C: Your husband thinks you drink too much.`,
+ w:`The clinician mirrors the content with almost no extrapolation. That is a simple reflection.`},
+{id:'mi23',t:'mi_complex',d:['mi_simple','mi_amplified','mi_affirm'],q:Q_MI_T,x:`P: I love seeing my apo every Sunday. I want to be there for her debut.
+C: You have a lot of reasons to stay healthy.`,
+ w:`The clinician adds a meaning the patient implied but did not say: a complex reflection, which response-mode systems would call an empathic statement. Nothing is exaggerated, so it is not amplified.`},
+{id:'mi24',t:'mi_complex',d:['mi_simple','mi_summary','mi_affirm'],q:`Which type of reflection is most likely to backfire here?`,x:`O: A man with active persecutory delusions is discussing whether to take his antipsychotic. The resident says with certainty, "Deep down you feel everyone around you has betrayed you." The patient stiffens and says, "Don't tell me what I feel."`,
+ w:`Complex reflections with high intuition and certainty are often disengaging with paranoid patients. Simple, tentative reflections are safer.`},
+{id:'mi25',t:'mi_amplified',d:['mi_simple','mi_complex','mi_righting'],q:Q_MI_T,x:`P: My barkada drink more than I do. My drinking is no problem.
+C: So the drinking has never caused you any trouble at all, not one bit.
+P: (pause) Well, there was that time I missed work...`,
+ w:`Deliberately overstating his position invites him to pull back and voice the other side. That is an amplified reflection. The righting reflex would argue the point instead.`},
+{id:'mi26',t:'mi_amplified',d:['mi_simple','mi_reframe','mi_summary'],q:Q_MI_T,x:`C: (light, non-sarcastic tone) So the shabu has been nothing but good for you.
+P: I wouldn't say that. I lost my job because of it.`,
+ w:`The exaggerated reflection of the sustain side drew out change talk. That is an amplified reflection.`},
+{id:'mi27',t:'mi_summary',d:['mi_complex','mi_focusing','mi_openq'],q:Q_MI_T,x:`C: Let me see if I have this. The gin helps you sleep, it makes nights with your barkada fun, and it eases the stress of driving all day. That's a real list. Now, what, if any, are some of the problems with the drinking?`,
+ w:`It collects several of his statements and then serves as a bridge to the cons. That is a summarizing statement. Listing the pros first tells him they were heard and accepted.`},
+{id:'mi28',t:'mi_summary',d:['mi_complex','mi_amplified','mi_affirm'],q:Q_MI_T,x:`C: On the one hand, the cigarettes help you calm down between calls at work. On the other hand, you told me you get winded on the stairs, and your daughter has asked you to stop. Both are true for you.`,
+ w:`It pulls together comments from different points in the interview to highlight ambivalence. That is a summarizing statement, not a single reflection.`},
+{id:'mi29',t:'mi_engaging',d:['mi_focusing','mi_evoking','mi_planning'],q:Q_MI_PR,x:`O: A woman brought in by her sister for drinking says, "My sister is the real problem." The clinician reflects her frustration, asks open questions about the sister, and affirms how much she cares for her children, without correcting her. His main aim is that she will want to come back.`,
+ w:`Building safety and the relationship by following her concerns with OARS is engaging. Her drinking can be brought in gently later.`},
+{id:'mi30',t:'mi_engaging',d:['mi_focusing','mi_evoking','mi_planning'],q:Q_MI_PR,x:`C: How are you feeling about being here today?
+P: My mother made me come.
+C: Coming wasn't your choice, and you're not sure what this will be like.`,
+ w:`Early in the interview, the clinician is welcoming his reluctance and building the relationship. That is engaging.`},
+{id:'mi31',t:'mi_focusing',d:['mi_engaging','mi_evoking','mi_planning'],q:Q_MI_PR,x:`C: You've told me about money problems, worries about your teenage son, and the drinking. Which of these, or maybe something you haven't mentioned yet, would be most important for us to focus on today?`,
+ w:`A summary leading into a question that lets the patient pick the target is "zooming in," part of focusing.`},
+{id:'mi32',t:'mi_focusing',d:['mi_engaging','mi_permission','mi_planning'],q:Q_MI_PR,x:`C: There are many things we'll want to talk about today that might help you. I'm wondering where you would like to begin?`,
+ w:`The clinician is choosing the direction and order of topics together with the patient, which is focusing. Eliciting permission is about sharing information.`},
+{id:'mi33',t:'mi_evoking',d:['mi_engaging','mi_focusing','mi_planning'],q:Q_MI_PR,x:`O: In later counseling sessions on his shabu use, the counselor uses desire, ability, reason and need questions and reflects every bit of change talk, helping the patient talk himself toward wanting to stop.`,
+ w:`Drawing the patient's own motivation out of him and releasing him from ambivalence is evoking. Concrete steps would be planning.`},
+{id:'mi34',t:'mi_evoking',d:['mi_focusing','mi_planning','mi_engaging'],q:Q_MI_PR,x:`C: How do you want your life to be different a year from now?
+P: I want to be someone my kids aren't ashamed of.
+C: That really matters to you.`,
+ w:`Using an open DARN question and a reflection to bring out the patient's own motivation is the evoking process.`},
+{id:'mi35',t:'mi_planning',d:['mi_evoking','mi_focusing','mi_engaging'],q:Q_MI_PR,x:`O: The patient has decided to quit smoking. Together they set a quit date, choose ways to handle cravings during breaks, agree how to track progress, and talk through what to do if he lapses.`,
+ w:`Goals, methods, monitoring and acceptance of lapses make up the planning process. Motivation is already present.`},
+{id:'mi36',t:'mi_planning',d:['mi_evoking','mi_focusing','mi_engaging'],q:Q_MI_PR,x:`O: With five minutes left in an intake, the clinician turns to one task: making sure the reluctant patient actually intends to come back next week, and agreeing on what that visit will cover.`,
+ w:`In an initial interview, the most important part of planning is ensuring the patient plans to return.`},
+{id:'mi37',t:'mi_permission',d:['mi_autosupport','mi_affirm','mi_focusing'],q:Q_MI_T,x:`C: We've covered a lot today. Would it be helpful if I shared some of my thoughts about what might be going on and how we might help?`,
+ w:`Asking before sharing information is EPE step 1, eliciting permission. Autonomy-supportive comments come later, while the information is being given.`},
+{id:'mi38',t:'mi_permission',d:['mi_autosupport','mi_desire','mi_summary'],q:Q_MI_T,x:`C: Before I say anything about treatment, tell me what you've heard about how alcohol problems are treated.`,
+ w:`Exploring prior knowledge before giving information is part of EPE step 1. It shapes what is worth sharing.`},
+{id:'mi39',t:'mi_autosupport',d:['mi_permission','mi_rolling','mi_affirm'],q:Q_MI_T,x:`C: It's really up to you, but I can describe a few options other people have used to stop chewing nganga.`,
+ w:`Wrapping information in an explicit statement of the patient's choice is an autonomy-supportive comment, EPE step 2.`},
+{id:'mi40',t:'mi_autosupport',d:['mi_permission','mi_amplified','mi_rolling'],q:Q_MI_T,x:`C: You might or might not agree with this, and it may not be right for you, but something you could try if you wish is keeping a drinking diary for a week.`,
+ w:`Advice framed so that the patient stays free to accept or reject it is an autonomy-supportive comment. There is no push-back to roll with.`},
+{id:'mi41',t:'mi_ambivalence',d:['mi_sustain','mi_discrepancy','mi_need'],q:Q_MI_C,x:`P: Part of me wants to quit shabu because of my kids. Part of me can't imagine getting through a night shift without it.`,
+ w:`He voices both sides at once, which is ambivalence. MI treats this as normal. Sustain talk would give only the side against change.`},
+{id:'mi42',t:'mi_ambivalence',d:['mi_sustain','mi_righting','mi_discrepancy'],q:Q_MI_C,x:`O: For weeks a patient goes back and forth: some days she means to stop drinking, other days she says it's the only thing that helps. A resident calls it "denial." The supervisor says it is a normal condition that prompts people to weigh pros and cons.`,
+ w:`MI regards ambivalence about change as normal, not a defect. It is a problem only when it stalls a change the person wants.`},
+{id:'mi43',t:'mi_sustain',d:['mi_desire','mi_reason','mi_need'],q:Q_MI_TALK,x:`P: I don't want to change my drinking. It makes me happy and it eases the pain.`,
+ w:`The patient argues for keeping the behavior, which is sustain talk. Change talk would lean toward change.`},
+{id:'mi44',t:'mi_sustain',d:['mi_reason','mi_ability','mi_ambivalence'],q:Q_MI_TALK,x:`P: Nganga is part of who we are here. My lolo chewed until he was 90 and nothing happened to him.`,
+ w:`These are reasons for things to stay the same: sustain talk. Change talk: reasons would name benefits of changing.`},
+{id:'mi45',t:'mi_desire',d:['mi_need','mi_ability','mi_reason'],q:Q_MI_TALK,x:`P: I wish I could wake up without needing a cigarette first thing.`,
+ w:`"I wish" expresses wanting a change: change talk, desire. Need would sound like "I must."`},
+{id:'mi46',t:'mi_desire',d:['mi_need','mi_ability','mi_reason'],q:`Which kind of change talk is this question trying to evoke?`,x:`C: What do you wish for in your marriage?`,
+ w:`Questions built on want, wish or like aim at desire, the D of DARN.`},
+{id:'mi47',t:'mi_ability',d:['mi_desire','mi_need','mi_reason'],q:Q_MI_TALK,x:`P: I think I could cut down to weekends only. I did it during Lent last year.`,
+ w:`"I could," backed by a past success, expresses ability. Desire would be about wanting the change.`},
+{id:'mi48',t:'mi_ability',d:['mi_desire','mi_reason','mi_need'],q:`Which kind of change talk is this question trying to evoke?`,x:`C: Of the options you've thought about, which seems most possible for you?`,
+ w:`Asking what seems possible, gently and without any "should," aims at ability.`},
+{id:'mi49',t:'mi_reason',d:['mi_desire','mi_need','mi_ability'],q:Q_MI_TALK,x:`P: If I stop the shabu, I could keep my job, and maybe my kids could come back to live with me.`,
+ w:`He names specific benefits of changing: change talk, reasons. Need would be urgency without specifics.`},
+{id:'mi50',t:'mi_reason',d:['mi_need','mi_desire','mi_ability'],q:`Which kind of change talk is this question trying to evoke?`,x:`C: What's the downside of how things are now?`,
+ w:`Asking about problems with the status quo aims at reasons for change.`},
+{id:'mi51',t:'mi_need',d:['mi_desire','mi_reason','mi_ability'],q:Q_MI_TALK,x:`P: I really must stop. I can't keep living like this.`,
+ w:`"I must" and "I can't keep..." express urgency: change talk, need. No specific benefits are named, so it is not reasons.`},
+{id:'mi52',t:'mi_need',d:['mi_reason','mi_desire','mi_ability'],q:`Which kind of change talk is this question trying to evoke?`,x:`C: How serious or urgent does this feel to you right now?`,
+ w:`Asking how high a priority the change is aims at need.`},
+{id:'mi53',t:'mi_discrepancy',d:['mi_amplified','mi_reframe','mi_ruler'],q:Q_MI_T,x:`C: Five years from now, you told me, you want to still be with your wife and to be teaching your son to drive. Where does the drinking fit into that picture?`,
+ w:`Setting his own goals beside his current behavior helps him see the gap. That is developing discrepancy. Nothing is exaggerated, so it is not an amplified reflection.`},
+{id:'mi54',t:'mi_discrepancy',d:['mi_ambivalence','mi_rolling','mi_empower'],q:`Which MI concept is the clinician developing?`,x:`O: Through gentle reflections and a few questions, a patient realizes on his own that his drinking threatens the marriage, children and job he most wants to keep. He says quietly, "If I keep this up, I lose all of it."`,
+ w:`The patient discovers for himself the gap between where he wants to be and where his behavior is taking him. That is discrepancy, the kind MI tries to have patients find rather than be told.`},
+{id:'mi55',t:'mi_ruler',d:['mi_discrepancy','mi_openq','mi_summary'],q:Q_MI_T,x:`C: On a scale from 0 to 10, where 0 is "not important to me at all" and 10 is "extremely important," how important is it to you to stop chewing nganga?`,
+ w:`Asking for a 0–10 rating of importance is the motivation scale (ruler). It helps the patient set and say aloud a priority.`},
+{id:'mi56',t:'mi_ruler',d:['mi_discrepancy','mi_permission','mi_ability'],q:Q_MI_T,x:`C: Scale of 0 to 10: 0 is "I'm not coming back next week," and 10 is "I'll be here, guaranteed." Where are you, honestly?
+P: Ten. I'll be here.`,
+ w:`The 0–10 scale here checks his commitment to returning, which is the planning task of an initial interview.`}
+);
+
+/* ===== Medication Interest Model (Shea Ch. 23) ===== */
+/* Medication Interest Model — Shea Ch. 23. Drafted 2026-11-02. */
+const Q_MM_T=`Which MIM technique is this?`;
+const Q_MM_S=`Which step of the Choice Triad is the sticking point?`;
+const Q_MM_C=`Which MIM concept best fits?`;
+
+T('mm_intentional','Intentional nonadherence','mm',[23],
+ `Weiden's first category: the patient makes an internal, active decision not to begin a medication or not to continue it as prescribed, whether by lowering the dose or stopping it.`,
+ `The patient chooses not to take it. In unintentional nonadherence the patient wants to take it but cannot. Truly oppositional refusal is a rare subset with a different motive.`,
+ `Ask "How did you decide to stop it?" A decision points to the Choice Triad, not to a pillbox problem.`);
+T('mm_unintentional','Unintentional nonadherence','mm',[23],
+ `Weiden's second category: external obstacles prevent a patient who wants to take the medication from doing so ("cannot adhere"). Examples include forgetting or cognitive impairment, complex regimens, transport to the pharmacy, language barriers, and interpersonal or cultural pressures. Overcoming these obstacles is Mueser's "medication follow-through."`,
+ `Here the patient wants the medication; something outside gets in the way. Intentional nonadherence is the patient's own decision.`,
+ `"What gets in the way of taking it on the days you miss?" Then fix the obstacle (simpler dosing, pillbox, reminders).`);
+T('mm_interest','Medication interest (the new word)','mm',[23],
+ `The person-centered term the MIM uses in place of compliance or adherence. The clinician's goal is not to make the patient comply but to help the patient arrive at his or her own choice, as reflected in personal interest, which may even be a choice not to take the medication.`,
+ `This is a term about the patient's own choice. Medication follow-through is the separate ability to overcome external obstacles.`,
+ `In rounds, ask "How interested is he in taking it, and what percentage of doses is he actually taking?" rather than "Is he compliant?"`);
+T('mm_dyadic','Nonadherence as a shared, dyadic experience','mm',[23],
+ `The MIM's more complete definition: nonadherence is when the patient is not doing what the clinician wants AND the clinician is not doing what the patient wants. It is less something one person does than an experience two people share and often co-create.`,
+ `In the dyadic view, both people help build the stalemate. Oppositional refusal is one person deliberately trying to anger or hurt the other.`,
+ `When stuck, ask yourself: "What does this patient want from me that I'm not doing?" Changing how you communicate can start the de-escalation.`);
+T('mm_collab','Spirit of the MIM: collaborative exploration','mm',[23],
+ `The transformative engine of the MIM. The clinician is a knowledgeable, compassionate guide, not someone trying "to get" the patient to take a medication. The clinician moves with the patient, considers whether the first choice should be something other than a medication, and treats the patient as the expert on the medication's effect on his or her life.`,
+ `This is the overall stance. Individual techniques such as the Medication Interest Opening are specific statements that put it into words.`,
+ `If a patient prefers to try a non-medication approach first, give your honest recommendation, then help their choice succeed.`);
+T('mm_oppositional','Oppositional refusal (MIM sense)','mm',[23],
+ `In the MIM, a patient is oppositional only when disagreeing on purpose in order to anger or hurt the clinician. Such a patient refuses even while agreeing with the recommendation. Shea considers it a relatively infrequent cause of low medication interest.`,
+ `The patient agrees the medication would help and still refuses, to hurt someone. Most refusals, even angry ones, are logical because a Choice Triad step is not met.`,
+ `Before labeling a patient oppositional, ask which Choice Triad step he doesn't believe.`);
+T('mm_step1','Choice Triad step 1: something is wrong','mm',[23],
+ `The first belief people need before taking a medication: there is something wrong from which they personally want relief. It does not require accepting a diagnosis, only that something is wrong that they want help with.`,
+ `At step 1 the patient doesn't think there's a problem to fix. At step 2 he agrees there's a problem but doubts a medication can help.`,
+ `Find the problem he does want help with, such as poor sleep or unwanted admissions, even if he rejects the diagnosis.`);
+T('mm_step2','Choice Triad step 2: a medication could help','mm',[23],
+ `The second belief: the patient feels motivated to use a medication because he or she believes it could bring relief from the perceived problem, or prevent a serious future one. The most powerful motivators are often positive life goals, not just symptom relief.`,
+ `At step 2 the patient accepts the problem but doubts that medication is the answer. Step 3 weighs the pros and cons of a specific medication.`,
+ `Tie the medication to what the patient wants back: "This may help you get back to work."`);
+T('mm_step3','Choice Triad step 3: pros outweigh cons','mm',[23],
+ `The third belief: the pros of taking the medication outweigh the cons. Patients weigh three belief axes: efficacy (does it make me feel better?), cost, and the psychological meaning of the medication.`,
+ `At step 3 the patient accepts both the problem and that medication could help, but the side effects, cost or meaning tip the balance against it.`,
+ `Ask about all three axes: how it's working, what it costs you, and what taking it means to you.`);
+T('mm_passport','Exploring the Medication Passport','mm',[23],
+ `Before prescribing a first medication, asking about the patient's past journey with medications and current attitudes toward them, for example "Have there been any psychiatric medications you really liked or really disliked?" A companion tip, Exploring for Medication Sensitivity, asks whether the patient tends to be sensitive to medications or to get bad side effects.`,
+ `This asks about the medications themselves. The Prescriber Passport asks about past clinicians, and the Diagnostic Passport about diagnoses.`,
+ `"How do you feel about the medication you're on now?" or, if none, "What are your feelings about psychiatric medications in general?"`);
+T('mm_minidose','Mini-Dose Recommendation','mm',[23],
+ `For a patient who is, or feels, sensitive to medications, offering (in the closing phase) to start at about half the usual starting dose or less, so the body can get a feel for it, while explaining that benefits may not come at this dose.`,
+ `This is a prescribing offer made after sensitivity is uncovered. The Medication Passport questions, including Exploring for Medication Sensitivity, are what uncover it.`,
+ `Pause while writing the prescription: "Would it be okay if I start you at half the usual dose, because of your sensitivity? What do you think?"`);
+T('mm_prescriber','Exploring the Prescriber Passport','mm',[23],
+ `Asking how the patient has felt about previous clinicians and their medication recommendations, since bad past prescribers can be projected onto the new one.`,
+ `This is about the people who prescribed. The Medication Passport is about the drugs themselves.`,
+ `"How have you felt about your previous clinicians and their medication recommendations?" For a transfer: "What are your feelings about your last psychiatrist?"`);
+T('mm_opening','Medication Interest Opening','mm',[23],
+ `In the closing phase, introducing your personal approach to medications: you will always give your best advice (start, stay on, or get off), together you want a medication the patient is genuinely interested in taking because it helps, and you would not recommend one you would not take yourself.`,
+ `It describes your overall philosophy. Introducing Shared Expertise focuses on both of you being experts. The "Call Me First" Invitation is about what to do when side effects occur.`,
+ `"Together we want to find a medication that you are genuinely interested in taking because it makes you feel better."`);
+T('mm_shared','Introducing Shared Expertise','mm',[23],
+ `Telling the patient that you are both experts: the clinician on medications, the patient on his or her own body. Since the medication goes in the patient, the clinician depends on the patient's report of benefit and side effects.`,
+ `It is about two kinds of expertise and the patient's input. The Medication Interest Opening states your overall approach. "Call Me First" asks the patient to call before stopping.`,
+ `"You're the expert on your own body. The medicine goes in you, not me, so I'm counting on you to tell me how it's going."`);
+T('mm_callfirst','"Call Me First" Invitation','mm',[23],
+ `Explicitly inviting side-effect reports and asking the patient to call the office before stopping a medication, because some side effects pass or can be reduced. It helps move the patient out of the "obedience mode." Combined with the Opening and Shared Expertise, it forms the strategy "Forging the Medication Alliance."`,
+ `It is about what to do when a problem arises: call before you stop. Shared Expertise is about the general partnership.`,
+ `"If you start getting a side effect, please call before you do anything. In the end you call the shots, but be sure to use me."`);
+T('mm_target','Target Symptoms Question','mm',[23],
+ `Asking which of the patient's symptoms he or she most wants help with, so that the medication is tied to the patient's own priorities (Osler: what sort of patient has the disease). It allows several answers.`,
+ `It allows several symptoms. The Magic Pill Question forces a single choice, which may distress an indecisive, ruminating patient.`,
+ `"Of all the symptoms you're having, which are the ones you would most like help with?"`);
+T('mm_magicpill','Magic Pill Question','mm',[23],
+ `Asking, "If I had a magic pill (and I don't) that could take away just one of your symptoms, which one would you want gone?" It requires the patient to choose a single symptom and suits some patients, such as an imaginative child.`,
+ `It asks for one symptom. The Target Symptoms Question allows several. The solution-focused miracle question imagines a whole changed life, not one symptom removed.`,
+ `Use it with patients who like to play with it. Avoid it with a ruminating patient who agonizes over every decision.`);
+T('mm_dxpassport','Exploring the Diagnostic Passport','mm',[23],
+ `A strategy of three inquiries, usually during the history of the present illness: Inquiry into Current Diagnoses ("Have you been given a diagnosis?"), Inquiry into Diagnostic Understanding ("What is your understanding of what that diagnosis means?"), and Inquiry into Diagnostic Agreement ("Do you agree with that diagnosis?").`,
+ `This explores the patient's views of the diagnosis without challenging them. Agreeing to Disagree comes later, when a lasting disagreement is acknowledged.`,
+ `If the patient disagrees, don't argue: "Let's look at that together today, and at the end I'll share my own ideas."`);
+T('mm_agreedis','Agreeing to Disagree','mm',[23],
+ `Openly acknowledging a disagreement, usually about diagnosis, while respecting the patient's right to his or her opinion. It takes the edge off the interpersonal field. It is the first half of the strategy "Heading for Common Ground."`,
+ `It names and respects the disagreement. Stating Shared Goals moves on to the goals you both hold.`,
+ `"We probably disagree about whether you have schizophrenia, but people are entitled to their own opinions, and I respect yours."`);
+T('mm_sharedgoals','Stating Shared Goals','mm',[23],
+ `Naming one or more genuinely shared goals, such as better sleep or staying out of the hospital, that do not depend on accepting the diagnosis. The patient must be the first to raise the goal ("meet the patient at the level of his or her request"). Paired with Agreeing to Disagree, it forms "Heading for Common Ground."`,
+ `Shared Goals uses a goal the patient already raised. Inquiry into Lost Dreams asks a question to uncover such a goal.`,
+ `"Whether or not you have this illness, I believe the medicine helps your sleep and keeps you out of the hospital. I know that's what you want, and it's what I want."`);
+T('mm_lostdreams','Inquiry into Lost Dreams','mm',[23],
+ `A step 2 technique (from a pediatrician treating asthma): "Is there anything your illness is keeping you from doing that you really wish you could do again?" It uncovers a positive life goal that can motivate taking a medication, often more powerfully than symptom relief.`,
+ `It asks what the illness has taken away. Tapping Family Motivators is about protecting others. Shared Goals uses a goal the patient has already raised.`,
+ `"Is there anything your depression is keeping you from doing that you really wish you could do again?" If the patient draws a blank, try the Alternative History Question: "If you didn't have this illness, what would you be doing?" Don't dampen ambitious goals.`);
+T('mm_family','Tapping Family Motivators','mm',[23],
+ `Linking the medication to protecting loved ones (or one's community or mission) from the consequences of relapse or illness. It is especially useful when symptoms are absent or in remission. The Visual Reminder extension places a photo of the children under the medicine bottle.`,
+ `The motivator is protecting others. Lost Dreams is about the patient's own lost goals. Shared Goals is about a goal the patient has raised for himself.`,
+ `"You told me what the last episode did to your wife and kids. Staying on the medicine may be one way to protect them. What do you think?"`);
+T('mm_committee','Inviting the committee to vote inside your office','mm',[23],
+ `A core step 3 principle: patients weigh pros and cons as if by an inner committee, which usually "votes" outside the office. Once a medication is stopped, it is hard to restart. At every medication check, ask specifically about emerging pros and cons so the decision happens during the appointment.`,
+ `It is a principle about when and where the decision is made. The "Since Last Time" Question is one technique that opens that discussion.`,
+ `Open each follow-up with the "Since Last Time" Question ("How's that medication working out that we started last time?"), then ask about benefit, side effects, cost and meaning. Assume nothing.`);
+
+T('mm_trapdoor','Trap Door Question','mm',[23],
+ `Before suggesting a dose increase, asking the patient's own opinion of the current dose along a continuum: "In your own opinion, do you feel you are on too little, too much, or just the right amount of this medication?" It guards against the "trap door effect," where a patient who silently disliked an increase stops the medication afterward.`,
+ `It asks about the dose and doesn't bias the answer in any direction. The Direct Side Effect Inquiry asks about side effects. Tipping the Scales asks for the overall pros-versus-cons verdict.`,
+ `Ask it at every med check before you say "Let's increase it." It sometimes surfaces a hidden side effect, such as sexual dysfunction.`);
+T('mm_hurtfeelings','Hurt Feelings Observation','mm',[23],
+ `Weiden's technique for dismantling the "obedience mode": noting that patients sometimes don't report side effects, or that they've stopped a medication, for fear of hurting the clinician's feelings or making him angry, and promising not to take it personally. A related tip is the "Let's Get Off the Medication Together" Invitation.`,
+ `It names the patient's fear of upsetting the clinician and grants permission to disclose. "Call Me First" asks the patient to call before stopping, and Probing for Discontinuance asks about thoughts of stopping.`,
+ `"I promise you I won't take it personally if you've stopped. I'd just rather know."`);
+T('mm_directse','Direct Side Effect Inquiry','mm',[23],
+ `Asking directly about side effects at every encounter ("Are you getting any of the side effects we talked about last time?" or "Are you having any problems you wonder might be a side effect?"). It is followed by specific questions that convey concern: a specific time it happened, how bad, how often, interference, and a 1–10 rating.`,
+ `It asks whether side effects are present. The Dream Destroyer Question asks whether a side effect blocks a life goal, and the relationship inquiry asks whether it causes problems with others.`,
+ `When a side effect is named, get specific: "Walk me through a time it happened. On a scale of 1 to 10, how much does it bother you?"`);
+T('mm_personalrisk','Personalizing Risk','mm',[23],
+ `When a medication carries a serious or even lethal risk (e.g., clozapine), after fully explaining the risks, sharing within a trusted relationship that you would take it yourself or give it to a family member in the patient's situation, with careful monitoring. It is used only when the clinician genuinely believes it.`,
+ `It is a personal endorsement for a high-risk step 3 decision. The Medication Interest Opening is a general statement of your prescribing philosophy at the start.`,
+ `Never use it as a sales tactic. Use it only when you would honestly say "I'd give it to my own family" and the alliance is established.`);
+T('mm_costexplore','Gently Exploring Cost Issues','mm',[23],
+ `Routinely and gently asking every patient what their medications cost and how much of a burden that is, because embarrassment often keeps patients from raising it ("if you don't ask, you often will not be told").`,
+ `This asks about financial cost. The inconvenience inquiries ask about psychological costs such as hassle, timing and travel.`,
+ `"I'm always curious how much my patients' medicines cost. How much did you end up paying this month? How much of a burden is that for your family?"`);
+T('mm_inconvenience','Inquiries into Inconvenience','mm',[23],
+ `Three questions on the psychological cost of inconvenience: General Inconvenience ("Is taking the medication inconvenient in any way?"), Timing Inconvenience (hard to remember the suggested times?), and Travel Inconvenience (problems getting to and from the pharmacy?). Shame or guilt can hide inconvenience.`,
+ `These ask about hassle, not money (Gently Exploring Cost Issues) and not missed doses (Normalizing Missed Doses).`,
+ `"Are you finding that taking the medicines is inconvenient for you in any way? If the timing is hard, maybe we can find better times."`);
+T('mm_relprob','Inquiry into Med-Induced Relationship Problems','mm',[23],
+ `Weiden's question "Are there any side effects causing problems in your relationships?" It targets side effects, such as sexual dysfunction and weight gain, that cost the patient through their effect on a partner. Once sexual dysfunction is disclosed, ask how the partner feels about it.`,
+ `The question is whether the side effect causes others problems, not how it makes the patient feel. The Deception Inquiry asks whether the patient hides the medication.`,
+ `Ask routinely about sexual side effects. Patients rarely volunteer them and simply stop the medication instead.`);
+T('mm_deception','Deception Inquiry','mm',[23],
+ `Asking "Do you find that you need to hide your use of your medication from anybody?" It uncovers interpersonal costs, such as a disapproving boss or an opposed spouse, that can tip step 3 toward stopping.`,
+ `It asks about concealment. The relationship inquiry asks about side effects straining relationships. Anticipating Family Response asks what family members think about the medication.`,
+ `A "yes" may reveal real danger at home. Explore it gently.`);
+T('mm_dreamdestroyer','Dream Destroyer Question','mm',[23],
+ `Weiden's question about the lost-goals cost of side effects: "Are any of your side effects interfering with any of your future goals or work?" Even a "minor" side effect, like dry mouth for a teacher, can be major for a particular patient.`,
+ `It asks whether a side effect blocks a goal. Inquiry into Lost Dreams (step 2) asks what the illness, not the medication, has taken away.`,
+ `"Is the slowed thinking causing you problems at school or at work?"`);
+T('mm_crutch','Dismantling the Crutch Myth','mm',[23],
+ `An axis 3 (meaning) technique, usually used proactively after psychoeducation: explaining that an antidepressant is not a crutch any more than insulin is for a person with diabetes. It restores a normal level so the patient has a fair chance to cope.`,
+ `It addresses the meaning of the pill as a sign of personal weakness. Testing the Waters addresses the remission paradox of wondering whether the illness is still there.`,
+ `"We'd never tell a person with diabetes their insulin is a crutch. Don't let anyone tell you this is one."`);
+T('mm_testwaters','Testing the Waters of Discontinuance','mm',[23],
+ `In sustained remission, proactively normalizing the natural wish to test whether the illness is still present and asking if the patient has had such thoughts (Weiden: "Have you tried or thought of trying that, as a kind of experiment?"). It addresses the paradox that full symptom relief removes any way of knowing whether the illness remains.`,
+ `It addresses curiosity or hope during remission. Probing for Discontinuance asks about thoughts of stopping because of a persisting side effect.`,
+ `If the patient does want a trial off medication, offer to taper safely rather than have him stop abruptly on his own.`);
+T('mm_tipping','Tipping the Scales','mm',[23],
+ `Asking the patient to state an overall verdict on the medication so the inner committee votes in the room: "Now that you've been on it a while, what do you honestly think? Do you feel the pros are outweighing the cons?" Watch for nonverbal hesitancy.`,
+ `It asks for the overall pros-versus-cons verdict. The Trap Door Question asks only about the dose, and the committee principle is the reason behind the technique.`,
+ `A half-hearted "It's okay, I guess" deserves follow-up: "You sound a little hesitant. What are some of your concerns?"`);
+T('mm_missed','Normalizing Missed Doses','mm',[23],
+ `A strategy for accurate reporting of actual medication practice that combines normalization ("many patients tell me it can be easy to forget") with gentle assumption ("how many doses do you think you might have missed per week?").`,
+ `The aim is to count actual missed doses without shame. Probing for Discontinuance asks about thoughts of stopping altogether.`,
+ `Avoid "You've been taking them, right?" Instead: "Roughly how many doses a week do you think you might have missed?"`);
+T('mm_probedisc','Probing for Discontinuance','mm',[23],
+ `When a side effect keeps being raised, asking directly about any thoughts, even fleeting, of stopping the medication: "What kind of thoughts, even fleeting in nature, have you had about maybe stopping the medication?"`,
+ `It is prompted by a persisting side effect. Testing the Waters is prompted by doing well in remission. Proactively Recommending Discontinuance has the clinician suggest stopping first.`,
+ `Use it when a patient mentions the same side effect a second or third time.`);
+T('mm_proactive','Proactively Recommending Discontinuance','mm',[23],
+ `When a side effect is repeatedly troubling, the clinician is the first to suggest that the medication may need to be stopped if it can't be controlled. This shows the clinician is a watchdog on the patient's side.`,
+ `The clinician raises stopping. In Probing for Discontinuance, the clinician asks whether the patient has thought of stopping.`,
+ `"I just don't like the problem we're having with this side effect. If we can't get it under control, I think we may need to stop it. What do you think?"`);
+T('mm_healers','Shaman Questions / Normalizing Use of an Alternative Healer','mm',[23],
+ `Asking, openly and with interest, whether the patient sees other healers, whether specific to the culture (a shaman, or locally an albularyo) or alternative practitioners, and what they think of the treatment. With alternative healers, the question is softened with normalization. Expressing Interest in Alternative Treatments follows.`,
+ `This asks about other healers. The Parental Backdoor Question asks about family beliefs, and the Grapevine Question about media.`,
+ `"It's not uncommon for my patients to also see someone else for healing. It's useful for me to know. Are you by chance seeing anyone else for this?"`);
+T('mm_parental','Parental Backdoor Question','mm',[23],
+ `Entering a younger patient's hidden cultural beliefs about medication indirectly, by first asking about the parents' views: "Do your parents have particular beliefs about medications, such as whether they are useful or how often people should take them?"`,
+ `It uses the parents' beliefs as a back door to the patient's own. Anticipating Family Response asks how a family member will react to this specific medication.`,
+ `"I'm always interested in how different cultures and generations view medicines..." Then listen for echoes of those beliefs in the patient's own words.`);
+T('mm_famresponse','Anticipating Family Response / Friendly Fire','mm',[23],
+ `Asking what family and friends will think, or have said, about the medication: "How do you think your spouse will feel about your starting an antidepressant?" and "Do you have any friends who have taken this medication, and what did they think?" For teenagers, the "Bad Drug" Probe asks whether anyone at school takes it.`,
+ `It asks about specific people's reactions to this medication. The Grapevine Question asks about the internet and media. Tapping Family Motivators uses family as a reason to take it.`,
+ `"We don't prescribe for a patient, we prescribe for a family." Ask what loved ones think before the prescription leaves the room.`);
+T('mm_grapevine','Grapevine Question','mm',[23],
+ `Asking what the patient has heard or seen, good or bad, about the medication on the internet or from TV, radio or magazines. Naming each channel draws out the whole story, and the clinician can follow up by pointing the patient to objective sources.`,
+ `It asks about media and the web. Anticipating Family Response and Friendly Fire ask about specific people the patient knows.`,
+ `"Have you heard or seen anything good or bad about this medicine on the internet, Facebook, TV, radio or in magazines?"`);
+
+V.push(
+{id:'mm01',t:'mm_intentional',d:['mm_unintentional','mm_oppositional','mm_dyadic'],q:`What kind of nonadherence is this?`,x:`P: I stopped the risperidone myself two weeks ago. I just don't want to be on it.`,
+ w:`An internal, active decision to stop is intentional nonadherence. No external obstacle is described, and nothing suggests he is refusing in order to hurt anyone.`},
+{id:'mm02',t:'mm_intentional',d:['mm_unintentional','mm_oppositional','mm_step2'],q:`What kind of nonadherence is this?`,x:`O: A teacher on sertraline has quietly been taking half her dose because she decided the full dose makes her feel "not like myself." She has no trouble getting or remembering the pills.`,
+ w:`She chose to lower the dose herself: intentional nonadherence. Unintentional nonadherence would involve something blocking a patient who wants to take it.`},
+{id:'mm03',t:'mm_unintentional',d:['mm_intentional','mm_step3','mm_oppositional'],q:`What kind of nonadherence is this?`,x:`P: I want to take it, Doc. I really do. I just keep forgetting the evening dose since I started night shift at the BPO.`,
+ w:`The patient wants the medication, but an external, situational obstacle gets in the way. That is unintentional nonadherence, a medication follow-through problem.`},
+{id:'mm04',t:'mm_unintentional',d:['mm_intentional','mm_oppositional','mm_dyadic'],q:`What kind of nonadherence is this?`,x:`O: Lolo Andoy, who has schizophrenia and some cognitive decline, is on four medications at different times of day. The labels are in English, which he reads poorly. He says he likes his medicines and wants to take them.`,
+ w:`Complex regimens, cognitive impairment and language barriers are external obstacles: unintentional nonadherence.`},
+{id:'mm05',t:'mm_interest',d:['mm_unintentional','mm_collab','mm_committee'],q:Q_MM_C,x:`O: At a ward team meeting, the case manager asks, "How interested is Ramon in taking his med? What percentage of doses do you think he's actually taking? If he were here, how would he list the pros and cons?"`,
+ w:`Replacing "noncompliant" with questions about the patient's own interest uses the MIM's new word, medication interest.`},
+{id:'mm06',t:'mm_interest',d:['mm_intentional','mm_oppositional','mm_dyadic'],q:`Which term would the MIM use instead of "noncompliant"?`,x:`O: A resident's progress note reads: "Patient noncompliant and resistant to meds." The consultant suggests a person-centered term that describes the patient's own choice instead.`,
+ w:`The MIM drops compliance, adherence and resistance in favor of "medication interest," which reflects the patient's own choice.`},
+{id:'mm07',t:'mm_dyadic',d:['mm_oppositional','mm_intentional','mm_collab'],q:`How does the MIM define what is happening here?`,x:`O: The resident thinks, "I wish he'd get it that he needs his lithium." At the same moment the patient thinks, "I wish this doctor would get it that nothing is wrong with me, and stop talking about that drug."`,
+ w:`Each wants something the other isn't doing. The MIM calls this a dyadic experience that two people share, not just something the patient does.`},
+{id:'mm08',t:'mm_dyadic',d:['mm_oppositional','mm_unintentional','mm_interest'],q:Q_MM_C,x:`O: For three visits a patient has asked to lower her dose because of drowsiness, and each time the clinician has said no. She has now stopped altogether. The supervisor says, "This isn't only her not doing what we want. We also haven't done what she wanted."`,
+ w:`The supervisor names the fuller, two-sided definition: nonadherence is co-created by both people.`},
+{id:'mm09',t:'mm_collab',d:['mm_sharedgoals','mm_agreedis','mm_dyadic'],q:Q_MM_C,x:`O: A woman with mild depression would rather try psychotherapy and regular walking first. The resident honestly says an antidepressant is an option she'd recommend, then agrees to help the non-medication plan work and to revisit together in a few weeks.`,
+ w:`She considers a non-medication first choice and supports the patient's choice instead of trying to correct it. That is the MIM's spirit of collaborative exploration.`},
+{id:'mm10',t:'mm_collab',d:['mm_opening','mm_interest','mm_minidose'],q:Q_MM_C,x:`O: A clinician sees her role as a guide who gives information, not someone trying "to get" patients to take pills. When a patient reports he can't function at work because of drowsiness, she treats him as the expert on the medication's effect on his life and they lower the dose together.`,
+ w:`Learning from the patient and moving with him is the spirit of collaborative exploration. The Medication Interest Opening is a specific statement, not this overall stance.`},
+{id:'mm11',t:'mm_oppositional',d:['mm_step1','mm_step3','mm_unintentional'],q:`How would the MIM classify this refusal?`,x:`P: Honestly, Doc, I know the pills work. I'm skipping them because my mother keeps nagging me to take them, and I want her to suffer for it.`,
+ w:`He agrees the medication helps but refuses on purpose to hurt someone. That is oppositional in the MIM's specific sense, and Shea considers it uncommon.`},
+{id:'mm12',t:'mm_oppositional',d:['mm_step2','mm_step3','mm_intentional'],q:`How would the MIM classify this refusal?`,x:`O: A patient with marked borderline dysfunction tells the resident that the mood stabilizer clearly helps her, then says she won't take it "until you stop acting so superior," and watches for his reaction.`,
+ w:`Refusing despite agreeing with the recommendation, in order to anger the clinician, is oppositional refusal. It sometimes occurs with personality dysfunction.`},
+{id:'mm13',t:'mm_step1',d:['mm_step2','mm_step3','mm_oppositional'],q:Q_MM_S,x:`P: There's nothing wrong with me. The neighbors are the ones who should see a psychiatrist.`,
+ w:`He doesn't believe anything is wrong that he wants relief from, so step 1 is not met. From his point of view, refusing a medication is logical.`},
+{id:'mm14',t:'mm_step1',d:['mm_oppositional','mm_step3','mm_unintentional'],q:`From the MIM view, what best explains his refusal?`,x:`O: A 19-year-old student in a first psychotic episode, brought in by his parents, angrily refuses an antipsychotic. He insists his thinking "has never been clearer" and that his parents are overreacting.`,
+ w:`His anger does not make him oppositional. He believes nothing is wrong, so step 1 of the Choice Triad is not met, and refusal follows logically.`},
+{id:'mm15',t:'mm_step2',d:['mm_step1','mm_step3','mm_intentional'],q:Q_MM_S,x:`P: Yes, I know my nerves are bad. But pills won't fix that. What I need is for my husband to come home from abroad.`,
+ w:`She accepts that something is wrong (step 1) but doesn't believe a medication could relieve it. Step 2 is not met.`},
+{id:'mm16',t:'mm_step2',d:['mm_step1','mm_step3','mm_oppositional'],q:Q_MM_S,x:`P: I know I hear voices, and I want them gone. But medicine can't touch that. It's a spiritual matter.`,
+ w:`He wants relief from a real problem (step 1 met) but doesn't believe a medication can bring it. Step 2 is not met.`},
+{id:'mm17',t:'mm_step3',d:['mm_step1','mm_step2','mm_unintentional'],q:Q_MM_S,x:`P: The lithium helps, I admit. But the tremor ruins my sewing work, and every blood test costs me a day's pay.`,
+ w:`She accepts both the problem and that the medication helps. The cons (side effects, cost) are outweighing the pros, so step 3 is the sticking point.`},
+{id:'mm18',t:'mm_step3',d:['mm_step2','mm_step1','mm_oppositional'],q:Q_MM_S,x:`P: The pills keep the voices quiet. But I've gained so much weight my girlfriend barely recognizes me. It's not worth it.`,
+ w:`He agrees the medication works (steps 1 and 2) but weighs the side effect as heavier. Step 3, pros versus cons, is the problem.`},
+{id:'mm19',t:'mm_passport',d:['mm_minidose','mm_prescriber','mm_dxpassport'],q:Q_MM_T,x:`C: Have there been any psychiatric medications that you either really liked or really disliked?`,
+ w:`Asking about past likes and dislikes of medications explores the Medication Passport. The Prescriber Passport would ask about past clinicians.`},
+{id:'mm20',t:'mm_passport',d:['mm_minidose','mm_prescriber','mm_trapdoor'],q:Q_MM_T,x:`O: The patient has never taken psychiatric medication. While expanding the past treatment history, the resident asks:
+C: What are your feelings about psychiatric medications in general?`,
+ w:`This is the version of Exploring the Medication Passport for a patient not on medication, asked before any first prescription.`},
+{id:'mm21',t:'mm_minidose',d:['mm_passport','mm_callfirst','mm_opening'],q:Q_MM_T,x:`C: (pausing while writing the prescription) Because you're sensitive to medicines, would it be okay if I start you at half the usual starting dose? Your body can get used to it gently. At this small dose you might not feel the benefit yet, and then we'll raise it slowly. What do you think?`,
+ w:`Offering a sub-starting dose because of sensitivity is the Mini-Dose Recommendation, given in the closing phase.`},
+{id:'mm22',t:'mm_minidose',d:['mm_passport','mm_trapdoor','mm_collab'],q:Q_MM_T,x:`O: A woman has stopped four antidepressants because of side effects. The resident starts the fifth at a quarter of the usual starting dose and raises it in tiny steps at her pace until it reaches a therapeutic level.`,
+ w:`Starting far below the usual dose for a sensitive patient is the Mini-Dose Recommendation in action.`},
+{id:'mm23',t:'mm_prescriber',d:['mm_passport','mm_dxpassport','mm_shared'],q:Q_MM_T,x:`C: How have you felt about your previous doctors and their medication recommendations?`,
+ w:`Asking about past prescribers explores the Prescriber Passport. Bad experiences can be projected onto the new clinician.`},
+{id:'mm24',t:'mm_prescriber',d:['mm_passport','mm_opening','mm_dxpassport'],q:Q_MM_T,x:`O: A patient transferred from a hospital in Manila.
+C: What are your feelings about Dr. Santos, your last psychiatrist? What did you like about her?`,
+ w:`For a direct transfer, asking about the last psychiatrist is Exploring the Prescriber Passport.`},
+{id:'mm25',t:'mm_opening',d:['mm_shared','mm_callfirst','mm_collab'],q:Q_MM_T,x:`C: My goal is always to give you my best advice, whether that's to start a medicine, stay on it, or get off it. Together we want to find a medicine you're genuinely interested in taking because it makes you feel better. You're the one putting it in your body, so your opinion matters most.`,
+ w:`Introducing your personal approach to prescribing in this way is the Medication Interest Opening.`},
+{id:'mm26',t:'mm_opening',d:['mm_shared','mm_callfirst','mm_minidose'],q:Q_MM_T,x:`C: In my own life, I only take medicines when I really need them and the benefits outweigh the costs, and I take the same approach with my patients. I'd never recommend a medicine I wouldn't take myself or give to my own family. How does that sound to you?`,
+ w:`This is another part of the Medication Interest Opening: the clinician's own respect for both the benefits and the risks of medications.`},
+{id:'mm27',t:'mm_shared',d:['mm_opening','mm_callfirst','mm_collab'],q:Q_MM_T,x:`C: I look at it as if we're both experts. I know a lot about medicines; you're the expert on your own body. The medicine goes in you, not me, so I'm counting on you to tell me if it's helping or causing side effects.`,
+ w:`Naming two complementary kinds of expertise is Introducing Shared Expertise.`},
+{id:'mm28',t:'mm_shared',d:['mm_opening','mm_passport','mm_interest'],q:Q_MM_T,x:`P: Whatever you say, Doc. You're the doctor.
+C: I appreciate that. But you know your body far better than I do. I need your input, because only you can tell me how this medicine is really affecting you.`,
+ w:`The clinician gently moves the patient out of the "obedience mode" by stressing the patient's expertise on his own body. That is Introducing Shared Expertise.`},
+{id:'mm29',t:'mm_callfirst',d:['mm_shared','mm_opening','mm_hurtfeelings'],q:Q_MM_T,x:`C: If you start getting a side effect, please call our office before you do anything. Try not to stop the medicine without talking with me or my staff first. Sometimes it isn't a side effect, and some go away as your body adjusts.`,
+ w:`Inviting a call before stopping is the "Call Me First" Invitation.`},
+{id:'mm30',t:'mm_callfirst',d:['mm_shared','mm_hurtfeelings','mm_directse'],q:Q_MM_T,x:`C: I'm curious, how comfortable do you feel telling your doctor about side effects? People vary. I really do want to hear about them, and if one starts, call me before you do anything. In the end you call the shots, but use me.`,
+ w:`This is a variation of the "Call Me First" Invitation that begins with a question.`},
+{id:'mm31',t:'mm_target',d:['mm_magicpill','mm_lostdreams','mm_dreamdestroyer'],q:Q_MM_T,x:`C: Of all the different symptoms you're having from your PTSD, which ones would you most like to get help with?`,
+ w:`Asking for the patient's priority symptoms, with room to name several, is the Target Symptoms Question.`},
+{id:'mm32',t:'mm_target',d:['mm_magicpill','miracle','mm_lostdreams'],q:`Which technique did the resident wisely choose?`,x:`O: An elderly man with agitated depression second-guesses every decision and ruminates for days over what he said. To learn which symptoms he most wants relieved, the resident asks a question that lets him name as many as he likes.`,
+ w:`Forcing a single choice (the Magic Pill Question) could distress him. The Target Symptoms Question allows several symptoms.`},
+{id:'mm33',t:'mm_magicpill',d:['mm_target','mm_lostdreams','miracle'],q:Q_MM_T,x:`C: If I had a magic pill, and I don't, but if I did, and it could completely take away just one of your symptoms, which one would you want me to get rid of today?`,
+ w:`Asking for one symptom to remove is the Magic Pill Question. The miracle question imagines a whole changed life.`},
+{id:'mm34',t:'mm_magicpill',d:['mm_target','miracle','mm_lostdreams'],q:Q_MM_T,x:`O: A 10-year-old with OCD arrives wearing a superhero cape.
+C: If I had a superhero pill that could make just one of your worry habits disappear, which one would you pick first?`,
+ w:`Matching the technique to the child's imagination, the clinician asks for a single symptom. That is the Magic Pill Question.`},
+{id:'mm35',t:'mm_dxpassport',d:['mm_passport','mm_agreedis','mm_prescriber'],q:Q_MM_T,x:`C: Have you been given a diagnosis?
+P: Bipolar, at the provincial hospital.
+C: What is your understanding of what that means? And do you agree with it?`,
+ w:`The three inquiries (current diagnosis, understanding, agreement) make up the strategy Exploring the Diagnostic Passport.`},
+{id:'mm36',t:'mm_dxpassport',d:['mm_agreedis','mm_sharedgoals','mm_passport'],q:Q_MM_T,x:`P: They said schizophrenia last year.
+C: Do you agree with that diagnosis?
+P: Not at all.
+C: One thing we can look at today is whether that's right or wrong. At the end I'll share my own ideas, including whether I think you have a diagnosis at all.`,
+ w:`The clinician asks about agreement with the diagnosis and does not challenge the doubt early. That is part of Exploring the Diagnostic Passport.`},
+{id:'mm37',t:'mm_agreedis',d:['mm_sharedgoals','mm_dxpassport','mm_oppositional'],q:Q_MM_T,x:`C: Well, we probably see this differently. You don't think you have bipolar disorder, and I think you might. But people are entitled to their own opinions, and I respect yours.`,
+ w:`Openly naming and respecting a disagreement is Agreeing to Disagree, the first half of Heading for Common Ground.`},
+{id:'mm38',t:'mm_agreedis',d:['mm_sharedgoals','mm_dyadic','mm_step1'],q:Q_MM_T,x:`O: Over several months of outreach visits, a case manager never argues about whether Edwin has schizophrenia. When it comes up, he says, "We disagree on that, and that's okay," and moves on to Edwin's interests.`,
+ w:`Taking the edge off the diagnostic disagreement without debating it is Agreeing to Disagree.`},
+{id:'mm39',t:'mm_sharedgoals',d:['mm_agreedis','mm_lostdreams','mm_family'],q:Q_MM_T,x:`C: Whether or not you have schizophrenia, I believe your injection helps your sleep, and I'm convinced it keeps you out of the hospital. You've told me you hate being admitted. That's what I want too.`,
+ w:`Naming goals the patient already raised, without requiring him to accept the diagnosis, is Stating Shared Goals.`},
+{id:'mm40',t:'mm_sharedgoals',d:['mm_agreedis','mm_target','mm_lostdreams'],q:Q_MM_T,x:`O: Months ago, Bong said he hates being brought to the ER by the barangay tanod. Now his sleep is slipping again.
+C: You and I both want to keep you out of the ER. A small increase now may be our best chance of doing that.`,
+ w:`The goal came from the patient first, so the clinician meets him at the level of his request. That is Stating Shared Goals.`},
+{id:'mm41',t:'mm_lostdreams',d:['miracle','mm_target','mm_magicpill'],q:Q_MM_T,x:`C: Is there anything your depression is keeping you from doing that you really wish you could do again?`,
+ w:`Asking what the illness has taken away is the Inquiry into Lost Dreams, a step 2 technique for finding motivators beyond symptom relief.`},
+{id:'mm42',t:'mm_lostdreams',d:['mm_dreamdestroyer','mm_family','mm_target'],q:Q_MM_T,x:`C: Is there something this illness has kept you from that you wish you could do again?
+P: I used to sing in the parish choir.
+C: No promises, but I've seen people get back to things like that. I'd like to work with you toward getting you back in the choir. How does that sound?`,
+ w:`The clinician uncovers a lost activity and uses it to shape a shared agenda, ending by handing the decision back. That is the Inquiry into Lost Dreams.`},
+{id:'mm43',t:'mm_family',d:['mm_lostdreams','mm_sharedgoals','mm_famresponse'],q:Q_MM_T,x:`C: You told me how hard your last manic episode was on your wife and kids. Staying on the lithium may be one way to protect them from going through that again. What do you think?`,
+ w:`Linking the medication to protecting loved ones from relapse is Tapping Family Motivators. It is useful when symptoms are in remission.`},
+{id:'mm44',t:'mm_family',d:['mm_lostdreams','mm_callfirst','mm_sharedgoals'],q:Q_MM_T,x:`C: Some of my patients put a photo of their children under their medicine bottle, somewhere safe and out of reach. Every time they reach for it, they remember who they're doing this for. What do you think?`,
+ w:`This is the Visual Reminder extension of Tapping Family Motivators, which reinforces it over time.`},
+{id:'mm45',t:'mm_committee',d:['mm_tipping','mm_callfirst','mm_step3'],q:`Which MIM principle is the resident following?`,x:`O: At every follow-up, the resident asks specifically what the patient likes and dislikes about the new medication: how it's working, what it costs her, and how she feels about being on it. She wants the decision to continue or stop to be made during the appointment.`,
+ w:`Getting the patient's inner committee to vote inside the office, not at home, is this core principle. The "Since Last Time" Question is only one technique for opening the discussion.`},
+{id:'mm46',t:'mm_committee',d:['mm_trapdoor','mm_passport','mm_dyadic'],q:`Which MIM principle would most likely have prevented this?`,x:`O: A patient arrives having stopped her antidepressant two weeks ago because of nausea that could easily have been managed. She now says she won't try it again. The supervisor remarks, "Her committee voted outside the office."`,
+ w:`Once the committee votes at home, restarting is hard. The principle is to invite that vote inside the office by asking about pros and cons at every check.`},
+{id:'mm47',t:'mm_trapdoor',d:['mm_directse','mm_tipping','mm_probedisc'],q:Q_MM_T,x:`C: Before we talk about next steps: at this point, in your own opinion, do you feel you're on too little, too much, or just the right amount of this medicine?`,
+ w:`Asking for the patient's view of the dose along a continuum, before suggesting an increase, is the Trap Door Question.`},
+{id:'mm48',t:'mm_trapdoor',d:['mm_directse','mm_relprob','mm_tipping'],q:Q_MM_T,x:`O: The resident is about to raise Aling Cora's sertraline because her mood is still low. First he asks whether she feels the dose is too little, too much or about right. She says, "Too much," and then admits it has affected her intimacy with her husband, which she had denied when asked about side effects directly.`,
+ w:`Asking her opinion of the dose before an increase is the Trap Door Question. Here it also uncovered a stigmatized side effect, and the increase she would likely have quietly abandoned was avoided.`},
+{id:'mm49',t:'mm_hurtfeelings',d:['mm_callfirst','mm_probedisc','mm_missed'],q:Q_MM_T,x:`C: Sometimes patients are nervous about telling me what's really going on with their side effects, because they're afraid of hurting my feelings or making me angry. I do think staying on the medicine is a good idea, but I promise I won't take it personally if you've stopped.`,
+ w:`Naming the patient's fear of upsetting the clinician, and promising not to take it personally, is Weiden's Hurt Feelings Observation.`},
+{id:'mm50',t:'mm_hurtfeelings',d:['mm_callfirst','mm_shared','mm_proactive'],q:Q_MM_T,x:`P: (quietly) I didn't want you to think I was complaining, Doc.
+C: A lot of patients worry about hurting my feelings or making me angry, so they keep side effects to themselves. Please always tell me. Our goal as a team is to limit them, and I won't take it personally if you need to stop.`,
+ w:`Responding to the patient's fear of displeasing the clinician is the Hurt Feelings Observation. It helps dismantle the "obedience mode."`},
+{id:'mm51',t:'mm_directse',d:['mm_trapdoor','mm_relprob','mm_hurtfeelings'],q:Q_MM_T,x:`C: Are you having any problems that you're wondering might be a side effect?`,
+ w:`Asking directly about side effects at each visit is the Direct Side Effect Inquiry.`},
+{id:'mm52',t:'mm_directse',d:['mm_probedisc','mm_trapdoor','mm_dreamdestroyer'],q:Q_MM_T,x:`C: Are you getting any of the side effects we talked about last time?
+P: Some nausea.
+C: Tell me about a specific time you felt nauseated. How many days this week? On a scale of 1 to 10, how much does it bother you?`,
+ w:`This is the Direct Side Effect Inquiry, followed by specific questions that convey concern and size up how the side effect weighs against the benefits.`},
+{id:'mm53',t:'mm_personalrisk',d:['mm_opening','mm_sharedgoals','mm_proactive'],q:Q_MM_T,x:`O: Jun's schizophrenia has not responded to several antipsychotics. After explaining clozapine's serious risks and the monitoring involved, his psychiatrist of many years says:
+C: We trust each other. If I were in your spot, I would take it myself. With careful monitoring, I'd give it to a member of my own family.`,
+ w:`Sharing a genuine personal endorsement of a high-risk medication within a trusted relationship is Personalizing Risk, used for one of the hardest step 3 decisions.`},
+{id:'mm54',t:'mm_personalrisk',d:['mm_opening','mm_tipping','mm_minidose'],q:`Which MIM technique is being misused here?`,x:`O: Meeting a patient for the first time, a resident says, "Honestly, I'd take clozapine myself," to win him over, although she has not reviewed his treatment history and isn't sure it's the right drug for him.`,
+ w:`Personalizing Risk requires a genuine belief in the recommendation and an established relationship. Used as a sales line, it betrays trust.`},
+{id:'mm55',t:'mm_costexplore',d:['mm_inconvenience','mm_tipping','mm_directse'],q:Q_MM_T,x:`C: I'm always curious how much my patients' medicines cost. How much did you end up paying for the quetiapine this past month? Were you surprised by the cost?`,
+ w:`Routinely and gently asking about money is Gently Exploring Cost Issues. Embarrassment often keeps patients from raising it themselves.`},
+{id:'mm56',t:'mm_costexplore',d:['mm_inconvenience','mm_missed','mm_deception'],q:Q_MM_T,x:`C: It can be tough for anyone to pay for medicines. How much of a burden do you think this will be for you and your family?
+P: To be honest, Doc, I've been taking it every other day so it lasts until payday.`,
+ w:`This variation of Gently Exploring Cost Issues opened the door to a financial burden the patient was too embarrassed to mention.`},
+{id:'mm57',t:'mm_inconvenience',d:['mm_costexplore','mm_relprob','mm_deception'],q:Q_MM_T,x:`C: Are you finding that taking the medicines is inconvenient for you in any way?`,
+ w:`This is the Inquiry into General Inconvenience, which uncovers a psychological cost on axis 2.`},
+{id:'mm58',t:'mm_inconvenience',d:['mm_costexplore','mm_missed','mm_dreamdestroyer'],q:Q_MM_T,x:`C: Sometimes it's hard to remember to take medicines at the times I suggested. Is that happening for you? If so, maybe we can find better times. And have there been any problems getting to and from the pharmacy?`,
+ w:`These are the inquiries into Timing and Travel Inconvenience. They ask about hassle, not about money or a count of missed doses.`},
+{id:'mm59',t:'mm_relprob',d:['mm_deception','mm_famresponse','mm_dreamdestroyer'],q:Q_MM_T,x:`C: Are there any side effects causing problems in your relationships?
+P: My wife's been upset since I've had trouble in bed.
+C: How does she feel about the medicine itself?`,
+ w:`This is Weiden's Inquiry into Med-Induced Relationship Problems. Following up on the partner's view matters, because the partner casts a strong vote.`},
+{id:'mm60',t:'mm_relprob',d:['mm_dreamdestroyer','mm_directse','mm_famresponse'],q:Q_MM_T,x:`O: A young man on an antipsychotic has gained weight. The nurse asks whether any side effects are causing problems between him and his girlfriend. He says she teases him about his weight, and he has started skipping doses before their dates.`,
+ w:`Asking whether a side effect causes problems in relationships is the Inquiry into Med-Induced Relationship Problems.`},
+{id:'mm61',t:'mm_deception',d:['mm_relprob','mm_famresponse','mm_inconvenience'],q:Q_MM_T,x:`C: Do you find that you need to hide your use of your medication from anybody?
+P: My supervisor. I take it in the CR so nobody sees.`,
+ w:`Asking about concealment is the Deception Inquiry. It reveals an interpersonal cost that could tip step 3 toward stopping.`},
+{id:'mm62',t:'mm_deception',d:['mm_relprob','mm_famresponse','mm_parental'],q:Q_MM_T,x:`C: Is there anyone you feel you have to keep your medicine a secret from?
+P: My husband. He says the pills are a waste of money, so I keep them in my bag.`,
+ w:`This is a variation of the Deception Inquiry. A yes may also signal danger at home, so the clinician should explore further.`},
+{id:'mm63',t:'mm_dreamdestroyer',d:['mm_relprob','mm_directse','mm_lostdreams'],q:Q_MM_T,x:`C: Are any of your side effects interfering with any of your future goals or work?
+P: The dry mouth. I'm a teacher, and by the third class I can barely talk.`,
+ w:`Asking whether a side effect blocks a goal is the Dream Destroyer Question. A "minor" side effect can be major for this particular patient.`},
+{id:'mm64',t:'mm_dreamdestroyer',d:['mm_lostdreams','mm_directse','mm_relprob'],q:Q_MM_T,x:`C: Is the slowed thinking causing you problems in your review classes for the board exam?`,
+ w:`Tying a specific side effect to a specific goal setting is a form of the Dream Destroyer Question. Lost Dreams asks what the illness, not the medication, has taken.`},
+{id:'mm65',t:'mm_crutch',d:['mm_personalrisk','mm_testwaters','mm_opening'],q:Q_MM_T,x:`C: Some people think these medicines are crutches, as if you should be able to will your way out of depression. But if your brain isn't making enough serotonin, you can't will it to make more, any more than a person with diabetes can will their pancreas to make insulin. We're just getting it back to normal.`,
+ w:`Correcting the "weakness" meaning of the pill with the insulin comparison is Dismantling the Crutch Myth, an axis 3 (meaning) technique often used proactively.`},
+{id:'mm66',t:'mm_crutch',d:['mm_testwaters','mm_costexplore','mm_agreedis'],q:`Which MIM technique best addresses this concern?`,x:`P: My tita says strong people handle their problems without pills. Maybe I'm just weak for needing this.`,
+ w:`The patient is attaching the meaning of personal weakness to the antidepressant. Dismantling the Crutch Myth addresses exactly this.`},
+{id:'mm67',t:'mm_testwaters',d:['mm_probedisc','mm_crutch','mm_trapdoor'],q:Q_MM_T,x:`C: Sophia, you've been doing great for over a year. Some of my patients tell me that after a while they wonder whether they still have bipolar disorder, or even need the medicines. I think that's a natural curiosity. Do you ever have thoughts like that?`,
+ w:`Normalizing the wish to test whether the illness is still there, during remission, is Testing the Waters of Discontinuance.`},
+{id:'mm68',t:'mm_testwaters',d:['mm_probedisc','mm_missed','mm_tipping'],q:Q_MM_T,x:`C: When patients feel better, they sometimes try stopping a medicine to see what will happen, as a kind of experiment. Have you tried, or thought of trying, that?`,
+ w:`This is Weiden's version of Testing the Waters of Discontinuance. If the patient wants to try, the clinician can offer a safe taper.`},
+{id:'mm69',t:'mm_tipping',d:['mm_trapdoor','mm_directse','mm_probedisc'],q:Q_MM_T,x:`C: We've reviewed some of the pros and cons. Now that you've been on it a while, do you feel the pros are outweighing the cons? Remember, you're the only expert on how it feels. I'm not taking it, you are.`,
+ w:`Asking for the overall verdict so the committee votes in the room is Tipping the Scales.`},
+{id:'mm70',t:'mm_tipping',d:['mm_probedisc','mm_trapdoor','mm_testwaters'],q:Q_MM_T,x:`C: Do you feel the relief you're getting is outweighing the sleepiness it causes in your classes?
+P: Yeah, yeah, it's okay, I guess.
+C: You sound a little hesitant, Judy. What are some of your concerns?`,
+ w:`This is Tipping the Scales, with attention to nonverbal hesitancy that may hide deeper concerns.`},
+{id:'mm71',t:'mm_missed',d:['mm_probedisc','mm_hurtfeelings','mm_inconvenience'],q:Q_MM_T,x:`C: Many patients tell me it can be easy to forget an antidepressant at times. In the weeks since we last met, roughly how many doses a week do you think you might have missed?`,
+ w:`Normalization followed by gentle assumption is the strategy Normalizing Missed Doses. It yields more accurate reports than "Have you missed any?"`},
+{id:'mm72',t:'mm_missed',d:['mm_probedisc','mm_directse','mm_deception'],q:`Which MIM strategy did the second clinician use?`,x:`O: Asked "You've been taking the meds as we discussed?", a patient says yes. A week later a nurse says, "Lots of people find it easy to forget sometimes. How many doses a week do you think you might have missed?" He admits to about three.`,
+ w:`The nurse normalized forgetting and gently assumed missed doses: Normalizing Missed Doses.`},
+{id:'mm73',t:'mm_probedisc',d:['mm_testwaters','mm_proactive','mm_hurtfeelings'],q:Q_MM_T,x:`C: Mary, we've been trying to decrease this side effect, but I know it's still a problem. What kind of thoughts, even fleeting in nature, have you had about maybe stopping the medication?`,
+ w:`Asking about thoughts of stopping because of a persisting side effect is Probing for Discontinuance.`},
+{id:'mm74',t:'mm_probedisc',d:['mm_testwaters','mm_proactive','mm_trapdoor'],q:Q_MM_T,x:`O: For the third visit in a row, Mang Rudy brings up his lithium tremor on his own. The resident asks whether he has had any thoughts, even passing ones, about stopping the lithium. He admits he planned to stop after the fiesta.`,
+ w:`A side effect raised spontaneously again and again is a harbinger of discontinuance. Asking about fleeting thoughts of stopping is Probing for Discontinuance.`},
+{id:'mm75',t:'mm_proactive',d:['mm_probedisc','mm_personalrisk','mm_hurtfeelings'],q:Q_MM_T,x:`C: Luis, I just don't like the problem we're having with this side effect. If we can't get it under control, I really think we may need to stop this med, even though I know it's helping too. What do you think?`,
+ w:`The clinician is the first to raise stopping: Proactively Recommending Discontinuance. It shows that the clinician is also watching out for side effects.`},
+{id:'mm76',t:'mm_proactive',d:['mm_probedisc','mm_callfirst','mm_tipping'],q:Q_MM_T,x:`O: A patient keeps mentioning sexual side effects on her antidepressant but never asks to change it. Before she can raise it again, the resident says that if they can't fix it, she thinks they should stop this one and try another.`,
+ w:`Being the first to suggest stopping, as a watchdog on the patient's side, is Proactively Recommending Discontinuance.`},
+{id:'mm77',t:'mm_healers',d:['mm_parental','mm_grapevine','mm_famresponse'],q:Q_MM_T,x:`C: It's not uncommon for some of my patients to also see an albularyo or a herbalist while working with me, and it's always useful to know so we can work well together. Are you by chance seeing anyone else for your nerves?`,
+ w:`Asking about other healers, softened with normalization, is Normalizing the Use of an Alternative Healer. It is part of the toolbox for cultural influences.`},
+{id:'mm78',t:'mm_healers',d:['mm_parental','mm_famresponse','mm_grapevine'],q:Q_MM_T,x:`C: Have you talked to your albularyo about our work together? What do you think he'll say about you starting an antidepressant?`,
+ w:`Asking about the culture-specific healer's views of the treatment follows the Shaman Questions.`},
+{id:'mm79',t:'mm_parental',d:['mm_famresponse','mm_healers','mm_grapevine'],q:Q_MM_T,x:`C: I'm always interested in how different cultures and generations view medicines. Do your parents have particular beliefs about medicines, such as whether they're useful or how long people should take them?`,
+ w:`Asking about the parents' beliefs first, as a back door to the patient's own hidden beliefs, is the Parental Backdoor Question.`},
+{id:'mm80',t:'mm_parental',d:['mm_famresponse','mm_grapevine','mm_crutch'],q:Q_MM_T,x:`O: A hesitant college student says he "just doesn't know" about an antidepressant. The resident asks how his parents in the province see such medicines. He laughs: his mother believes maintenance pills make you dependent and should only be taken while you are sick. Then he admits he half believes it himself.`,
+ w:`The indirect question about parental beliefs uncovered a cultural belief the student held without realizing it. That is the Parental Backdoor Question.`},
+{id:'mm81',t:'mm_famresponse',d:['mm_parental','mm_relprob','mm_family'],q:Q_MM_T,x:`C: How do you think your husband will feel about your starting an antidepressant?
+P: To tell you the truth, he doesn't really believe in this kind of thing.`,
+ w:`Asking how a family member will react to the medication is Anticipating Family Response. It can reveal a roadblock to medication interest.`},
+{id:'mm82',t:'mm_famresponse',d:['mm_grapevine','mm_parental','mm_deception'],q:Q_MM_T,x:`C: Do you have any friends who have taken this medicine? What did they think of it?`,
+ w:`Asking what friends think of the medication is Anticipating Friendly Fire, the friend version of Anticipating Family Response.`},
+{id:'mm83',t:'mm_grapevine',d:['mm_famresponse','mm_parental','mm_healers'],q:Q_MM_T,x:`C: Sometimes this medicine can help with problems like yours. Have you heard or seen anything good or bad about it on the internet, Facebook, TV, radio or in magazines?`,
+ w:`Naming media channels to draw out what the patient has picked up is the Grapevine Question.`},
+{id:'mm84',t:'mm_grapevine',d:['mm_famresponse','mm_parental','mm_passport'],q:Q_MM_T,x:`O: The resident expects that her patient will post "Has anyone tried this drug?" in an online group. Before he leaves, she asks what he has already read or watched about the medication, then gives him an objective government health website to start with.`,
+ w:`Seeking out what the patient has heard from the web and media is the Grapevine Question. Pointing the patient to objective sources is the recommended follow-up.`}
 );
