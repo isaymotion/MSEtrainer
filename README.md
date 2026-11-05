@@ -1,6 +1,8 @@
 # MSE Trainer
 
-A web app for psychiatry residents to practice recognizing mental status exam (MSE) and psychopathology findings, along with the interviewing techniques and concepts in Shea's *Psychiatric Interviewing: The Art of Understanding*, 3rd ed. (2016). Each case presents a short vignette or interview excerpt, and the resident picks the term that fits best from four options chosen to be easily confused with one another (for example, circumstantiality vs. tangentiality, or a process response vs. sidetracking).
+A web app for psychiatry residents to practice recognizing mental status exam (MSE) and psychopathology findings, along with the interviewing techniques and concepts in Shea's *Psychiatric Interviewing: The Art of Understanding*, 3rd ed. (2016). Each case presents a short vignette or interview excerpt, and the resident picks the term that fits best from four options chosen to be easily confused with one another (for example, circumstantiality vs. tangentiality, or a process response vs. sidetracking). It runs entirely in the browser, works offline after the first visit, and can be installed on phones and desktops.
+
+**Live site:** https://isaymotion.github.io/MSEtrainer/
 
 After each answer the app explains the answer and gives a rule for telling it apart from its look-alikes. MSE cases show a sample line for documenting the finding in the chart; interviewing-skills cases show a practical tip or sample phrasing for the bedside. Every term points to the relevant Shea chapter for further reading.
 
@@ -8,57 +10,59 @@ After each answer the app explains the answer and gives a rule for telling it ap
 
 - 1,269 fictional cases covering 625 terms, including 56 original Tagalog cases; every interviewing term has at least two cases
 - Mental status: ten MSE domains, from appearance and attitude toward the examiner to insight and judgment
-- Clinical interviewing, Part 1 (Ch. 1–8): engagement and empathy, safety and the alliance, interview structure, facilics, validity techniques, the person beneath the diagnosis, assessment and planning, and nonverbal behavior
-- Clinical interviewing, Part 2 (Ch. 9–15): mood disorders, the person beneath the mood disorder, psychotic disorders, the person beneath the psychosis, and personality disorders (core concepts, differential diagnosis, and psychodynamics)
-- Clinical interviewing, Part 3 (Ch. 17–18): suicide assessment (risk factors and warning signs, the tetrad of lethality, the CASE Approach, safety contracting) and violence assessment (the violence tetrad, dangerous psychotic process, the CADE Approach)
-- Clinical interviewing, Part 4 (Ch. 19–21): anger and disengagement, culture and identity, and vantage points
-- Collaborative interviewing (Ch. 22–23): motivational interviewing (spirit, principles, OARS, four processes, change talk) and the Medication Interest Model (Choice Triad, passports, the three toolboxes)
-- Appendices: facilic schematics drawn with Shea's own symbols (Appendix I) and the written document (Appendix III)
+- Clinical interviewing, Parts 1 to 4 (Shea Ch. 1–21), collaborative interviewing (motivational interviewing, Medication Interest Model, Ch. 22–23), and the appendices (facilic schematics drawn with Shea's own symbols, the written document)
 - Mastery: a term counts as mastered after two correct answers on different cases; term cards, domain pages and My progress show it
-- Tagalog and Filipino culture: Tagalog cases across all eight MSE domains (patient lines in Tagalog, English shown after answering, "Ask it in Tagalog" for each), and a Culture or pathology? domain with 10 Filipino look-alikes (hiya, deferential gaze, dropped po, shared kulam/usog/engkanto beliefs, grief-related sensing, sama ng loob, nerbiyos, lutang, agreeable opo, sanib)
-- Sa Tagalog card on every MSE and culture case, linking to the matching Usap Tayo section or lesson
-- Tagalog audio in the recorded Filipino voice from Usap Tayo (isaymotion.github.io/Tagalog), played when online
-- Sidebar with every MSE domain and Shea chapter (with your score); each domain has its own page with its terms and a Practice button
-- Home page with one Start or Continue button, overall progress, weak spots, Review misses, and Tagalog shortcuts
-- Sessions keep their place, so you can leave and continue at the same case later
-- Custom session panel: choose domains, language (English, Tagalog, or both), only unseen or previously missed cases, and length (10, 20, 40, or all)
-- Glossary search from the top bar (/ on a keyboard), with a "Drill this term" option
-- Progress by domain and a list of terms to revisit, saved in the browser (no account or server); back up and restore progress from the ☰ menu
-- Installs as a home-screen app (Share > Add to Home Screen on iPhone and iPad; Install app in Chrome) and opens offline after the first visit; Tagalog audio still needs a connection
-- Keyboard shortcuts: 1 to 4 to answer, Enter for the next case
-- Back and forward buttons (Alt+← / Alt+→), What's New and About pages
-- Text size: tap Aa in the top bar for Smaller, Default, Larger, or Largest; saved on the device
-- Plum and rose theme: light, dark, or match device. Works on iPhone, iPad, and desktop (the sidebar becomes a drawer on narrow screens)
-- Deep links: `#/domain/<domain key>` (e.g. `#/domain/tp`), `#/tagalog`, `#/misses`, `#/quick`, `#/practice?lang=tl&dom=fc` (Tagalog culture cases), `#/practice?drill=<term key>`
+- Tagalog and Filipino culture: Tagalog cases across the MSE domains (English shown after answering, "Ask it in Tagalog", recorded audio from Usap Tayo when online) and a Culture or pathology? domain of Filipino look-alikes; a Sa Tagalog card points to the matching Usap Tayo section
+- Sessions keep their place, so you can leave and continue at the same case later; Quick session, Review misses, Custom session (domains, language, unseen or missed only, length), Drill this term
+- Glossary of every term with its own filter, and My progress by domain with terms to revisit
+- Menu: the ☰ button (phones and tablets) or the docked sidebar (desktop, with a hide/show button) lists Practice, Mental status, Interviewing · Shea, Tagalog and Filipino culture, and App (Back up or restore, What's new, About). Bottom tab bar on phones: Home, Practice, Glossary, Progress, Menu
+- Search from the top bar (press `/` or Ctrl+K): every term, domain and page, with suggestions and a full results page at `#/search/<query>`
+- Back and forward buttons in the top bar, `Alt+Left` / `Alt+Right`, and scroll position restored when you go back
+- Light, dark or match-device theme, a text-size control (Aa), and an English / Tagalog interface switch (About > Settings; the Tagalog interface strings are a draft)
+- What's new page with a "new" badge for entries you have not seen
+- Backup in the footer: export progress and any session in progress to a file, import it elsewhere, undo the last import; uses the share sheet in installed phone apps. Backup files from v5 still import
+- Keyboard shortcuts in a session: 1 to 4 to answer, Enter for the next case
+- Deep links: `#/domain/<domain key>` (e.g. `#/domain/tp`), `#/tagalog`, `#/misses`, `#/quick`, `#/practice?lang=tl&dom=fc`, `#/practice?drill=<term key>`
 
-## Run it locally
+## Files to upload
 
-Open `index.html` in any modern browser. No build step or installation is needed.
-
-## Publish with GitHub Pages
-
-1. Create a new repository on GitHub and upload all files in this folder, keeping the folder structure.
-2. In the repository, go to **Settings > Pages**.
-3. Under **Build and deployment**, set the source to **Deploy from a branch**, choose `main` and `/ (root)`, and save.
-4. After a minute or two, the app will be live at `https://<your-username>.github.io/<repository-name>/`.
-
-## Project structure
+Upload everything in this folder to the root of the repository, keeping the folder structure:
 
 ```
-index.html      Page structure
-favicon.ico, favicon-32.png   Browser tab icons (caduceus)
-apple-touch-icon.png   iPhone and iPad home-screen icon
-icon-192.png, icon-512.png, icon-maskable-512.png   Install icons (Android, desktop)
-manifest.webmanifest   Lets the app install to the home screen
-sw.js           Offline support: network first, cached copy when offline
-css/style.css   Styles, including light and dark themes
-js/data.js      Domains, terms, Shea chapter titles, and the English cases (new v5 domains and the second-case series are appended at the end)
-js/data-tl.js   Tagalog cases and the Culture or pathology? domain and terms
-js/audio-key.js Maps a Tagalog line to its audio file in Usap Tayo's pack (same as Usap Tayo's js/audio-key.js)
-js/news.js      What's New entries
-js/app.js       App logic: sidebar, home and domain pages, sessions (saved so they can be resumed), scoring, glossary, progress, navigation, theme, backup, audio
-.nojekyll       Tells GitHub Pages to serve files as-is
+.nojekyll               (empty file; tells GitHub Pages not to run Jekyll)
+README.md
+index.html              App shell (top bar, menu, screens, footer with backup, bottom tabs, custom-session sheet)
+favicon.ico             Browser tab icon (browsers request it at the root)
+css/app.css             Styles (shared design tokens, light and dark themes, MSE screens)
+js/app.js               Shell (menu, history, search, theme, text size, language, backup) and the MSE screens
+js/data.js              Domains, terms, Shea chapter titles, and the English cases
+js/data-tl.js           Tagalog cases and the Culture or pathology? domain and terms
+js/audio-key.js         Maps a Tagalog line to its audio file in Usap Tayo's pack
+data/app-meta.js        App name, version, attribution (window.APP_META), menu links (window.APP_LINKS)
+data/changelog.js       What's new entries (window.APP_CHANGELOG)
+data/hospital.js        Hospital and program details shared across the apps (window.HOSPITAL)
+data/strings.js         Interface strings in English and Tagalog (window.STRINGS)
+icons/                  icon-192.png, icon-512.png, icon-maskable-512.png, apple-touch-icon.png, favicon-32.png
+manifest.webmanifest    Install metadata
+sw.js                   Offline cache
 ```
+
+## Publish on GitHub Pages
+
+1. Upload all files in this folder to the `MSEtrainer` repository, keeping the folder structure.
+2. In the repository, open **Settings > Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**, select `main` and `/ (root)`, and save.
+4. After a minute the site is live at `https://isaymotion.github.io/MSEtrainer/`.
+5. On a phone, open that link, then use **Add to Home Screen** (iPhone Safari) or **Install app** (Android Chrome).
+
+There is no build step and no dependencies. To preview locally, run `python3 -m http.server` in this folder and visit `http://localhost:8000`.
+
+## Upgrading from v5
+
+- Progress (`mse-trainer-v1`) and the resumable session (`mse-trainer-session`) are kept exactly where they were; nothing is migrated or lost.
+- Theme, text size and the sidebar setting move once from the old keys to the new `mse:v1:` prefix.
+- Old backup files (made with "Back up progress" in the old ☰ menu) still restore through **Import backup**.
+- `css/style.css` and `js/news.js` are removed (replaced by `css/app.css` and `data/changelog.js`), and the root-level icons moved into `icons/` (`favicon.ico` stays at the root as well). Delete the old files from the repository.
 
 ## Adding cases
 
@@ -70,25 +74,24 @@ P: Patient line
 O: Observation line`, w:`Explanation shown after answering.`}
 ```
 
-- `id` must be unique.
-- `q` is optional; it replaces the default question, "Which term fits best?"
-- `t` is the key of the correct term, and `d` lists three distractor term keys. All keys must exist in `TERMS`.
-- Lines beginning `C:`, `P:`, or `O:` render as clinician, patient, and observation lines. A vignette with no `C:` or `P:` lines renders as a single narrative paragraph.
-- Lines beginning `S:` draw a facilic schematic (Appendix I notation) as an SVG: `[Maj._Dep./3]` is a content rectangle with three corner slashes, `(Dynam.)` a process circle, `{Scout.}` the scouting capsule, and `-spont->`, `-nat->`, `-ref->`, `-imp->`, `-phan->`, `-intro->`, `-obs->` the seven gates. A gate may carry `@b` (circled letter) or `@10:41` (counter time). Underscores become spaces; consecutive `S:` lines stack as rows.
-- `dom:'fs'` (or any domain key) places a case in a domain other than its answer's, as the schematic drill does for the Ch. 4 gate terms.
+- `id` must be unique; `t` is the correct term key and `d` three distractor keys (all must exist in `TERMS`); `q` replaces the default question.
+- Lines beginning `C:`, `P:`, `O:` render as clinician, patient and observation lines; `S:` lines draw a facilic schematic (Appendix I notation: `[Content/3]`, `(Process)`, `{Scout}`, gates `-spont->` `-nat->` `-ref->` `-imp->` `-phan->` `-intro->` `-obs->`, optional `@b` or `@10:41`).
+- `dom:'fs'` (or any domain key) places a case in a domain other than its answer's.
 
-New terms are added with `T(key, name, domain, [chapters], definition, tellingApart, chartLine)`. For interviewing domains, the last field is shown as "At the bedside" instead of "In the chart." New domains go in the `DOMAINS` list with a group (`mse`, `p1`, `p2`, or `skill`), and new chapter titles go in `CH`.
+New terms: `T(key, name, domain, [chapters], definition, tellingApart, chartLine)`. New domains go in `DOMAINS`; chapter titles in `CH`.
 
-### Tagalog cases
+Tagalog cases go in `js/data-tl.js` with `lang:'tl'`; write lines as `Tagalog || English` and add `ask:'Tagalog question || English'`. A case with `rev:0` shows a "Draft translation" tag. After changing Tagalog lines, run `node tools/import-msetrainer.js /path/to/MSEtrainer` in the Usap Tayo repo so its audio job records them.
 
-Add them to `js/data-tl.js` with `lang:'tl'`. Write clinician and patient lines as `Tagalog || English` (the English stays hidden until the case is answered), and add `ask:'Tagalog question || English'`. Use `dom:'fc'` to place a case in Culture or pathology? when its answer is a standard MSE term. Stage directions in parentheses, like `(ngumiti)`, are shown but not spoken.
+## Version and What's new
 
-Audio: Tagalog lines play from Usap Tayo's audio pack. After adding or changing Tagalog lines, run `node tools/import-msetrainer.js /path/to/MSEtrainer` in the Usap Tayo repo and push; its audio job records the new lines in a few minutes.
+- Versions are semantic (`6.0.0`) and must agree in `data/app-meta.js` (`version`), the first entry of `data/changelog.js`, and `sw.js` (`VERSION`).
+- For every release: add an entry at the top of `data/changelog.js` (`{version, date:'YYYY-MM-DD', title, items:[{type, text}]}`, type `feature | update | correction | content`), bump the version in `data/app-meta.js` and `sw.js` (so returning users get the new files), and update "Latest version" in `index.html`, `data/app-meta.js` and this README.
+- Storage keys: `mse-trainer-v1`, `mse-trainer-session`, and `mse:v1:*` for settings. Cache names start with `mse-trainer-`. All isaymotion apps share one origin, so keep these unique and unchanged.
 
 ## Disclaimer
 
-For education only. All cases are fictional and do not describe real patients. This app is not a clinical decision tool. Tagalog cases are original teaching cases, not from Shea; cultural look-alikes are generalizations, so always ask the patient and family what an experience means to them.
+All cases are fictional teaching vignettes written for training. Not clinical guidance. Progress is saved in this browser only. Tagalog cases are original teaching cases, not from Shea; cultural look-alikes are generalizations, so always ask the patient and family what an experience means to them.
 
-## Author
+## Attribution
 
-Made by Isabella Navarro, MD. Latest version November 2026 (v5). isaymotion@gmail.com
+App created by Isabella Navarro, MD. Latest version November 2026. isaymotion@gmail.com

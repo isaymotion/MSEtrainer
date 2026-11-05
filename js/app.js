@@ -1,4 +1,311 @@
-/* ---------- state ---------- */
+/* MSE Trainer - app shell and screens.
+   Shell (menu, back/forward, search, theme, text size, language, backup, What's new) comes from the shared isaymotion starter
+   (as in Shea Trainer); the screens, case pools, sessions, mastery, glossary, Tagalog cases and audio are MSE v5's, unchanged
+   in behaviour. Views are the static <section id="v-..."> panels in index.html, shown by show()/route().
+   Content lives in js/data.js and js/data-tl.js (globals CH, DOMAINS, GROUPS, DOM, DOMG, TERMS, V). */
+(function () {
+'use strict';
+
+/* ===== Storage (try/catch so the app works with storage blocked) ===== */
+var PREFIX = 'mse:v1:';
+var store = {
+  get: function (k, d) { try { var v = localStorage.getItem(PREFIX + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: function (k, v) { try { localStorage.setItem(PREFIX + k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } },
+  del: function (k) { try { localStorage.removeItem(PREFIX + k); } catch (e) {} }
+};
+function rawGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+/* v5 kept theme, text size and the sidebar as raw strings under "mse-trainer-theme", "mse-trainer-textSize" and
+   "mse-trainer-sidebar". If the new key is empty, take the old value once, store it under PREFIX, and drop the old key.
+   Progress ("mse-trainer-v1") and the resumable session ("mse-trainer-session") are NOT moved: they stay where v5 kept them. */
+(function legacyPrefs() {
+  try {
+    var oldT = localStorage.getItem('mse-trainer-theme');
+    if (oldT != null) {
+      if (localStorage.getItem(PREFIX + 'theme') == null && (oldT === 'light' || oldT === 'dark')) store.set('theme', oldT);
+      localStorage.removeItem('mse-trainer-theme');
+    }
+    var oldZ = localStorage.getItem('mse-trainer-textSize');
+    if (oldZ != null) {
+      if (localStorage.getItem(PREFIX + 'textSize') == null && (oldZ === '90' || oldZ === '112.5' || oldZ === '125')) store.set('textSize', oldZ);
+      localStorage.removeItem('mse-trainer-textSize');
+    }
+    var oldS = localStorage.getItem('mse-trainer-sidebar');
+    if (oldS != null) {
+      if (localStorage.getItem(PREFIX + 'navCollapsed') == null) store.set('navCollapsed', oldS === 'closed');
+      localStorage.removeItem('mse-trainer-sidebar');
+    }
+  } catch (e) { /* storage unavailable */ }
+})();
+
+var META = window.APP_META || {};
+var CHANGELOG = window.APP_CHANGELOG || [];
+var ATTRIBUTION = META.attribution || '';
+var APP_NAME = META.name || document.title;
+var APP_LINKS = window.APP_LINKS || [];
+
+/* ===== Language: 'en' (default) or 'tl' (Tagalog). Shell UI strings live in data/strings.js. ===== */
+var STRINGS = window.STRINGS || {};
+var lang = store.get('lang', 'en') === 'tl' ? 'tl' : 'en';
+function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+function t(key) {
+  var s = STRINGS[lang] && has(STRINGS[lang], key) ? STRINGS[lang][key] : null;
+  if (typeof s !== 'string' || !s) s = STRINGS.en && has(STRINGS.en, key) ? STRINGS.en[key] : null;
+  return typeof s === 'string' && s ? s : key;
+}
+function tf(key, vars) { return t(key).replace(/\{(\w+)\}/g, function (m, k) { return vars && has(vars, k) ? String(vars[k]) : m; }); }
+function rich(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\[\[(.+?)\]\]/g, '<kbd>$1</kbd>'); }
+function locale() { return lang === 'tl' ? 'fil' : undefined; }
+
+/* ===== Helpers ===== */
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function pad2(n) { return String(n).padStart(2, '0'); }
+function fmtDate(iso) {
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso));
+  if (!m) return String(iso);
+  return new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString(locale(), { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+var sidenav = document.getElementById('sidenav');
+var backdrop = document.getElementById('nav-backdrop');
+var menuBtn = document.getElementById('menu-btn');
+var tabMenu = document.getElementById('tab-menu');
+var qInput = document.getElementById('q');
+var suggestBox = document.getElementById('suggest');
+
+/* ===== Icons (inline SVG, 24x24, stroke = currentColor) ===== */
+var ICONS = {
+  home: '<path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
+  bolt: '<path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z"/>',
+  redo: '<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/>',
+  sliders: '<path d="M5 6h9M18 6h1M5 12h3M12 12h7M5 18h11M20 18h-1"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+  book: '<path d="M5 4.5h10a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  chat: '<path d="M5 5h14v10H10l-4 4v-4H5z"/>',
+  news: '<path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h6M9 16h6"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+  save: '<path d="M12 3v11m0 0l-4-4m4 4l4-4M5 15v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/>',
+  external: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>'
+};
+function icon(name, cls) {
+  return '<svg class="' + (cls || 'nav-ico') + '" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.info) + '</svg>';
+}
+
+/* ===== Theme: auto (match device) / light / dark. No data-theme attribute = match device. ===== */
+var THEME_ICONS = {
+  auto: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>',
+  dark: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+  light: '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+};
+var darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+function getTheme() {
+  var cur = store.get('theme', 'auto');
+  return cur === 'light' || cur === 'dark' ? cur : 'auto';
+}
+function applyTheme(mode) {
+  var root = document.documentElement;
+  if (mode === 'light' || mode === 'dark') root.setAttribute('data-theme', mode); else root.removeAttribute('data-theme');
+  var dark = mode === 'dark' || (mode !== 'light' && darkMQ && darkMQ.matches);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dark ? '#200E18' : '#6E1C4C');
+  var btn = document.getElementById('theme-btn');
+  if (btn) {
+    var label = tf('theme.label', { name: t('theme.' + mode) });
+    btn.innerHTML = THEME_ICONS[mode];
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+  }
+  var radios = document.querySelectorAll('input[name="theme"]');   // the Theme segment on the About page
+  for (var j = 0; j < radios.length; j++) radios[j].checked = radios[j].value === mode;
+}
+function setTheme(mode) {
+  if (mode !== 'light' && mode !== 'dark') mode = 'auto';
+  if (mode === 'auto') store.del('theme'); else store.set('theme', mode);
+  applyTheme(mode);
+}
+applyTheme(getTheme());
+(function () {
+  var btn = document.getElementById('theme-btn');
+  if (btn) btn.addEventListener('click', function () {
+    var cur = document.documentElement.getAttribute('data-theme') || 'auto';
+    setTheme({ auto: 'light', light: 'dark', dark: 'auto' }[cur]);
+  });
+  function onDeviceChange() { applyTheme(document.documentElement.getAttribute('data-theme') || 'auto'); }
+  if (darkMQ) { if (darkMQ.addEventListener) darkMQ.addEventListener('change', onDeviceChange); else if (darkMQ.addListener) darkMQ.addListener(onDeviceChange); }
+})();
+
+/* ===== Header height -> --top ===== */
+function headerH() { var el = document.querySelector('.topbar'); return el ? el.offsetHeight : 64; }
+function setTopVar() { document.documentElement.style.setProperty('--top', headerH() + 'px'); }
+window.addEventListener('resize', setTopVar);
+setTopVar();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(setTopVar);
+
+/* ===== Text size (Aa panel) ===== */
+var TEXT_SIZES = [['90', 'textsize.smaller'], ['100', 'textsize.default'], ['112.5', 'textsize.larger'], ['125', 'textsize.largest']];
+function syncSizeRadios(v) {
+  var radios = document.querySelectorAll('input[name="aboutTextSize"]');
+  for (var i = 0; i < radios.length; i++) radios[i].checked = radios[i].value === v;
+}
+function applyTextSize(v) {
+  var ok = TEXT_SIZES.some(function (z) { return z[0] === v; });
+  document.documentElement.style.fontSize = ok && v !== '100' ? v + '%' : '';
+  setTopVar();
+}
+applyTextSize(String(store.get('textSize', '100')));
+(function () {
+  var btn = document.getElementById('textSizeBtn');
+  if (!btn) return;
+  var panel = document.createElement('div');
+  panel.className = 'text-size-panel'; panel.id = 'textSizePanel'; panel.hidden = true;
+  panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', t('textsize.title'));
+  document.body.appendChild(panel);
+  function build() {
+    var cur = String(store.get('textSize', '100'));
+    panel.setAttribute('aria-label', t('textsize.title'));
+    panel.innerHTML = '<p class="text-size-panel__title">' + esc(t('textsize.title')) + '</p><div class="seg">' + TEXT_SIZES.map(function (z, i) {
+      return '<label><input type="radio" name="textSize" value="' + z[0] + '"' + (cur === z[0] ? ' checked' : '') + '><span style="font-size:' + (0.82 + i * 0.1).toFixed(2) + 'rem">' + esc(t(z[1])) + '</span></label>';
+    }).join('') + '</div>';
+  }
+  function open() { build(); panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); var f = panel.querySelector('input:checked'); if (f) f.focus(); }
+  function close() { if (panel.hidden) return; panel.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); if (panel.hidden) open(); else close(); });
+  panel.addEventListener('change', function (e) {
+    if (e.target.name === 'textSize') { store.set('textSize', e.target.value); applyTextSize(e.target.value); syncSizeRadios(e.target.value); }
+  });
+  document.addEventListener('click', function (e) { if (!panel.hidden && !panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { close(); btn.focus(); } });
+  window.addEventListener('hashchange', close);
+})();
+
+/* ===== In-app back/forward buttons (index-stamped history) ===== */
+var HIST_KEY = PREFIX + 'hist';
+var hist = (function () { try { return JSON.parse(sessionStorage.getItem(HIST_KEY)) || { cur: 0, max: 0 }; } catch (e) { return { cur: 0, max: 0 }; } })();
+function saveHist() { try { sessionStorage.setItem(HIST_KEY, JSON.stringify(hist)); } catch (e) {} }
+function stamp(i) { try { history.replaceState({ spIdx: i }, ''); } catch (e) {} }
+function syncHist() {
+  var st = history.state;
+  if (st && typeof st.spIdx === 'number') {
+    hist.cur = st.spIdx;
+    if (hist.cur > hist.max) hist.max = hist.cur;
+  } else {
+    hist.cur = hist.cur + 1;     // a new page: anything that was ahead is discarded
+    hist.max = hist.cur;
+    stamp(hist.cur);
+  }
+  saveHist(); paintHist();
+}
+function paintHist() {
+  var b = document.getElementById('nav-back'), f = document.getElementById('nav-fwd');
+  if (b) b.disabled = hist.cur <= 0;
+  if (f) f.disabled = hist.cur >= hist.max;
+}
+(function initHist() {
+  var st = history.state;
+  if (st && typeof st.spIdx === 'number') { hist.cur = st.spIdx; if (hist.max < hist.cur) hist.max = hist.cur; }
+  else { hist = { cur: 0, max: 0 }; stamp(0); }
+  saveHist(); paintHist();
+  var b = document.getElementById('nav-back'), f = document.getElementById('nav-fwd');
+  if (b) b.addEventListener('click', function () { if (!b.disabled) history.back(); });
+  if (f) f.addEventListener('click', function () { if (!f.disabled) history.forward(); });
+})();
+
+/* Alt+Left / Alt+Right (ignores typing in fields and other modifiers) */
+document.addEventListener('keydown', function (e) {
+  var tag = (e.target.tagName || '').toLowerCase();
+  var typing = tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable;
+  if (e.altKey && !typing && !e.ctrlKey && !e.metaKey && !e.shiftKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+    e.preventDefault();
+    if (e.key === 'ArrowLeft') history.back(); else history.forward();
+  }
+});
+
+/* ===== Scroll restoration (only on back/forward, not on ordinary link clicks) ===== */
+var scrollMemo = {}, scrollKey = location.hash || '#/', fromHistory = false, scrollPending = false;
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('scroll', function () {
+  if (scrollPending) return;
+  scrollPending = true;
+  setTimeout(function () { scrollPending = false; scrollMemo[scrollKey] = window.scrollY; }, 120);
+}, { passive: true });
+window.addEventListener('popstate', function (e) { fromHistory = !!(e.state && typeof e.state.spIdx === 'number'); });
+
+/* ===== Menu: docked sidebar on desktop, drawer on phones/tablets ===== */
+function isDrawerMode() { return window.matchMedia('(max-width: 1099px)').matches; }
+function setMenuExpanded(v) { [menuBtn, tabMenu].forEach(function (b) { if (b) b.setAttribute('aria-expanded', v ? 'true' : 'false'); }); }
+function openDrawer() {
+  if (!isDrawerMode()) return;
+  document.body.classList.add('drawer-open');
+  backdrop.hidden = false;
+  setMenuExpanded(true);
+  var target = sidenav.querySelector('.sidenav__close');
+  setTimeout(function () { if (target) target.focus(); }, 60);
+}
+function closeDrawer() {
+  if (!document.body.classList.contains('drawer-open')) return;
+  document.body.classList.remove('drawer-open');
+  backdrop.hidden = true;
+  setMenuExpanded(false);
+}
+if (menuBtn) menuBtn.addEventListener('click', function () { openDrawer(); });
+if (tabMenu) tabMenu.addEventListener('click', function () { if (document.body.classList.contains('drawer-open')) closeDrawer(); else openDrawer(); });
+document.getElementById('nav-close').addEventListener('click', function () { closeDrawer(); if (menuBtn) menuBtn.focus(); });
+backdrop.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('drawer-open')) { closeDrawer(); if (menuBtn) menuBtn.focus(); } });
+sidenav.addEventListener('click', function (e) { var a = e.target.closest('a'); if (a) closeDrawer(); });
+var collapseBtn = document.getElementById('collapse-btn');   // desktop: hide/show the docked sidebar
+function labelCollapse() {
+  var c = document.documentElement.classList.contains('nav-collapsed');
+  collapseBtn.setAttribute('aria-label', t(c ? 'sidebar.show' : 'sidebar.hide'));
+  collapseBtn.setAttribute('title', t(c ? 'sidebar.show' : 'sidebar.hide'));
+  collapseBtn.setAttribute('aria-expanded', c ? 'false' : 'true');
+}
+document.documentElement.classList.toggle('nav-collapsed', !!store.get('navCollapsed', false));
+collapseBtn.addEventListener('click', function () {
+  var c = !document.documentElement.classList.contains('nav-collapsed');
+  document.documentElement.classList.toggle('nav-collapsed', c);
+  store.set('navCollapsed', c); labelCollapse(); setTopVar();
+});
+labelCollapse();
+
+/* APP_LINKS minus this app's own entry (matched on the repo slug at the end of the URL). Menu only: never tiles, search or tabs. */
+function otherApps() {
+  if (!window.SHOW_OTHER_APPS) return [];   // off until she is ready to interlink the apps (data/app-meta.js)
+  var me = String(META.repo || '').toLowerCase();
+  return APP_LINKS.filter(function (a) {
+    if (!a || !a.name || !/^https?:\/\//i.test(String(a.href || ''))) return false;
+    var slug = String(a.href).replace(/[?#].*$/, '').replace(/\/+$/, '').split('/').pop().toLowerCase();
+    return !me || slug !== me;
+  });
+}
+
+/* ===== What's new: unseen badge keyed on the version string ===== */
+function latestNewsVersion() { return CHANGELOG.length ? String(CHANGELOG[0].version) : ''; }
+function seenNewsVersion() {
+  var s = store.get('seenNews', null);
+  if (s == null) { s = rawGet('mse-trainer-v1') ? '5.0.0' : latestNewsVersion(); store.set('seenNews', s); }   // new visitors start up to date; v5 users see what changed since v5
+  return s;
+}
+function unseenNews() {
+  var seen = seenNewsVersion(), out = [];
+  for (var i = 0; i < CHANGELOG.length; i++) {
+    if (String(CHANGELOG[i].version) === seen) return out;
+    out.push(CHANGELOG[i]);
+  }
+  return out;
+}
+function updateNavBadges() {
+  var n = unseenNews().length;
+  var els = document.querySelectorAll('[data-badge="news"]');
+  for (var i = 0; i < els.length; i++) { els[i].textContent = n; els[i].hidden = !n; }
+}
+
+/* ===== MSE progress store and resumable session: kept EXACTLY where v5 saved them, so nobody loses anything ===== */
 const STORE='mse-trainer-v1', SESS_KEY='mse-trainer-session';
 function load(){try{const s=JSON.parse(localStorage.getItem(STORE)||'{}');return{items:s.items||{},prefs:s.prefs||{}}}catch(e){return{items:{},prefs:{}}}}
 let stats=load();
@@ -14,23 +321,6 @@ const settings={
 const domOf=v=>v.dom||TERMS[v.t].dom;
 const VBYID=Object.fromEntries(V.map(v=>[v.id,v]));
 function savePrefs(){stats.prefs={dv:6,doms:[...settings.doms],mode:settings.mode,len:settings.len,lang:settings.lang};save();}
-
-const $=s=>document.querySelector(s);
-const $$=s=>document.querySelectorAll(s);
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-const ICON={
-  home:'<path d="M4 11l8-6.5 8 6.5"/><path d="M6 10v9h12v-9"/>',
-  bolt:'<path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z"/>',
-  redo:'<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/>',
-  sliders:'<path d="M5 6h9M18 6h1M5 12h3M12 12h7M5 18h11M20 18h-1"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
-  book:'<path d="M5 4.5h10a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/>',
-  chart:'<path d="M5 19V5M5 19h14"/><path d="M9 16v-4M13 16V9M17 16v-6"/>',
-  chat:'<path d="M5 5h14v10H10l-4 4v-4H5z"/>',
-  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/>',
-  x:'<path d="M6 6l12 12M18 6L6 18"/>'
-};
-const ico=n=>`<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[n]}</svg>`;
 
 /* ---------- case pools and sessions ---------- */
 let session=null, view='home', domView=null;
@@ -105,74 +395,6 @@ function masteryPill(k){
 }
 const masteredCount=ks=>ks.filter(k=>termMastery(k).mastered).length;
 
-/* ---------- sidebar ---------- */
-function domStats(k){
-  const vs=V.filter(v=>domOf(v)===k);let a=0,c=0,seen=0,miss=0;
-  vs.forEach(v=>{const s=stats.items[v.id];if(s){seen++;a+=s.a;c+=s.c;if(s.l===0)miss++;}});
-  return {n:vs.length,seen,a,c,miss,pct:a?Math.round(c/a*100):null,tl:vs.filter(v=>v.lang==='tl').length};
-}
-function renderSide(){
-  const cur=view==='domain'?'domain/'+domView:view, mc=missedCount();
-  const link=(r,icon,label,extra)=>`<a href="#/${r}" ${cur===r?'aria-current="page"':''}>${ico(icon)}<span class="lbl">${esc(label)}</span>${extra||''}</a>`;
-  const dlink=(d,num)=>{const st=domStats(d.k);return `<a class="dom" href="#/domain/${d.k}" ${cur==='domain/'+d.k?'aria-current="page"':''}><span class="num">${num}</span><span class="lbl">${esc(d.n)}</span>${st.pct!==null?`<span class="pct">${st.pct}%</span>`:''}</a>`;};
-  const mse=DOMAINS.filter(d=>d.g==='mse'), shea=sheaDoms(), tl=DOMAINS.filter(d=>d.g==='tl');
-  $('#sidenav').innerHTML=
-    link('home','home','Home')+
-    (inProgress()?link('practice','bolt',`Session: case ${session.i+1} of ${session.items.length}`):`<a href="#/quick">${ico('bolt')}<span class="lbl">Quick session</span><span class="pct">10 cases</span></a>`)+
-    `<a href="#/misses">${ico('redo')}<span class="lbl">Review misses</span>${mc?`<span class="badge">${mc}</span>`:''}</a>`+
-    `<a href="#/custom">${ico('sliders')}<span class="lbl">Custom session</span></a>`+
-    link('glossary','book','Glossary')+
-    link('progress','chart','My progress')+
-    link('new','spark',"What's New")+
-    `<div class="sidesep"></div><p class="sidehead">Mental status</p>`+mse.map((d,i)=>dlink(d,i+1)).join('')+
-    `<p class="sidehead">Interviewing · Shea</p>`+shea.map(d=>dlink(d,typeof d.ch==='number'?d.ch:d.ch.slice(1))).join('')+
-    `<p class="sidehead">Tagalog and Filipino culture</p>`+
-    `<a href="#/tagalog">${ico('chat')}<span class="lbl">Tagalog cases</span><span class="pct">${V.filter(v=>v.lang==='tl').length}</span></a>`+
-    tl.map(d=>dlink(d,d.ch)).join('');
-}
-
-/* ---------- home ---------- */
-function renderHome(){
-  const it=stats.items, seen=V.filter(v=>it[v.id]);let A=0,C=0;seen.forEach(v=>{A+=it[v.id].a;C+=it[v.id].c});
-  const pct=A?Math.round(C/A*100):0, mc=missedCount(), circ=2*Math.PI*30;
-  const weak=DOMAINS.map(d=>({d,s:domStats(d.k)})).filter(x=>x.s.a>=3&&x.s.pct<100).sort((x,y)=>x.s.pct-y.s.pct).slice(0,3);
-  const r=WHATS_NEW[0], tlN=V.filter(v=>v.lang==='tl').length;
-  const cta=inProgress()
-    ?`<a class="btn primary big" href="#/practice">Continue session · case ${session.i+1} of ${session.items.length}</a>
-      <a class="btn ghost" href="#/custom">Custom session</a><p class="sub">${esc(session.label)}. <a href="#/fresh">Start a new ${settings.len}-case session instead</a></p>`
-    :`<a class="btn primary big" href="#/fresh">Start a ${settings.len}-case session</a>
-      <a class="btn ghost" href="#/custom">Custom session</a><p class="sub">${esc(describeDoms(settings.doms))} · ${settings.mode==='mix'?'focus on misses':settings.mode==='new'?'only unseen':'only missed'} · ${settings.lang==='all'?'English and Tagalog':settings.lang==='tl'?'Tagalog':'English'}</p>`;
-  $('#v-home').innerHTML=`
-  <div class="hero"><div class="herogrid">
-    <div>
-      <p class="eyebrow">Mental status examination · Clinical interviewing</p>
-      <h1>Read the case. <em>Name the finding.</em></h1>
-      <p class="lead">${V.length} fictional cases across the mental status exam and Shea's interviewing techniques, with look-alike answers, telling-apart rules and chart lines.</p>
-      <div class="cta">${cta}</div>
-    </div>
-    <div class="statcard">
-      <h2>Your progress</h2>
-      <div class="ring">
-        <svg viewBox="0 0 76 76" role="img" aria-label="${pct} percent correct"><circle class="trk" cx="38" cy="38" r="30"/><circle class="val" cx="38" cy="38" r="30" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-pct/100)}" transform="rotate(-90 38 38)"/></svg>
-        ${A?`<div class="bignum">${pct}%<small>correct</small></div>`:`<div class="bignum none">Answer a few cases and your accuracy shows here.</div>`}
-      </div>
-      <div class="minis"><div><strong>${seen.length} / ${V.length}</strong>cases seen</div><div><strong>${mc}</strong>missed last time</div></div>
-    </div>
-  </div></div>
-  <div class="pagepad homebody">
-    ${r?`<a class="newsbar" href="#/new"><span class="tag">NEW</span><span class="txt">${esc(r.v)}: ${r.items.length} update${r.items.length===1?'':'s'}</span><span class="more">See what changed</span></a>`:''}
-    <div class="cards">
-      <a class="card" href="#/misses"><h3>Review misses${mc?`<span class="badge">${mc}</span>`:''}</h3><p>${mc?'Cases you got wrong the last time you saw them.':'Nothing to review yet. Misses collect here as you practice.'}</p><span class="go">${mc?'Review now':'Start practicing'}</span></a>
-      <a class="card" href="${weak.length?'#/domain/'+weak[0].d.k:'#/progress'}"><h3>Weak spots</h3>${weak.length?`<ul class="weaklist">${weak.map(x=>`<li><span>${esc(x.d.n)}</span><span>${x.s.pct}%</span></li>`).join('')}</ul>`:'<p>Your lowest-scoring domains show up here after a few cases.</p>'}<span class="go">${weak.length?'Practice '+esc(weak[0].d.n):'See progress'}</span></a>
-      <a class="card feature" href="#/tagalog"><h3>Tagalog cases</h3><p>${tlN} original cases with Tagalog patient lines, audio, and "Ask it in Tagalog".</p><span class="go">Practice in Tagalog</span></a>
-      <a class="card" href="#/domain/su"><h3>Suicide and violence assessment</h3><p>The CASE and CADE approaches, risk factors versus warning signs, and the tetrads of lethality from Shea Ch. 17–18.</p><span class="go">Practice safety assessment</span></a>
-      <a class="card" href="#/domain/mi"><h3>MI and the Medication Interest Model</h3><p>OARS, change talk, the Choice Triad and the medication toolboxes from Ch. 22–23.</p><span class="go">Open collaborative interviewing</span></a>
-      <a class="card" href="#/domain/fc"><h3>Culture or pathology?</h3><p>Filipino look-alikes: hiya, sama ng loob, kulam, lutang, sanib and more.</p><span class="go">Open domain</span></a>
-      <a class="card" href="#/glossary"><h3>Glossary</h3><p>${Object.keys(TERMS).length} terms with definitions, telling-apart rules and chart lines.</p><span class="go">Browse terms</span></a>
-    </div>
-  </div>`;
-}
-
 
 /* ---------- facilic schematic renderer (Appendix I notation) ----------
    An S: line holds one row of a facilic map, tokens separated by spaces:
@@ -221,12 +443,13 @@ function renderSchematic(rows){
   return `<div class="facilic-wrap"><svg class="facilic" width="${vw}" height="${y}" viewBox="0 0 ${vw} ${y}" role="img" aria-label="Facilic schematic">${out}</svg></div>`;
 }
 
+
 /* ---------- domain page ---------- */
-function termCard(t){return `<article class="term">
+function termCard(t){return `<article class="term" data-term="${t.k}">
   <h3>${esc(t.n)} ${masteryPill(t.k)}</h3><p>${esc(t.def)}</p><p><mark>${esc(t.tell)}</mark></p>
   <p class="chartline">${esc(t.chart)}</p>
   <p class="refs">Shea ${t.ch.map(chShort).join(', ')}</p>
-  <button class="btn small" data-drill="${t.k}">Drill this term</button></article>`;}
+  <button class="btn btn--small" data-drill="${t.k}">Drill this term</button></article>`;}
 function renderDomain(k){
   const d=DOMAINS.find(x=>x.k===k);if(!d){show('home');return;}
   const st=domStats(k), G=GROUPS.find(g=>g.g===d.g);
@@ -235,7 +458,7 @@ function renderDomain(k){
   let ch=d.ch;if(!ch){const cnt={};terms.forEach(t=>t.ch.forEach(c=>cnt[c]=(cnt[c]||0)+1));ch=+Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0]?.[0]||16;}
   const mastered=masteredCount(terms.map(t=>t.k));
   $('#v-domain').innerHTML=`
-  <div class="domhero">
+  <div class="domhero"><div class="wrap">
     <p class="eyebrow">${esc(G.n)}</p>
     <h1 class="pagetitle">${esc(d.n)}</h1>
     <p class="chap">Shea ${chShort(ch)}: ${esc(CH[ch])}</p>
@@ -247,11 +470,11 @@ function renderDomain(k){
       <div><strong>${mastered}</strong>mastered</div>
     </div>
     <div class="domactions">
-      <button class="btn primary big" id="dPractice">Practice this domain</button>
+      <button class="btn btn--solid btn--big" id="dPractice">Practice this domain</button>
       ${st.miss?`<button class="btn" id="dMiss">Review ${st.miss} missed</button>`:''}
       ${st.tl&&st.tl<st.n?`<button class="btn" id="dTl">Tagalog cases only (${st.tl})</button>`:''}
     </div>
-  </div>
+  </div></div>
   <div class="pagepad">
     <h2 class="sectionh">Terms in this domain</h2>
     <div class="terms">${terms.map(termCard).join('')}</div>
@@ -263,6 +486,7 @@ function renderDomain(k){
   const t=$('#dTl');if(t)t.onclick=()=>startSession({doms,mode:'mix',lang:'tl',label:d.n+' in Tagalog'});
   bindDrill($('#v-domain'));
 }
+
 
 /* ---------- practice ---------- */
 const UT='https://isaymotion.github.io/Tagalog/#/';
@@ -305,27 +529,27 @@ function renderSessBar(){
   const sb=$('#sessbar');
   if(!inProgress()){sb.innerHTML='';sb.hidden=true;return;}
   sb.hidden=false;const n=session.items.length;
-  sb.innerHTML=`<div class="sessrow"><span class="what">${esc(session.label)}</span>
+  sb.innerHTML=`<div class="sessbar__inner"><div class="sessrow"><span class="what">${esc(session.label)}</span>
     <span class="count">Case <b>${session.i+1}</b> of ${n} · <b id="nright">${session.right}</b> correct</span>
-    <a class="iconbtn" href="#/home" aria-label="Exit session (you can continue it later)" title="Exit (you can continue later)">${ico('x')}</a></div>
-    <div class="meter" aria-hidden="true"><span style="width:${(session.i+(session.cur&&session.cur.picked?1:0))/n*100}%"></span></div>`;
+    <a class="iconbtn" href="#/home" aria-label="Exit session (you can continue it later)" title="Exit (you can continue later)">${icon('x','')}</a></div>
+    <div class="meter" aria-hidden="true"><span style="width:${(session.i+(session.cur&&session.cur.picked?1:0))/n*100}%"></span></div></div>`;
 }
 function renderPractice(){
   renderSessBar();
   const st=$('#stage');
   if(!session){
     st.innerHTML=`<div class="empty"><p class="eyebrow">Practice</p><h1 class="pagetitle">No session in progress</h1>
-      <div class="actions"><a class="btn primary" href="#/fresh">Start a ${settings.len}-case session</a><a class="btn" href="#/quick">Quick 10</a><a class="btn" href="#/custom">Custom session</a></div></div>`;return;
+      <div class="actions"><a class="btn btn--solid" href="#/fresh">Start a ${settings.len}-case session</a><a class="btn" href="#/quick">Quick 10</a><a class="btn" href="#/custom">Custom session</a></div></div>`;return;
   }
   if(!session.items.length){
     st.innerHTML=`<div class="empty"><h1 class="pagetitle">No cases match</h1><p class="muted">Nothing fits these settings. Try "Focus on misses", a different language, or more domains.</p>
-      <div class="actions"><a class="btn primary" href="#/custom">Change settings</a><a class="btn" href="#/home">Home</a></div></div>`;return;
+      <div class="actions"><a class="btn btn--solid" href="#/custom">Change settings</a><a class="btn" href="#/home">Home</a></div></div>`;return;
   }
   if(session.done)return renderSummary();
   const {v,opts}=session.cur;
   st.innerHTML=`
     ${session.drill?`<div class="drill"><span>Drilling <strong>${esc(TERMS[session.drill].n)}</strong> and the terms it gets confused with.</span></div>`:''}
-    <article class="case" aria-label="Case vignette">${v.lang==='tl'?'<span class="langtag">Tagalog</span>':''}${v.lang==='tl'&&v.rev===0?'<span class="langtag draft" title="This Tagalog wording has not yet been reviewed">Draft translation</span>':''}${renderVig(v.x)}${v.lang==='tl'&&v.x.includes(' || ')?'<button class="btn small" id="showEn">Show English</button>':''}</article>
+    <article class="case" aria-label="Case vignette">${v.lang==='tl'?'<span class="langtag">Tagalog</span>':''}${v.lang==='tl'&&v.rev===0?'<span class="langtag draft" title="This Tagalog wording has not yet been reviewed">Draft translation</span>':''}${renderVig(v.x)}${v.lang==='tl'&&v.x.includes(' || ')?'<button class="btn btn--small" id="showEn">Show English</button>':''}</article>
     <p class="prompt" id="prompt">${esc(v.q||'Which term fits best?')}</p>
     <div class="opts" role="group" aria-labelledby="prompt">${opts.map((k,i)=>`<button class="opt" data-k="${k}"><span class="key" aria-hidden="true">${i+1}</span><span>${esc(TERMS[k].n)}</span></button>`).join('')}</div>
     <div id="fb" aria-live="polite"></div>`;
@@ -339,7 +563,7 @@ function answer(k){
   c.picked=k;const ok=k===c.v.t;
   const s=stats.items[c.v.id]||{a:0,c:0,l:0};s.a++;if(ok)s.c++;s.l=ok?1:0;stats.items[c.v.id]=s;save();
   session.log.push({v:c.v,picked:k,ok});if(ok)session.right++;
-  saveSession();renderSessBar();renderSide();
+  saveSession();renderSessBar();buildNav();
   showFeedback(true);
 }
 function showFeedback(focus){
@@ -359,7 +583,7 @@ function showFeedback(focus){
     ${ask?`<div class="ask"><h3>Ask it in Tagalog</h3><p class="tlline"><span>${esc(ask[0])}</span>${sayBtn(ask[0])}</p><p class="muted">${esc(ask[1])}</p></div>`:''}
     <p class="read"><strong>Further reading in Shea:</strong> ${T0.ch.map(c=>`${chShort(c)}, ${esc(CH[c])}`).join('; ')}.${v.lang==='tl'?' This Tagalog case is original, not from the book.':''}</p>
     ${utCard(v)}
-    <div class="nextrow"><button class="btn primary big" id="next">${session.i+1<n?'Next case':'See results'}</button></div>
+    <div class="nextrow"><button class="btn btn--solid btn--big" id="next">${session.i+1<n?'Next case':'See results'}</button></div>
   </div>`;
   $('#next').onclick=next;
   bindSay($('#fb'));
@@ -369,7 +593,7 @@ function next(){
   if(!session.cur||!session.cur.picked)return;
   session.i++;
   if(session.i>=session.items.length){session.done=true;}else setCur();
-  saveSession();renderPractice();renderSide();
+  saveSession();renderPractice();buildNav();
   const first=$('.opt')||$('.summary button');
   if(first)first.focus({preventScroll:true});
   scrollTop();
@@ -382,14 +606,14 @@ function renderSummary(){
     <h2>You named ${session.right} of ${n} findings correctly.</h2>
     ${missed.length?`<h3>Worth another look</h3><ul class="missed">${missed.map(l=>`<li><strong>${esc(TERMS[l.v.t].n)}</strong><span>you chose ${esc(TERMS[l.picked].n)}</span></li>`).join('')}</ul>`
       :`<p>Every finding named. Try another domain or a longer session.</p>`}
-    <div class="actions">${missed.length?`<button class="btn primary" id="retry">Retry missed cases</button>`:''}<a class="btn" href="#/fresh">New session</a><a class="btn ghost" href="#/home">Home</a></div>
+    <div class="actions">${missed.length?`<button class="btn btn--solid" id="retry">Retry missed cases</button>`:''}<a class="btn" href="#/fresh">New session</a><a class="btn ghost" href="#/home">Home</a></div>
   </section>`;
   const r=$('#retry');if(r)r.onclick=()=>startSession({list:shuffle(missed.map(l=>l.v)),label:session.label+': retry'});
 }
 
 /* ---------- glossary ---------- */
 function renderGlossary(){
-  const q=($('#q').value||'').trim().toLowerCase();
+  const q=($('#gq').value||'').trim().toLowerCase();
   let lastG=null;
   const html=DOMAINS.map(d=>{
     const ts=Object.values(TERMS).filter(t=>t.dom===d.k&&(!q||(t.n+' '+t.def+' '+t.tell).toLowerCase().includes(q)));
@@ -409,7 +633,7 @@ function startDrill(k){
 /* ---------- progress ---------- */
 function renderProgress(){
   const it=stats.items, seen=V.filter(v=>it[v.id]);
-  if(!seen.length){$('#prog').innerHTML=`<p class="stat-lead">Finish a few cases and your accuracy by domain will show up here.</p><a class="btn primary" href="#/fresh">Start a session</a>`;return;}
+  if(!seen.length){$('#prog').innerHTML=`<p class="stat-lead">Finish a few cases and your accuracy by domain will show up here.</p><a class="btn btn--solid" href="#/fresh">Start a session</a>`;return;}
   let A=0,C=0;seen.forEach(v=>{A+=it[v.id].a;C+=it[v.id].c});
   let lastPG=null;
   const rows=DOMAINS.map(d=>{
@@ -423,12 +647,13 @@ function renderProgress(){
     <p class="stat-lead">You've worked through ${seen.length} of ${V.length} cases, answering ${Math.round(C/A*100)}% correctly overall. Terms mastered: <strong>${masteredCount(Object.keys(TERMS))}</strong> of ${Object.keys(TERMS).length} (a term is mastered once you get it right on two different cases).</p>
     ${rows}
     <p class="section-h">Terms to revisit</p>
-    ${weak.length?`<ul class="weak">${weak.map(([k,s])=>`<li><span><strong>${esc(TERMS[k].n)}</strong><br><span class="muted">${s.c} of ${s.a} correct</span></span><button class="btn small" data-drill="${k}">Drill</button></li>`).join('')}</ul>`
+    ${weak.length?`<ul class="weak">${weak.map(([k,s])=>`<li><span><strong>${esc(TERMS[k].n)}</strong><br><span class="muted">${s.c} of ${s.a} correct</span></span><button class="btn btn--small" data-drill="${k}">Drill</button></li>`).join('')}</ul>`
       :`<p class="muted">No misses yet.</p>`}
     <button class="btn" id="reset">Reset progress</button>`;
   bindDrill($('#prog'));
-  $('#reset').onclick=()=>{if(confirm('Clear all saved progress in this browser?')){stats.items={};save();session=null;saveSession();renderProgress();renderSide();}};
+  $('#reset').onclick=()=>{if(confirm('Clear all saved progress in this browser?')){stats.items={};save();session=null;saveSession();renderProgress();buildNav();}};
 }
+
 
 /* ---------- custom session sheet ---------- */
 const dlg=$('#custom');
@@ -453,7 +678,7 @@ function renderPicker(){
   sync();
 }
 function readPicker(){return{doms:new Set([...dlg.querySelectorAll('[data-k]:checked')].map(b=>b.dataset.k)),mode:$('#mode').value,lang:$('#lang').value};}
-function openCustom(){$('#mode').value=settings.mode;$('#lang').value=settings.lang;$('#len').value=String(settings.len);renderPicker();closeSide();if(!dlg.open)dlg.showModal();}
+function openCustom(){$('#mode').value=settings.mode;$('#lang').value=settings.lang;$('#len').value=String(settings.len);renderPicker();closeDrawer();if(!dlg.open)dlg.showModal();}
 ['#mode','#lang','#len'].forEach(s=>$(s).addEventListener('change',()=>renderPickerCount()));
 function renderPickerCount(){const n=pool(readPicker()).length;$('#poolCount').textContent=n?`${n} matching case${n===1?'':'s'}`:'No cases match';$('#customStart').disabled=!n;}
 $('#customForm').addEventListener('submit',e=>{
@@ -464,158 +689,6 @@ $('#customForm').addEventListener('submit',e=>{
 });
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
 
-/* ---------- navigation: #/home, #/domain/<k>, #/practice, #/glossary, #/progress, #/new, #/about
-   Actions: #/quick, #/fresh, #/misses, #/tagalog, #/custom
-   Deep links: #/practice?lang=tl&dom=fc, #/practice?drill=<term key> ---------- */
-const VIEWS=['home','domain','practice','glossary','progress','new','about'];
-const scrollPos={};
-function show(v,push){
-  if(!VIEWS.includes(v))v='home';
-  if(push!==false){location.hash='#/'+v;return;}
-  view=v;
-  VIEWS.forEach(k=>$('#v-'+k).hidden=k!==v);
-  if(v==='home')renderHome();
-  if(v==='practice')renderPractice();
-  if(v==='glossary')renderGlossary();
-  if(v==='progress')renderProgress();
-  if(v==='new')renderNews();
-  renderSide();
-  closeMenu();closeSide();
-}
-function replaceHash(h){history.replaceState(null,'',h);}
-const ACTIONS={
-  quick:()=>startSession({doms:ALL(),mode:'mix',len:10,label:'Quick session'}),
-  fresh:()=>startSession({doms:settings.doms}),
-  misses:()=>{const n=missedCount();if(!n){replaceHash('#/home');show('home',false);return;}startSession({doms:ALL(),mode:'missed',lang:'all',len:Math.min(n,20),label:'Review misses'});},
-  tagalog:()=>startSession({doms:ALL(),mode:'mix',lang:'tl',label:'Tagalog cases'}),
-  custom:()=>{}
-};
-function applyQuery(q){
-  const p=new URLSearchParams(q||'');
-  if(p.get('lang')&&['all','en','tl'].includes(p.get('lang')))settings.lang=p.get('lang');
-  if(p.get('dom')){const ks=p.get('dom').split(',').filter(k=>DOM[k]);if(ks.length)settings.doms=new Set(ks);}
-  savePrefs();
-  if(p.get('drill')&&TERMS[p.get('drill')])startDrill(p.get('drill'));else startSession({doms:settings.doms});
-}
-function route(){
-  const raw=location.hash.replace(/^#\/?/,''), [path,q]=raw.split('?'), [h,arg]=path.split('/');
-  if(ACTIONS[h]){
-    if(h==='custom'){replaceHash(lastRoute||'#/home');route();openCustom();return;}
-    replaceHash('#/practice');lastRoute='#/practice';view='practice';VIEWS.forEach(k=>$('#v-'+k).hidden=k!=='practice');ACTIONS[h]();renderSide();closeSide();return;
-  }
-  if(h==='practice'&&q){replaceHash('#/practice');lastRoute='#/practice';view='practice';VIEWS.forEach(k=>$('#v-'+k).hidden=k!=='practice');applyQuery(q);return;}
-  if(h==='domain'&&arg&&DOM[arg]){domView=arg;show('domain',false);renderDomain(arg);renderSide();}
-  else show(h||'home',false);
-  lastRoute=location.hash;
-  requestAnimationFrame(()=>window.scrollTo(0,scrollPos[location.hash]||0));
-}
-let lastRoute=null;
-window.addEventListener('scroll',()=>{scrollPos[location.hash]=window.scrollY;},{passive:true});
-window.addEventListener('hashchange',route);
-if('scrollRestoration' in history)history.scrollRestoration='manual';
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g){show(g.dataset.go);}});
-$('#navBack').onclick=()=>history.back();
-$('#navFwd').onclick=()=>history.forward();
-document.addEventListener('keydown',e=>{if(e.altKey&&e.key==='ArrowLeft'){e.preventDefault();history.back();}if(e.altKey&&e.key==='ArrowRight'){e.preventDefault();history.forward();}});
-
-/* ---------- sidebar toggle: docked on wide screens, a drawer on narrow ones ---------- */
-const narrow=matchMedia('(max-width:960px)');
-function setSideAria(){$('#sideBtn').setAttribute('aria-expanded',String(narrow.matches?document.documentElement.classList.contains('side-open'):!document.documentElement.classList.contains('side-closed')));}
-function closeSide(){document.documentElement.classList.remove('side-open');$('#scrim').hidden=true;setSideAria();}
-$('#sideBtn').onclick=()=>{
-  const r=document.documentElement;
-  if(narrow.matches){const o=r.classList.toggle('side-open');$('#scrim').hidden=!o;if(o)closeMenu();}
-  else{const c=r.classList.toggle('side-closed');try{localStorage.setItem('mse-trainer-sidebar',c?'closed':'open')}catch(e){}}
-  setSideAria();
-};
-$('#scrim').onclick=closeSide;
-narrow.addEventListener('change',()=>{closeSide();});
-$('#sidenav').addEventListener('click',e=>{if(e.target.closest('a'))closeSide();});
-
-/* ---------- menu ---------- */
-function closeMenu(){$('#menu').hidden=true;$('#menuBtn').setAttribute('aria-expanded','false');}
-$('#menuBtn').onclick=e=>{e.stopPropagation();const m=$('#menu');m.hidden=!m.hidden;$('#menuBtn').setAttribute('aria-expanded',String(!m.hidden));if(!m.hidden)closeSide();};
-document.addEventListener('click',e=>{if(!e.target.closest('.menuwrap'))closeMenu();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();closeSide();}});
-
-/* ---------- search ---------- */
-$('#tq').addEventListener('input',()=>{
-  $('#q').value=$('#tq').value;
-  if(view!=='glossary')show('glossary');else renderGlossary();
-});
-$('#q').addEventListener('input',()=>{$('#tq').value=$('#q').value;renderGlossary();});
-$('#searchBtn').onclick=()=>{if(view!=='glossary')show('glossary');setTimeout(()=>$('#q').focus(),50);};
-document.addEventListener('keydown',e=>{
-  if(e.key!=='/'||e.metaKey||e.ctrlKey||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||dlg.open)return;
-  e.preventDefault();
-  const t=$('#tq');if(t.offsetParent)t.focus();else $('#searchBtn').click();
-});
-
-/* ---------- theme: match device -> light -> dark ---------- */
-const THEMES=['system','light','dark'], THEME_LABEL={system:'Theme: match device',light:'Theme: light',dark:'Theme: dark'};
-const THEME_ICON={
-  system:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>',
-  light:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>',
-  dark:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/></svg>'};
-let theme=(()=>{try{return localStorage.getItem('mse-trainer-theme')||'system'}catch(e){return 'system'}})();
-function applyTheme(){
-  if(theme==='system')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',theme);
-  const b=$('#themeBtn');b.innerHTML=THEME_ICON[theme];b.setAttribute('aria-label',THEME_LABEL[theme]);b.title=THEME_LABEL[theme];
-}
-$('#themeBtn').onclick=()=>{theme=THEMES[(THEMES.indexOf(theme)+1)%3];try{localStorage.setItem('mse-trainer-theme',theme)}catch(e){}applyTheme();};
-applyTheme();
-
-/* ---------- text size: Aa button in the top bar ---------- */
-const TEXT_SIZES=[['90','Smaller'],['100','Default'],['112.5','Larger'],['125','Largest']];
-function applyTextSize(v){
-  document.documentElement.style.fontSize=TEXT_SIZES.some(t=>t[0]===v)&&v!=='100'?v+'%':'';
-}
-(()=>{
-  const btn=$('#textSizeBtn');if(!btn)return;
-  let cur='100';try{const z=localStorage.getItem('mse-trainer-textSize');if(TEXT_SIZES.some(t=>t[0]===z))cur=z}catch(e){}
-  applyTextSize(cur);
-  const panel=document.createElement('div');
-  panel.className='ts-panel';panel.id='textSizePanel';panel.hidden=true;
-  panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Text size');
-  document.body.appendChild(panel);
-  const build=()=>{panel.innerHTML='<p class="ts-title">Text size</p><div class="ts-seg">'+TEXT_SIZES.map((t,i)=>
-    '<label><input type="radio" name="ts" value="'+t[0]+'"'+(cur===t[0]?' checked':'')+'><span style="font-size:'+[0.82,0.92,1.02,1.12][i]+'rem">'+t[1]+'</span></label>').join('')+'</div>';};
-  const open=()=>{build();panel.hidden=false;btn.setAttribute('aria-expanded','true');const f=panel.querySelector('input:checked');if(f)f.focus();};
-  const close=()=>{if(panel.hidden)return;panel.hidden=true;btn.setAttribute('aria-expanded','false');};
-  btn.addEventListener('click',e=>{e.stopPropagation();panel.hidden?open():close();});
-  panel.addEventListener('change',e=>{
-    if(e.target.name!=='ts')return;
-    cur=e.target.value;try{localStorage.setItem('mse-trainer-textSize',cur)}catch(err){}
-    applyTextSize(cur);
-  });
-  document.addEventListener('click',e=>{if(!panel.hidden&&!panel.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))close();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden){close();btn.focus();}});
-  window.addEventListener('hashchange',close);
-})();
-
-/* ---------- backup ---------- */
-$('#exportBtn').onclick=()=>{
-  const blob=new Blob([JSON.stringify({app:'mse-trainer',version:1,exported:new Date().toISOString(),stats},null,1)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mse-trainer-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);closeMenu();
-};
-$('#importBtn').onclick=()=>{closeMenu();$('#importFile').click();};
-$('#importFile').onchange=e=>{
-  const f=e.target.files[0];if(!f)return;
-  f.text().then(t=>{
-    const d=JSON.parse(t);
-    if(!d||d.app!=='mse-trainer'||!d.stats||typeof d.stats.items!=='object')throw new Error('not a backup');
-    if(!confirm('Replace the progress in this browser with the backup from '+(d.exported||'an earlier date').slice(0,10)+'?'))return;
-    stats={items:d.stats.items||{},prefs:d.stats.prefs||stats.prefs};save();
-    alert('Progress restored: '+Object.keys(stats.items).length+' cases.');
-    route();
-  }).catch(()=>alert('That file is not an MSE Trainer backup.')).finally(()=>{e.target.value='';});
-};
-
-/* ---------- What's New ---------- */
-function renderNews(){
-  $('#news').innerHTML=`<div class="terms" style="grid-template-columns:1fr">`+WHATS_NEW.map(r=>`<article class="term"><h3>${esc(r.v)} <span class="muted" style="font-family:var(--sans);font-size:.9rem;font-weight:400">· ${esc(r.date)}</span></h3><ul>${r.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></article>`).join('')+`</div>`;
-}
 
 /* ---------- Tagalog audio: Usap Tayo's recorded pack, then a Filipino device voice ---------- */
 const AUDIO=(()=>{
@@ -643,7 +716,506 @@ document.addEventListener('keydown',e=>{
   else if(e.key==='Enter'&&session.cur&&session.cur.picked&&e.target.id!=='next'&&!e.target.closest('a,button')){e.preventDefault();next();}
 });
 
+/* ===== Menu (NAV groups): MSE's v5 sidebar sections, now the shared sidenav (docked >=1100px, drawer below) ===== */
+function domStats(k){
+  const vs=V.filter(v=>domOf(v)===k);let a=0,c=0,seen=0,miss=0;
+  vs.forEach(v=>{const s=stats.items[v.id];if(s){seen++;a+=s.a;c+=s.c;if(s.l===0)miss++;}});
+  return {n:vs.length,seen,a,c,miss,pct:a?Math.round(c/a*100):null,tl:vs.filter(v=>v.lang==='tl').length};
+}
+function navKey(){return view==='domain'?'domain/'+domView:view;}
+function buildNav(){
+  const cur=navKey(), mc=missedCount();
+  const item=(r,ic,label,extra,raw)=>{const on=cur===r;return `<li><a class="nav-item${on?' is-active':''}" href="#/${raw||r}"${on?' aria-current="page"':''}>${icon(ic)}<span>${esc(label)}</span>${extra||''}</a></li>`;};
+  const dlink=(d,num)=>{const st=domStats(d.k),on=cur==='domain/'+d.k;return `<li><a class="nav-item nav-item--sub${on?' is-active':''}" href="#/domain/${d.k}"${on?' aria-current="page"':''}><span class="nav-num">${esc(num)}</span><span>${esc(d.n)}</span>${st.pct!==null?`<span class="nav-pct">${st.pct}%</span>`:''}</a></li>`;};
+  const group=(label,items)=>`<div class="nav-group"><div class="nav-label">${esc(label)}</div><ul>${items}</ul></div>`;
+  const mse=DOMAINS.filter(d=>d.g==='mse'), shea=sheaDoms(), tl=DOMAINS.filter(d=>d.g==='tl');
+  let html=
+    group(t('nav.sessions'),
+      item('home','home',t('nav.home'))+
+      (inProgress()?item('practice','bolt',`Session: case ${session.i+1} of ${session.items.length}`):item('quick','bolt',t('nav.quickSession'),'<span class="nav-pct">10 cases</span>'))+
+      item('misses','redo',t('nav.reviewMisses'),mc?`<span class="badge">${mc}</span>`:'')+
+      item('custom','sliders',t('nav.customSession'))+
+      item('glossary','book',t('nav.glossary'))+
+      item('progress','chart',t('nav.progress')))+
+    group(t('nav.mse'),mse.map((d,i)=>dlink(d,i+1)).join(''))+
+    group(t('nav.shea'),shea.map(d=>dlink(d,typeof d.ch==='number'?d.ch:d.ch.slice(1))).join(''))+
+    group(t('nav.tagalog'),item('tagalog','chat',t('nav.tagalogCases'),`<span class="nav-pct">${V.filter(v=>v.lang==='tl').length}</span>`)+tl.map(d=>dlink(d,d.ch)).join(''))+
+    group(t('nav.app'),
+      item('backup','save',t('nav.backup'))+
+      item('whats-new','news',t('nav.whatsNew'),'<span class="badge" data-badge="news" hidden></span>')+
+      item('about','info',t('nav.about')));
+  const others=otherApps();   // empty while window.SHOW_OTHER_APPS is false (data/app-meta.js)
+  if(others.length){
+    html+=group(t('nav.otherApps'),others.map(a=>`<li><a class="nav-item" href="${esc(a.href)}" target="_blank" rel="noopener">${icon('external')}<span>${esc(a.name)}</span><span class="sr-only"> ${esc(t('nav.newTab'))}</span></a></li>`).join(''));
+  }
+  document.getElementById('sidenav-body').innerHTML=html;
+  const key=view==='home'||view==='practice'||view==='glossary'||view==='progress'?view:'';
+  document.querySelectorAll('.tabbar [data-tab]').forEach(tb=>{
+    if(tb.tagName!=='A')return;
+    const on=tb.getAttribute('data-tab')===key;
+    tb.classList.toggle('is-active',on);if(on)tb.setAttribute('aria-current','page');else tb.removeAttribute('aria-current');
+  });
+  updateNavBadges();
+}
+
+/* ---------- home ---------- */
+function whatsNewTeaser(){
+  const w=CHANGELOG[0];if(!w)return '';
+  return `<a class="card news-strip" href="#/whats-new"><span class="badge" data-badge="news" hidden></span><strong>${esc(t('nav.whatsNew'))}</strong><span class="muted">${esc(w.teaser?w.teaser:tf('home.latest',{title:w.title,version:w.version}))}</span></a>`;
+}
+function renderHome(){
+  const it=stats.items, seen=V.filter(v=>it[v.id]);let A=0,C=0;seen.forEach(v=>{A+=it[v.id].a;C+=it[v.id].c});
+  const pct=A?Math.round(C/A*100):0, mc=missedCount(), circ=2*Math.PI*30;
+  const weak=DOMAINS.map(d=>({d,s:domStats(d.k)})).filter(x=>x.s.a>=3&&x.s.pct<100).sort((x,y)=>x.s.pct-y.s.pct).slice(0,3);
+  const tlN=V.filter(v=>v.lang==='tl').length;
+  const cta=inProgress()
+    ?`<a class="btn btn--solid btn--big" href="#/practice">Continue session · case ${session.i+1} of ${session.items.length}</a>
+      <a class="btn btn--ghost" href="#/custom">Custom session</a><p class="sub">${esc(session.label)}. <a href="#/fresh">Start a new ${settings.len}-case session instead</a></p>`
+    :`<a class="btn btn--solid btn--big" href="#/fresh">Start a ${settings.len}-case session</a>
+      <a class="btn btn--ghost" href="#/custom">Custom session</a><p class="sub">${esc(describeDoms(settings.doms))} · ${settings.mode==='mix'?'focus on misses':settings.mode==='new'?'only unseen':'only missed'} · ${settings.lang==='all'?'English and Tagalog':settings.lang==='tl'?'Tagalog':'English'}</p>`;
+  $('#v-home').innerHTML=`
+  <section class="hero"><div class="wrap hero__inner herogrid">
+    <div>
+      <p class="eyebrow">Mental status examination · Clinical interviewing</p>
+      <h1>Read the case. <em>Name the finding.</em></h1>
+      <p class="lead">${V.length} fictional cases across the mental status exam and Shea's interviewing techniques, with look-alike answers, telling-apart rules and chart lines.</p>
+      <div class="cta">${cta}</div>
+    </div>
+    <div class="statcard">
+      <h2>Your progress</h2>
+      <div class="ring">
+        <svg viewBox="0 0 76 76" role="img" aria-label="${pct} percent correct"><circle class="trk" cx="38" cy="38" r="30"/><circle class="val" cx="38" cy="38" r="30" stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${circ*(1-pct/100)}" transform="rotate(-90 38 38)"/></svg>
+        ${A?`<div class="bignum">${pct}%<small>correct</small></div>`:`<div class="bignum none">Answer a few cases and your accuracy shows here.</div>`}
+      </div>
+      <div class="minis"><div><strong>${seen.length} / ${V.length}</strong>cases seen</div><div><strong>${mc}</strong>missed last time</div></div>
+    </div>
+  </div></section>
+  <div class="pagepad homebody">
+    ${whatsNewTeaser()}
+    <div class="cards">
+      <a class="card tile" href="#/misses"><h3>Review misses${mc?`<span class="badge">${mc}</span>`:''}</h3><p>${mc?'Cases you got wrong the last time you saw them.':'Nothing to review yet. Misses collect here as you practice.'}</p><span class="go">${mc?'Review now':'Start practicing'}</span></a>
+      <a class="card tile" href="${weak.length?'#/domain/'+weak[0].d.k:'#/progress'}"><h3>Weak spots</h3>${weak.length?`<ul class="weaklist">${weak.map(x=>`<li><span>${esc(x.d.n)}</span><span>${x.s.pct}%</span></li>`).join('')}</ul>`:'<p>Your lowest-scoring domains show up here after a few cases.</p>'}<span class="go">${weak.length?'Practice '+esc(weak[0].d.n):'See progress'}</span></a>
+      <a class="card tile feature" href="#/tagalog"><h3>Tagalog cases</h3><p>${tlN} original cases with Tagalog patient lines, audio, and "Ask it in Tagalog".</p><span class="go">Practice in Tagalog</span></a>
+      <a class="card tile" href="#/domain/su"><h3>Suicide and violence assessment</h3><p>The CASE and CADE approaches, risk factors versus warning signs, and the tetrads of lethality from Shea Ch. 17–18.</p><span class="go">Practice safety assessment</span></a>
+      <a class="card tile" href="#/domain/mi"><h3>MI and the Medication Interest Model</h3><p>OARS, change talk, the Choice Triad and the medication toolboxes from Ch. 22–23.</p><span class="go">Open collaborative interviewing</span></a>
+      <a class="card tile" href="#/domain/fc"><h3>Culture or pathology?</h3><p>Filipino look-alikes: hiya, sama ng loob, kulam, lutang, sanib and more.</p><span class="go">Open domain</span></a>
+      <a class="card tile" href="#/glossary"><h3>Glossary</h3><p>${Object.keys(TERMS).length} terms with definitions, telling-apart rules and chart lines.</p><span class="go">Browse terms</span></a>
+    </div>
+  </div>`;
+}
+
+/* ---------- What's new (shared .news__* markup; opening the page marks everything as seen) ---------- */
+function renderNews(){
+  const unseen={};unseenNews().forEach(e=>{unseen[String(e.version)]=true;});
+  $('#v-whats-new').innerHTML='<div class="news"><header class="page__head"><h1>'+esc(t('nav.whatsNew'))+'</h1><p>'+esc(t('news.intro1'))+'<span class="news__new">'+esc(t('news.new'))+'</span>'+esc(t('news.intro2'))+'</p></header>'+
+    CHANGELOG.map(e=>{
+      const isNew=!!unseen[String(e.version)];
+      return '<article class="news__entry'+(isNew?' is-new':'')+'"><div class="news__date"><time datetime="'+esc(e.date)+'">'+esc(fmtDate(e.date))+'</time><span class="news__ver">'+esc(tf('news.version',{v:e.version}))+'</span>'+(isNew?'<span class="news__new">'+esc(t('news.new'))+'</span>':'')+'</div>'+
+        '<div class="news__body"><h2>'+esc(e.title)+'</h2>'+(e.summary?'<p>'+esc(e.summary)+'</p>':'')+'<ul>'+
+        (e.items||[]).map(it=>{
+          const ty=String(it.type||'feature');let tyLabel=t('news.type.'+ty);
+          if(tyLabel==='news.type.'+ty)tyLabel=ty.charAt(0).toUpperCase()+ty.slice(1);
+          return '<li><span class="news__type news__type--'+esc(ty)+'">'+esc(tyLabel)+'</span><span class="news__text">'+esc(it.text)+(it.href?' <a href="'+esc(it.href)+'">'+esc(t('news.open'))+'</a>':'')+'</span></li>';
+        }).join('')+'</ul></div></article>';
+    }).join('')+
+    '<p class="news__note">'+esc(t('news.note'))+'<a href="mailto:isaymotion@gmail.com">isaymotion@gmail.com</a>.</p></div>';
+  store.set('seenNews',latestNewsVersion());
+  updateNavBadges();
+}
+
+/* ---------- About: v5 text, plus Settings (language, theme, text size) and Tips ---------- */
+function segGroup(name,label,opts,cur){
+  return '<fieldset class="setting"><legend>'+esc(label)+'</legend><div class="seg">'+opts.map(o=>'<label><input type="radio" name="'+esc(name)+'" value="'+esc(o[0])+'"'+(cur===o[0]?' checked':'')+'><span>'+esc(o[1])+'</span></label>').join('')+'</div></fieldset>';
+}
+function renderAbout(){
+  $('#aboutVersion').innerHTML='<strong>'+esc(APP_NAME)+'</strong> · '+esc(t('about.version'))+' '+esc(META.version||'')+' · <a href="#/whats-new">'+esc(t('nav.whatsNew'))+'</a>';
+  const sizes=TEXT_SIZES.map(z=>[z[0],t(z[1])]);
+  $('#aboutSettings').innerHTML='<h2>'+esc(t('about.settings'))+'</h2><div class="card">'+
+      segGroup('lang',t('about.language'),[['en',t('about.langEn')],['tl',t('about.langTl')]],lang)+
+      segGroup('theme',t('theme.title'),[['auto',t('theme.auto')],['light',t('theme.light')],['dark',t('theme.dark')]],getTheme())+
+      segGroup('aboutTextSize',t('textsize.title'),sizes,String(store.get('textSize','100')))+
+    '</div><h2>'+esc(t('about.tips'))+'</h2><div class="card"><ul>'+
+      [1,2,3,4,5].map(i=>'<li>'+rich(t('about.tip'+i))+'</li>').join('')+
+      '<li>During a session, keys <kbd>1</kbd> to <kbd>4</kbd> answer and <kbd>Enter</kbd> goes to the next case.</li>'+
+    '</ul></div>';
+}
+document.getElementById('main').addEventListener('change',e=>{   // About > Settings
+  const n=e.target&&e.target.name, v=e.target&&e.target.value;
+  if(n==='lang'){setLang(v);const again=document.querySelector('input[name="lang"]:checked');if(again)again.focus();}
+  else if(n==='theme')setTheme(v);
+  else if(n==='aboutTextSize'){store.set('textSize',v);applyTextSize(v);}
+});
+
+/* ---------- Search: topbar box with suggestions over SEARCH_INDEX, full results at #/search/<q> ----------
+   Index: every term (name, definition, telling-apart rule), every domain (name, group, Shea chapter title),
+   the Tagalog cases and the shell pages. Cases have no titles, and their text would give away the answer, so they are not indexed. */
+var SEARCH_INDEX=null;
+function searchIndex(){
+  if(SEARCH_INDEX)return SEARCH_INDEX;
+  const out=[];
+  DOMAINS.forEach(d=>{
+    const G=GROUPS.find(g=>g.g===d.g);
+    out.push({kind:'Domain',title:d.n,where:G?G.n:'',text:(d.ch&&CH[d.ch]?'Shea '+chShort(d.ch)+': '+CH[d.ch]+'. ':'')+Object.values(TERMS).filter(x=>x.dom===d.k).map(x=>x.n).join(', '),href:'#/domain/'+d.k,w:3});
+  });
+  Object.values(TERMS).forEach(x=>{
+    out.push({kind:'Term',title:x.n,where:DOM[x.dom]||'',text:x.def+' '+x.tell,href:'#/domain/'+x.dom+'/'+x.k,w:2});
+  });
+  out.push({kind:'Practice',title:t('nav.tagalogCases'),where:t('nav.tagalog'),text:'Tagalog patient lines, audio, Ask it in Tagalog, Filipino culture',href:'#/tagalog',w:1});
+  out.push({kind:'Practice',title:t('nav.reviewMisses'),where:'',text:'Cases you got wrong the last time you saw them',href:'#/misses',w:0});
+  out.push({kind:'Page',title:t('nav.glossary'),where:'',text:'Every finding and technique, with definitions, telling-apart rules and chart lines',href:'#/glossary',w:0});
+  out.push({kind:'Page',title:t('nav.progress'),where:'',text:'Accuracy by domain, terms mastered, terms to revisit',href:'#/progress',w:0});
+  SEARCH_INDEX=out;return out;
+}
+function shellIndex(){
+  return [
+    {title:t('nav.whatsNew'),text:t('search.newsText')+' '+CHANGELOG.map(w=>w.title).join('. '),href:'#/whats-new',kind:t('nav.app')},
+    {title:t('nav.about'),text:t('search.aboutText'),href:'#/about',kind:t('nav.app')}
+  ];
+}
+var sugIndex=-1, sugTimer=null, searchKind='', searchQ='';
+function terms(q){return String(q).toLowerCase().replace(/[^\p{L}\p{N}\-\s.]/gu,' ').split(/\s+/).filter(w=>w.length>0);}
+function runSearch(q){
+  const ts=terms(q);if(!ts.length)return [];
+  const out=[];
+  shellIndex().concat(searchIndex()).forEach(e=>{
+    const ti=String(e.title||'').toLowerCase(), x=String(e.text||'').toLowerCase();let score=e.w||0, ok=true;
+    ts.forEach(w=>{const iT=ti.indexOf(w), iX=x.indexOf(w);if(iT<0&&iX<0){ok=false;return;}if(iT>=0)score+=iT===0?12:8;if(iX>=0)score+=2;});
+    if(ok)out.push({e,score});
+  });
+  out.sort((a,b)=>b.score-a.score);
+  return out.map(r=>r.e);
+}
+function highlight(text,ts){
+  text=String(text==null?'':text);if(!ts.length)return esc(text);
+  const re=new RegExp('('+ts.map(escRe).join('|')+')','gi');
+  return text.split(re).map((seg,i)=>i%2?'<mark>'+esc(seg)+'</mark>':esc(seg)).join('');
+}
+function snippet(text,ts,len){
+  text=String(text||'');if(text.length<=len)return text;
+  const low=text.toLowerCase();let at=-1;
+  for(let i=0;i<ts.length&&at<0;i++)at=low.indexOf(ts[i]);
+  const start=Math.max(0,(at<0?0:at)-40);
+  return (start>0?'…':'')+text.slice(start,start+len)+(start+len<text.length?'…':'');
+}
+function openSuggest(q){
+  q=String(q||'').trim();
+  if(!q){closeSuggest();return;}
+  const ts=terms(q), res=runSearch(q), shown=res.slice(0,6);
+  sugIndex=-1;qInput.removeAttribute('aria-activedescendant');
+  if(!shown.length)suggestBox.innerHTML='<div class="suggest__empty">'+esc(tf('search.noMatches',{q}))+'</div>';
+  else suggestBox.innerHTML=shown.map((e,i)=>'<a class="suggest__item" role="option" id="sug-'+i+'" href="'+esc(e.href)+'" aria-selected="false"><span class="suggest__meta"><span class="kind">'+esc(e.kind||'')+'</span>'+(e.where?'<span>'+esc(e.where)+'</span>':'')+'</span><span class="suggest__title">'+highlight(e.title,ts)+'</span><span class="suggest__text">'+highlight(snippet(e.text,ts,140),ts)+'</span></a>').join('')+
+    '<a class="suggest__item suggest__all" role="option" id="sug-all" href="#/search/'+encodeURIComponent(q)+'" aria-selected="false">'+esc(tf(res.length===1?'search.seeAll1':'search.seeAllN',{n:res.length}))+'</a>';
+  suggestBox.hidden=false;qInput.setAttribute('aria-expanded','true');
+}
+function closeSuggest(){
+  if(!suggestBox)return;
+  suggestBox.hidden=true;sugIndex=-1;
+  qInput.setAttribute('aria-expanded','false');qInput.removeAttribute('aria-activedescendant');
+}
+function moveSug(d){
+  const items=suggestBox.querySelectorAll('.suggest__item');if(!items.length)return;
+  sugIndex=(sugIndex+d+items.length)%items.length;
+  items.forEach((it,i)=>it.setAttribute('aria-selected',String(i===sugIndex)));
+  qInput.setAttribute('aria-activedescendant',items[sugIndex].id);
+  items[sugIndex].scrollIntoView({block:'nearest'});
+}
+qInput.addEventListener('input',()=>{clearTimeout(sugTimer);sugTimer=setTimeout(()=>openSuggest(qInput.value),110);});
+qInput.addEventListener('focus',()=>{if(qInput.value.trim())openSuggest(qInput.value);});
+qInput.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();if(suggestBox.hidden)openSuggest(qInput.value);moveSug(1);}
+  else if(e.key==='ArrowUp'){e.preventDefault();moveSug(-1);}
+  else if(e.key==='Escape'){closeSuggest();qInput.blur();}
+  else if(e.key==='Enter'){
+    e.preventDefault();
+    const items=suggestBox.querySelectorAll('.suggest__item');
+    const target=sugIndex>-1&&items[sugIndex]?items[sugIndex].getAttribute('href'):(qInput.value.trim()?'#/search/'+encodeURIComponent(qInput.value.trim()):null);
+    closeSuggest();
+    if(target){if(location.hash===target)route();else location.hash=target;qInput.blur();}
+  }
+});
+suggestBox.addEventListener('mousedown',e=>e.preventDefault());
+qInput.addEventListener('blur',()=>setTimeout(closeSuggest,120));
+document.addEventListener('keydown',e=>{
+  const inField=!!(e.target.matches&&e.target.matches('input, textarea, select'));
+  if(dlg.open)return;
+  if((e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!inField)||((e.key==='k'||e.key==='K')&&(e.ctrlKey||e.metaKey)&&!e.altKey)){e.preventDefault();closeDrawer();qInput.focus();qInput.select();}
+});
+function renderSearch(){
+  const q=searchQ, ts=terms(q), res=runSearch(q), kinds=[];
+  res.forEach(e=>{const k=e.kind||'';if(k&&kinds.indexOf(k)<0)kinds.push(k);});
+  if(searchKind&&kinds.indexOf(searchKind)<0)searchKind='';
+  const shown=searchKind?res.filter(e=>e.kind===searchKind):res;
+  $('#v-search').innerHTML='<header class="page__head"><h1>'+esc(t('search.title'))+'</h1><p>'+esc(q?tf(shown.length===1?'search.count1':'search.countN',{n:shown.length,q}):t('search.prompt'))+'</p></header>'+
+    (kinds.length>1?'<div class="filters" role="group" aria-label="'+esc(t('search.filterBy'))+'"><button type="button" class="filter" data-kind="" aria-pressed="'+(!searchKind)+'">'+esc(t('search.all'))+'</button>'+kinds.map(k=>'<button type="button" class="filter" data-kind="'+esc(k)+'" aria-pressed="'+(searchKind===k)+'">'+esc(k)+'</button>').join('')+'</div>':'')+
+    (shown.length?'<div class="results">'+shown.map(e=>'<div class="result"><a href="'+esc(e.href)+'"><span class="result__meta"><span class="kind">'+esc(e.kind||'')+'</span>'+(e.where?'<span>'+esc(e.where)+'</span>':'')+'</span><span class="result__title">'+highlight(e.title,ts)+'</span><span class="result__text">'+highlight(snippet(e.text,ts,220),ts)+'</span></a></div>').join('')+'</div>'
+      :(q?'<div class="empty"><h2>'+esc(t('search.noneTitle'))+'</h2><p>'+esc(t('search.noneText'))+'</p></div>':''));
+  if(document.activeElement!==qInput)qInput.value=q;
+}
+document.getElementById('v-search').addEventListener('click',e=>{
+  const f=e.target.closest('.filter[data-kind]');if(f){searchKind=f.getAttribute('data-kind');renderSearch();}
+});
+
+/* ---------- navigation: #/home, #/domain/<k>[/<term>], #/practice, #/glossary, #/progress, #/whats-new, #/about, #/search/<q>
+   Actions: #/quick, #/fresh, #/misses, #/tagalog, #/custom, #/backup   (old #/new still opens What's new)
+   Deep links: #/practice?lang=tl&dom=fc, #/practice?drill=<term key> ---------- */
+const PANELS=['home','domain','practice','glossary','progress','whats-new','about','search'];
+function viewTitle(v){
+  if(v==='home')return '';
+  if(v==='domain')return DOM[domView]||'';
+  if(v==='practice')return t('nav.practice');
+  if(v==='glossary')return t('nav.glossary');
+  if(v==='progress')return t('nav.progress');
+  if(v==='whats-new')return t('nav.whatsNew');
+  if(v==='about')return t('nav.about');
+  if(v==='search')return t('search.title');
+  return '';
+}
+function setPanels(v){PANELS.forEach(k=>$('#v-'+k).hidden=k!==v);const tt=viewTitle(v);document.title=tt?tt+' — '+APP_NAME:APP_NAME;}
+function show(v,push){
+  if(!PANELS.includes(v))v='home';
+  if(push!==false){location.hash='#/'+v;return;}
+  view=v;
+  setPanels(v);
+  if(v==='home')renderHome();
+  if(v==='practice')renderPractice();
+  if(v==='glossary')renderGlossary();
+  if(v==='progress')renderProgress();
+  if(v==='whats-new')renderNews();
+  if(v==='about')renderAbout();
+  if(v==='search')renderSearch();
+  buildNav();
+  closeDrawer();
+}
+function replaceHash(h){try{history.replaceState(history.state,'',h);}catch(e){}}
+const ACTIONS={
+  quick:()=>startSession({doms:ALL(),mode:'mix',len:10,label:'Quick session'}),
+  fresh:()=>startSession({doms:settings.doms}),
+  misses:()=>{const n=missedCount();if(!n){replaceHash('#/home');show('home',false);return;}startSession({doms:ALL(),mode:'missed',lang:'all',len:Math.min(n,20),label:'Review misses'});},
+  tagalog:()=>startSession({doms:ALL(),mode:'mix',lang:'tl',label:'Tagalog cases'})
+};
+function applyQuery(q){
+  const p=new URLSearchParams(q||'');
+  if(p.get('lang')&&['all','en','tl'].includes(p.get('lang')))settings.lang=p.get('lang');
+  if(p.get('dom')){const ks=p.get('dom').split(',').filter(k=>DOM[k]);if(ks.length)settings.doms=new Set(ks);}
+  savePrefs();
+  if(p.get('drill')&&TERMS[p.get('drill')])startDrill(p.get('drill'));else startSession({doms:settings.doms});
+}
+let lastRoute=null;
+/* #/custom and #/backup act on top of the page you were on: the address goes back to that page (rendering it first on a cold start). */
+function stayOnLast(){
+  const back=lastRoute||'#/home';replaceHash(back);scrollKey=back;
+  if(!lastRoute)route({keepScroll:true});
+}
+function route(opts){
+  opts=opts||{};
+  closeSuggest();closeDrawer();
+  let restoreY=null;
+  if(!opts.keepScroll){
+    scrollMemo[scrollKey]=window.scrollY;
+    scrollKey=location.hash||'#/';
+    restoreY=fromHistory&&has(scrollMemo,scrollKey)?scrollMemo[scrollKey]:null;
+    fromHistory=false;
+  }
+  const raw=location.hash.replace(/^#\/?/,''), qi=raw.indexOf('?'), path=qi<0?raw:raw.slice(0,qi), q=qi<0?'':raw.slice(qi+1);
+  const seg=path.split('/'), h=seg[0], arg=seg[1];
+  if(h==='custom'){stayOnLast();openCustom();return;}
+  if(h==='backup'){
+    stayOnLast();
+    setTimeout(()=>{const el=document.getElementById('backup');if(el){el.scrollIntoView({block:'center'});const b=document.getElementById('bk-export');if(b)b.focus({preventScroll:true});}},60);
+    return;
+  }
+  if(ACTIONS[h]){
+    replaceHash('#/practice');lastRoute='#/practice';scrollKey='#/practice';view='practice';setPanels('practice');ACTIONS[h]();buildNav();return;
+  }
+  if(h==='practice'&&q){replaceHash('#/practice');lastRoute='#/practice';scrollKey='#/practice';view='practice';setPanels('practice');applyQuery(q);return;}
+  if(h==='new'){replaceHash('#/whats-new');scrollKey='#/whats-new';show('whats-new',false);}
+  else if(h==='search'){let s=seg.slice(1).join('/');try{s=decodeURIComponent(s);}catch(e){}if(s!==searchQ)searchKind='';searchQ=s;show('search',false);}
+  else if(h==='domain'&&arg&&DOM[arg]){domView=arg;view='domain';setPanels('domain');renderDomain(arg);buildNav();closeDrawer();}
+  else show(PANELS.includes(h)&&h!=='domain'?h:'home',false);
+  lastRoute=location.hash;
+  if(opts.keepScroll)return;
+  if(restoreY!==null){requestAnimationFrame(()=>window.scrollTo(0,restoreY));return;}
+  if(h==='domain'&&seg[2]){   // #/domain/<k>/<term>: open at that term card (from search)
+    const card=document.querySelector('#v-domain [data-term="'+CSS.escape(seg[2])+'"]');
+    if(card){card.scrollIntoView({block:'start'});card.classList.add('is-target');return;}
+  }
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',()=>{syncHist();route();});
+
+/* ===== Mobile tab bar: hides on scroll down, shows on scroll up ===== */
+(function initTabbar(){
+  let lastY=window.scrollY, hold=0, ticking=false;
+  function showBar(){if(document.body.classList.contains('tabbar-hidden'))document.body.classList.remove('tabbar-hidden');}
+  function hideBar(){if(!document.body.classList.contains('tabbar-hidden'))document.body.classList.add('tabbar-hidden');}
+  function update(){
+    ticking=false;
+    const y=window.scrollY, dy=y-lastY, max=document.documentElement.scrollHeight-window.innerHeight;
+    const a=document.activeElement, typing=!!(a&&a.matches&&a.matches('input, textarea, select'));
+    if(Date.now()<hold||document.body.classList.contains('drawer-open')||typing||y<80||y>max-80){showBar();lastY=y;}
+    else if(dy>10){hideBar();lastY=y;}
+    else if(dy<-6){showBar();lastY=y;}
+  }
+  window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+  window.addEventListener('hashchange',()=>{hold=Date.now()+700;showBar();});
+  document.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input, textarea, select'))showBar();});
+  new MutationObserver(()=>{if(document.body.classList.contains('drawer-open'))showBar();}).observe(document.body,{attributes:true,attributeFilter:['class']});
+})();
+
+/* ===== Backup: export / import / undo =====
+   Exports every key under PREFIX plus MSE's two v5 keys by exact name: the progress store ("mse-trainer-v1") and the
+   resumable session ("mse-trainer-session"). Backup files made by v5 ({app:'mse-trainer', version:1, exported, stats})
+   still import: their stats replace the progress store and everything else on this device is kept, as v5 did. */
+var BK_APP='mse-trainer', BK_UNDO=BK_APP+':undo-import';
+var LEGACY_KEYS=[STORE,SESS_KEY];
+function bkCollect(){
+  const data={};
+  try{
+    for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(PREFIX)===0)data[k.slice(PREFIX.length)]=localStorage.getItem(k);}
+    LEGACY_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!=null)data[k]=v;});
+  }catch(e){}
+  return data;
+}
+function bkReplace(data){
+  const keys=[];
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&(k.indexOf(PREFIX)===0||LEGACY_KEYS.indexOf(k)>-1))keys.push(k);}
+  keys.forEach(k=>localStorage.removeItem(k));
+  Object.keys(data).forEach(k=>localStorage.setItem(LEGACY_KEYS.indexOf(k)>-1?k:PREFIX+k,data[k]));
+}
+function bkSummary(data){
+  let pr=null;try{pr=data&&data[STORE]?JSON.parse(data[STORE]):null;}catch(e){pr=null;}
+  const parts=[];
+  if(pr&&pr.items&&typeof pr.items==='object'){
+    const items=pr.items, n=Object.keys(items).length;
+    if(n){
+      let mastered=0;
+      Object.keys(CASES_BY_TERM).forEach(k=>{let ok=0,miss=0;CASES_BY_TERM[k].forEach(v=>{const s=items[v.id];if(!s)return;if(s.l===1)ok++;else miss++;});if(ok>=2&&miss===0)mastered++;});
+      parts.push(tf('backup.progress',{cases:n,mastered}));
+    }
+  }
+  if(data&&data[SESS_KEY])parts.push(t('backup.session'));
+  if(parts.length)return parts.join(', ');
+  const n=Object.keys(data||{}).filter(k=>k!=='lastBackup'&&k!=='seenNews'&&k!=='navCollapsed').length;
+  return n?tf(n===1?'backup.item1':'backup.itemN',{n}):t('backup.nothing');
+}
+function bkFromV5(p){
+  if(!p||p.app!==BK_APP||!p.stats||typeof p.stats!=='object'||!p.stats.items||typeof p.stats.items!=='object'||Array.isArray(p.stats.items))return null;
+  const data=bkCollect();delete data.lastBackup;
+  let prefs=stats.prefs;if(p.stats.prefs&&typeof p.stats.prefs==='object'&&!Array.isArray(p.stats.prefs))prefs=p.stats.prefs;
+  data[STORE]=JSON.stringify({items:p.stats.items,prefs});
+  return data;
+}
+function bkDate(iso){
+  const d=new Date(iso);if(isNaN(d.getTime()))return '';
+  return d.toLocaleDateString(locale(),{year:'numeric',month:'short',day:'numeric'})+', '+d.toLocaleTimeString(locale(),{hour:'numeric',minute:'2-digit'});
+}
+function bkStatus(msg,isErr){const el=document.getElementById('bk-status');if(!el)return;el.textContent=msg||'';el.classList.toggle('is-error',!!isErr);}
+function bkPaint(){
+  const meta=document.getElementById('bk-meta'), un=document.getElementById('bk-undo'), last=store.get('lastBackup',null);
+  if(meta)meta.textContent=tf('backup.onDevice',{summary:bkSummary(bkCollect())})+' '+(last&&bkDate(last)?tf('backup.lastExported',{date:bkDate(last)}):t('backup.notExported'));
+  let hasUndo=false;try{hasUndo=!!localStorage.getItem(BK_UNDO);}catch(e){}
+  if(un)un.hidden=!hasUndo;
+}
+function bkExport(){
+  const now=new Date();
+  store.set('lastBackup',now.toISOString());
+  const data=bkCollect();
+  const payload={app:BK_APP,format:1,exported:now.toISOString(),attribution:ATTRIBUTION,summary:bkSummary(data),data};
+  const name=BK_APP+'-backup-'+now.getFullYear()+'-'+pad2(now.getMonth()+1)+'-'+pad2(now.getDate())+'.json';
+  const json=JSON.stringify(payload,null,1);
+  window.__mseLastExport=payload;   // read-only hook for QA scripts
+  const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+  let file=null;try{file=new File([json],name,{type:'application/json'});}catch(e){}
+  if(standalone&&file&&navigator.canShare&&navigator.canShare({files:[file]})){
+    // Installed apps on phones cannot always download files; the share sheet can save to Files or send it on.
+    navigator.share({files:[file],title:tf('backup.shareTitle',{app:APP_NAME})}).then(()=>{bkStatus(t('backup.shared'));bkPaint();}).catch(()=>bkStatus(t('backup.exportCancelled')));
+    return;
+  }
+  const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  const a=document.createElement('a');a.href=url;a.download=name;a.rel='noopener';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  bkStatus(tf('backup.saved',{name}));
+  bkPaint();
+}
+function bkImport(file){
+  if(!file)return;
+  const reader=new FileReader(), bad=tf('backup.notBackup',{app:APP_NAME});
+  reader.onerror=()=>bkStatus(t('backup.unreadable'),true);
+  reader.onload=()=>{
+    let p;try{p=JSON.parse(reader.result);}catch(e){bkStatus(bad,true);return;}
+    if(p&&p.app===BK_APP&&!p.data&&p.stats){   // a backup file from MSE Trainer v5
+      const conv=bkFromV5(p);if(!conv){bkStatus(bad,true);return;}
+      p={app:BK_APP,exported:p.exported,data:conv};
+    }
+    let ok=p&&p.app===BK_APP&&p.data&&typeof p.data==='object'&&!Array.isArray(p.data)&&Object.keys(p.data).every(k=>typeof p.data[k]==='string'&&k.length<80);
+    if(ok)Object.keys(p.data).forEach(k=>{try{JSON.parse(p.data[k]);}catch(e){ok=false;}});
+    if(!ok){bkStatus(bad,true);return;}
+    const msg=tf('backup.confirmImport',{date:bkDate(p.exported)||t('backup.unknownDate'),backup:bkSummary(p.data),device:bkSummary(bkCollect())});
+    if(!window.confirm(msg)){bkStatus(t('backup.importCancelled'));return;}
+    try{
+      localStorage.setItem(BK_UNDO,JSON.stringify({saved:new Date().toISOString(),data:bkCollect()}));
+      bkReplace(p.data);
+    }catch(e){bkStatus(t('backup.importFailed'),true);return;}
+    bkStatus(t('backup.imported'));
+    setTimeout(()=>location.reload(),700);
+  };
+  reader.readAsText(file);
+}
+function bkUndo(){
+  let snap;try{snap=JSON.parse(localStorage.getItem(BK_UNDO));}catch(e){}
+  if(!snap||!snap.data){bkPaint();return;}
+  if(!window.confirm(tf('backup.confirmUndo',{summary:bkSummary(snap.data)})))return;
+  try{bkReplace(snap.data);localStorage.removeItem(BK_UNDO);}catch(e){bkStatus(t('backup.undoFailed'),true);return;}
+  bkStatus(t('backup.restored'));
+  setTimeout(()=>location.reload(),700);
+}
+(function initBackup(){
+  const ex=document.getElementById('bk-export'), fi=document.getElementById('bk-file'), un=document.getElementById('bk-undo');
+  if(!ex||!fi)return;
+  ex.addEventListener('click',bkExport);
+  fi.addEventListener('change',()=>{bkImport(fi.files&&fi.files[0]);fi.value='';});
+  if(un)un.addEventListener('click',bkUndo);
+  bkPaint();
+  window.addEventListener('hashchange',bkPaint);
+})();
+
+/* ===== Language switching: static markup (data-i18n / data-i18n-attr in index.html), then re-render ===== */
+function applyStatic(){
+  document.documentElement.setAttribute('lang',lang);
+  let els=document.querySelectorAll('[data-i18n]');
+  els.forEach(el=>{const v=t(el.getAttribute('data-i18n'));if(v!==el.getAttribute('data-i18n'))el.textContent=v;});
+  els=document.querySelectorAll('[data-i18n-attr]');
+  els.forEach(el=>{
+    el.getAttribute('data-i18n-attr').split(';').forEach(pair=>{const at=pair.indexOf(':'), key=pair.slice(at+1);if(at>0&&t(key)!==key)el.setAttribute(pair.slice(0,at),t(key));});
+  });
+  const brand=document.querySelector('.brand');if(brand)brand.setAttribute('aria-label',tf('brand.home',{name:APP_NAME}));
+  const panel=document.getElementById('textSizePanel');if(panel)panel.setAttribute('aria-label',t('textsize.title'));
+  labelCollapse();
+  applyTheme(getTheme());
+}
+function setLang(l){
+  lang=l==='tl'?'tl':'en';
+  store.set('lang',lang);
+  SEARCH_INDEX=null;
+  applyStatic();
+  bkPaint();
+  const panel=document.getElementById('textSizePanel');
+  if(panel&&!panel.hidden){panel.hidden=true;const tb=document.getElementById('textSizeBtn');if(tb)tb.setAttribute('aria-expanded','false');}
+  route({keepScroll:true});
+}
+
+window.__mseBackup={collect:bkCollect};   // read-only hook for QA scripts
+
+$('#gq').addEventListener('input',renderGlossary);
+
+/* ===== Start ===== */
 loadSession();
-setSideAria();
+applyStatic();
 route();
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+
+/* ===== Service worker (https or localhost only) ===== */
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+}
+})();
