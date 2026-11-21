@@ -497,3 +497,7 @@ svg.facilic{display:block;width:auto;height:auto;max-width:none;margin:0;stroke:
 }
 /* phones: tagline hidden so the brand stays on the first row (must come after .brand__sub base rule) */
 @media (max-width:480px){.topbar__inner{gap:8px 6px}.brand__sub{display:none}.brand{min-width:0}}
+
+/* Ko-fi support link under the attribution line */
+.support-line{margin:0 0 10px}
+.support-line a{display:inline-flex;align-items:center;min-height:44px;color:inherit;font-weight:600;text-underline-offset:3px}
