@@ -3,7 +3,7 @@ window.APP_META = {
   name: 'MSE Trainer',
   short: 'MSE',
   tagline: 'Mental Status & Interviewing Practice',
-  version: '6.0.1',
+  version: '6.0.2',
   kofi: 'https://ko-fi.com/isaymotion',   // support link shown in the footer
   repo: 'MSEtrainer',
   attribution: 'App created by Isabella Navarro, MD. Latest version November 2026. isaymotion@gmail.com'

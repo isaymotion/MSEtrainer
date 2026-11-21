@@ -3,7 +3,7 @@
    so activate deletes only this app's own old caches (v5 deleted every other cache on the origin; fixed in version 6).
    Tagalog audio is not cached (it streams from Usap Tayo). */
 const PREFIX = 'mse-trainer-';
-const VERSION = PREFIX + '6.0.1';
+const VERSION = PREFIX + '6.0.2';
 const CORE = [
   './',
   './index.html',

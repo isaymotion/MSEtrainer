@@ -802,6 +802,7 @@ function renderHome(){
       <a class="card tile" href="#/glossary"><h3>Glossary</h3><p>${Object.keys(TERMS).length} terms with definitions, telling-apart rules and chart lines.</p><span class="go">Browse terms</span></a>
     </div>
   </div>`;
+  $('#v-home').insertAdjacentHTML('beforeend',supportCard());
 }
 
 /* ---------- What's new (shared .news__* markup; opening the page marks everything as seen) ---------- */
@@ -827,6 +828,12 @@ function renderNews(){
 function segGroup(name,label,opts,cur){
   return '<fieldset class="setting"><legend>'+esc(label)+'</legend><div class="seg">'+opts.map(o=>'<label><input type="radio" name="'+esc(name)+'" value="'+esc(o[0])+'"'+(cur===o[0]?' checked':'')+'><span>'+esc(o[1])+'</span></label>').join('')+'</div></fieldset>';
 }
+/* Ko-fi support card at the end of Home and About. The address is APP_META.kofi; without one nothing is shown. */
+function supportCard(){
+  const u=String(META.kofi||'');
+  if(!/^https:\/\/ko-fi\.com\/[\w-]+\/?$/.test(u))return '';
+  return '<div class="card support-card"><h2>Enjoying '+esc(APP_NAME)+'?</h2><p>It is free, with no ads and no tracking. If it helps you, you can buy me a coffee.</p><p><a class="btn btn--solid" href="'+esc(u)+'" target="_blank" rel="noopener">♥ Support on Ko-fi</a></p></div>';
+}
 function renderAbout(){
   $('#aboutVersion').innerHTML='<strong>'+esc(APP_NAME)+'</strong> · '+esc(t('about.version'))+' '+esc(META.version||'')+' · <a href="#/whats-new">'+esc(t('nav.whatsNew'))+'</a>';
   const sizes=TEXT_SIZES.map(z=>[z[0],t(z[1])]);
@@ -837,7 +844,7 @@ function renderAbout(){
     '</div><h2>'+esc(t('about.tips'))+'</h2><div class="card"><ul>'+
       [1,2,3,4,5].map(i=>'<li>'+rich(t('about.tip'+i))+'</li>').join('')+
       '<li>During a session, keys <kbd>1</kbd> to <kbd>4</kbd> answer and <kbd>Enter</kbd> goes to the next case.</li>'+
-    '</ul></div>';
+    '</ul></div>'+supportCard();
 }
 document.getElementById('main').addEventListener('change',e=>{   // About > Settings
   const n=e.target&&e.target.name, v=e.target&&e.target.value;
