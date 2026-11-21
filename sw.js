@@ -1,6 +1,6 @@
 /* MSE Trainer offline support: network first, cached copy when offline. Bump VERSION on every publish.
    Cache names MUST start with this app's PREFIX: all isaymotion apps share one origin and one cache storage,
-   so activate deletes only this app's own old caches (v5 deleted every other cache on the origin; fixed in 6.0.0).
+   so activate deletes only this app's own old caches (v5 deleted every other cache on the origin; fixed in version 6).
    Tagalog audio is not cached (it streams from Usap Tayo). */
 const PREFIX = 'mse-trainer-';
 const VERSION = PREFIX + '6.0.1';
